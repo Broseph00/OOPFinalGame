@@ -62,7 +62,7 @@ public class Map {
     public void printRivers() {
         for(Location location : rivers.keySet()) {
             System.out.println(rivers.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            rivers.get(location).printRiverEdges();
+            rivers.get(location).printRiverEdgesandBridges();
         }
     }
 

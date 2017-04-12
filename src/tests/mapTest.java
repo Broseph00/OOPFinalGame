@@ -39,7 +39,7 @@ public class mapTest {
         mapManager.fillMapFromTextFile();
 
         assertEquals(map.getTiles().size(), 37);
-//        assertEquals(map.getRivers().size(), 7);
+        assertEquals(map.getRivers().size(), 7);
 
         // need to print edges and tiles to check if they are correct
         map.printRivers();
@@ -51,6 +51,7 @@ public class mapTest {
         Map map = new Map();
         MapFileManager mapManager = new MapFileManager(map, "src/tests/mapFileTest.txt");
 
+        // adding from file to avoid dealing with adjacency
         map.addTileFromFile(new Location(0,0,0), new Tile(new PastureTerrain()));
         map.addTileFromFile(new Location(0,0,1), new Tile(new WoodTerrain()));
         map.addTileFromFile(new Location(0,1,-1), new Tile(new WoodTerrain()));
@@ -60,6 +61,34 @@ public class mapTest {
 
         mapManager.fillTextFileFromMap();
 
+    }
+
+
+    // test adding Bridges to a River
+    @Test
+    public void testAddBridges() throws Exception{
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+
+        mapManager.fillMapFromTextFile();
+
+        assertEquals(map.getTiles().size(), 37);
+        assertEquals(map.getRivers().size(), 7);
+
+        // add Bridges to Rivers w/ edge
+        map.getRivers().get(new Location(0,0,0)).addBridge(1);
+        map.getRivers().get(new Location(0,0,0)).addBridge(1);  // won't add because already there
+        map.getRivers().get(new Location(0,0,0)).addBridge(2);  // won't add because no river there
+
+        assertEquals(map.getRivers().get(new Location(0,0,0)).getBridges().size(), 1);
+        map.getRivers().get(new Location(0,0,0)).addBridge(3);
+        assertEquals(map.getRivers().get(new Location(0,0,0)).getBridges().size(), 2);
+        map.getRivers().get(new Location(0,0,0)).removeBridge(3);
+        assertEquals(map.getRivers().get(new Location(0,0,0)).getBridges().size(), 1);
+
+        // need to print edges and tiles to check if they are correct
+        map.printRivers();
+        map.printTiles();
     }
 
 
