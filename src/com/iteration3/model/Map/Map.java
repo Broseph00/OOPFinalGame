@@ -1,5 +1,6 @@
 package com.iteration3.model.Map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.iteration3.model.Tiles.Tile;
@@ -10,23 +11,69 @@ public class Map {
 
     private HashMap<Location, Tile> tiles;
     private HashMap<Location, River> rivers;
+    private HashMap<Location, ArrayList<Integer>> bridges;
 
     public Map() {
         tiles = new HashMap<>();
         rivers = new HashMap<>();
+        bridges = new HashMap<>();
     }
 
-    public void addTileFromFile(Location l, Tile t) {
-        if(validateLocationRange(l)) {
-            tiles.put(l,t);
+    public void addTileFromFile(Location location, Tile tile) {
+        if(validateLocationRange(location)) {
+            this.tiles.put(location,tile);
         }
     }
 
-    public void addRiverFromFile(Location l, River r) {
-        if(validateLocationRange(l)) {
-            rivers.put(l, r);
+    public void addRiverFromFile(Location location, River river) {
+        if(validateLocationRange(location)) {
+            this.rivers.put(location, river);
         }
     }
+
+    // add bridge if that bridge isn't already in the list and if size < 3 and there is river there
+    public void addBridges(Location location, ArrayList<Integer> bridgesToAdd) {
+        boolean allBridgesValid = true;
+        // check river is on tile and correct number of bridges
+        if(this.rivers.containsKey(location) && bridges.size() < 3) {
+            // ensures all bridges are valid
+            for(int i = 0; i < bridgesToAdd.size(); i++) {
+                if (!this.rivers.get(location).containsRiverEdge(bridgesToAdd.get(i))) {
+                    allBridgesValid = false;
+                } else {
+                    System.out.println("Bridge not added!");
+                }
+            }
+            if(allBridgesValid) {
+                this.bridges.put(location, bridgesToAdd);
+            }
+        } else {
+            System.out.println("Bridge not added!");
+        }
+    }
+
+    public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
+        if(this.rivers.containsKey(location) && bridges.size() < 3) {
+            ArrayList<Integer> newBridgeSet = this.bridges.get(location);
+            for(int i = 0; i < bridgesToRemove.size(); i++) {
+                newBridgeSet.remove(Integer.valueOf(bridgesToRemove.get(i)));
+            }
+            this.bridges.put(location, newBridgeSet);
+        }
+    }
+
+
+    public boolean containsBridge(Location location, Integer i){
+        if(bridges.get(location).contains(Integer.valueOf(i))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+
 
     public void clearMap() {
         rivers.clear();
@@ -51,6 +98,8 @@ public class Map {
     }
 
 
+
+    // getters setters and methods for debugging
     public HashMap<Location, Tile> getTiles() {
         return tiles;
     }
@@ -59,10 +108,14 @@ public class Map {
         return rivers;
     }
 
+    public HashMap<Location, ArrayList<Integer>> getBridges() {
+        return bridges;
+    }
+
     public void printRivers() {
         for(Location location : rivers.keySet()) {
             System.out.println(rivers.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            rivers.get(location).printRiverEdgesandBridges();
+            rivers.get(location).printRiverEdges();
         }
     }
 

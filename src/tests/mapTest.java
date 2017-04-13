@@ -9,6 +9,11 @@ import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Tiles.WoodTerrain;
 import org.junit.Test;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class mapTest {
@@ -75,20 +80,28 @@ public class mapTest {
         assertEquals(map.getTiles().size(), 37);
         assertEquals(map.getRivers().size(), 7);
 
+        ArrayList<Integer> bridgesToAdd = new ArrayList<Integer>(Arrays.asList(1,2,3));
+
         // add Bridges to Rivers w/ edge
-        map.getRivers().get(new Location(0,0,0)).addBridge(1);
-        map.getRivers().get(new Location(0,0,0)).addBridge(1);  // won't add because already there
-        map.getRivers().get(new Location(0,0,0)).addBridge(2);  // won't add because no river there
+        map.addBridges(new Location(0,0,0), bridgesToAdd);
+        map.addBridges(new Location(-1,3,-2), bridgesToAdd);
+        assertEquals(map.getBridges().size(), 0);
 
-        assertEquals(map.getRivers().get(new Location(0,0,0)).getBridges().size(), 1);
-        map.getRivers().get(new Location(0,0,0)).addBridge(3);
-        assertEquals(map.getRivers().get(new Location(0,0,0)).getBridges().size(), 2);
-        map.getRivers().get(new Location(0,0,0)).removeBridge(3);
-        assertEquals(map.getRivers().get(new Location(0,0,0)).getBridges().size(), 1);
+        bridgesToAdd = new ArrayList<Integer>(Arrays.asList(1,3));
 
-        // need to print edges and tiles to check if they are correct
-        map.printRivers();
-        map.printTiles();
+        // add Bridges to Rivers w/ edge
+        map.addBridges(new Location(0,0,0), bridgesToAdd);
+        assertEquals(map.getBridges().size(), 1);
+        assertEquals(map.getBridges().get(new Location(0, 0,0)).contains(1), true);
+
+        // removeBridge
+        ArrayList<Integer> bridgesToRemove = new ArrayList<Integer>(Arrays.asList(1));
+        map.removeBridges(new Location(0,0,0), bridgesToRemove);
+        assertEquals(map.getBridges().size(), 1);
+        assertEquals(map.getBridges().get(new Location(0, 0,0)).contains(1), false);
+
+
+
     }
 
 
