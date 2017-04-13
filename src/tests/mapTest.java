@@ -81,25 +81,35 @@ public class mapTest {
         assertEquals(map.getRivers().size(), 7);
 
         ArrayList<Integer> bridgesToAdd = new ArrayList<Integer>(Arrays.asList(1,2,3));
+        Location tileLocation = new Location(0,0,0);
 
         // add Bridges to Rivers w/ edge
-        map.addBridges(new Location(0,0,0), bridgesToAdd);
+        map.addBridges(tileLocation, bridgesToAdd);
         map.addBridges(new Location(-1,3,-2), bridgesToAdd);
         assertEquals(map.getBridges().size(), 0);
 
         bridgesToAdd = new ArrayList<Integer>(Arrays.asList(1,3));
 
         // add Bridges to Rivers w/ edge
-        map.addBridges(new Location(0,0,0), bridgesToAdd);
+        map.addBridges(tileLocation, bridgesToAdd);
         assertEquals(map.getBridges().size(), 1);
-        assertEquals(map.getBridges().get(new Location(0, 0,0)).contains(1), true);
+        assertEquals(map.getBridges().get(tileLocation).contains(1), true);
 
         // removeBridge
         ArrayList<Integer> bridgesToRemove = new ArrayList<Integer>(Arrays.asList(1));
-        map.removeBridges(new Location(0,0,0), bridgesToRemove);
+        map.removeBridges(tileLocation, bridgesToRemove);
         assertEquals(map.getBridges().size(), 1);
-        assertEquals(map.getBridges().get(new Location(0, 0,0)).contains(1), false);
+        assertEquals(map.getBridges().get(tileLocation).contains(1), false);
+        assertEquals(map.getBridges().get(tileLocation).contains(3), true);
 
+        map.addBridge(tileLocation, 0);
+        map.addBridge(tileLocation, 7);
+        map.removeBridge(tileLocation, 3);
+        map.removeBridge(tileLocation, 7);
+
+        System.out.println(map.getBridges().get(tileLocation));
+
+        assertEquals(map.getBridges().size(), 0);
 
 
     }
