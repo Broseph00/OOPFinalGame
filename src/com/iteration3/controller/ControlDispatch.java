@@ -3,15 +3,25 @@ package com.iteration3.controller;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 
-/**
- * Created by LesliesLaptop on 4/11/17.
- */
-public class ControlDispatch {
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
+
+public class ControlDispatch implements EventHandler<KeyEvent>{
+
+    private ControlDispatchState currentState;
+
     public ControlDispatch(GameModel model, GameWindow window){
 
-//        mapEditorState = new MapEditorControlState(model,window);
-//
-//        setCurrentState(mapEditorState);
-//        window.addKeyHandler(this);
+        //setCurrentState();
+    }
+
+    public void setCurrentState(ControlDispatchState state){
+        currentState = state;
+    }
+
+    @Override
+    public void handle(KeyEvent event) {
+
+        currentState.handleInput(event);
     }
 }
