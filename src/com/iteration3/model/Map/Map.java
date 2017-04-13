@@ -1,11 +1,14 @@
 package com.iteration3.model.Map;
 
+import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
+import com.sun.javafx.geom.Edge;
 
 
 public class Map {
@@ -19,6 +22,7 @@ public class Map {
         tiles = new HashMap<>();
         rivers = new HashMap<>();
         bridges = new HashMap<>();
+        walls = new HashMap<>();
     }
 
     public void addTileFromFile(Location location, Tile tile) {
@@ -33,33 +37,38 @@ public class Map {
         }
     }
 
-    // add bridge if that bridge isn't already in the list and if size < 3 and there is river there
+    // add bridge if bridge isn't there already and if size < 3 and there is river there
     public void addBridges(Location location, ArrayList<Integer> bridgesToAdd) {
-        boolean allBridgesValid = true;
         // check river is on tile and correct number of bridges
-        if(this.rivers.containsKey(location) && bridgesToAdd.size() < 3) {
-            // ensures all bridges are valid
+        if(this.rivers.containsKey(location) && bridgesToAdd.size() <= 3) {
+            // check the whole arraylist of bridges to see if it can be inserted
             for(int i = 0; i < bridgesToAdd.size(); i++) {
-                if (!this.rivers.get(location).containsRiverEdge(bridgesToAdd.get(i))) {
-                    allBridgesValid = false;
-                } else {
-                    System.out.println("Bridge not added!");
+                if(!this.rivers.get(location).containsRiverEdge(bridgesToAdd.get(i))) {
+                    return;
                 }
             }
-            if(allBridgesValid) {
-                this.bridges.put(location, bridgesToAdd);
+
+            // add each bridge from bridges to add
+            for(int i = 0; i < bridgesToAdd.size(); i++) {
+                    addBridge(location, bridgesToAdd.get(i));
             }
+
         } else {
             System.out.println("Bridges not added!");
         }
     }
 
+    // add bridge if there isn't already and there is a river there
     public void addBridge(Location location, Integer bridgeToAdd) {
         // check river is on tile and correct number of bridges
         if(this.rivers.containsKey(location)) {
-            // check bridge isn't there
-            ArrayList<Integer> newBridgeSet = this.bridges.get(location);
-            if (this.containsRiverEdge(location, bridgeToAdd)) {
+            // get existing bridges
+            ArrayList<Integer> newBridgeSet = new ArrayList<>();
+            if(bridges.containsKey(location)) {
+               newBridgeSet = this.bridges.get(location);
+            }
+            // check bridge isn't there and river is theere
+            if (this.containsRiverEdge(location, bridgeToAdd) && !this.containsBridge(location, bridgeToAdd)) {
                 newBridgeSet.add(bridgeToAdd);
                 this.bridges.put(location, newBridgeSet);
             } else {
@@ -70,29 +79,25 @@ public class Map {
         }
     }
 
+    // remove bridges from map if it exists
     public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
-        if(this.rivers.containsKey(location) && bridgesToRemove.size() < 3) {
-            ArrayList<Integer> newBridgeSet = this.bridges.get(location);
+        if(this.rivers.containsKey(location) && bridgesToRemove.size() <= 3) {
+
             for(int i = 0; i < bridgesToRemove.size(); i++) {
-                newBridgeSet.remove(Integer.valueOf(bridgesToRemove.get(i)));
-            }
-            // check to see if arraylist is empty
-            if(newBridgeSet.size() > 0) {
-                this.bridges.put(location, newBridgeSet);
-            } else {
-                this.bridges.remove(location);
+                removeBridge(location, bridgesToRemove.get(i));
             }
 
         }
     }
 
+    // remove bridge from map if it exists
     public void removeBridge(Location location, Integer bridgeToRemove) {
-        if(this.containsBridge(location, bridgeToRemove) && bridges.size() < 3) {
+        if(this.containsBridge(location, bridgeToRemove)) {
             ArrayList<Integer> newBridgeSet = this.bridges.get(location);
 
             newBridgeSet.remove(Integer.valueOf(bridgeToRemove));
 
-            // check to see if arraylist is empty
+            // check to see if arraylist is empty, if it is remove from list
             if(newBridgeSet.size() > 0) {
                 this.bridges.put(location, newBridgeSet);
             } else {
@@ -101,6 +106,35 @@ public class Map {
 
         }
     }
+
+    // add wall to map if it isn't between seaTiles or if there is no other Player's wall
+    public void addWall(Location location, Player owner, int edge, int strength) {
+        if(!this.betweenTwoSeaTiles(location, edge) && !this.wallOwnedByOpposingPlayer(location, owner, edge)) {
+
+
+
+
+        }
+    }
+
+    // gets the strength of a wall at a location for building on top of old walls
+    private int getWallStrength(Location location, int edge) {
+        if(this.walls.containsKey(location)) {
+            // if there is wall in location, get strength
+            ArrayList<Wall> existingWallSet = this.walls.get(location);
+
+            // if there is neutral wall or wall of current player, add to the strength
+            int strengthToAdd = 0;
+            for(int i = 0; i < existingWallSet.size(); i++) {
+                if(existingWallSet.get(i).getEdge() == edge) {
+                    strengthToAdd = existingWallSet.get(i).getStrength();
+                }
+            }
+
+        }
+        return 0;
+    }
+
 
     // private method to see if a wall is going to be between two sea tiles
     private boolean betweenTwoSeaTiles(Location location, int edge) {
@@ -132,6 +166,27 @@ public class Map {
         else {
             return false;
         }
+    }
+
+    // check if a wall is owned by another Player
+    private boolean wallOwnedByOpposingPlayer(Location location, Player owner, int edge) {
+        HashMap<Location, ArrayList<Wall>> opposingWalls = this.getOpposingOwnedWalls(owner);
+
+        // check if this Location has any opposing walls at all
+        if(!opposingWalls.containsKey(location)) {
+            return false;
+        }
+        else {
+            // check if that edge is owned by other player
+            for(int i = 0; i < opposingWalls.get(location).size(); i++) {
+                if(opposingWalls.get(location).get(i).getEdge() == edge) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
     }
 
 
@@ -177,13 +232,6 @@ public class Map {
         }
     }
 
-    private boolean isSeaTile(Location l) {
-        if(tiles.get(l).getTerrain(new TerrainTypeVisitor()).equals("sea")) {
-            return true;
-        }
-        return false;
-    }
-
 
 
     // getters setters and methods for debugging
@@ -226,6 +274,23 @@ public class Map {
             }
         }
         return seaTiles;
+    }
+
+    // return list of all walls not owned by the owner
+    private HashMap<Location, ArrayList<Wall>> getOpposingOwnedWalls(Player owner) {
+        HashMap<Location, ArrayList<Wall>> opposingWalls = new HashMap<>();
+        for(Location location : walls.keySet()) {
+            // loop through all walls in wallset
+            for(int i = 0; i < walls.get(location).size(); i++) {
+                // check if wall is owned by opposing player
+                if(walls.get(location).get(i) instanceof WallWithOwner) {
+                    if(((WallWithOwner) walls.get(location).get(i)).getOwner() != owner) {
+                        opposingWalls.put(location, walls.get(location));
+                    }
+                }
+            }
+        }
+        return opposingWalls;
     }
 
 

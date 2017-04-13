@@ -83,8 +83,10 @@ public class mapTest {
         ArrayList<Integer> bridgesToAdd = new ArrayList<Integer>(Arrays.asList(1,2,3));
         Location tileLocation = new Location(0,0,0);
 
+
         // add Bridges to Rivers w/ edge
         map.addBridges(tileLocation, bridgesToAdd);
+        System.out.println(map.getBridges().get(tileLocation));
         map.addBridges(new Location(-1,3,-2), bridgesToAdd);
         assertEquals(map.getBridges().size(), 0);
 
@@ -102,12 +104,12 @@ public class mapTest {
         assertEquals(map.getBridges().get(tileLocation).contains(1), false);
         assertEquals(map.getBridges().get(tileLocation).contains(3), true);
 
+        // get rid of all bridges and extra and see if size is 0
         map.addBridge(tileLocation, 0);
-        map.addBridge(tileLocation, 7);
+        map.addBridge(tileLocation, 5);
         map.removeBridge(tileLocation, 3);
-        map.removeBridge(tileLocation, 7);
-
-        System.out.println(map.getBridges().get(tileLocation));
+        map.removeBridge(tileLocation, 5);
+        map.removeBridge(tileLocation, 4);
 
         assertEquals(map.getBridges().size(), 0);
 
