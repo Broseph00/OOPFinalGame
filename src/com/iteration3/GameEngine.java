@@ -9,13 +9,13 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GameEngine extends Application{
+public class GameEngine {
     private int frameCounter = 0;
     private GameWindow gameWindow;
     private GameModel gameModel;
     private ModelViewAdapter MVA;
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+
+    public GameEngine (Stage primaryStage) throws Exception {
         gameWindow = new GameWindow(1221,726);
         gameModel = new GameModel();
         MVA = new ModelViewAdapter(gameModel, gameWindow);
@@ -39,7 +39,7 @@ public class GameEngine extends Application{
         //TODO: Make size equal to screen resolution
         Scene scene = new Scene(gameWindow, 1221, 726);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Map Editor");
+        primaryStage.setTitle("Roads & Boats");
         primaryStage.show();
     }
 }
