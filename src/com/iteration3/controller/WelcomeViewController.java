@@ -10,6 +10,6 @@ public class WelcomeViewController {
 
     }
     public void startNewGame(WelcomeViewWindow welcomeViewWindow) throws Exception {
-//        GameEngine gameEngine = new GameEngine((Stage) welcomeViewWindow.getScene().getWindow());
+        GameEngine gameEngine = new GameEngine((Stage) welcomeViewWindow.getScene().getWindow());
     }
 }
