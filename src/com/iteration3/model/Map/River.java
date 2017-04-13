@@ -57,12 +57,11 @@ public class River {
 
 
     public boolean containsRiverEdge(int i){
-        if(riverEdges.contains(i)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return riverEdges.contains(i);
+    }
+
+    public int getNumOfEdges(){
+        return riverEdges.size();
     }
 
     public void printRiverEdges() {
