@@ -99,6 +99,7 @@ public class mapTest {
         map.removeBridges(new Location(0,0,0), bridgesToRemove);
         assertEquals(map.getBridges().size(), 1);
         assertEquals(map.getBridges().get(new Location(0, 0,0)).contains(1), false);
+        assertEquals(map.getBridges().get(new Location(0, 0,0)).contains(3), true);
 
 
 
