@@ -8,9 +8,8 @@ import javafx.scene.layout.BorderPane;
 /**
  * Created by LesliesLaptop on 4/11/17.
  */
-public class GameWindow extends BorderPane {
+public class GameWindow extends BorderPane implements View {
     private MenuBar menuBar;
-    private MenuItem importMapFileItem, exportMapFileItem;
     private MapView mapView;
     private StatusView statusView;
 
@@ -22,8 +21,8 @@ public class GameWindow extends BorderPane {
     }
 
     private void initializeWindow() {
-        this.mapView = new MapView((2.0/3)*this.getWidth(), this.getHeight());
-        this.statusView = new StatusView((1.0/3)*this.getWidth(),this.getHeight());
+        this.mapView = new MapView((3.0/4)*this.getWidth(), this.getHeight());
+        this.statusView = new StatusView((1.0/4)*this.getWidth(),this.getHeight());
         this.menuBar = new MenuBar();
         this.menuBar.prefWidthProperty().bind(this.widthProperty());
 

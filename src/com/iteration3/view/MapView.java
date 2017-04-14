@@ -11,7 +11,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class MapView extends Pane{
+public class MapView extends Pane implements View {
     private final int MAX_CAMERA_X_BOUND = 660;
     private final int MIN_CAMERA_X_BOUND = -660;
     private final int MAX_CAMERA_Y_BOUND = 660;
@@ -56,7 +56,7 @@ public class MapView extends Pane{
     }
 
     private void initializePane() {
-        this.mapCanvas.addEventFilter(MouseEvent.MOUSE_MOVED, // for camera movement
+        this.mapCanvas.addEventFilter(MouseEvent.MOUSE_DRAGGED, // for camera movement
                 event -> {
                     if (canMoveCameraRight(event.getSceneX())) {
                         moveCameraRight();
