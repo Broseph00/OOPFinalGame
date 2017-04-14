@@ -3,6 +3,8 @@ package com.iteration3.controller;
 /**
  * Created by Clay on 4/14/2017.
  */
+import com.iteration3.model.GameModel;
+import com.iteration3.view.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -11,11 +13,15 @@ import java.util.HashMap;
 
 public class MovementController{
 
+    private GameModel model;
+    private GameWindow window;
     HashMap<KeyCode, Action> keyMap;
-    private EventHandler<ActionEvent> nextPhase, nextPlayer;
+    private EventHandler<ActionEvent> endTurn;
     //TODO: Iterator of transporters
 
-    public MovementController(HashMap<KeyCode, Action> keyMap) {
+    public MovementController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
+        this.model = model;
+        this.window = window;
         this.keyMap = keyMap;
     }
 
@@ -37,20 +43,12 @@ public class MovementController{
     }
 
     private void createHandlers() {
-        nextPhase = new EventHandler<ActionEvent>() {
+        endTurn = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
 
                 //model.nextPlayer();
             }
-        };
-
-        nextPlayer = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                //state.nextState();
-            }
-
         };
     }
 }

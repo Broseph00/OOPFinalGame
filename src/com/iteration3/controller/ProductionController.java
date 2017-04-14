@@ -12,14 +12,16 @@ import java.util.HashMap;
 public class ProductionController implements Observable{
 
     GameModel model;
-    GameWindow view;
+    GameWindow window;
     ArrayList<Observer> subscribers;
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> endTurn;
     //TODO: Iterator of transporters
 
-    public ProductionController(HashMap<KeyCode, Action> keyMap) {
+    public ProductionController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
+        this.model = model;
+        this.window = window;
         this.keyMap = keyMap;
         lastPlayer = false;
         subscribers = new ArrayList<>();

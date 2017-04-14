@@ -17,7 +17,7 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
 
         this.model = model;
         this.window = window;
-        currentState = new WelcomeState(this);
+        currentState = new WelcomeState(this, model, window);
     }
 
     public void setCurrentState(ControlDispatchState state){
