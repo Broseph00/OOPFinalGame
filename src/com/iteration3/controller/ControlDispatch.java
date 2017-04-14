@@ -8,11 +8,16 @@ import javafx.scene.input.KeyEvent;
 
 public class ControlDispatch implements EventHandler<KeyEvent>{
 
+    GameModel model;
+    GameWindow window;
     private ControlDispatchState currentState;
+
 
     public ControlDispatch(GameModel model, GameWindow window){
 
-        currentState = new WelcomeState(this);
+        this.model = model;
+        this.window = window;
+        currentState = new WelcomeState(this, model, window);
     }
 
     public void setCurrentState(ControlDispatchState state){
