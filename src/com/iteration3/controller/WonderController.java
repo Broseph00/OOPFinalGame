@@ -27,6 +27,9 @@ public class WonderController{
         this.keyMap = keyMap;
         subscribers = new ArrayList<>();
         lastPlayer = false;
+
+        initializeKeyMap();
+        createHandlers();
     }
 
     private void initializeKeyMap() {
