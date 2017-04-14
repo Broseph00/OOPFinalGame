@@ -14,4 +14,5 @@ import javafx.scene.input.KeyEvent;
 public interface ControlDispatchState {
 
     public void handleInput(KeyEvent event);
+    public void nextState();
 }

@@ -12,7 +12,7 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
 
     public ControlDispatch(GameModel model, GameWindow window){
 
-        //setCurrentState();
+        currentState = new WelcomeState(this);
     }
 
     public void setCurrentState(ControlDispatchState state){
@@ -23,5 +23,9 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
     public void handle(KeyEvent event) {
 
         currentState.handleInput(event);
+    }
+
+    public void changeState(ControlDispatchState newState){
+        currentState = newState;
     }
 }
