@@ -95,22 +95,6 @@ public class mapTest {
         assertEquals(map.getBridges().size(), 1);
         assertEquals(map.getBridges().get(tileLocation).contains(1), true);
 
-        // removeBridge
-        ArrayList<Integer> bridgesToRemove = new ArrayList<Integer>(Arrays.asList(1));
-        map.removeBridges(tileLocation, bridgesToRemove);
-        assertEquals(map.getBridges().size(), 1);
-        assertEquals(map.getBridges().get(tileLocation).contains(1), false);
-        assertEquals(map.getBridges().get(tileLocation).contains(3), true);
-
-        // get rid of all bridges and extra and see if size is 0
-        map.addBridge(tileLocation, 0);
-        map.addBridge(tileLocation, 5);
-        map.removeBridge(tileLocation, 3);
-        map.removeBridge(tileLocation, 5);
-        map.removeBridge(tileLocation, 4);
-
-        assertEquals(map.getBridges().size(), 0);
-
 
     }
 

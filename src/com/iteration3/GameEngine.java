@@ -5,7 +5,6 @@ import com.iteration3.model.GameModel;
 import com.iteration3.model.ModelViewAdapter;
 import com.iteration3.view.GameWindow;
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
