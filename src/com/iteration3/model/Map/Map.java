@@ -64,11 +64,11 @@ public class Map {
         if(this.rivers.containsKey(location)) {
             // get existing bridges
             ArrayList<Integer> newBridgeSet = new ArrayList<>();
-            if(bridges.containsKey(location)) {
+            if(this.bridges.containsKey(location)) {
                newBridgeSet = this.bridges.get(location);
             }
             // check bridge isn't there and river is theere
-            if (this.containsRiverEdge(location, bridgeToAdd) && !this.containsBridge(location, bridgeToAdd)) {
+            if (this.containsRiverEdge(location, bridgeToAdd) && !this.containsBridge(location, bridgeToAdd) && newBridgeSet.size() < 3) {
                 newBridgeSet.add(bridgeToAdd);
                 this.bridges.put(location, newBridgeSet);
             } else {
@@ -83,7 +83,7 @@ public class Map {
     public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
         if(this.rivers.containsKey(location) && bridgesToRemove.size() <= 3) {
 
-            for(int i = 0; i < bridgesToRemove.size(); i++) {
+            for(int i = bridgesToRemove.size() - 1; i >= 0; i--) {
                 removeBridge(location, bridgesToRemove.get(i));
             }
 
@@ -93,7 +93,11 @@ public class Map {
     // remove bridge from map if it exists
     public void removeBridge(Location location, Integer bridgeToRemove) {
         if(this.containsBridge(location, bridgeToRemove)) {
-            ArrayList<Integer> newBridgeSet = this.bridges.get(location);
+
+            ArrayList<Integer> newBridgeSet = new ArrayList<>();
+            if(bridges.containsKey(location)) {
+                newBridgeSet = this.bridges.get(location);
+            }
 
             newBridgeSet.remove(Integer.valueOf(bridgeToRemove));
 
@@ -111,11 +115,39 @@ public class Map {
     public void addWall(Location location, Player owner, int edge, int strength) {
         if(!this.betweenTwoSeaTiles(location, edge) && !this.wallOwnedByOpposingPlayer(location, owner, edge)) {
 
+            // check if there are already existing walls
+            ArrayList<Wall> newWallSet = new ArrayList<>();
+            if(this.walls.containsKey(location)) {
+                newWallSet = this.walls.get(location);
+            }
 
+            newWallSet.add(new WallWithOwner(owner, edge, getWallStrength(location, edge) + strength));
 
+            this.walls.put(location, newWallSet);
 
+        } else {
+            System.out.println("Wall not added!");
         }
     }
+
+    public void removeWall(Location location, int edge) {
+        // check if there are already existing walls
+        ArrayList<Wall> newWallSet = new ArrayList<>();
+        if(this.walls.containsKey(location)) {
+            newWallSet = this.walls.get(location);
+        }
+
+        for(int i = newWallSet.size() - 1; i >= 0; i--) {
+            if(newWallSet.get(i).getEdge() == edge) {
+                newWallSet.remove(i);
+            }
+        }
+
+        this.walls.put(location, newWallSet);
+
+    }
+
+
 
     // gets the strength of a wall at a location for building on top of old walls
     private int getWallStrength(Location location, int edge) {
@@ -130,6 +162,7 @@ public class Map {
                     strengthToAdd = existingWallSet.get(i).getStrength();
                 }
             }
+            return strengthToAdd;
 
         }
         return 0;
@@ -207,6 +240,19 @@ public class Map {
     public boolean containsBridge(Location location, Integer i){
         if(bridges.containsKey(location)) {
             if(bridges.get(location).contains(Integer.valueOf(i))){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // check if there is bridge at certain location
+    public boolean containsWall(Location location, Integer i){
+        if(walls.containsKey(location)) {
+            if(walls.get(location).contains(Integer.valueOf(i))){
                 return true;
             }
             else{

@@ -116,5 +116,8 @@ public class mapTest {
 
     }
 
+    // TODO: add wall tests
+
+
 
 }
