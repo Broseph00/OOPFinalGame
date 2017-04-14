@@ -9,4 +9,31 @@ public abstract class Transporter {
     private int remainingMovePoints;
     private int maxMovePoints;
     private int capacity;
+
+
+    public Transporter(){
+
+    }
+
+    public List<Resource> getResourceList() {
+        return resourceList;
+    }
+
+    public int getRemainingMovePoints() {
+        return remainingMovePoints;
+    }
+
+    public int getMaxMovePoints() {
+        return maxMovePoints;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void resetMovePoints(){
+        remainingMovePoints = maxMovePoints;
+    }
+
+
 }
