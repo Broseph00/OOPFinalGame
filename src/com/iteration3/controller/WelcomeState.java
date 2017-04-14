@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
     /**
      * Created by Clay on 4/13/2017.
      */
-    public class WelcomeState implements ControlDispatchState{
+    public class WelcomeState implements ControlDispatchState, Observer{
         private GameModel model;
         private GameWindow window;
         private ControlDispatch dispatch;
@@ -28,5 +28,9 @@ import javafx.scene.input.KeyEvent;
 
         public void nextState(){
             dispatch.changeState(new ProductionPhaseState(dispatch, model, window));
+        }
+
+        public void update() {
+            nextState();
         }
     }

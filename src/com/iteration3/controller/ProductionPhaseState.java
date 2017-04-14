@@ -7,7 +7,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 
-public class ProductionPhaseState implements ControlDispatchState {
+public class ProductionPhaseState implements ControlDispatchState, Observer {
     private GameModel model;
     private GameWindow window;
     private ControlDispatch dispatch;
@@ -20,6 +20,7 @@ public class ProductionPhaseState implements ControlDispatchState {
         this.dispatch = dispatch;
         keyMap = new HashMap<>();
         productionController = new ProductionController(model, window, keyMap);
+        productionController.addObserver(this);
     }
 
     @Override
@@ -31,5 +32,9 @@ public class ProductionPhaseState implements ControlDispatchState {
     @Override
     public void nextState() {
         dispatch.changeState(new MovementPhaseState(dispatch, model, window));
+    }
+
+    public void update() {
+        nextState();
     }
 }

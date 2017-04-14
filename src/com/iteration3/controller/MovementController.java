@@ -9,20 +9,24 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MovementController{
+public class MovementController implements Observable{
 
     private GameModel model;
     private GameWindow window;
+    ArrayList<Observer> subscribers;
+    boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> endTurn;
-    //TODO: Iterator of transporters
 
     public MovementController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
         this.window = window;
         this.keyMap = keyMap;
+        subscribers = new ArrayList<>();
+        lastPlayer = false;
     }
 
     private void initializeKeyMap() {
@@ -50,5 +54,18 @@ public class MovementController{
                 //model.nextPlayer();
             }
         };
+    }
+
+    public void addObserver(Observer obs) {
+        subscribers.add(obs);
+    }
+
+    public void removeObserver(Observer obs) {
+        subscribers.remove(obs);
+    }
+
+    public void notifyAllObservers() {
+        for (Observer o: subscribers)
+            o.update();
     }
 }

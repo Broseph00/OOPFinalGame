@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * Created by Clay on 4/14/2017.
  */
-public class WonderPhaseState implements ControlDispatchState {
+public class WonderPhaseState implements ControlDispatchState, Observer {
     private GameModel model;
     private GameWindow window;
     private ControlDispatch dispatch;
@@ -21,17 +21,25 @@ public class WonderPhaseState implements ControlDispatchState {
     public WonderPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
         this.model = model;
         this.window = window;
+        this.dispatch = dispatch;
         keyMap = new HashMap<>();
         wonderController = new WonderController(model, window, keyMap);
-        this.dispatch = dispatch;
+        wonderController.addObserver(this);
+
     }
 
     @Override
     public void handleInput(KeyEvent event) {
+        if (keyMap.containsKey(event.getCode()))
+            keyMap.get(event.getCode()).execute();
     }
 
     @Override
     public void nextState() {
         dispatch.changeState(new ProductionPhaseState(dispatch, model, window));
+    }
+
+    public void update() {
+        nextState();
     }
 }
