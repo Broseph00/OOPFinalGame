@@ -8,16 +8,14 @@ import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Tiles.WoodTerrain;
-import org.junit.Test;
-
-import java.lang.reflect.Array;
+import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertEquals;
+
 
 public class mapTest {
-
 
     @Test
     public void testContains(){
