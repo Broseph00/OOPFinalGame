@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
 import com.sun.javafx.geom.Edge;
 
@@ -17,12 +19,18 @@ public class Map {
     private HashMap<Location, River> rivers;
     private HashMap<Location, ArrayList<Integer>> bridges;
     private HashMap<Location, ArrayList<Wall>> walls;
+    private HashMap<Location, Region> regions;
+    private HashMap<RegionLocation, Transporter> transports;
+    private HashMap<RegionLocation, Resource> resources;
 
     public Map() {
         tiles = new HashMap<>();
         rivers = new HashMap<>();
         bridges = new HashMap<>();
         walls = new HashMap<>();
+        regions = new HashMap<>();
+        transports = new HashMap<>();
+        resources = new HashMap<>();
     }
 
     public void addTileFromFile(Location location, Tile tile) {
@@ -37,6 +45,7 @@ public class Map {
         }
     }
 
+    //TODO IF ADDED BRIDGE CALL RESPECTIVE REGION TO UPDATE ITSELF
     // add bridge if bridge isn't there already and if size < 3 and there is river there
     public void addBridges(Location location, ArrayList<Integer> bridgesToAdd) {
         // check river is on tile and correct number of bridges
@@ -58,6 +67,7 @@ public class Map {
         }
     }
 
+    //TODO IF ADDED BRIDGE CALL RESPECTIVE REGION TO UPDATE ITSELF
     // add bridge if there isn't already and there is a river there
     public void addBridge(Location location, Integer bridgeToAdd) {
         // check river is on tile and correct number of bridges
@@ -79,8 +89,8 @@ public class Map {
         }
     }
 
-    // remove bridges from map if it exists
-    public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
+    // Can't remove bridges in game
+/**    public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
         if(this.rivers.containsKey(location) && bridgesToRemove.size() <= 3) {
 
             for(int i = bridgesToRemove.size() - 1; i >= 0; i--) {
@@ -90,7 +100,7 @@ public class Map {
         }
     }
 
-    // remove bridge from map if it exists
+
     public void removeBridge(Location location, Integer bridgeToRemove) {
         if(this.containsBridge(location, bridgeToRemove)) {
 
@@ -110,6 +120,7 @@ public class Map {
 
         }
     }
+ **/
 
     // add wall to map if it isn't between seaTiles or if there is no other Player's wall
     public void addWall(Location location, Player owner, int edge, int strength) {

@@ -1,6 +1,7 @@
 package com.iteration3.model.Map;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Region {
     private ArrayList<ArrayList<Integer>> regions;
@@ -180,7 +181,84 @@ public class Region {
         }
     }
 
-    public void addBridge(Integer edge){
+    private void removeRegion(ArrayList<Integer> regionToRemove){
+        regions.remove(regionToRemove);
+    }
 
+    public void addBridge(Integer edge){
+        if(edge>=1 && edge <=6) {
+            ArrayList<Integer> region1;
+            ArrayList<Integer> region2 = new ArrayList<>();
+            if (edge == 1) {
+                if (!connected(6, 1)) {
+                    region1=getRegion(6);
+                    region2=getRegion(1);
+                    region1.addAll(region2);
+                }
+            } else if (edge == 2) {
+                if (!connected(1, 2)) {
+                    region1=getRegion(1);
+                    region2=getRegion(2);
+                    region1.addAll(region2);
+                }
+            } else if (edge == 3) {
+                if (!connected(2, 3)) {
+                    region1=getRegion(2);
+                    region2=getRegion(3);
+                    region1.addAll(region2);
+                }
+            } else if (edge == 4) {
+                if (!connected(3, 4)) {
+                    region1=getRegion(3);
+                    region2=getRegion(4);
+                    region1.addAll(region2);
+                }
+            } else if (edge == 5) {
+                if (!connected(4, 5)) {
+                    region1=getRegion(4);
+                    region2=getRegion(5);
+                    region1.addAll(region2);
+                }
+            } else if (edge == 6) {
+                if (!connected(5, 6)) {
+                    region1=getRegion(5);
+                    region2=getRegion(6);
+                    region1.addAll(region2);
+                }
+            }
+            removeRegion(region2);
+        }
+    }
+
+    public boolean connected(int x, int y){
+        return getRegion(x) == getRegion(y);
+    }
+
+    public ArrayList<Integer> getRegion(int x){
+        Iterator<ArrayList<Integer>> outer = regions.iterator();
+        while(outer.hasNext()){
+            ArrayList<Integer> region = outer.next();
+            Iterator<Integer> inner = region.iterator();
+            while(inner.hasNext()){
+                if(x==inner.next()){
+                    return region;
+                }
+            }
+        }
+        //Return empty region if it doesn't exist
+        ArrayList<Integer> empty = new ArrayList<>();
+        return empty;
+    }
+
+    public void printRegion(){
+        Iterator<ArrayList<Integer>> outer = regions.iterator();
+        while(outer.hasNext()){
+            System.out.println("");
+            ArrayList<Integer> region = outer.next();
+            Iterator<Integer> inner = region.iterator();
+            while(inner.hasNext()){
+                System.out.print(inner.next() + " ");
+            }
+        }
     }
 }
