@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * Created by Clay on 4/13/2017.
  */
-public class MovementPhaseState implements ControlDispatchState {
+public class MovementPhaseState implements ControlDispatchState, Observer {
     private GameModel model;
     private GameWindow window;
     private ControlDispatch dispatch;
@@ -19,20 +19,28 @@ public class MovementPhaseState implements ControlDispatchState {
 
 
     public MovementPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
-        keyMap = new HashMap<>();
+
         this.model = model;
         this.window = window;
-        movementController = new MovementController(model, window, keyMap);
         this.dispatch = dispatch;
+        keyMap = new HashMap<>();
+        movementController = new MovementController(model, window, keyMap);
+        movementController.addObserver(this);
+
     }
 
     @Override
     public void handleInput(KeyEvent event) {
-
+        if (keyMap.containsKey(event.getCode()))
+            keyMap.get(event.getCode()).execute();
     }
 
     @Override
     public void nextState() {
         dispatch.changeState(new BuildingPhaseState(dispatch, model, window));
+    }
+
+    public void update() {
+        nextState();
     }
 }
