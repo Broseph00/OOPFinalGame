@@ -89,39 +89,6 @@ public class Map {
         }
     }
 
-    // Can't remove bridges in game
-/**    public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
-        if(this.rivers.containsKey(location) && bridgesToRemove.size() <= 3) {
-
-            for(int i = bridgesToRemove.size() - 1; i >= 0; i--) {
-                removeBridge(location, bridgesToRemove.get(i));
-            }
-
-        }
-    }
-
-
-    public void removeBridge(Location location, Integer bridgeToRemove) {
-        if(this.containsBridge(location, bridgeToRemove)) {
-
-            ArrayList<Integer> newBridgeSet = new ArrayList<>();
-            if(bridges.containsKey(location)) {
-                newBridgeSet = this.bridges.get(location);
-            }
-
-            newBridgeSet.remove(Integer.valueOf(bridgeToRemove));
-
-            // check to see if arraylist is empty, if it is remove from list
-            if(newBridgeSet.size() > 0) {
-                this.bridges.put(location, newBridgeSet);
-            } else {
-                this.bridges.remove(location);
-            }
-
-        }
-    }
- **/
-
     // add wall to map if it isn't between seaTiles or if there is no other Player's wall
     public void addWall(Location location, Player owner, int edge, int strength) {
         if(!this.betweenTwoSeaTiles(location, edge) && !this.wallOwnedByOpposingPlayer(location, owner, edge)) {
