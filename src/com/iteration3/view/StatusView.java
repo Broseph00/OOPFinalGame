@@ -63,13 +63,9 @@ public class StatusView extends VBox {
 	
 	private void initializeView() {
 		
-		Label title = new Label("Map Building Menu");
-		title.setFont(Font.font("Verdana", FontWeight.BOLD,30));
-		
-		this.setAlignment(Pos.TOP_CENTER);
+		Text title = new Text("Map Building Menu");
 		
 		this.getChildren().add(title);
-		
 		
 		this.getChildren().add(selectTerrain);
 		
@@ -84,6 +80,8 @@ public class StatusView extends VBox {
 		
 		this.getChildren().add(rotateOption);
 		
+		this.setAlignment(Pos.TOP_CENTER);
+		
 		HBox horizontalPane = new HBox(10);
 		horizontalPane.setAlignment(Pos.CENTER);
 		
@@ -91,6 +89,8 @@ public class StatusView extends VBox {
 		
 		
 		this.getChildren().add(horizontalPane);
+		
+		title.setFont(Font.font("Verdana", FontWeight.BOLD,20));
 		
 		selectTerrain.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		selectRiver.setFont(Font.font("Verdana",FontWeight.SEMI_BOLD,15));

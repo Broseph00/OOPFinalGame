@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
 import com.sun.javafx.geom.Edge;
 
@@ -17,12 +19,18 @@ public class Map {
     private HashMap<Location, River> rivers;
     private HashMap<Location, ArrayList<Integer>> bridges;
     private HashMap<Location, ArrayList<Wall>> walls;
+    private HashMap<Location, Region> regions;
+    private HashMap<RegionLocation, Transporter> transports;
+    private HashMap<RegionLocation, Resource> resources;
 
     public Map() {
         tiles = new HashMap<>();
         rivers = new HashMap<>();
         bridges = new HashMap<>();
         walls = new HashMap<>();
+        regions = new HashMap<>();
+        transports = new HashMap<>();
+        resources = new HashMap<>();
     }
 
     public void addTileFromFile(Location location, Tile tile) {
@@ -37,6 +45,7 @@ public class Map {
         }
     }
 
+    //TODO IF ADDED BRIDGE CALL RESPECTIVE REGION TO UPDATE ITSELF
     // add bridge if bridge isn't there already and if size < 3 and there is river there
     public void addBridges(Location location, ArrayList<Integer> bridgesToAdd) {
         // check river is on tile and correct number of bridges
@@ -58,6 +67,7 @@ public class Map {
         }
     }
 
+    //TODO IF ADDED BRIDGE CALL RESPECTIVE REGION TO UPDATE ITSELF
     // add bridge if there isn't already and there is a river there
     public void addBridge(Location location, Integer bridgeToAdd) {
         // check river is on tile and correct number of bridges
@@ -76,38 +86,6 @@ public class Map {
             }
         } else {
             System.out.println("Bridge not added!");
-        }
-    }
-
-    // remove bridges from map if it exists
-    public void removeBridges(Location location, ArrayList<Integer> bridgesToRemove) {
-        if(this.rivers.containsKey(location) && bridgesToRemove.size() <= 3) {
-
-            for(int i = bridgesToRemove.size() - 1; i >= 0; i--) {
-                removeBridge(location, bridgesToRemove.get(i));
-            }
-
-        }
-    }
-
-    // remove bridge from map if it exists
-    public void removeBridge(Location location, Integer bridgeToRemove) {
-        if(this.containsBridge(location, bridgeToRemove)) {
-
-            ArrayList<Integer> newBridgeSet = new ArrayList<>();
-            if(bridges.containsKey(location)) {
-                newBridgeSet = this.bridges.get(location);
-            }
-
-            newBridgeSet.remove(Integer.valueOf(bridgeToRemove));
-
-            // check to see if arraylist is empty, if it is remove from list
-            if(newBridgeSet.size() > 0) {
-                this.bridges.put(location, newBridgeSet);
-            } else {
-                this.bridges.remove(location);
-            }
-
         }
     }
 
@@ -145,6 +123,24 @@ public class Map {
 
         this.walls.put(location, newWallSet);
 
+    }
+
+    public void destroyWall(Location location, int edge) {
+        // check if there are already existing walls
+        ArrayList<Wall> newWallSet = new ArrayList<>();
+        if(this.getAllOwnedWalls().containsKey(location)) {
+            newWallSet = this.walls.get(location);
+        }
+
+        for(int i = newWallSet.size() - 1; i >= 0; i--) {
+            if(newWallSet.get(i).getEdge() == edge) {
+                int strength = newWallSet.get(i).getStrength();
+                newWallSet.remove(i);
+                newWallSet.add(i, new WallWithoutOwner(edge, strength));
+            }
+        }
+
+        this.walls.put(location, newWallSet);
     }
 
 
@@ -203,16 +199,16 @@ public class Map {
 
     // check if a wall is owned by another Player
     private boolean wallOwnedByOpposingPlayer(Location location, Player owner, int edge) {
-        HashMap<Location, ArrayList<Wall>> opposingWalls = this.getOpposingOwnedWalls(owner);
+        HashMap<Location, ArrayList<WallWithOwner>> ownedWalls = this.getAllOwnedWalls();
 
         // check if this Location has any opposing walls at all
-        if(!opposingWalls.containsKey(location)) {
+        if(!ownedWalls.containsKey(location)) {
             return false;
         }
         else {
             // check if that edge is owned by other player
-            for(int i = 0; i < opposingWalls.get(location).size(); i++) {
-                if(opposingWalls.get(location).get(i).getEdge() == edge) {
+            for(int i = 0; i < ownedWalls.get(location).size(); i++) {
+                if(ownedWalls.get(location).get(i).getEdge() == edge && ownedWalls.get(location).get(i).getOwner() != owner) {
                     return true;
                 }
             }
@@ -323,20 +319,40 @@ public class Map {
     }
 
     // return list of all walls not owned by the owner
-    private HashMap<Location, ArrayList<Wall>> getOpposingOwnedWalls(Player owner) {
-        HashMap<Location, ArrayList<Wall>> opposingWalls = new HashMap<>();
+//    private HashMap<Location, ArrayList<Wall>> getOpposingOwnedWalls(Player owner) {
+//        HashMap<Location, ArrayList<Wall>> opposingWalls = new HashMap<>();
+//        for(Location location : walls.keySet()) {
+//            // loop through all walls in wallset
+//            for(int i = 0; i < walls.get(location).size(); i++) {
+//                // check if wall is owned by opposing player
+//                if(walls.get(location).get(i) instanceof WallWithOwner) {
+//                    if(((WallWithOwner) walls.get(location).get(i)).getOwner() != owner) {
+//                        opposingWalls.put(location, walls.get(location));
+//                    }
+//                }
+//            }
+//        }
+//        return opposingWalls;
+//    }
+
+    // return list of all walls not owned by the owner
+    private HashMap<Location, ArrayList<WallWithOwner>> getAllOwnedWalls() {
+        HashMap<Location, ArrayList<WallWithOwner>> ownedWalls = new HashMap<>();
         for(Location location : walls.keySet()) {
             // loop through all walls in wallset
+            ArrayList<WallWithOwner> wallsWithOwners= new ArrayList<WallWithOwner>();
             for(int i = 0; i < walls.get(location).size(); i++) {
                 // check if wall is owned by opposing player
                 if(walls.get(location).get(i) instanceof WallWithOwner) {
-                    if(((WallWithOwner) walls.get(location).get(i)).getOwner() != owner) {
-                        opposingWalls.put(location, walls.get(location));
-                    }
+                    wallsWithOwners.add(((WallWithOwner) walls.get(location).get(i)));
                 }
             }
+            if(wallsWithOwners.size() > 0) {
+                ownedWalls.put(location, wallsWithOwners);
+            }
+
         }
-        return opposingWalls;
+        return ownedWalls;
     }
 
 
