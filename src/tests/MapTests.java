@@ -1,3 +1,5 @@
+package tests;
+
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
