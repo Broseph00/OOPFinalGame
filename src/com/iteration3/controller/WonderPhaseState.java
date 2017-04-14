@@ -1,5 +1,7 @@
 package com.iteration3.controller;
 
+import com.iteration3.model.GameModel;
+import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -10,7 +12,7 @@ public class WonderPhaseState implements ControlDispatchState {
     private WonderController wonderController;
 
 
-    public WonderPhaseState(ControlDispatch dispatch) {
+    public WonderPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
         wonderController = new WonderController();
         this.dispatch = dispatch;
     }
