@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
+import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Transporter;
@@ -21,7 +22,7 @@ public class Map {
     private HashMap<Location, ArrayList<Wall>> walls;
     private HashMap<Location, Region> regions;
     private HashMap<RegionLocation, Transporter> transports;
-    private HashMap<RegionLocation, Resource> resources;
+    private HashMap<RegionLocation, ResourceList> resources;
 
     public Map() {
         tiles = new HashMap<>();
@@ -293,6 +294,18 @@ public class Map {
         return walls;
     }
 
+    public HashMap<Location, Region> getRegions() {
+        return regions;
+    }
+
+    public HashMap<RegionLocation, Transporter> getTransports() {
+        return transports;
+    }
+
+    public HashMap<RegionLocation, ResourceList> getResources() {
+        return resources;
+    }
+
     public void printRivers() {
         for(Location location : rivers.keySet()) {
             System.out.println(rivers.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
@@ -319,23 +332,6 @@ public class Map {
     }
 
     // return list of all walls not owned by the owner
-//    private HashMap<Location, ArrayList<Wall>> getOpposingOwnedWalls(Player owner) {
-//        HashMap<Location, ArrayList<Wall>> opposingWalls = new HashMap<>();
-//        for(Location location : walls.keySet()) {
-//            // loop through all walls in wallset
-//            for(int i = 0; i < walls.get(location).size(); i++) {
-//                // check if wall is owned by opposing player
-//                if(walls.get(location).get(i) instanceof WallWithOwner) {
-//                    if(((WallWithOwner) walls.get(location).get(i)).getOwner() != owner) {
-//                        opposingWalls.put(location, walls.get(location));
-//                    }
-//                }
-//            }
-//        }
-//        return opposingWalls;
-//    }
-
-    // return list of all walls not owned by the owner
     private HashMap<Location, ArrayList<WallWithOwner>> getAllOwnedWalls() {
         HashMap<Location, ArrayList<WallWithOwner>> ownedWalls = new HashMap<>();
         for(Location location : walls.keySet()) {
@@ -354,6 +350,7 @@ public class Map {
         }
         return ownedWalls;
     }
+
 
 
 }
