@@ -84,7 +84,6 @@ public class mapTest {
 
         // add Bridges to Rivers w/ edge
         map.addBridges(tileLocation, bridgesToAdd);
-        System.out.println(map.getBridges().get(tileLocation));
         map.addBridges(new Location(-1, 3, -2), bridgesToAdd);
         assertEquals(map.getBridges().size(), 0);
 
