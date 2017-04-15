@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
+import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
@@ -18,7 +20,7 @@ public class Map {
     private HashMap<Location, ArrayList<Integer>> bridges;
     private HashMap<Location, ArrayList<Wall>> walls;
     private HashMap<Location, Region> regions;
-    private HashMap<RegionLocation, Transporter> transports;
+    private HashMap<RegionLocation, TransportList> transports;
     private HashMap<RegionLocation, ResourceList> resources;
     private HashMap<Location, ArrayList<Location>> roads;
 
@@ -91,7 +93,8 @@ public class Map {
         Region region = this.regions.get(location);
         Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
         Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
-        return connectedRegion && passableWall;
+        Boolean terrainMatch = !getTerrain(toLocation).equals("sea");
+        return connectedRegion && passableWall && terrainMatch;
     }
 
     public boolean validateRoadMove(RegionLocation start, int exitRegion, int exitEdge, Player owner){
@@ -103,7 +106,8 @@ public class Map {
         Region region = this.regions.get(location);
         Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
         Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
-        return connectedRegion && passableWall;
+        Boolean terrainMatch = !getTerrain(toLocation).equals("sea");
+        return connectedRegion && passableWall && terrainMatch;
     }
 
     public boolean validateWaterMove(RegionLocation start, int exitEdge, Player owner){
@@ -113,7 +117,7 @@ public class Map {
         if(rivers.containsKey(location)){
             Boolean validRiver = rivers.get(location).containsRiverEdge(exitEdge);
             Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
-            Boolean terrainMatch = getTerrain(location).matches(getTerrain(toLocation));
+            Boolean terrainMatch = !getTerrain(toLocation).equals("sea");
             //Traveling to another river
             if(terrainMatch){
                 //If river exits on traveling to tile it must already be validated as a connected river
@@ -136,8 +140,9 @@ public class Map {
             else{
                 //Check it has rivers
                 if(rivers.containsKey(toLocation)){
+                    Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
                     //check it it has the correct river edge
-                    return rivers.get(toLocation).containsRiverEdge(oppositeEdge(exitEdge));
+                    return rivers.get(toLocation).containsRiverEdge(oppositeEdge(exitEdge)) && passableWall;
                 }
                 //false if it doesn't have river
                 else{
@@ -152,6 +157,22 @@ public class Map {
         if(validateLocationRange(location)) {
             this.tiles.put(location, tile);
             this.regions.put(location, new Region());
+            this.intializeResourceList(location);
+            this.intializeTansportList(location);
+        }
+    }
+
+    private void intializeResourceList(Location location) {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
+            this.resources.put(regionLocation, new ResourceList());
+        }
+    }
+
+    private void intializeTansportList(Location location) {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
+            this.transports.put(regionLocation, new TransportList());
         }
     }
 
@@ -537,7 +558,7 @@ public class Map {
         return regions;
     }
 
-    public HashMap<RegionLocation, Transporter> getTransports() {
+    public HashMap<RegionLocation, TransportList> getTransports() {
         return transports;
     }
 
@@ -588,6 +609,36 @@ public class Map {
 
         }
         return ownedWalls;
+    }
+
+
+    public RegionLocation getTransportRegionLocation(Transporter transport) {
+        for(RegionLocation regionLocation: this.transports.keySet()) {
+            TransportList transportList = this.transports.get(regionLocation);
+            for(Transporter t: transportList.getTransports()){
+                if(t == transport) {
+                    return regionLocation;
+                }
+            }
+        }
+        System.out.println("RegionLocation for Transport not found.");
+        return null;
+    }
+
+    public void removeResource(Resource r, RegionLocation regionLocation) {
+        this.resources.get(regionLocation).removeResource(r);
+    }
+
+    public void addResource(Resource r, RegionLocation regionLocation) {
+        this.resources.get(regionLocation).addResource(r);
+    }
+
+    public void addTransport(Transporter t, RegionLocation regionLocation) {
+        this.transports.get(regionLocation).addTransport(t);
+    }
+
+    public void removeTransport(Transporter t, RegionLocation regionLocation) {
+        this.transports.get(regionLocation).removeTransport(t);
     }
 
 
