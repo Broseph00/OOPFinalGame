@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildSteamerFactoryAbility extends Ability {
 
     public BuildSteamerFactoryAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD STEAMER FACTORY");
     }
 }

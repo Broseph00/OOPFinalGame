@@ -7,15 +7,15 @@ import com.iteration3.model.Transporters.Transporter;
  */
 
 /*--------------------------------------------------------------------------------------
-|    BuildCoalBurnerAbility Module: Created by test on 04/14/2017.
+|    MoveDegree90Ability Module: Created by test on 04/14/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class BuildCoalBurnerAbility extends Ability {
+public class MoveDegree90Ability extends MoveAbility {
 
-    public BuildCoalBurnerAbility(Transporter transporter){
-        super(transporter, "BUILD COAL BURNER");
+    public MoveDegree90Ability(Transporter transporter){
+        super(transporter, 2,3, "MOVE SOUTHEAST");
     }
 }

@@ -2,13 +2,9 @@ package com.iteration3.model.Map;
 
 
 public class Location {
-    protected int x;
-    protected int y;
-    protected int z;
-
-    public Location(){
-
-    }
+    private int x;
+    private int y;
+    private int z;
 
     public Location(int x, int y, int z) {
         this.x = x;

@@ -17,6 +17,6 @@ import sun.awt.image.BufferedImageDevice;
 public class BuildClaypitAbility extends Ability {
 
     public BuildClaypitAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD CLAYPIT");
     }
 }

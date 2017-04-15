@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildStockExchangeAbility extends Ability {
 
     public BuildStockExchangeAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD STOCK EXCHANGE");
     }
 }

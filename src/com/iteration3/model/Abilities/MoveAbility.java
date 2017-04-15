@@ -14,11 +14,16 @@ import com.iteration3.model.Transporters.Transporter;
 ---------------------------------------------------------------------------------------*/
 
 public class MoveAbility extends Ability {
-    int direction;
+    private int region;
+    private int border;
 
-    public MoveAbility(Transporter transporter, int direction){
-        super(transporter);
-        this.direction = direction;
-
+    public MoveAbility(Transporter transporter, int region, int border, String name){
+        super(transporter, name);
+        this.region = region;
+        this.border = border;
     }
+
+    public int getRegion(){ return region; }
+
+    public int getBorder(){ return border; }
 }
