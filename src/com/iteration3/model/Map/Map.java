@@ -35,106 +35,6 @@ public class Map {
         roads = new HashMap<>();
     }
 
-    public String getTerrain(Location location){
-        if(tiles.containsKey(location)){
-            return tiles.get(location).getTerrain(new TerrainTypeVisitor());
-        }
-        return "";
-    }
-
-    public int oppositeEdge(int edge){
-        switch (edge){
-            case 1:
-                return 4;
-            case 2:
-                return 5;
-            case 3:
-                return 6;
-            case 4:
-                return 1;
-            case 5:
-                return 2;
-            case 6:
-                return 3;
-            default:
-                return edge;
-        }
-    }
-
-    public boolean checkAdjacency(Location loc1, Location loc2){
-        if(loc1.getNorth().equals(loc2)){
-            return true;
-        }
-        else if(loc1.getNorthEast().equals(loc2)){
-            return true;
-        }
-        else if(loc1.getSouthEast().equals(loc2)){
-            return true;
-        }
-        else if(loc1.getSouth().equals(loc2)){
-            return true;
-        }
-        else if(loc1.getSouthWest().equals(loc2)){
-            return true;
-        }
-        else if(loc1.getNorthWest().equals(loc2)){
-            return true;
-        }
-        return false;
-    }
-
-    public int getOppositeRegion(int exitRegion, int exitEdge){
-        if(exitEdge==1){
-            if(exitRegion==1){
-                return 3;
-            }
-            else if(exitRegion==6){
-                return 4;
-            }
-        }
-        else if(exitEdge==2){
-            if(exitRegion==1){
-                return 5;
-            }
-            else if(exitRegion==2){
-                return 4;
-            }
-        }
-        else if(exitEdge==3){
-            if(exitRegion==2){
-                return 6;
-            }
-            else if(exitRegion==3){
-                return 5;
-            }
-        }
-        else if(exitEdge==4){
-            if(exitRegion==3){
-                return 1;
-            }
-            else if(exitRegion==4){
-                return 6;
-            }
-        }
-        else if(exitEdge==5){
-            if(exitRegion==4){
-                return 2;
-            }
-            else if(exitRegion==5){
-                return 1;
-            }
-        }
-        else if(exitEdge==6){
-            if(exitRegion==5){
-                return 3;
-            }
-            else if(exitRegion==6){
-                return 2;
-            }
-        }
-        return 0;
-    }
-
     public void transportMove(Transporter transporter, int exitRegion, int exitEdge){
         RegionLocation startRegionLocation = getTransportRegionLocation(transporter);
         Location startLocation = startRegionLocation.getLocation();
@@ -235,20 +135,6 @@ public class Map {
             this.regions.put(location, new Region());
             this.intializeResourceList(location);
             this.intializeTansportList(location);
-        }
-    }
-
-    private void intializeResourceList(Location location) {
-        for(int i = 1; i < 7; i++) {
-            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
-            this.resources.put(regionLocation, new ResourceList());
-        }
-    }
-
-    private void intializeTansportList(Location location) {
-        for(int i = 1; i < 7; i++) {
-            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
-            this.transports.put(regionLocation, new TransportList());
         }
     }
 
@@ -442,6 +328,296 @@ public class Map {
 
     }
 
+    //check if there is a road connecting two locations
+    public boolean containsRoad(Location from, Location to){
+        if(roads.containsKey(from)){
+            return roads.get(from).contains(to);
+        }
+        return false;
+    }
+
+    // check if there is a river at a certain location
+    public boolean containsRiverEdge(Location location, Integer i){
+        if(rivers.containsKey(location)){
+            if(this.rivers.get(location).getRiverEdges().contains(Integer.valueOf(i))){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // check if there is bridge at certain location
+    public boolean containsBridge(Location location, Integer i){
+        if(bridges.containsKey(location)) {
+            if(bridges.get(location).contains(Integer.valueOf(i))){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // check if there is bridge at certain location
+    public boolean containsWall(Location location, Integer i){
+        if(walls.containsKey(location)) {
+            if(walls.get(location).contains(Integer.valueOf(i))){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+
+    public void clearMap() {
+        rivers.clear();
+        tiles.clear();
+    }
+
+
+    public boolean validateLocationRange(Location location) {
+        if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {
+            System.out.println("Invalid location type");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // getters setters and methods for debugging
+    public HashMap<Location, Tile> getTiles() {
+        return tiles;
+    }
+
+    public HashMap<Location, River> getRivers() {
+        return rivers;
+    }
+
+    public HashMap<Location, ArrayList<Integer>> getBridges() {
+        return bridges;
+    }
+
+    public HashMap<Location, ArrayList<Wall>> getWalls() {
+        return walls;
+    }
+
+    public HashMap<Location, ArrayList<Location>> getRoads(){
+        return roads;
+    }
+
+    public HashMap<Location, Region> getRegions() {
+        return regions;
+    }
+
+    public HashMap<RegionLocation, TransportList> getTransports() {
+        return transports;
+    }
+
+    public HashMap<RegionLocation, ResourceList> getResources() {
+        return resources;
+    }
+
+    public RegionLocation getTransportRegionLocation(Transporter transport) {
+        for(RegionLocation regionLocation: this.transports.keySet()) {
+            TransportList transportList = this.transports.get(regionLocation);
+            for(Transporter t: transportList.getTransports()){
+                if(t == transport) {
+                    return regionLocation;
+                }
+            }
+        }
+        System.out.println("RegionLocation for Transport not found.");
+        return null;
+    }
+
+    public void removeResource(Resource r, RegionLocation regionLocation) {
+        this.resources.get(regionLocation).removeResource(r);
+    }
+
+    public void addResource(Resource r, RegionLocation regionLocation) {
+        this.resources.get(regionLocation).addResource(r);
+    }
+
+    public void addTransport(Transporter t, RegionLocation regionLocation) {
+        this.transports.get(regionLocation).addTransport(t);
+    }
+
+    public void removeTransport(Transporter t, RegionLocation regionLocation) {
+        this.transports.get(regionLocation).removeTransport(t);
+    }
+
+
+
+    /**HELPER FUNCTIONS***********************************************************************************************/
+    /*****************************************************************************************************************/
+    /*****************************************************************************************************************/
+    /*****************************************************************************************************************/
+
+    public void printRivers() {
+        for(Location location : rivers.keySet()) {
+            System.out.println(rivers.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
+            rivers.get(location).printRiverEdges();
+        }
+    }
+
+    public void printTiles() {
+        for(Location location : tiles.keySet()) {
+            System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
+            System.out.println("Terrain: " + tiles.get(location).getTerrain(new TerrainTypeVisitor()));
+        }
+    }
+
+    private String getTerrain(Location location){
+        if(tiles.containsKey(location)){
+            return tiles.get(location).getTerrain(new TerrainTypeVisitor());
+        }
+        return "";
+    }
+
+    private int oppositeEdge(int edge){
+        switch (edge){
+            case 1:
+                return 4;
+            case 2:
+                return 5;
+            case 3:
+                return 6;
+            case 4:
+                return 1;
+            case 5:
+                return 2;
+            case 6:
+                return 3;
+            default:
+                return edge;
+        }
+    }
+
+    private boolean checkAdjacency(Location loc1, Location loc2){
+        if(loc1.getNorth().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getNorthEast().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouthEast().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouth().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouthWest().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getNorthWest().equals(loc2)){
+            return true;
+        }
+        return false;
+    }
+
+    private int getOppositeRegion(int exitRegion, int exitEdge){
+        if(exitEdge==1){
+            if(exitRegion==1){
+                return 3;
+            }
+            else if(exitRegion==6){
+                return 4;
+            }
+        }
+        else if(exitEdge==2){
+            if(exitRegion==1){
+                return 5;
+            }
+            else if(exitRegion==2){
+                return 4;
+            }
+        }
+        else if(exitEdge==3){
+            if(exitRegion==2){
+                return 6;
+            }
+            else if(exitRegion==3){
+                return 5;
+            }
+        }
+        else if(exitEdge==4){
+            if(exitRegion==3){
+                return 1;
+            }
+            else if(exitRegion==4){
+                return 6;
+            }
+        }
+        else if(exitEdge==5){
+            if(exitRegion==4){
+                return 2;
+            }
+            else if(exitRegion==5){
+                return 1;
+            }
+        }
+        else if(exitEdge==6){
+            if(exitRegion==5){
+                return 3;
+            }
+            else if(exitRegion==6){
+                return 2;
+            }
+        }
+        return 0;
+    }
+
+    private void intializeResourceList(Location location) {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
+            this.resources.put(regionLocation, new ResourceList());
+        }
+    }
+
+    private void intializeTansportList(Location location) {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
+            this.transports.put(regionLocation, new TransportList());
+        }
+    }
+    // return list of all sea tiles
+    private HashMap<Location, Tile> getSeaTiles() {
+        HashMap<Location, Tile> seaTiles = new HashMap<>();
+        for(Location location : tiles.keySet()) {
+            if(tiles.get(location).getTerrain() instanceof SeaTerrain) {
+                seaTiles.put(location, tiles.get(location));
+            }
+        }
+        return seaTiles;
+    }
+
+    // return list of all walls not owned by the owner
+    private HashMap<Location, ArrayList<WallWithOwner>> getAllOwnedWalls() {
+        HashMap<Location, ArrayList<WallWithOwner>> ownedWalls = new HashMap<>();
+        for(Location location : walls.keySet()) {
+            // loop through all walls in wallset
+            ArrayList<WallWithOwner> wallsWithOwners= new ArrayList<WallWithOwner>();
+            for(int i = 0; i < walls.get(location).size(); i++) {
+                // check if wall is owned by opposing player
+                if(walls.get(location).get(i) instanceof WallWithOwner) {
+                    wallsWithOwners.add(((WallWithOwner) walls.get(location).get(i)));
+                }
+            }
+            if(wallsWithOwners.size() > 0) {
+                ownedWalls.put(location, wallsWithOwners);
+            }
+
+        }
+        return ownedWalls;
+    }
+
     private HashMap<Location, Integer> getAdjacentWallLocation(Location location, int edge) {
         HashMap<Location, Integer> oppositeWallLocation = new HashMap<>();
 
@@ -541,178 +717,4 @@ public class Map {
         return false;
 
     }
-
-    //check if there is a road connecting two locations
-    public boolean containsRoad(Location from, Location to){
-        if(roads.containsKey(from)){
-            return roads.get(from).contains(to);
-        }
-        return false;
-    }
-
-    // check if there is a river at a certain location
-    public boolean containsRiverEdge(Location location, Integer i){
-        if(rivers.containsKey(location)){
-            if(this.rivers.get(location).getRiverEdges().contains(Integer.valueOf(i))){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        return false;
-    }
-
-    // check if there is bridge at certain location
-    public boolean containsBridge(Location location, Integer i){
-        if(bridges.containsKey(location)) {
-            if(bridges.get(location).contains(Integer.valueOf(i))){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        return false;
-    }
-
-    // check if there is bridge at certain location
-    public boolean containsWall(Location location, Integer i){
-        if(walls.containsKey(location)) {
-            if(walls.get(location).contains(Integer.valueOf(i))){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        return false;
-    }
-
-
-    public void clearMap() {
-        rivers.clear();
-        tiles.clear();
-    }
-
-
-    public boolean validateLocationRange(Location location) {
-        if(location.getX() > Math.abs(10) || location.getY() > Math.abs(10) || location.getZ() > Math.abs(10)) {
-            System.out.println("Invalid location type");
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-
-
-    // getters setters and methods for debugging
-    public HashMap<Location, Tile> getTiles() {
-        return tiles;
-    }
-
-    public HashMap<Location, River> getRivers() {
-        return rivers;
-    }
-
-    public HashMap<Location, ArrayList<Integer>> getBridges() {
-        return bridges;
-    }
-
-    public HashMap<Location, ArrayList<Wall>> getWalls() {
-        return walls;
-    }
-
-    public HashMap<Location, ArrayList<Location>> getRoads(){
-        return roads;
-    }
-
-    public HashMap<Location, Region> getRegions() {
-        return regions;
-    }
-
-    public HashMap<RegionLocation, TransportList> getTransports() {
-        return transports;
-    }
-
-    public HashMap<RegionLocation, ResourceList> getResources() {
-        return resources;
-    }
-
-    public void printRivers() {
-        for(Location location : rivers.keySet()) {
-            System.out.println(rivers.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            rivers.get(location).printRiverEdges();
-        }
-    }
-
-    public void printTiles() {
-        for(Location location : tiles.keySet()) {
-            System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            System.out.println("Terrain: " + tiles.get(location).getTerrain(new TerrainTypeVisitor()));
-        }
-    }
-
-    // return list of all sea tiles
-    private HashMap<Location, Tile> getSeaTiles() {
-        HashMap<Location, Tile> seaTiles = new HashMap<>();
-        for(Location location : tiles.keySet()) {
-            if(tiles.get(location).getTerrain() instanceof SeaTerrain) {
-                seaTiles.put(location, tiles.get(location));
-            }
-        }
-        return seaTiles;
-    }
-
-    // return list of all walls not owned by the owner
-    private HashMap<Location, ArrayList<WallWithOwner>> getAllOwnedWalls() {
-        HashMap<Location, ArrayList<WallWithOwner>> ownedWalls = new HashMap<>();
-        for(Location location : walls.keySet()) {
-            // loop through all walls in wallset
-            ArrayList<WallWithOwner> wallsWithOwners= new ArrayList<WallWithOwner>();
-            for(int i = 0; i < walls.get(location).size(); i++) {
-                // check if wall is owned by opposing player
-                if(walls.get(location).get(i) instanceof WallWithOwner) {
-                    wallsWithOwners.add(((WallWithOwner) walls.get(location).get(i)));
-                }
-            }
-            if(wallsWithOwners.size() > 0) {
-                ownedWalls.put(location, wallsWithOwners);
-            }
-
-        }
-        return ownedWalls;
-    }
-
-
-    public RegionLocation getTransportRegionLocation(Transporter transport) {
-        for(RegionLocation regionLocation: this.transports.keySet()) {
-            TransportList transportList = this.transports.get(regionLocation);
-            for(Transporter t: transportList.getTransports()){
-                if(t == transport) {
-                    return regionLocation;
-                }
-            }
-        }
-        System.out.println("RegionLocation for Transport not found.");
-        return null;
-    }
-
-    public void removeResource(Resource r, RegionLocation regionLocation) {
-        this.resources.get(regionLocation).removeResource(r);
-    }
-
-    public void addResource(Resource r, RegionLocation regionLocation) {
-        this.resources.get(regionLocation).addResource(r);
-    }
-
-    public void addTransport(Transporter t, RegionLocation regionLocation) {
-        this.transports.get(regionLocation).addTransport(t);
-    }
-
-    public void removeTransport(Transporter t, RegionLocation regionLocation) {
-        this.transports.get(regionLocation).removeTransport(t);
-    }
-
 }
