@@ -9,10 +9,10 @@ public class Wonder {
     private ArrayList<WonderRow> rows;
     private int bricksPerRow;
     private int rowMultiplierCounter;
-    // TODO: need brick cost manager
+    // TODO: need brick cost manager?
 
     public Wonder() {
-        rows = new ArrayList<WonderRow>();
+        rows = new ArrayList<>();
         bricksPerRow = 4;
         rowMultiplierCounter = 1;
         newRow();
@@ -25,6 +25,7 @@ public class Wonder {
             incrementRowMultiplierCounter();
             WonderRow wonderRow = new WonderRow(bricksPerRow);
             rows.add(wonderRow);
+            checkIrrigation();
         }
     }
 
@@ -36,6 +37,10 @@ public class Wonder {
         } else {
             return false;
         }
+    }
+
+    private void checkIrrigation() {
+        // TODO: make call to Map to update desert tiles
     }
 
     private WonderRow getCurrentRow() {
@@ -58,6 +63,17 @@ public class Wonder {
     public void addBrick(Player owner) {
         // TODO: need brick cost
         // TODO: decrement cost from owner
+        if(isFull()){
+            return;
+        }
+
+        WonderRow currentRow = getCurrentRow();
+        if(currentRow.isFull()){
+            newRow();
+            currentRow = getCurrentRow();
+        }
+
+        currentRow.addBrick(owner);
     }
 
     public void addNeutralBrick() {

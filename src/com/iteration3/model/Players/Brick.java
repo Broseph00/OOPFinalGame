@@ -16,7 +16,8 @@ public class Brick {
     }
 
     public String getColor(){
-//        return owner.colorString();
+        // return owner.colorString();
+        // TODO: owner needs a color string or player ID
         return null;
     }
 }
