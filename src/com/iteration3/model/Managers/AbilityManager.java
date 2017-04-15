@@ -90,34 +90,21 @@ public class AbilityManager {
         }
     }
 
-    public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList){
-
+    public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
         //abilities to move
-        MoveAbility moveAbility = new MoveDegree0Ability(transporter);
+        MoveAbility moveAbility = new MoveEdge1Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree30Ability(transporter);
+        moveAbility = new MoveEdge2Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree60Ability(transporter);
+        moveAbility = new MoveEdge3Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree90Ability(transporter);
+        moveAbility = new MoveEdge4Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree120Ability(transporter);
+        moveAbility = new MoveEdge5Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree150Ability(transporter);
+        moveAbility = new MoveEdge6Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree180Ability(transporter);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree210Ability(transporter);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree240Ability(transporter);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree270Ability(transporter);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree300Ability(transporter);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree330Ability(transporter);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        }
+    }
 
     public void addMoveAbilities(LandTransporter transporter, ArrayList<Ability> abilitiesList){
 
@@ -208,5 +195,5 @@ public class AbilityManager {
     private boolean verifyRoadMoveAbility(MoveAbility moveAbility, OnRoadLandTransporter transporter){
         return movementManager.validateRoadMoveAbility(moveAbility, transporter);
     }
-    
+
 }
