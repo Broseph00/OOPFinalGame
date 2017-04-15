@@ -23,7 +23,7 @@ public class Player {
     public void updateTransporterAbilities(){
         updateLandTransportAbilities();
         updateRoadTransportAbilities();
-        updateWaterTransporterAbilties();
+        updateWaterTransporterAbilities();
 
     }
 
@@ -37,7 +37,7 @@ public class Player {
         abilityManager.updateLandTransporters(landTransporters);
     }
 
-    public void updateWaterTransporterAbilties(){
+    public void updateWaterTransporterAbilities(){
         ArrayList<WaterTransporter> waterTransporters = new ArrayList<>();
         for(Transporter transporter : transportersList) {
             if(transporter instanceof WaterTransporter) {
