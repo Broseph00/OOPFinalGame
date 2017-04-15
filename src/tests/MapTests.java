@@ -1,10 +1,7 @@
 package tests;
 
 import com.iteration3.model.Managers.MapFileManager;
-import com.iteration3.model.Map.Location;
-import com.iteration3.model.Map.Map;
-import com.iteration3.model.Map.River;
-import com.iteration3.model.Map.WallWithoutOwner;
+import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
@@ -126,6 +123,12 @@ public class MapTests {
         map.destroyWall(location,1);
         assertTrue(map.getWalls().get(location).get(0) instanceof WallWithoutOwner);
 
+    }
+
+    @Test
+    public void testLocationTypeConformance() throws Exception{
+        Map map = new Map();
+        assertEquals(map.checkAdjacency(new RegionLocation(0,0,0,1).getLocation(), new RegionLocation(1,0,-1,1).getLocation()), true);
     }
 
 }
