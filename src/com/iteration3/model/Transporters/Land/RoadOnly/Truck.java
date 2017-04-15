@@ -4,7 +4,6 @@ public class Truck extends OnRoadLandTransporter {
 
 
     public Truck(){
-        setMaxMovePoints(4);
-        setCapacity(6);
+        super(6,4);
     }
 }

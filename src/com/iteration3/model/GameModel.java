@@ -24,7 +24,7 @@ public class GameModel {
 
     public GameModel(){
         map = new Map();
-        exchangeManager = new ExchangeManager();
+        exchangeManager = new ExchangeManager(map);
         movementManager = new MovementManager(map);
         productionManager = new ProductionManager();
         turnManager = new TurnManager();
