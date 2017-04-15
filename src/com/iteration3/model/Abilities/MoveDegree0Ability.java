@@ -7,23 +7,15 @@ import com.iteration3.model.Transporters.Transporter;
  */
 
 /*--------------------------------------------------------------------------------------
-|    MoveAbility Module: Created by test on 04/14/2017.
+|    MoveDegree0Ability Module: Created by test on 04/14/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class MoveAbility extends Ability {
-    private int region;
-    private int border;
+public class MoveDegree0Ability extends MoveAbility {
 
-    public MoveAbility(Transporter transporter, int region, int border){
-        super(transporter);
-        this.region = region;
-        this.border = border;
+    public MoveDegree0Ability(Transporter transporter){
+        super(transporter, 1, 1);
     }
-
-    public int getRegion(){ return region; }
-
-    public int getBorder(){ return border; }
 }
