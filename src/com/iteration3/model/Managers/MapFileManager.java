@@ -23,7 +23,7 @@ public class MapFileManager {
     }
 
     // TODO: Methods to move map to text file and text file to map
-
+    // TODO: ADD ADDITION OF WALLS ROADS TRANSPORTERS etc...
     // Reads file line by line, extracts info and creates a map out of it
     public void fillMapFromTextFile() throws IOException{
         map.clearMap();
