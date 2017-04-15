@@ -1,11 +1,11 @@
 package com.iteration3.model.Buildings.Primary;
 
-import com.iteration3.model.Buildings.ResourceProducer;
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Tiles.*;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
-public abstract class PrimaryProducer extends ResourceProducer {
+public abstract class PrimaryProducer extends Producer {
     private Terrain myTerrain;
     private TerrainTypeVisitor terrainVisitor;
 
