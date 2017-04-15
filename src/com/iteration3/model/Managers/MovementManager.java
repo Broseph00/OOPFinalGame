@@ -19,6 +19,8 @@ public class MovementManager {
         this.map = map;
     }
 
+    //TODO: CALL FOR MOVEMENT TO BE EXECUTED
+
     public boolean validateWaterMoveAbility(MoveAbility moveAbility, WaterTransporter waterTransporter){
         int movesLeft = waterTransporter.getRemainingMovePoints();
         if(movesLeft<1){
