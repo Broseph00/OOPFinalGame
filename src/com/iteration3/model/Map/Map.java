@@ -56,12 +56,32 @@ public class Map {
     }
 
     //TODO DIFFERENT VALIDATIONS FOR LAND, ROAD RESTRICTED, AND WATER TRANSPORTERS
-    public boolean validate(RegionLocation start, int exitRegion, int exitEdge, Player owner){
+    public boolean validateLandMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
         Location location = start.getLocation();
+        Location toLocation = location.getLocationEdge(exitEdge);
+        if(!containsRoad(location,toLocation) && moves<2){
+            return false;
+        }
         Region region = this.regions.get(location);
         Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
         Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
         return connectedRegion && passableWall;
+    }
+
+    public boolean validateRoadMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
+        Location location = start.getLocation();
+        Location toLocation = location.getLocationEdge(exitEdge);
+        if(!containsRoad(location,toLocation)){
+            return false;
+        }
+        Region region = this.regions.get(location);
+        Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
+        Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
+        return connectedRegion && passableWall;
+    }
+
+    public boolean validateWaterMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
+        return false;
     }
 
     public void addTileFromFile(Location location, Tile tile) {
@@ -366,9 +386,7 @@ public class Map {
     //check if there is a road connecting two locations
     public boolean containsRoad(Location from, Location to){
         if(roads.containsKey(from)){
-            if(roads.get(from).contains(to)){
-                return true;
-            }
+            return roads.get(from).contains(to);
         }
         return false;
     }
