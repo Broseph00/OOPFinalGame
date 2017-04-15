@@ -1,6 +1,5 @@
 package com.iteration3.model.Map;
 
-import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,13 +55,13 @@ public class Map {
         return false;
     }
 
-    public boolean validate(RegionLocation from, RegionLocation to){
-        if(checkAdjacency(from.getLocation(),to.getLocation())){
-            return true;
-        }
-        else{
-            return false;
-        }
+    //TODO DIFFERENT VALIDATIONS FOR LAND, ROAD RESTRICTED, AND WATER TRANSPORTERS
+    public boolean validate(RegionLocation start, int exitRegion, int exitEdge, Player owner){
+        Location location = start.getLocation();
+        Region region = this.regions.get(location);
+        Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
+        Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
+        return connectedRegion && passableWall;
     }
 
     public void addTileFromFile(Location location, Tile tile) {
