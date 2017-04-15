@@ -34,6 +34,37 @@ public class Map {
         roads = new HashMap<>();
     }
 
+    public boolean checkAdjacency(Location loc1, Location loc2){
+        if(loc1.getNorth().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getNorthEast().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouthEast().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouth().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouthWest().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getNorthWest().equals(loc2)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validate(RegionLocation from, RegionLocation to){
+        if(checkAdjacency(from.getLocation(),to.getLocation())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void addTileFromFile(Location location, Tile tile) {
         if(validateLocationRange(location)) {
             this.tiles.put(location, tile);
