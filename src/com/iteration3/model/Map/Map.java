@@ -1,6 +1,5 @@
 package com.iteration3.model.Map;
 
-import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,6 +31,37 @@ public class Map {
         transports = new HashMap<>();
         resources = new HashMap<>();
         roads = new HashMap<>();
+    }
+
+    public boolean checkAdjacency(Location loc1, Location loc2){
+        if(loc1.getNorth().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getNorthEast().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouthEast().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouth().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getSouthWest().equals(loc2)){
+            return true;
+        }
+        else if(loc1.getNorthWest().equals(loc2)){
+            return true;
+        }
+        return false;
+    }
+
+    //TODO DIFFERENT VALIDATIONS FOR LAND, ROAD RESTRICTED, AND WATER TRANSPORTERS
+    public boolean validate(RegionLocation start, int exitRegion, int exitEdge, Player owner){
+        Location location = start.getLocation();
+        Region region = this.regions.get(location);
+        Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
+        Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
+        return connectedRegion && passableWall;
     }
 
     public void addTileFromFile(Location location, Tile tile) {
