@@ -83,7 +83,83 @@ public class Map {
         return false;
     }
 
-    //TODO DIFFERENT VALIDATIONS FOR LAND, ROAD RESTRICTED, AND WATER TRANSPORTERS
+    public int getOppositeRegion(int exitRegion, int exitEdge){
+        if(exitEdge==1){
+            if(exitRegion==1){
+                return 3;
+            }
+            else if(exitRegion==6){
+                return 4;
+            }
+        }
+        else if(exitEdge==2){
+            if(exitRegion==1){
+                return 5;
+            }
+            else if(exitRegion==2){
+                return 4;
+            }
+        }
+        else if(exitEdge==3){
+            if(exitRegion==2){
+                return 6;
+            }
+            else if(exitRegion==3){
+                return 5;
+            }
+        }
+        else if(exitEdge==4){
+            if(exitRegion==3){
+                return 1;
+            }
+            else if(exitRegion==4){
+                return 6;
+            }
+        }
+        else if(exitEdge==5){
+            if(exitRegion==4){
+                return 2;
+            }
+            else if(exitRegion==5){
+                return 1;
+            }
+        }
+        else if(exitEdge==6){
+            if(exitRegion==5){
+                return 3;
+            }
+            else if(exitRegion==6){
+                return 2;
+            }
+        }
+        return 0;
+    }
+
+    public void transportMove(Transporter transporter, int exitRegion, int exitEdge){
+        RegionLocation startRegionLocation = getTransportRegionLocation(transporter);
+        Location startLocation = startRegionLocation.getLocation();
+        Location endLocation = startLocation.getLocationEdge(exitEdge);
+        int enterRegion;
+        //Boat
+        if(startRegionLocation.getRegion()==7){
+            enterRegion=7;
+            transporter.decreaseMovePoints(1);
+        }
+        //NotBoat
+        else {
+            enterRegion = getOppositeRegion(exitRegion, exitEdge);
+            if(containsRoad(startLocation,endLocation)){
+                transporter.decreaseMovePoints(1);
+            }
+            else{
+                transporter.decreaseMovePoints(2);
+            }
+        }
+        RegionLocation endRegionLocation = new RegionLocation(startLocation, enterRegion);
+        removeTransport(transporter,startRegionLocation);
+        addTransport(transporter,endRegionLocation);
+    }
+
     public boolean validateLandMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(exitEdge);
@@ -335,12 +411,10 @@ public class Map {
         Location oppositeLocation = entry.getKey();
         int oppositeEdge = entry.getValue();
 
-
         ArrayList<Wall> newWallSet1 = new ArrayList<>();
         if(this.walls.containsKey(location)) {
             newWallSet1 = this.walls.get(location);
         }
-
         // check if there are already existing walls
         ArrayList<Wall> newWallSet2 = new ArrayList<>();
         if(this.walls.containsKey(oppositeLocation)) {
@@ -641,7 +715,4 @@ public class Map {
         this.transports.get(regionLocation).removeTransport(t);
     }
 
-
-
 }
-
