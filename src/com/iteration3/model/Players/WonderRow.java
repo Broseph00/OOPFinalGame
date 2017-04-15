@@ -37,7 +37,7 @@ public class WonderRow {
         }
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         return (!(maxBrickCount > getBrickCount()));
     }
 
