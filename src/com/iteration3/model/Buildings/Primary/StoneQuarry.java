@@ -1,8 +1,7 @@
 package com.iteration3.model.Buildings.Primary;
 
-import com.iteration3.model.Resource.Resource;
-import com.iteration3.model.Tiles.RockTerrain;
-import com.iteration3.model.Tiles.Tile;
+import com.iteration3.model.Resource.Stone;
+import com.iteration3.model.Tiles.*;
 
 public class StoneQuarry extends PrimaryProducer {
     Tile location;
@@ -13,7 +12,13 @@ public class StoneQuarry extends PrimaryProducer {
     }
 
     @Override
-    public Resource produce() {
-        return null;
+    public Stone produce() {
+        Stone stone = null;
+
+        if (verifyLocation(location)) {
+            // TODO: confirm produces only one stone when Stone class updated
+            stone = new Stone();
+        }
+        return stone;
     }
 }
