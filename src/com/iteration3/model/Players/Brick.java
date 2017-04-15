@@ -16,6 +16,7 @@ public class Brick {
     }
 
     public String getColor(){
-        return owner.colorString();
+//        return owner.colorString();
+        return null;
     }
 }
