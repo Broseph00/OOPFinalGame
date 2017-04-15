@@ -4,6 +4,7 @@ package com.iteration3.model.Transporters;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
+import sun.plugin2.message.transport.Transport;
 
 import java.util.ArrayList;
 
@@ -52,5 +53,14 @@ public class TransportList {
         }
         return roadTransporters;
     }
+
+    public void removeTransport(Transporter t) {
+        this.transports.remove(t);
+    }
+
+    public void addTransport(Transporter t) {
+        this.transports.add(t);
+    }
+
 
 }

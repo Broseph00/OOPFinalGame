@@ -154,6 +154,22 @@ public class Map {
         if(validateLocationRange(location)) {
             this.tiles.put(location, tile);
             this.regions.put(location, new Region());
+            this.intializeResourceList(location);
+            this.intializeTansportList(location);
+        }
+    }
+
+    private void intializeResourceList(Location location) {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
+            this.resources.put(regionLocation, new ResourceList());
+        }
+    }
+
+    private void intializeTansportList(Location location) {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
+            this.transports.put(regionLocation, new TransportList());
         }
     }
 
@@ -614,7 +630,14 @@ public class Map {
         this.resources.get(regionLocation).addResource(r);
     }
 
-//    public void addTransportList
+    public void addTransport(Transporter t, RegionLocation regionLocation) {
+        this.transports.get(regionLocation).addTransport(t);
+    }
+
+    public void removeTransport(Transporter t, RegionLocation regionLocation) {
+        this.transports.get(regionLocation).removeTransport(t);
+    }
+
 
 
 }
