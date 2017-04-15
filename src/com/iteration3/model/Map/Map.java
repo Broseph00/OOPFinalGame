@@ -93,7 +93,8 @@ public class Map {
         Region region = this.regions.get(location);
         Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
         Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
-        return connectedRegion && passableWall;
+        Boolean terrainMatch = !getTerrain(toLocation).equals("sea");
+        return connectedRegion && passableWall && terrainMatch;
     }
 
     public boolean validateRoadMove(RegionLocation start, int exitRegion, int exitEdge, Player owner){
@@ -105,7 +106,8 @@ public class Map {
         Region region = this.regions.get(location);
         Boolean connectedRegion = region.connected(start.getRegion(), exitRegion);
         Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
-        return connectedRegion && passableWall;
+        Boolean terrainMatch = !getTerrain(toLocation).equals("sea");
+        return connectedRegion && passableWall && terrainMatch;
     }
 
     public boolean validateWaterMove(RegionLocation start, int exitEdge, Player owner){
@@ -115,7 +117,7 @@ public class Map {
         if(rivers.containsKey(location)){
             Boolean validRiver = rivers.get(location).containsRiverEdge(exitEdge);
             Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
-            Boolean terrainMatch = getTerrain(location).matches(getTerrain(toLocation));
+            Boolean terrainMatch = !getTerrain(toLocation).equals("sea");
             //Traveling to another river
             if(terrainMatch){
                 //If river exits on traveling to tile it must already be validated as a connected river
