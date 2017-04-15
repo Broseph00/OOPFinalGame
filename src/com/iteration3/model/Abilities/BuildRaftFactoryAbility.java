@@ -15,6 +15,6 @@ import com.iteration3.model.Transporters.Transporter;
 
 public class BuildRaftFactoryAbility extends Ability {
     public BuildRaftFactoryAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD RAFT FACTORY");
     }
 }

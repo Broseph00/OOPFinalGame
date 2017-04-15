@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class MoveDegree300Ability extends MoveAbility {
 
     public MoveDegree300Ability(Transporter transporter){
-        super(transporter, 6,6);
+        super(transporter, 6,6, "MOVE NORTHWEST");
     }
 }

@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildWagonFactoryAbility extends Ability{
 
     public BuildWagonFactoryAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD WAGON FACTORY");
     }
 }

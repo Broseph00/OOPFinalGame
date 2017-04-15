@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 
 public class BuildMintAbility extends Ability {
     public BuildMintAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD MINT");
     }
 }

@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildPapermillAbility extends Ability {
 
     public BuildPapermillAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD PAPERMILL");
     }
 }

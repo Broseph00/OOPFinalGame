@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildCoalBurnerAbility extends Ability {
 
     public BuildCoalBurnerAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD COAL BURNER");
     }
 }

@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildOilRigAbility extends Ability {
 
     public BuildOilRigAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD OILRIG");
     }
 }
