@@ -252,4 +252,13 @@ public class ResourceList {
     public ArrayList<Resource> getResources() {
         return resources;
     }
+
+    public void removeResource(Resource r) {
+        this.resources.remove(r);
+    }
+
+    public void addResource(Resource r) {
+        this.resources.add(r);
+    }
+
 }

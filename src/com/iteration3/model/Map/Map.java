@@ -152,15 +152,27 @@ public class Map {
     public void addWall(Location location, Player owner, int edge, int strength) {
         if(!this.betweenTwoSeaTiles(location, edge) && !this.wallOwnedByOpposingPlayer(location, owner, edge)) {
 
+            HashMap<Location, Integer> oppositeWallLocation = getAdjacentWallLocation(location,edge);
+            HashMap.Entry<Location,Integer> entry= oppositeWallLocation.entrySet().iterator().next();
+            Location oppositeLocation = entry.getKey();
+            int oppositeEdge = entry.getValue();
+
             // check if there are already existing walls
-            ArrayList<Wall> newWallSet = new ArrayList<>();
+            ArrayList<Wall> newWallSet1 = new ArrayList<>();
             if(this.walls.containsKey(location)) {
-                newWallSet = this.walls.get(location);
+                newWallSet1 = this.walls.get(location);
+            }
+            // check if there are already existing walls
+            ArrayList<Wall> newWallSet2 = new ArrayList<>();
+            if(this.walls.containsKey(oppositeLocation)) {
+                newWallSet2 = this.walls.get(oppositeLocation);
             }
 
-            newWallSet.add(new WallWithOwner(owner, edge, getWallStrength(location, edge) + strength));
+            newWallSet1.add(new WallWithOwner(owner, edge, getWallStrength(location, edge) + strength));
+            this.walls.put(location, newWallSet1);
 
-            this.walls.put(location, newWallSet);
+            newWallSet2.add(new WallWithOwner(owner, oppositeEdge, getWallStrength(oppositeLocation, oppositeEdge) + strength));
+            this.walls.put(oppositeLocation, newWallSet2);
 
         } else {
             System.out.println("Wall not added!");
@@ -169,37 +181,111 @@ public class Map {
 
     public void removeWall(Location location, int edge) {
         // check if there are already existing walls
-        ArrayList<Wall> newWallSet = new ArrayList<>();
+        HashMap<Location, Integer> oppositeWallLocation = getAdjacentWallLocation(location,edge);
+        HashMap.Entry<Location,Integer> entry= oppositeWallLocation.entrySet().iterator().next();
+        Location oppositeLocation = entry.getKey();
+        int oppositeEdge = entry.getValue();
+
+
+        ArrayList<Wall> newWallSet1 = new ArrayList<>();
         if(this.walls.containsKey(location)) {
-            newWallSet = this.walls.get(location);
+            newWallSet1 = this.walls.get(location);
         }
 
-        for(int i = newWallSet.size() - 1; i >= 0; i--) {
-            if(newWallSet.get(i).getEdge() == edge) {
-                newWallSet.remove(i);
+        // check if there are already existing walls
+        ArrayList<Wall> newWallSet2 = new ArrayList<>();
+        if(this.walls.containsKey(oppositeLocation)) {
+            newWallSet2 = this.walls.get(oppositeLocation);
+        }
+
+        for(int i = newWallSet1.size() - 1; i >= 0; i--) {
+            if(newWallSet1.get(i).getEdge() == edge) {
+                newWallSet1.remove(i);
+                if(newWallSet1.size() == 0) {
+                    this.walls.remove(location);
+                } else {
+                    this.walls.put(location, newWallSet1);
+                }
             }
         }
 
-        this.walls.put(location, newWallSet);
+        for(int i = newWallSet2.size() - 1; i >= 0; i--) {
+            if(newWallSet2.get(i).getEdge() == oppositeEdge) {
+                newWallSet2.remove(i);
+                if(newWallSet2.size() == 0) {
+                    this.walls.remove(oppositeLocation);
+                }
+                else {
+                    this.walls.put(oppositeLocation, newWallSet2);
+                }
+            }
+        }
 
     }
 
     public void destroyWall(Location location, int edge) {
         // check if there are already existing walls
-        ArrayList<Wall> newWallSet = new ArrayList<>();
-        if(this.getAllOwnedWalls().containsKey(location)) {
-            newWallSet = this.walls.get(location);
+        HashMap<Location, Integer> oppositeWallLocation = getAdjacentWallLocation(location,edge);
+        HashMap.Entry<Location,Integer> entry= oppositeWallLocation.entrySet().iterator().next();
+        Location oppositeLocation = entry.getKey();
+        int oppositeEdge = entry.getValue();
+
+
+        ArrayList<Wall> newWallSet1 = new ArrayList<>();
+        if(this.walls.containsKey(location)) {
+            newWallSet1 = this.walls.get(location);
         }
 
-        for(int i = newWallSet.size() - 1; i >= 0; i--) {
-            if(newWallSet.get(i).getEdge() == edge) {
-                int strength = newWallSet.get(i).getStrength();
-                newWallSet.remove(i);
-                newWallSet.add(i, new WallWithoutOwner(edge, strength));
+        // check if there are already existing walls
+        ArrayList<Wall> newWallSet2 = new ArrayList<>();
+        if(this.walls.containsKey(oppositeLocation)) {
+            newWallSet2 = this.walls.get(oppositeLocation);
+        }
+
+        for(int i = newWallSet1.size() - 1; i >= 0; i--) {
+            if(newWallSet1.get(i).getEdge() == edge) {
+                int strength = newWallSet1.get(i).getStrength();
+                newWallSet1.remove(i);
+                newWallSet1.add(i, new WallWithoutOwner(edge, strength));
+                this.walls.put(location, newWallSet1);
             }
         }
 
-        this.walls.put(location, newWallSet);
+        for(int i = newWallSet2.size() - 1; i >= 0; i--) {
+            if(newWallSet2.get(i).getEdge() == oppositeEdge) {
+                int strength = newWallSet2.get(i).getStrength();
+                newWallSet2.remove(i);
+                newWallSet2.add(i, new WallWithoutOwner(oppositeEdge, strength));
+                this.walls.put(oppositeLocation, newWallSet2);
+            }
+        }
+
+
+    }
+
+    private HashMap<Location, Integer> getAdjacentWallLocation(Location location, int edge) {
+        HashMap<Location, Integer> oppositeWallLocation = new HashMap<>();
+
+        if(edge == 1) {
+            oppositeWallLocation.put(location.getNorth(), 4);
+        }
+        else if(edge == 2) {
+            oppositeWallLocation.put(location.getNorthEast(), 5);
+        }
+        else if(edge == 3) {
+            oppositeWallLocation.put(location.getSouthEast(), 6);
+        }
+        else if(edge == 4) {
+            oppositeWallLocation.put(location.getSouth(), 1);
+        }
+        else if(edge == 5) {
+            oppositeWallLocation.put(location.getSouthWest(), 2);
+        }
+        else if(edge == 6) {
+            oppositeWallLocation.put(location.getNorthWest(), 3);
+        }
+
+        return oppositeWallLocation;
     }
 
 
