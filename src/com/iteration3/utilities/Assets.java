@@ -48,6 +48,7 @@ public class Assets {
         images.put("straight3", new Image("straight3.png"));
         images.put("tri1", new Image("tri1.png"));
         images.put("tri2", new Image("tri2.png"));
+        images.put("welcomeImage", new Image("welcomeImage.png"));
     }
 
     public Image getImage(String imageName) {
