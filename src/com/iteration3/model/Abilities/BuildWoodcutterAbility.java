@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildWoodcutterAbility extends Ability {
 
     public BuildWoodcutterAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD WOODCUTTER");
     }
 }

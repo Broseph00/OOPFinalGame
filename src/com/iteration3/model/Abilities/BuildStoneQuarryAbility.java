@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildStoneQuarryAbility extends Ability {
 
     public BuildStoneQuarryAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD STONE QUARRY");
     }
 }

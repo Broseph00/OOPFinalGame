@@ -17,8 +17,8 @@ public class MoveAbility extends Ability {
     private int region;
     private int border;
 
-    public MoveAbility(Transporter transporter, int region, int border){
-        super(transporter);
+    public MoveAbility(Transporter transporter, int region, int border, String name){
+        super(transporter, name);
         this.region = region;
         this.border = border;
     }

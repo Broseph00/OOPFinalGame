@@ -16,6 +16,6 @@ import com.iteration3.model.Transporters.Transporter;
 public class BuildMineAbility extends Ability {
 
     public BuildMineAbility(Transporter transporter){
-        super(transporter);
+        super(transporter, "BUILD MINE");
     }
 }
