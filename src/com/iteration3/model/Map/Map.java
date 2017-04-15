@@ -500,7 +500,7 @@ public class Map {
         }
     }
 
-    private boolean checkAdjacency(Location loc1, Location loc2){
+    public boolean checkAdjacency(Location loc1, Location loc2){
         if(loc1.getNorth().equals(loc2)){
             return true;
         }
