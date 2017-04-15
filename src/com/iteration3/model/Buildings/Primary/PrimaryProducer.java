@@ -1,9 +1,26 @@
 package com.iteration3.model.Buildings.Primary;
 
 import com.iteration3.model.Buildings.ResourceProducer;
+import com.iteration3.model.Resource.Resource;
+import com.iteration3.model.Tiles.Terrain;
+import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 public abstract class PrimaryProducer extends ResourceProducer {
-    public PrimaryProducer(){
+    private Terrain myTerrain;
+
+    public PrimaryProducer(Terrain requiredTerrain){
         super(1);
+        myTerrain = requiredTerrain;
     }
+
+    public final boolean verifyTerrain(Terrain terrain){
+//        String myTerrainType = myTerrain.getTerrainType(terrainVisitor);
+//        String otherTerrainType = terrain.getTerrainType(terrainVisitor);
+//        // TODO: inquire about terrain equals method
+//        return myTerrainType.matches(otherTerrainType);
+        myTerrain.getClass();
+        return false;
+    }
+
+    public abstract Resource produce();
 }
