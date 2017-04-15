@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.iteration3.model.Players.Player;
-import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
-import com.sun.javafx.geom.Edge;
 
 
 public class Map {
@@ -23,6 +21,7 @@ public class Map {
     private HashMap<Location, Region> regions;
     private HashMap<RegionLocation, Transporter> transports;
     private HashMap<RegionLocation, ResourceList> resources;
+    private HashMap<Location, ArrayList<Location>> roads;
 
     public Map() {
         tiles = new HashMap<>();
@@ -32,21 +31,49 @@ public class Map {
         regions = new HashMap<>();
         transports = new HashMap<>();
         resources = new HashMap<>();
+        roads = new HashMap<>();
     }
 
     public void addTileFromFile(Location location, Tile tile) {
         if(validateLocationRange(location)) {
-            this.tiles.put(location,tile);
+            this.tiles.put(location, tile);
+            this.regions.put(location, new Region());
         }
     }
 
     public void addRiverFromFile(Location location, River river) {
         if(validateLocationRange(location)) {
             this.rivers.put(location, river);
+            this.regions.get(location).addRiver(river);
         }
     }
 
-    //TODO IF ADDED BRIDGE CALL RESPECTIVE REGION TO UPDATE ITSELF
+    public void addRoad(Location from, Location to){
+        if(this.roads.containsKey(from)){
+            ArrayList<Location> roadSet = roads.get(from);
+            if(!roadSet.contains(to)){
+                roadSet.add(to);
+            }
+        }
+        else{
+            ArrayList<Location> roadSet = new ArrayList<>();
+            roadSet.add(to);
+            this.roads.put(from,roadSet);
+        }
+
+        if(this.roads.containsKey(to)){
+            ArrayList<Location> roadSet = roads.get(to);
+            if(!roadSet.contains(from)){
+                roadSet.add(from);
+            }
+        }
+        else{
+            ArrayList<Location> roadSet = new ArrayList<>();
+            roadSet.add(from);
+            this.roads.put(to,roadSet);
+        }
+    }
+
     // add bridge if bridge isn't there already and if size < 3 and there is river there
     public void addBridges(Location location, ArrayList<Integer> bridgesToAdd) {
         // check river is on tile and correct number of bridges
@@ -61,6 +88,7 @@ public class Map {
             // add each bridge from bridges to add
             for(int i = 0; i < bridgesToAdd.size(); i++) {
                     addBridge(location, bridgesToAdd.get(i));
+                    this.regions.get(location).addBridge(bridgesToAdd.get(i));
             }
 
         } else {
@@ -68,7 +96,6 @@ public class Map {
         }
     }
 
-    //TODO IF ADDED BRIDGE CALL RESPECTIVE REGION TO UPDATE ITSELF
     // add bridge if there isn't already and there is a river there
     public void addBridge(Location location, Integer bridgeToAdd) {
         // check river is on tile and correct number of bridges
@@ -81,6 +108,7 @@ public class Map {
             // check bridge isn't there and river is theere
             if (this.containsRiverEdge(location, bridgeToAdd) && !this.containsBridge(location, bridgeToAdd) && newBridgeSet.size() < 3) {
                 newBridgeSet.add(bridgeToAdd);
+                this.regions.get(location).addBridge(bridgeToAdd);
                 this.bridges.put(location, newBridgeSet);
             } else {
                 System.out.println("Bridge not added!");
@@ -219,6 +247,15 @@ public class Map {
 
     }
 
+    //check if there is a road connecting two locations
+    public boolean containsRoad(Location from, Location to){
+        if(roads.containsKey(from)){
+            if(roads.get(from).contains(to)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     // check if there is a river at a certain location
     public boolean containsRiverEdge(Location location, Integer i){
@@ -292,6 +329,10 @@ public class Map {
 
     public HashMap<Location, ArrayList<Wall>> getWalls() {
         return walls;
+    }
+
+    public HashMap<Location, ArrayList<Location>> getRoads(){
+        return roads;
     }
 
     public HashMap<Location, Region> getRegions() {
