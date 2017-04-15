@@ -24,11 +24,10 @@ public class MovementManager {
         if(movesLeft<1){
             return false;
         }
-        int region = moveAbility.getRegion();
         int border = moveAbility.getBorder();
         if(transporters.containsKey(waterTransporter)) {
             RegionLocation rloc = transporters.get(waterTransporter);
-            return map.validateWaterMove(rloc, region, border, null);
+            return map.validateWaterMove(rloc, border, waterTransporter.getOwner());
         }
         return false;
     }
@@ -42,7 +41,7 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(onRoadLandTransporter)) {
             RegionLocation rloc = transporters.get(onRoadLandTransporter);
-            return map.validateRoadMove(rloc, region, border, null);
+            return map.validateRoadMove(rloc, region, border, onRoadLandTransporter.getOwner());
         }
         return false;
     }
@@ -56,7 +55,7 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(landTransporter)) {
             RegionLocation rloc = transporters.get(landTransporter);
-            return map.validateLandMove(rloc, region, border, null, movesLeft);
+            return map.validateLandMove(rloc, region, border, landTransporter.getOwner(), movesLeft);
         }
         return false;
     }
