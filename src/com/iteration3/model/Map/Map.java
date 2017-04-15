@@ -140,8 +140,9 @@ public class Map {
             else{
                 //Check it has rivers
                 if(rivers.containsKey(toLocation)){
+                    Boolean passableWall = !wallOwnedByOpposingPlayer(location, owner, exitEdge);
                     //check it it has the correct river edge
-                    return rivers.get(toLocation).containsRiverEdge(oppositeEdge(exitEdge));
+                    return rivers.get(toLocation).containsRiverEdge(oppositeEdge(exitEdge)) && passableWall;
                 }
                 //false if it doesn't have river
                 else{
