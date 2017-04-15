@@ -28,7 +28,7 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(waterTransporter)) {
             RegionLocation rloc = transporters.get(waterTransporter);
-            return map.validateWaterMove(rloc, region, border, null, movesLeft);
+            return map.validateWaterMove(rloc, region, border, null);
         }
         return false;
     }
@@ -42,7 +42,7 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(onRoadLandTransporter)) {
             RegionLocation rloc = transporters.get(onRoadLandTransporter);
-            return map.validateRoadMove(rloc, region, border, null, movesLeft);
+            return map.validateRoadMove(rloc, region, border, null);
         }
         return false;
     }

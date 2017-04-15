@@ -68,7 +68,7 @@ public class Map {
         return connectedRegion && passableWall;
     }
 
-    public boolean validateRoadMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
+    public boolean validateRoadMove(RegionLocation start, int exitRegion, int exitEdge, Player owner){
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(exitEdge);
         if(!containsRoad(location,toLocation)){
@@ -80,7 +80,7 @@ public class Map {
         return connectedRegion && passableWall;
     }
 
-    public boolean validateWaterMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
+    public boolean validateWaterMove(RegionLocation start, int exitRegion, int exitEdge, Player owner){
         return false;
     }
 
