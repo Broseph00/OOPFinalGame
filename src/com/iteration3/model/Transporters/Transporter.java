@@ -1,6 +1,7 @@
 package com.iteration3.model.Transporters;
 
 import com.iteration3.model.Abilities.Ability;
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Transporter {
+    private Player owner;
     private ResourceList resourceList;
     private ArrayList<Ability> abilityList;
     private int remainingMovePoints;
@@ -15,7 +17,8 @@ public abstract class Transporter {
     private int capacity;
 
 
-    public Transporter(int maxMove, int cap){
+    public Transporter(Player player, int maxMove, int cap){
+        this.owner = player;
         this.resourceList = new ResourceList();
         this.abilityList = new ArrayList<>();
         this.maxMovePoints = maxMove;
@@ -57,6 +60,14 @@ public abstract class Transporter {
 
     public void setAbilityList(ArrayList<Ability> abilityList){
         this.abilityList = abilityList;
+    }
+
+    public ArrayList<Ability> getAbilityList() {
+        return abilityList;
+    }
+
+    public Player getOwner() {
+        return owner;
     }
 
     public void removeResource(Resource r) {
