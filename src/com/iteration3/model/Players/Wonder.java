@@ -3,73 +3,93 @@ package com.iteration3.model.Players;
 import java.util.ArrayList;
 
 public class Wonder {
-    private final int WONDER_SIZE = 15;
-
-    private final int TIER1_ROWSIZE = 4;
-    private final int TIER1_ROWS = 3;
-
-    private final int TIER2_ROWSIZE = 5;
-    private final int TIER2_ROWS = 4;
-
-    private final int TIER3_ROWSIZE = 6;
-    private final int TIER3_ROWS = 5;
-
-    private final int TIER4_ROWSIZE = 7;
-    private final int TIER4_ROWS = 3;
+    private final int MAX_WONDER_ROWS = 15;
+    private final int IRRIGATION_ROW = 10;
 
     private ArrayList<WonderRow> rows;
+    private int bricksPerRow;
+    private int rowMultiplierCounter;
+    // TODO: need brick cost manager
 
     public Wonder() {
-        this.rows = new ArrayList<WonderRow>(getWonderSize());
-        //initializeRows();
+        rows = new ArrayList<WonderRow>();
+        bricksPerRow = 4;
+        rowMultiplierCounter = 1;
+        newRow();
     }
 
-    public void initializeRows() {}
+    private void newRow() {
+        if(isFull()) {
+            return;
+        } else {
+            incrementRowMultiplierCounter();
+            WonderRow wonderRow = new WonderRow(bricksPerRow);
+            rows.add(wonderRow);
+        }
+    }
 
-//    public void addBrick(PlayerID ownerColor) {
-//
-//    }
+    private boolean isFull() {
+        boolean reachedMaxRows = (rows.size() == MAX_WONDER_ROWS);
+        if(reachedMaxRows){
+            WonderRow currentRow = getCurrentRow();
+            return currentRow.isFull();
+        } else {
+            return false;
+        }
+    }
+
+    private WonderRow getCurrentRow() {
+        int maxIndex = rows.size() - 1;
+        return rows.get(maxIndex);
+    }
+
+    private void incrementRowMultiplierCounter() {
+        ++rowMultiplierCounter;
+        if (rowMultiplierCounter == bricksPerRow) {
+            resetMultiplier();
+        }
+    }
+
+    private void resetMultiplier() {
+        ++bricksPerRow;
+        rowMultiplierCounter = 1;
+    }
+
+    public void addBrick(Player owner) {
+        // TODO: need brick cost
+        // TODO: decrement cost from owner
+    }
+
     public void addNeutralBrick() {
+        if(isFull()){
+            return;
+        }
 
+        WonderRow currentRow = getCurrentRow();
+        if(currentRow.isFull()){
+            newRow();
+            currentRow = getCurrentRow();
+        }
+
+        currentRow.addNeutralBrick();
+    }
+
+    public int getScore(Player owner){
+        int ownerScore = 0;
+
+        for(WonderRow row : rows){
+            ownerScore += row.getScore(owner);
+        }
+
+        return ownerScore;
     }
 
     public ArrayList<WonderRow> getRows() {
-        return rows;
+        final ArrayList<WonderRow> finalRows = this.rows;
+        return finalRows;
     }
 
-    public int getWonderSize() {
-        return WONDER_SIZE;
-    }
-
-    public int getTier1_RowSize() {
-        return TIER1_ROWSIZE;
-    }
-
-    public int getTier1_Rows() {
-        return TIER1_ROWS;
-    }
-
-    public int getTier2_RowSize() {
-        return TIER2_ROWSIZE;
-    }
-
-    public int getTier2_Rows() {
-        return TIER2_ROWS;
-    }
-
-    public int getTier3_RowSize() {
-        return TIER3_ROWSIZE;
-    }
-
-    public int getTier3_Rows() {
-        return TIER3_ROWS;
-    }
-
-    public int getTier4_RowSize() {
-        return TIER4_ROWSIZE;
-    }
-
-    public int getTier4_Rows() {
-        return TIER4_ROWS;
+    public int getMaxWonderSize() {
+        return MAX_WONDER_ROWS;
     }
 }
