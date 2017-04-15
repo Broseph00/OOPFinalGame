@@ -30,7 +30,15 @@ public class ResourceTests {
         map.getResources().get(location).addGold();
         assertEquals(map.getResources().get(location).getResources().size(), 2);
 
-
-
     }
+
+
+    @Test
+    public void testPickUpResource() throws Exception {
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        RegionLocation location = new RegionLocation(0,0,0,0);
+        mapManager.fillMapFromTextFile();
+    }
+
 }
