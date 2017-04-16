@@ -41,7 +41,7 @@ public class MapView extends Pane implements View {
     private int mapSizeRadius;
 
     public MapView(double width, double height) {
-        this.mapSizeRadius = 10;
+        this.mapSizeRadius = 3;
         this.images = new Assets();
         cursorLocation = new Location(0,0,0);
         this.setWidth(width);
@@ -75,7 +75,7 @@ public class MapView extends Pane implements View {
         this.getChildren().add(getMapCanvas());
         clearCanvas();
         drawCursor();
-        drawEmptyHexGrid();
+        //drawEmptyHexGrid();
     }
 
     private void drawEmptyHexGrid() {
