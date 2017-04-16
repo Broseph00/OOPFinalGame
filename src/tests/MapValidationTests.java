@@ -23,14 +23,14 @@ public class MapValidationTests {
         Map map = new Map();
         player1 = new Player(map,1, null);
         player2 = new Player(map, 2,null);
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
         mapManager.fillMapFromTextFile();
     }
 
     @Test
     public void LandTest1() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
 
@@ -65,7 +65,7 @@ public class MapValidationTests {
     @Test
     public void LandTest2()throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
 
@@ -80,7 +80,7 @@ public class MapValidationTests {
     @Test
     public void RoadTest1() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
 
@@ -105,7 +105,7 @@ public class MapValidationTests {
     @Test
     public void WaterTest1() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
 
@@ -147,7 +147,7 @@ public class MapValidationTests {
     @Test
     public void WaterTest2() throws Exception{
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
 

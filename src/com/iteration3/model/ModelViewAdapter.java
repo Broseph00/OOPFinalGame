@@ -31,7 +31,7 @@ public class ModelViewAdapter implements Visitor {
     public void update() {
         Map map = gameModel.getMap();
         try {
-            MapFileManager fileManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+            MapFileManager fileManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt", "src/com/iteration3/RoadsAndBoatsSavedState.txt");
             fileManager.fillMapFromTextFile();
         } catch (IOException e) {
             e.printStackTrace();

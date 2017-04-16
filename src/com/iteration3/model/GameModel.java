@@ -14,11 +14,9 @@ import java.util.ArrayList;
 public class GameModel {
     private Map map;
     private ExchangeManager exchangeManager;
-    private MapFileManager mapFileManager;
     private MovementManager movementManager;
     private ProductionManager productionManager;
     private TurnManager turnManager;
-    private String path;
     private Player player1;
     private Player player2;
     private ValidationManager validationManager;
@@ -36,10 +34,6 @@ public class GameModel {
         player2 = new Player(map, 2, movementManager);
     }
 
-    public void setPath(String path){
-        this.path=path;
-        this.mapFileManager = new MapFileManager(this.map, path);
-    }
 
     public Map getMap(){
         return map;
@@ -47,14 +41,6 @@ public class GameModel {
 
     public void setMap(Map map){
         this.map=map;
-    }
-
-    public void fillMapFromTextFile() throws IOException {
-        mapFileManager.fillMapFromTextFile();
-    }
-
-    public void fillTextFileFromMap() throws IOException{
-        mapFileManager.fillTextFileFromMap();
     }
 
     public Player getPlayer1(){
