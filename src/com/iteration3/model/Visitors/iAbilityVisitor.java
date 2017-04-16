@@ -55,6 +55,11 @@ public interface iAbilityVisitor {
     String getType(DockatSea4Ability ability);
     String getType(DockatSea5Ability ability);
     String getType(DockatSea6Ability ability);
-    String getType(DockatRiverAbility ability);
+    String getType(DockatRiver1Ability ability);
+    String getType(DockatRiver2Ability ability);
+    String getType(DockatRiver3Ability ability);
+    String getType(DockatRiver4Ability ability);
+    String getType(DockatRiver5Ability ability);
+    String getType(DockatRiver6Ability ability);
     String getType(UndockAbility ability);
 }

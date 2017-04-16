@@ -127,7 +127,7 @@ public class AbilityManager {
         UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
         addUndockAbility(undockAbility, transporter, abilitiesList);
 
-        DockatRiverAbility dockAbility = new DockatRiverAbility(transporter, executionManager);
+        DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
         addRiverDockAbility(dockAbility, transporter, abilitiesList);
 
         DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
