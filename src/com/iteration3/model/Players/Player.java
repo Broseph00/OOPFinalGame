@@ -27,24 +27,34 @@ public class Player {
     }
 
     public void updateTransporterAbilities(){
+        System.out.println("Step 1");
         updateLandTransportAbilities();
-        updateRoadTransportAbilities();
+        updateRoadTransporterAbilities();
         updateWaterTransporterAbilties();
     }
 
-    public void updateLandTransportAbilities(){
+    private void updateLandTransportAbilities(){
+        System.out.println("Step 2");
         ArrayList<LandTransporter> landTransporters = this.transportersList.getLandTransports();
         abilityManager.updateLandTransporters(landTransporters);
     }
 
 
-    public void updateWaterTransporterAbilties(){
+    private void updateWaterTransporterAbilties(){
         ArrayList<WaterTransporter> waterTransporters = this.transportersList.getWaterTransports();
         abilityManager.updateWaterTransporters(waterTransporters);
     }
 
-    public void updateRoadTransportAbilities(){
+    private void updateRoadTransporterAbilities(){
         ArrayList<OnRoadLandTransporter> roadTransporters = this.transportersList.getRoadTransports();
         abilityManager.updateRoadTransporters(roadTransporters);
+    }
+
+    public void addTransporter(Transporter transporter){
+        transportersList.addTransport(transporter);
+    }
+
+    public TransportList getTransportersList(){
+        return transportersList;
     }
 }

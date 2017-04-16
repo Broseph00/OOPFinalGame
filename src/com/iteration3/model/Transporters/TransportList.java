@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TransportList {
 
-    ArrayList<Transporter> transports;
+    private ArrayList<Transporter> transports;
 
     public TransportList() {
         this.transports = new ArrayList<>();

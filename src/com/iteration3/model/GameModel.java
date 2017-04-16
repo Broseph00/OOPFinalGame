@@ -53,4 +53,12 @@ public class GameModel {
         mapFileManager.fillTextFileFromMap();
     }
 
+    public Player getPlayer1(){
+        return player1;
+    }
+
+    public  Player getPlayer2() {
+        return player2;
+    }
+
 }

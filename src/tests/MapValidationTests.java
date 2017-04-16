@@ -13,9 +13,9 @@ public class MapValidationTests {
 
     @Before
     public void setUp() throws Exception{
-        player1 = new Player(null,null);
-        player2 = new Player(null,null);
         Map map = new Map();
+        player1 = new Player(map, 1);
+        player2 = new Player(map, 2);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
     }
