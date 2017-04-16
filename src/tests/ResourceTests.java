@@ -21,7 +21,7 @@ public class ResourceTests {
     @Test
     public void testAddRemoveFromResourceList() throws Exception {
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         RegionLocation location = new RegionLocation(0,0,0,1);
         mapManager.fillMapFromTextFile();
 
@@ -44,7 +44,7 @@ public class ResourceTests {
     public void testPickUpDropAndExchangeResource() throws Exception {
         Map map = new Map();
         ExchangeManager exchangeManager = new ExchangeManager(map);
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         RegionLocation location = new RegionLocation(0,0,0,1);
 
         Player player1 = new Player(map, 1, null);

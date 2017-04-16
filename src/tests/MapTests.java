@@ -39,7 +39,7 @@ public class MapTests {
     @Test
     public void testValidFileToMap() throws Exception {
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
 
         mapManager.fillMapFromTextFile();
 
@@ -54,7 +54,7 @@ public class MapTests {
     @Test
     public void testMapToFile() throws Exception {
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/tests/mapFileTest.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/tests/mapFileTest.txt");
 
         // adding from file to avoid dealing with adjacency
         map.addTileFromFile(new Location(0, 0, 0), new Tile(new PastureTerrain()));
@@ -73,7 +73,7 @@ public class MapTests {
     @Test
     public void testAddBridges() throws Exception {
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
 
         mapManager.fillMapFromTextFile();
 
@@ -100,7 +100,7 @@ public class MapTests {
     @Test
     public void testAddWalls() throws Exception {
         Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt","src/com/iteration3/RoadsAndBoatsSavedState.txt");
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
 
         Player player1 = new Player(map, 1, null);
         Player player2 = new Player(map, 2, null);
