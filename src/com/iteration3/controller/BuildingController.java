@@ -22,6 +22,9 @@ public class BuildingController implements Observable{
     HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> endTurn;
 
+    //TODO: iterator over transporters
+    //TODO: building modes (factory, bridge, etc)
+
     public BuildingController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
         this.window = window;
@@ -44,6 +47,20 @@ public class BuildingController implements Observable{
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
                 //iter.prev();
+
+            }
+        });
+
+        keyMap.put(KeyCode.UP, new Action() {
+            public void execute() {
+                //mode.next();
+
+            }
+        });
+
+        keyMap.put(KeyCode.DOWN, new Action() {
+            public void execute() {
+                //mode.prev();
 
             }
         });

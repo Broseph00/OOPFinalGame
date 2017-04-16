@@ -21,6 +21,7 @@ public class WonderController{
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> endTurn;
+    int numBricks;
 
     public WonderController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
@@ -28,22 +29,30 @@ public class WonderController{
         this.keyMap = keyMap;
         subscribers = new ArrayList<>();
         lastPlayer = false;
+        numBricks = 0;
 
         initializeKeyMap();
         createHandlers();
     }
 
     private void initializeKeyMap() {
-        keyMap.put(KeyCode.RIGHT, new Action() {
+        keyMap.put(KeyCode.UP, new Action() {
             public void execute() {
-                //iter.next();
+                numBricks++;
 
             }
         });
 
-        keyMap.put(KeyCode.LEFT, new Action() {
+        keyMap.put(KeyCode.DOWN, new Action() {
             public void execute() {
-                //iter.prev();
+                numBricks--;
+
+            }
+        });
+
+        keyMap.put(KeyCode.ENTER, new Action() {
+            public void execute() {
+                //model.buildBricks(numBricks);
 
             }
         });

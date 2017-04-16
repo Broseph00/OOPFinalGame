@@ -20,7 +20,7 @@ public class MovementController implements Observable{
     ArrayList<Observer> subscribers;
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
-    private EventHandler<ActionEvent> endTurn;
+    private EventHandler<ActionEvent> pickupResources, endTurn;
     //TODO - Iterator over transporters, valid tiles around them
 
     public MovementController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
@@ -76,6 +76,14 @@ public class MovementController implements Observable{
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+                //model.nextPlayer();
+            }
+        };
+
+        pickupResources = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
 
