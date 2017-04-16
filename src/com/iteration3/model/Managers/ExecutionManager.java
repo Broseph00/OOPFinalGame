@@ -6,6 +6,7 @@ import com.iteration3.model.Buildings.Secondary.*;
 import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
 import com.iteration3.model.Transporters.Transporter;
@@ -14,84 +15,6 @@ public class ExecutionManager {
     private Map map;
     public ExecutionManager(Map map){
         this.map = map;
-    }
-
-
-    public void transportMove(Transporter transporter, int exitRegion, int exitEdge){
-        RegionLocation startRegionLocation = map.getTransportRegionLocation(transporter);
-        Location startLocation = startRegionLocation.getLocation();
-        Location endLocation = startLocation.getLocationEdge(exitEdge);
-        int enterRegion;
-        //Boat
-        if(startRegionLocation.getRegion()==7){
-            enterRegion=7;
-            transporter.decreaseMovePoints(1);
-        }
-        //NotBoat
-        else {
-            enterRegion = getOppositeRegion(exitRegion, exitEdge);
-            if(map.containsRoad(startLocation,endLocation)){
-                transporter.decreaseMovePoints(1);
-            }
-            else{
-                transporter.decreaseMovePoints(2);
-            }
-        }
-        RegionLocation endRegionLocation = new RegionLocation(startLocation, enterRegion);
-        map.removeTransport(transporter,startRegionLocation);
-        map.addTransport(transporter,endRegionLocation);
-    }
-
-    private int getOppositeRegion(int exitRegion, int exitEdge){
-        if(exitEdge==1){
-            if(exitRegion==1){
-                return 3;
-            }
-            else if(exitRegion==6){
-                return 4;
-            }
-        }
-        else if(exitEdge==2){
-            if(exitRegion==1){
-                return 5;
-            }
-            else if(exitRegion==2){
-                return 4;
-            }
-        }
-        else if(exitEdge==3){
-            if(exitRegion==2){
-                return 6;
-            }
-            else if(exitRegion==3){
-                return 5;
-            }
-        }
-        else if(exitEdge==4){
-            if(exitRegion==3){
-                return 1;
-            }
-            else if(exitRegion==4){
-                return 6;
-            }
-        }
-        else if(exitEdge==5){
-            if(exitRegion==4){
-                return 2;
-            }
-            else if(exitRegion==5){
-                return 1;
-            }
-        }
-        else if(exitEdge==6){
-            if(exitRegion==5){
-                return 3;
-            }
-            else if(exitRegion==6){
-                return 2;
-            }
-        }
-        return 0;
     }
 
     public void execute(Ability ability){ }
@@ -187,32 +110,122 @@ public class ExecutionManager {
         map.addProducer(producer, regionLocation);
     }
 
-    public void execute(MoveDegree0Ability ability) { }
-    public void execute(MoveDegree30Ability ability) { }
-    public void execute(MoveDegree60Ability ability) { }
-    public void execute(MoveDegree90Ability ability) { }
-    public void execute(MoveDegree120Ability ability) { }
-    public void execute(MoveDegree150Ability ability) { }
-    public void execute(MoveDegree180Ability ability) { }
-    public void execute(MoveDegree210Ability ability) { }
-    public void execute(MoveDegree240Ability ability) { }
-    public void execute(MoveDegree270Ability ability) { }
-    public void execute(MoveDegree300Ability ability) { }
-    public void execute(MoveDegree330Ability ability) { }
-    public void execute(MoveEdge1Ability ability) { }
-    public void execute(MoveEdge2Ability ability) { }
-    public void execute(MoveEdge3Ability ability) { }
-    public void execute(MoveEdge4Ability ability) { }
-    public void execute(MoveEdge5Ability ability) { }
-    public void execute(MoveEdge6Ability ability) { }
+    public void executeMoveDegree(MoveAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, getOppositeRegion(ability.getRegion(), ability.getBorder()));
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
 
-    public void execute(DockatSea1Ability ability) { }
-    public void execute(DockatSea2Ability ability) { }
-    public void execute(DockatSea3Ability ability) { }
-    public void execute(DockatSea4Ability ability) { }
-    public void execute(DockatSea5Ability ability) { }
-    public void execute(DockatSea6Ability ability) { }
+    public void execute(MoveDegree0Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree30Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree60Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree90Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree120Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree150Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree180Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree210Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree240Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree270Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree300Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree330Ability ability) {executeMoveDegree(ability);}
+
+    public void executeMoveEdge(MoveAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        //Region 7 because boats are restricted to region 7 when moving
+        RegionLocation end = new RegionLocation(location.getLocationEdge(ability.getBorder()), 7);
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    public void execute(MoveEdge1Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge2Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge3Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge4Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge5Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge6Ability ability) {executeMoveEdge(ability);}
+
+    public void executeSeaDock(DockatSeaAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, ability.getBorder());
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    public void execute(DockatSea1Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea2Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea3Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea4Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea5Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea6Ability ability) {executeSeaDock(ability);}
+
     public void execute(DockatRiverAbility ability) { }
-    public void execute(UndockAbility ability) { }
 
+    
+    public void execute(UndockAbility ability) {
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, 7);
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    private int getOppositeRegion(int exitRegion, int exitEdge){
+        if(exitEdge==1){
+            if(exitRegion==1){
+                return 3;
+            }
+            else if(exitRegion==6){
+                return 4;
+            }
+        }
+        else if(exitEdge==2){
+            if(exitRegion==1){
+                return 5;
+            }
+            else if(exitRegion==2){
+                return 4;
+            }
+        }
+        else if(exitEdge==3){
+            if(exitRegion==2){
+                return 6;
+            }
+            else if(exitRegion==3){
+                return 5;
+            }
+        }
+        else if(exitEdge==4){
+            if(exitRegion==3){
+                return 1;
+            }
+            else if(exitRegion==4){
+                return 6;
+            }
+        }
+        else if(exitEdge==5){
+            if(exitRegion==4){
+                return 2;
+            }
+            else if(exitRegion==5){
+                return 1;
+            }
+        }
+        else if(exitEdge==6){
+            if(exitRegion==5){
+                return 3;
+            }
+            else if(exitRegion==6){
+                return 2;
+            }
+        }
+        return 0;
+    }
 }
