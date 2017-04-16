@@ -47,7 +47,8 @@ public class ProductionView extends VBox {
 		tileResourceList.setFocusTraversable(false);
 		transportResourceList.setFocusTraversable(false);
 		
-		
+		transportResourceList.setMaxWidth(width/2);
+		tileResourceList.setMaxWidth(width/2);
 		
 		initializeView();
 	}
