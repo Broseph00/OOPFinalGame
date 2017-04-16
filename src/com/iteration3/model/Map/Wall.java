@@ -22,6 +22,8 @@ public abstract class Wall {
     public void setStrength(int strength) {
         this.strength = strength;
     }
+
+    public abstract boolean oppositeOwner(Player player);
 }
 
 

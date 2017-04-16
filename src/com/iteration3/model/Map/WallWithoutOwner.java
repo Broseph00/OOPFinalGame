@@ -12,4 +12,8 @@ public class WallWithoutOwner extends Wall {
         this.setStrength(strength);
     }
 
+    public boolean oppositeOwner(Player player){
+        return true;
+    }
+
 }
