@@ -1,4 +1,3 @@
-
 package tests;
 
 import com.iteration3.model.Abilities.Ability;
@@ -9,12 +8,9 @@ import com.iteration3.model.Players.Research.OilResearch;
 import com.iteration3.model.Players.Research.Research;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Transporter;
-import org.junit.jupiter.api.Test;
-
-
+import org.junit.Test;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 
 

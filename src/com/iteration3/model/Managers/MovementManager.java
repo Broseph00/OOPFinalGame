@@ -22,11 +22,24 @@ public class MovementManager {
 
     }
 
+    //TODO FINISH WHEN DOCK ABILITIES CREATED
+    public boolean validateSeaDockAbility(){
+        return false;
+    }
+
+    public boolean validateRiverDockAbility(){
+        return false;
+    }
+
+    public boolean validateUndockAbility(){
+        return false;
+    }
+
     //TODO: CALL FOR MOVEMENT TO BE EXECUTED
 
     public boolean validateWaterMoveAbility(MoveAbility moveAbility, WaterTransporter waterTransporter){
         int movesLeft = waterTransporter.getRemainingMovePoints();
-        if(movesLeft<1){
+        if(movesLeft<1 || waterTransporter.isDocked()){
             return false;
         }
         int border = moveAbility.getBorder();
