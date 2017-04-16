@@ -90,6 +90,7 @@ public class ExecutionManager {
         return 0;
     }
 
+    public void execute(Ability ability){ }
 
     public void execute(BuildClaypitAbility ability) { }
     public void execute(BuildCoalBurnerAbility ability) { }

@@ -1,5 +1,6 @@
 package com.iteration3.model.Abilities;
 
+import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iAbilityVisitor;
@@ -18,8 +19,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class MoveEdge3Ability extends MoveAbility {
 
-    public MoveEdge3Ability(Transporter transporter){
-        super(transporter, 7, 3, GameLibrary.MOVE_EDGE3_ABILITY);
+    public MoveEdge3Ability(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, 7, 3, GameLibrary.MOVE_EDGE3_ABILITY, executionManager);
     }
 
     @Override

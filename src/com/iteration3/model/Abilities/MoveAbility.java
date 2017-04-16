@@ -1,5 +1,6 @@
 package com.iteration3.model.Abilities;
 
+import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 
 /**
@@ -17,8 +18,8 @@ public abstract class MoveAbility extends Ability {
     private int region;
     private int border;
 
-    public MoveAbility(Transporter transporter, int region, int border, String name){
-        super(transporter, name);
+    public MoveAbility(Transporter transporter, int region, int border, String name, ExecutionManager executionManager){
+        super(transporter, name, executionManager);
         this.region = region;
         this.border = border;
     }
