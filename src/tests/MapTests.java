@@ -1,8 +1,12 @@
-package tests;
+//package tests;
 
+import com.iteration3.model.Managers.LoadSaveStateManager;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.Gold;
+import com.iteration3.model.Resource.Goose;
+import com.iteration3.model.Resource.Iron;
 import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
@@ -141,4 +145,46 @@ public class MapTests {
 //        assertTrue(map.getWalls().get(location.getNorthEast()).get(0) instanceof WallWithoutOwner);
 
     }
+
+    @Test
+    public void testLoadState() throws Exception {
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/loadStateTest.txt");
+
+        Player player1 = new Player(map, 1, null);
+        Player player2 = new Player(map, 2, null);
+        mapManager.fillMapFromTextFile();
+
+        saveStateManager.loadState();
+        assertEquals(map.getResources().size(), 1);
+
+    }
+
+    @Test
+    public void testSaveState() throws Exception {
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/saveStateTest.txt");
+
+        Player player1 = new Player(map, 1, null);
+        Player player2 = new Player(map, 2, null);
+        mapManager.fillMapFromTextFile();
+
+        map.addResource(new Gold(), new RegionLocation(0,0,0,1));
+        map.addResource(new Goose(), new RegionLocation(-1,0,1,3));
+        map.addResource(new Iron(), new RegionLocation(0,-1,0,2));
+        map.addResource(new Gold(), new RegionLocation(1,2,0,1));
+        map.addResource(new Gold(), new RegionLocation(0,1,0,4));
+
+
+        saveStateManager.saveState();
+
+
+    }
+
+
+
+
+
 }

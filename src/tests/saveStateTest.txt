@@ -1,0 +1,5 @@
+resource0 ::= 0 0 0 1 gold
+resource1 ::= -1 0 1 3 goose
+resource2 ::= 0 -1 0 2 iron
+resource3 ::= 1 2 0 1 gold
+resource4 ::= 0 1 0 4 gold
