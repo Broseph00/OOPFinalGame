@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class StructureMode implements CycleMode {
 
-    ArrayList<Action> buildings;
+    ArrayList<BuildingAction> buildings;
     int index;
 
     public StructureMode(GameModel model, GameWindow window){
@@ -20,22 +20,38 @@ public class StructureMode implements CycleMode {
 
     //TODO: add all possible building types
     public void initActions(){
-        buildings.add(new Action(){
+        buildings.add(new BuildingAction(){
             public void execute() {
                 //model.createSawmill();
             }
+
+            public String getActionName(){
+                return "Sawmill";
+            }
+
         });
 
-        buildings.add(new Action(){
+        //TODO: replace placeholders with all types
+        buildings.add(new BuildingAction(){
             public void execute() {
                 //model.createSawmill();
             }
+
+            public String getActionName(){
+                return "Sawmill";
+            }
+
         });
 
-        buildings.add(new Action(){
+        buildings.add(new BuildingAction(){
             public void execute() {
                 //model.createSawmill();
             }
+
+            public String getActionName(){
+                return "Sawmill";
+            }
+
         });
     }
 
@@ -52,5 +68,9 @@ public class StructureMode implements CycleMode {
 
     public void execute(){
         buildings.get(index).execute();
+    }
+
+    public String getCurrentActionName(){
+        return buildings.get(index).getActionName();
     }
 }

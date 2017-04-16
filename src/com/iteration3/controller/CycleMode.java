@@ -5,4 +5,8 @@ package com.iteration3.controller;
  */
 public interface CycleMode extends PhaseMode {
 
+    public void execute();
+    public void next();
+    public void prev();
+    public String getCurrentActionName();
 }
