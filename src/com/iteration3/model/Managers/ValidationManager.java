@@ -1,11 +1,16 @@
 package com.iteration3.model.Managers;
 
+import com.iteration3.model.Abilities.DockatSeaAbility;
+import com.iteration3.model.Abilities.MoveAbility;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Transporters.Land.LandTransporter;
+import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.WaterTransporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 public class ValidationManager {
@@ -14,7 +19,9 @@ public class ValidationManager {
         this.map = map;
     }
 
-    public boolean validateSeaDock(RegionLocation start, int edge, Player owner){
+    public boolean validateSeaDock(WaterTransporter transporter, DockatSeaAbility dockatSeaAbility, Player owner){
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        int edge = dockatSeaAbility.getBorder();
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(edge);
         Boolean onSea = getTerrain(location).equals("sea");
@@ -23,12 +30,16 @@ public class ValidationManager {
         return onSea && toLand && passableWall;
     }
 
-    public boolean validateRiverDock(RegionLocation start){
+    public boolean validateRiverDock(WaterTransporter transporter){
+        RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
         return map.getRivers().containsKey(location);
     }
 
-    public boolean validateLandMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
+    public boolean validateLandMove(LandTransporter transporter, MoveAbility moveAbility, Player owner, int moves){
+        int exitRegion = moveAbility.getRegion();
+        int exitEdge = moveAbility.getBorder();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(exitEdge);
         if(!map.containsRoad(location,toLocation) && moves<2){
@@ -41,7 +52,10 @@ public class ValidationManager {
         return connectedRegion && passableWall && terrainMatch;
     }
 
-    public boolean validateRoadMove(RegionLocation start, int exitRegion, int exitEdge, Player owner){
+    public boolean validateRoadMove(OnRoadLandTransporter transporter, MoveAbility moveAbility, Player owner){
+        int exitRegion = moveAbility.getRegion();
+        int exitEdge = moveAbility.getBorder();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(exitEdge);
         if(!map.containsRoad(location,toLocation)){
@@ -54,7 +68,9 @@ public class ValidationManager {
         return connectedRegion && passableWall && terrainMatch;
     }
 
-    public boolean validateWaterMove(RegionLocation start, int exitEdge, Player owner){
+    public boolean validateWaterMove(WaterTransporter transporter, MoveAbility moveAbility, Player owner){
+        int exitEdge = moveAbility.getBorder();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(exitEdge);
         //Know Transport is on river if location has a river
