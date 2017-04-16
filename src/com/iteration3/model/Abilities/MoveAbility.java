@@ -13,7 +13,7 @@ import com.iteration3.model.Transporters.Transporter;
 |
 ---------------------------------------------------------------------------------------*/
 
-public class MoveAbility extends Ability {
+public abstract class MoveAbility extends Ability {
     private int region;
     private int border;
 
