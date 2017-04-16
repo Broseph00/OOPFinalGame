@@ -66,6 +66,13 @@ public class GameWindow extends VBox implements View {
         return menuBar;
     }
 
+    public void drawTile(String imageURL, int x, int y) {
+        getMainView().drawTile(imageURL, x, y);
+    }
+    public void drawRiver(String imageURL, int x, int y) {
+        getMainView().drawRiver(imageURL, x, y);
+    }
+
     @Override
     public void update() {
         getMainView().update();

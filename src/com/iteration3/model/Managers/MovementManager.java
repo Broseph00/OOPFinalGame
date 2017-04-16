@@ -1,6 +1,9 @@
 package com.iteration3.model.Managers;
 
+import com.iteration3.model.Abilities.DockatRiverAbility;
+import com.iteration3.model.Abilities.DockatSeaAbility;
 import com.iteration3.model.Abilities.MoveAbility;
+import com.iteration3.model.Abilities.UndockAbility;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Transporters.Land.LandTransporter;
@@ -13,26 +16,32 @@ import java.util.HashMap;
 public class MovementManager {
     private ValidationManager validationManager;
     private ExecutionManager executionManager;
-    private HashMap<Transporter, RegionLocation> transporters;
 
     public MovementManager(ValidationManager validationManager, ExecutionManager executionManager){
         this.validationManager = validationManager;
         this.executionManager = executionManager;
-        transporters = new HashMap<>();
-
     }
 
     //TODO FINISH WHEN DOCK ABILITIES CREATED
-    public boolean validateSeaDockAbility(){
-        return false;
+    public boolean validateSeaDockAbility(DockatSeaAbility dockatSeaAbility, WaterTransporter transporter){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
+        return validationManager.validateSeaDock(transporter, dockatSeaAbility);
     }
 
-    public boolean validateRiverDockAbility(){
-        return false;
+    public boolean validateRiverDockAbility(DockatRiverAbility dockatRiverAbility, WaterTransporter transporter){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
+        return validationManager.validateRiverDock(transporter);
     }
 
-    public boolean validateUndockAbility(){
-        return false;
+    public boolean validateUndockAbility(UndockAbility undockAbility, WaterTransporter transporter){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
+        return transporter.isDocked();
     }
 
     //TODO: CALL FOR MOVEMENT TO BE EXECUTED
@@ -42,12 +51,8 @@ public class MovementManager {
         if(movesLeft<1 || waterTransporter.isDocked()){
             return false;
         }
-        int border = moveAbility.getBorder();
-        if(transporters.containsKey(waterTransporter)) {
-            RegionLocation rloc = transporters.get(waterTransporter);
-            return validationManager.validateWaterMove(rloc, border, waterTransporter.getOwner());
-        }
-        return false;
+        return validationManager.validateWaterMove(waterTransporter, moveAbility);
+
     }
 
     public boolean validateRoadMoveAbility(MoveAbility moveAbility, OnRoadLandTransporter onRoadLandTransporter){
@@ -55,13 +60,7 @@ public class MovementManager {
         if(movesLeft<1){
             return false;
         }
-        int region = moveAbility.getRegion();
-        int border = moveAbility.getBorder();
-        if(transporters.containsKey(onRoadLandTransporter)) {
-            RegionLocation rloc = transporters.get(onRoadLandTransporter);
-            return validationManager.validateRoadMove(rloc, region, border, onRoadLandTransporter.getOwner());
-        }
-        return false;
+        return validationManager.validateRoadMove(onRoadLandTransporter, moveAbility);
     }
 
     public boolean validateLandMoveAbility(MoveAbility moveAbility, LandTransporter landTransporter){
@@ -69,13 +68,7 @@ public class MovementManager {
         if(movesLeft<1){
             return false;
         }
-        int region = moveAbility.getRegion();
-        int border = moveAbility.getBorder();
-        if(transporters.containsKey(landTransporter)) {
-            RegionLocation rloc = transporters.get(landTransporter);
-            return validationManager.validateLandMove(rloc, region, border, landTransporter.getOwner(), movesLeft);
-        }
-        return false;
+        return validationManager.validateLandMove(landTransporter, moveAbility);
     }
 
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){

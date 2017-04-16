@@ -30,6 +30,13 @@ public class MainView extends BorderPane implements View {
 
     }
 
+    public void drawTile(String imageURL, int x, int y) {
+        mapView.drawTile(imageURL, x, y);
+    }
+    public void drawRiver(String imageURL, int x, int y) {
+        mapView.drawRiver(imageURL, x, y);
+    }
+
     public void update() {
         mapView.update();
     }

@@ -34,6 +34,6 @@ public class BuildClaypitAbility extends Ability {
 
     @Override
     public void execute(){
-        
+
     }
 }

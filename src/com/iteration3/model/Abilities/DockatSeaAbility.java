@@ -20,4 +20,6 @@ public abstract class DockatSeaAbility extends Ability {
         super(transporter, name);
         this.border = border;
     }
+
+    public int getBorder(){return border;}
 }
