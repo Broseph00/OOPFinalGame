@@ -17,12 +17,13 @@ public class Player {
     private TransportList transportersList;
     private AbilityManager abilityManager;
     private ResearchManager researchManager;
+    private MovementManager movementManager;
 
-    public Player(Map map, int id){
+    public Player(Map map, int id, MovementManager movementManager){
         researchManager = new ResearchManager();
         transportersList = new TransportList();
-        MovementManager movementManager = new MovementManager(map);
-        abilityManager = new AbilityManager(map,movementManager, researchManager);
+        this.movementManager = movementManager;
+        abilityManager = new AbilityManager(map,this.movementManager, researchManager);
         this.id = id;
     }
 
