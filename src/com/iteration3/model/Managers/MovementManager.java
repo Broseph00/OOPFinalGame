@@ -1,8 +1,8 @@
 package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.MoveAbility;
-import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
@@ -11,12 +11,12 @@ import com.iteration3.model.Transporters.Water.WaterTransporter;
 import java.util.HashMap;
 
 public class MovementManager {
-    private ValidationManager validateManager;
+    private ValidationManager validationManager;
     private ExecutionManager executionManager;
     private HashMap<Transporter, RegionLocation> transporters;
 
-    public MovementManager(ValidationManager validateManager, ExecutionManager executionManager){
-        this.validateManager = validateManager;
+    public MovementManager(ValidationManager validationManager, ExecutionManager executionManager){
+        this.validationManager = validationManager;
         this.executionManager = executionManager;
         transporters = new HashMap<>();
 
@@ -45,7 +45,7 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(waterTransporter)) {
             RegionLocation rloc = transporters.get(waterTransporter);
-            return validateManager.validateWaterMove(rloc, border, waterTransporter.getOwner());
+            return validationManager.validateWaterMove(rloc, border, waterTransporter.getOwner());
         }
         return false;
     }
@@ -59,7 +59,7 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(onRoadLandTransporter)) {
             RegionLocation rloc = transporters.get(onRoadLandTransporter);
-            return validateManager.validateRoadMove(rloc, region, border, onRoadLandTransporter.getOwner());
+            return validationManager.validateRoadMove(rloc, region, border, onRoadLandTransporter.getOwner());
         }
         return false;
     }
@@ -73,8 +73,20 @@ public class MovementManager {
         int border = moveAbility.getBorder();
         if(transporters.containsKey(landTransporter)) {
             RegionLocation rloc = transporters.get(landTransporter);
-            return validateManager.validateLandMove(rloc, region, border, landTransporter.getOwner(), movesLeft);
+            return validationManager.validateLandMove(rloc, region, border, landTransporter.getOwner(), movesLeft);
         }
         return false;
+    }
+
+    public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
+        return validationManager.validateResourceCost(transporter, boardCost, stoneCost);
+    }
+
+    public boolean validateShore(Transporter transporter){
+        return true; //TODO
+    }
+
+    public boolean validateTerrain(Transporter transporter, String terrainType){
+        return true; //TODO
     }
 }

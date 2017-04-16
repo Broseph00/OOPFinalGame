@@ -1,5 +1,6 @@
 package com.iteration3.model.Managers;
 
+import static com.iteration3.utilities.GameLibrary.*;
 import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Players.Research.Research;
@@ -8,6 +9,7 @@ import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
 
+import javax.xml.crypto.dsig.TransformService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +91,16 @@ public class AbilityManager {
         if (verifyMineAbility(transporter)) { abilitiesList.add(new BuildMineAbility(transporter)); }
         if (verifyMintAbility(transporter)) { abilitiesList.add(new BuildMintAbility(transporter)); }
         if (verifyOilRigAbility(transporter)) { abilitiesList.add(new BuildOilRigAbility(transporter)); }
+        if (verifyPaperMillAbility(transporter)) { abilitiesList.add(new BuildPapermillAbility(transporter)); }
+        if (verifyRaftFactoryAbility(transporter)) { abilitiesList.add(new BuildRaftFactoryAbility(transporter)); }
+        if (verifyRowboatFactoryAbility(transporter)) { abilitiesList.add(new BuildRowboatFactoryAbility(transporter)); }
+        if (verifySteamerFactoryAbility(transporter)) { abilitiesList.add(new BuildSteamerFactoryAbility(transporter)); }
+        if (verifyStockExchangeAbility(transporter)) { abilitiesList.add(new BuildStockExchangeAbility(transporter)); }
+        if (verifyStoneFactoryAbility(transporter)) { abilitiesList.add(new BuildStoneFactoryAbility(transporter)); }
+        if (verifyStoneQuarryAbility(transporter)) { abilitiesList.add(new BuildStoneQuarryAbility(transporter)); }
+        if (verifyTruckFactoryAbility(transporter)) { abilitiesList.add(new BuildTruckFactoryAbility(transporter)); }
+        if (verifyWagonFactoryAbility(transporter)) { abilitiesList.add(new BuildWagonFactoryAbility(transporter)); }
+        if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter)); }
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
@@ -178,19 +190,63 @@ public class AbilityManager {
     }
 
     private boolean verifyClayPitAbility(Transporter transporter) {
-        return true; //TODO: make proper verifier
+       return (movementManager.validateResources(transporter, CLAYPIT_BOARD, CLAYPIT_STONE) && movementManager.validateShore(transporter));
     }
 
     private boolean verifyCoalBurnerAbility(Transporter transporter) {
-        return true; //TODO: make proper verifier
+       return movementManager.validateResources(transporter, COALBURNER_BOARD, COALBURNER_STONE);
     }
 
-    private boolean verifyMineAbility(Transporter transporter) { return true; } //TODO: make proper verifier
+    private boolean verifyMineAbility(Transporter transporter) {
+        return ( movementManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && movementManager.validateTerrain(transporter, MOUNTAINS));
+    }
 
-    private boolean verifyMintAbility(Transporter transporter) { return true; } //TODO: make proper verifier
+    private boolean verifyMintAbility(Transporter transporter) {
+        return movementManager.validateResources(transporter, MINT_BOARD, MINT_STONE);
+    }
 
     private boolean verifyOilRigAbility(Transporter transporter) {
-        return researchManager.isFinishedOilResearch();
+        return (researchManager.isFinishedOilResearch() && movementManager.validateResources(transporter, OILRIG_BOARD, OILRIG_STONE) && movementManager.validateTerrain(transporter, SEA));
+    }
+
+    private boolean verifyPaperMillAbility(Transporter transporter) {
+        return (movementManager.validateResources(transporter, PAPERMILL_BOARD, PAPERMILL_STONE));
+    }
+
+    private boolean verifyRaftFactoryAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, RAFTFACTORY_BOARD, RAFTFACTORY_STONE) && movementManager.validateShore(transporter));
+    }
+
+    private boolean verifyRowboatFactoryAbility(Transporter transporter){
+        return (movementManager.validateShore(transporter) && researchManager.isFinishedRowingResearch() && movementManager.validateResources(transporter, ROWBOATFACTORY_BOARD, ROWBOATFACTORY_STONE));
+    }
+
+    private boolean verifySteamerFactoryAbility(Transporter transporter){
+        return (movementManager.validateShore(transporter) && researchManager.isFinishedShipResearch() && movementManager.validateResources(transporter, STEAMER_BOARD, STEAMER_STONE));
+    }
+
+    private boolean verifyStockExchangeAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, STOCK_BOARD, STOCK_STONE));
+    }
+
+    private  boolean verifyStoneFactoryAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, STONEFACTORY_BOARD, STONEFACTORY_STONE));
+    }
+
+    private boolean verifyStoneQuarryAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, QUARRY_BOARD, QUARRY_STONE) && movementManager.validateTerrain(transporter, ROCK));
+    }
+
+    private boolean verifyTruckFactoryAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, TRUCKFACTORY_BOARD, TRUCKFACTORY_STONE) && researchManager.isFinishedTruckResearch());
+    }
+
+    private boolean verifyWagonFactoryAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, WAGONFACTORY_BOARD, WAGONFACTORY_STONE));
+    }
+
+    private boolean verifyWoodcutterAbility(Transporter transporter){
+        return (movementManager.validateResources(transporter, WOODCUTTER_BOARD, WOODCUTTER_STONE) && movementManager.validateTerrain(transporter, WOODS));
     }
 
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){
