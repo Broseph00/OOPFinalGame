@@ -23,6 +23,7 @@ public class Player {
         transportersList = new TransportList();
         MovementManager movementManager = new MovementManager(map);
         abilityManager = new AbilityManager(map,movementManager, researchManager);
+        this.id = id;
     }
 
     public void updateTransporterAbilities(){
