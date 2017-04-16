@@ -17,8 +17,9 @@ public class ProductionController implements Observable{
     ArrayList<Observer> subscribers;
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
-    private EventHandler<ActionEvent> endTurn;
-    //TODO: Iterator of transporters
+    private EventHandler<ActionEvent> endTurn, useFactory;
+    // Location current;
+    //TODO: Iterator of transporters (or locations)
 
     public ProductionController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
@@ -26,6 +27,9 @@ public class ProductionController implements Observable{
         this.keyMap = keyMap;
         lastPlayer = false;
         subscribers = new ArrayList<>();
+
+        initializeKeyMap();
+        createHandlers();
     }
 
     private void initializeKeyMap() {
@@ -46,6 +50,15 @@ public class ProductionController implements Observable{
     }
 
     private void createHandlers() {
+        useFactory = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                notifyAllObservers();
+            }
+        };
+
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 //model.nextPlayer();
