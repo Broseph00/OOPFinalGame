@@ -44,8 +44,8 @@ public class ResourceTests {
         ExchangeManager exchangeManager = new ExchangeManager(map);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         RegionLocation location = new RegionLocation(0,0,0,1);
-        Player player1 = new Player(new AbilityManager(map,new MovementManager(map)), new ResearchManager());
-        Player player2 = new Player(new AbilityManager(map, new MovementManager(map)), new ResearchManager());
+        Player player1 = new Player(new AbilityManager(map, new MovementManager(null,null)), new ResearchManager());
+        Player player2 = new Player(new AbilityManager(map, new MovementManager(null,null)), new ResearchManager());
 
         mapManager.fillMapFromTextFile();
 

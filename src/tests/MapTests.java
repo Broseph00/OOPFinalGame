@@ -140,11 +140,4 @@ public class MapTests {
         assertTrue(map.getWalls().get(location.getNorthEast()).get(0) instanceof WallWithoutOwner);
 
     }
-
-    @Test
-    public void testLocationTypeConformance() throws Exception{
-        Map map = new Map();
-        assertEquals(map.checkAdjacency(new RegionLocation(0,0,0,1).getLocation(), new RegionLocation(1,0,-1,1).getLocation()), true);
-    }
-
 }
