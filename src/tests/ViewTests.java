@@ -17,8 +17,8 @@ public class ViewTests extends Application {
 		TabPane tabPane = new TabPane();
 		
 		Tab statusViewTab = new Tab();
-		statusViewTab.setText("StatusView");
-		statusViewTab.setContent(new StatusView(500,500));
+		statusViewTab.setText("MainView");
+		statusViewTab.setContent(new MainView(500,500));
 		
 		
 		Tab mapViewTab = new Tab();
