@@ -1,5 +1,6 @@
 package com.iteration3.model.Abilities;
 
+import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iAbilityVisitor;
@@ -18,8 +19,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class BuildWagonFactoryAbility extends Ability{
 
-    public BuildWagonFactoryAbility(Transporter transporter){
-        super(transporter, GameLibrary.BUILD_WAGON_ABILITY);
+    public BuildWagonFactoryAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, GameLibrary.BUILD_WAGON_ABILITY, executionManager);
     }
 
     @Override
