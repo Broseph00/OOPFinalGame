@@ -82,4 +82,6 @@ public abstract class Transporter {
         this.resourceList.addResource(r);
     }
 
+    public abstract boolean isDocked();
+
 }

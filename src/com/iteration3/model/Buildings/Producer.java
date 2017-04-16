@@ -1,17 +1,32 @@
 package com.iteration3.model.Buildings;
 
 public abstract class Producer {
-    ProducerCapacity capacity;
+    int capacity;
+    private int capacityUsage;
 
     public Producer(int maxCapacity){
-        capacity = new ProducerCapacity(maxCapacity);
+        if(maxCapacity < 1){
+            throw new Error("maxCapacity must be greater than 0");
+
+        }
+        capacity = maxCapacity;
+        capacityUsage = 0;
     }
 
-    public int getCurrentCapacity(){
-        return capacity.getCapacity();
+    public int getCapacity(){
+        return (capacity - capacityUsage);
     }
 
-    public void reset(){
-        capacity.resetCapacity();
+    public boolean decrementCapacity(){
+        if(capacityUsage < capacity) {
+            capacityUsage += 1;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void resetCapacity(){
+        capacityUsage = 0;
     }
 }

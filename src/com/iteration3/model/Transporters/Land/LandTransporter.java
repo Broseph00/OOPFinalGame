@@ -7,4 +7,8 @@ public abstract class LandTransporter extends Transporter {
     public LandTransporter(Player player, int maxMove, int cap) {
         super(player, maxMove, cap);
     }
+
+    public boolean isDocked(){
+        return false;
+    }
 }

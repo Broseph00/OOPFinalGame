@@ -14,6 +14,20 @@ public class ValidationManager {
         this.map = map;
     }
 
+    public boolean validateSeaDock(RegionLocation start, int edge, Player owner){
+        Location location = start.getLocation();
+        Location toLocation = location.getLocationEdge(edge);
+        Boolean onSea = getTerrain(location).equals("sea");
+        Boolean toLand = !getTerrain(toLocation).equals("sea");
+        Boolean passableWall = !map.wallOwnedByOpposingPlayer(location, owner, edge);
+        return onSea && toLand && passableWall;
+    }
+
+    public boolean validateRiverDock(RegionLocation start){
+        Location location = start.getLocation();
+        return map.getRivers().containsKey(location);
+    }
+
     public boolean validateLandMove(RegionLocation start, int exitRegion, int exitEdge, Player owner, int moves){
         Location location = start.getLocation();
         Location toLocation = location.getLocationEdge(exitEdge);
