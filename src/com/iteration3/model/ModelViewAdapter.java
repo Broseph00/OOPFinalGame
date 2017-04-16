@@ -1,6 +1,7 @@
 package com.iteration3.model;
 
 import com.iteration3.view.GameWindow;
+import com.iteration3.view.MainView;
 
 /**
  * Created by LesliesLaptop on 4/11/17.

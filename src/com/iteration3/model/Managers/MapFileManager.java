@@ -5,6 +5,7 @@ import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.River;
 import com.iteration3.model.Tiles.*;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
+import com.iteration3.utilities.GameLibrary;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +24,7 @@ public class MapFileManager {
     }
 
     // TODO: Methods to move map to text file and text file to map
-
+    // TODO: ADD ADDITION OF WALLS ROADS TRANSPORTERS etc...
     // Reads file line by line, extracts info and creates a map out of it
     public void fillMapFromTextFile() throws IOException{
         map.clearMap();
@@ -44,22 +45,22 @@ public class MapFileManager {
             String terrainString = splitLine[5];
             Terrain terrain = new PastureTerrain();
 
-            if(terrainString.equals("pasture")) {
+            if(terrainString.equals(GameLibrary.PASTURE)) {
                 terrain = new PastureTerrain();
             }
-            else if(terrainString.equals("woods")) {
+            else if(terrainString.equals(GameLibrary.WOODS)) {
                 terrain = new WoodTerrain();
             }
-            else if(terrainString.equals("rock")) {
+            else if(terrainString.equals(GameLibrary.ROCK)) {
                 terrain = new RockTerrain();
             }
-            else if(terrainString.equals("mountains")) {
+            else if(terrainString.equals(GameLibrary.MOUNTAINS)) {
                 terrain = new MountainTerrain();
             }
-            else if(terrainString.equals("desert")) {
+            else if(terrainString.equals(GameLibrary.DESERT)) {
                 terrain = new DesertTerrain();
             }
-            else if(terrainString.equals("sea")){
+            else if(terrainString.equals(GameLibrary.SEA)){
                 terrain = new SeaTerrain();
             }
             else {
@@ -81,12 +82,6 @@ public class MapFileManager {
 
 
         }
-
-        // check that all rivers connect correctly
-//        if(!map.validateAllRiverLocations()) {
-//            System.out.println("Invalid river setup, check text file.");
-//            map.clearMap();
-//        }
 
 
     }

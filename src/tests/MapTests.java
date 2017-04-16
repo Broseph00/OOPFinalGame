@@ -1,8 +1,7 @@
+package tests;
+
 import com.iteration3.model.Managers.MapFileManager;
-import com.iteration3.model.Map.Location;
-import com.iteration3.model.Map.Map;
-import com.iteration3.model.Map.River;
-import com.iteration3.model.Map.WallWithoutOwner;
+import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
@@ -17,7 +16,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class mapTest {
+public class MapTests {
 
 
     @Test
@@ -102,28 +101,50 @@ public class mapTest {
     public void testAddWalls() throws Exception {
         Map map = new Map();
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player(null,null);
+        Player player2 = new Player(null,null);
         Location location = new Location(0,0,0);
         Location waterLocation = new Location(-2,1,1);
 
         mapManager.fillMapFromTextFile();
 
-        // add valid wall
+        // add valid wall and check corresponding wall appears
         map.addWall(location, player1, 1,1);
-        assertEquals(map.getWalls().size(), 1);
+        assertEquals(map.getWalls().size(), 2);
+        assertEquals(map.getWalls().get(location.getNorth()).get(0).getEdge(), 4);
 
-        // try to add wall of invalid player
-        map.addWall(location, player2, 1,1);
-        assertEquals(map.getWalls().size(), 1);
+        // remove that wall and a extra for good measure
+        map.removeWall(location.getNorth(), 4);
+        map.removeWall(location.getNorth().getNorth(), 4);
+        assertEquals(map.getWalls().size(), 0);
+
+        // add valid wall and then try to add wall of invalid player
+        map.addWall(location, player1, 2,1);
+        map.addWall(location, player2, 2,1);
+        assertEquals(map.getWalls().get(location.getNorthEast()).get(0).getEdge(), 5);
+        assertEquals(map.getWalls().size(), 2);
+
+        // test adding another wall
+        map.addWall(location.getNorthWest(), player2, 4,1);
+        assertEquals(map.getWalls().get(location.getNorthWest()).get(0).getEdge(), 4);
+        assertEquals(map.getWalls().get(location.getNorthWest().getSouth()).get(0).getEdge(), 1);
+
+        assertEquals(map.getWalls().size(), 4);
 
         // try to add wall between two sea tiles
         map.addWall(waterLocation, player1, 2,1);
-        assertEquals(map.getWalls().size(), 1);
+        assertEquals(map.getWalls().size(), 4);
 
-        map.destroyWall(location,1);
+        map.destroyWall(location,2);
         assertTrue(map.getWalls().get(location).get(0) instanceof WallWithoutOwner);
+        assertTrue(map.getWalls().get(location.getNorthEast()).get(0) instanceof WallWithoutOwner);
 
+    }
+
+    @Test
+    public void testLocationTypeConformance() throws Exception{
+        Map map = new Map();
+        assertEquals(map.checkAdjacency(new RegionLocation(0,0,0,1).getLocation(), new RegionLocation(1,0,-1,1).getLocation()), true);
     }
 
 }

@@ -4,6 +4,7 @@ import com.iteration3.controller.ControlDispatch;
 import com.iteration3.model.GameModel;
 import com.iteration3.model.ModelViewAdapter;
 import com.iteration3.view.GameWindow;
+import com.iteration3.view.MainView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,10 +16,10 @@ public class GameEngine {
     private ModelViewAdapter MVA;
 
     public GameEngine (Stage primaryStage) throws Exception {
-        gameWindow = new GameWindow(1221,726);
+        gameWindow = new GameWindow(1221,726, 15);
         gameModel = new GameModel();
         MVA = new ModelViewAdapter(gameModel, gameWindow);
-        ControlDispatch controller = new ControlDispatch(gameModel,gameWindow);
+        ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
 
 
         new AnimationTimer() {

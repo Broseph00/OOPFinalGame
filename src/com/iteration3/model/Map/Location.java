@@ -2,13 +2,9 @@ package com.iteration3.model.Map;
 
 
 public class Location {
-    protected int x;
-    protected int y;
-    protected int z;
-
-    public Location(){
-
-    }
+    private int x;
+    private int y;
+    private int z;
 
     public Location(int x, int y, int z) {
         this.x = x;
@@ -41,6 +37,25 @@ public class Location {
         result = 31 * result + y ^ (y >>> 32);
         result = 31 * result + z ^ (z >>> 32);
         return result;
+    }
+
+    public Location getLocationEdge(int edge){
+        switch (edge){
+            case 1:
+                return getNorth();
+            case 2:
+                return getNorthEast();
+            case 3:
+                return getSouthEast();
+            case 4:
+                return getSouth();
+            case 5:
+                return getSouthWest();
+            case 6:
+                return getNorthWest();
+            default:
+                return this;
+        }
     }
 
     public Location getNorth(){

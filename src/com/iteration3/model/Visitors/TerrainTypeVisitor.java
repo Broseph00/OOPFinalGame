@@ -1,35 +1,34 @@
 package com.iteration3.model.Visitors;
 
 import com.iteration3.model.Tiles.*;
+import com.iteration3.utilities.GameLibrary;
 
 public class TerrainTypeVisitor implements iTerrainVisitor {
     @Override
-    public String getType(DesertTerrain terrain) {
-        return "desert";
-    }
+    public String getType(DesertTerrain terrain) { return GameLibrary.DESERT; }
 
     @Override
     public String getType(MountainTerrain terrain) {
-        return "mountains";
+        return GameLibrary.MOUNTAINS;
     }
 
     @Override
     public String getType(PastureTerrain terrain) {
-        return "pasture";
+        return GameLibrary.PASTURE;
     }
 
     @Override
     public String getType(RockTerrain terrain) {
-        return "rock";
+        return GameLibrary.ROCK;
     }
 
     @Override
     public String getType(SeaTerrain terrain) {
-        return "sea";
+        return GameLibrary.SEA;
     }
 
     @Override
     public String getType(WoodTerrain terrain) {
-        return "woods";
+        return GameLibrary.WOODS;
     }
 }

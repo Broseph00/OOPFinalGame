@@ -8,22 +8,21 @@ package com.iteration3.controller;
 import com.iteration3.model.GameModel;
 //import com.iteration3.model.map.Location;
 //import com.iteration3.model.map.Map;
-import com.iteration3.view.GameWindow;
+import com.iteration3.view.MainView;
 //import com.iteration3.view.Observable;
 //import com.iteration3.view.Observer;
 
 import javafx.scene.input.KeyCode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CursorController{
 
     HashMap<KeyCode,Action> keyMap;
     //ArrayList<Observer> observers;
-    GameWindow window;
+    MainView window;
 
-    public CursorController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keymap){
+    public CursorController(GameModel model, MainView window, HashMap<KeyCode, Action> keymap){
 
         this.keyMap = keymap;
         this.window = window;

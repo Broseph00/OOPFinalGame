@@ -1,16 +1,42 @@
 package com.iteration3.model.Map;
 
-public class RegionLocation extends Location{
-
+public class RegionLocation{
+    private int x;
+    private int y;
+    private int z;
     private int region;
 
-    public RegionLocation(int x, int y, int z, int region){
-        super(x, y ,z);
+    public RegionLocation(Location location , int region){
+        this.x=location.getX();
+        this.y=location.getY();
+        this.z=location.getZ();
         this.region=region;
     }
 
+    public RegionLocation(int x, int y, int z, int region){
+        this.x=x;
+        this.y=y;
+        this.z=z;
+        this.region=region;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+    public int getY() {
+        return this.y;
+    }
+    public int getZ() {
+        return this.z;
+    }
+    public void setX(int x) { this.x = x; }
+    public void setY(int y) { this.y = y; }
+    public void setZ(int z) { this.z = z; }
     public int getRegion(){return this.region;}
     public void setRegion(int region){this.region=region;}
+    public Location getLocation(){
+        return new Location(this.x, this.y, this.z);
+    }
 
     public boolean equals(Object o) {
         if (this == o) return true;
