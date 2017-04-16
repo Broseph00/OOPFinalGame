@@ -26,6 +26,10 @@ public class ResourceList {
         }
     }
 
+    public boolean isEmpty(){
+        return resources.isEmpty();
+    }
+
     public void addClay() {
         this.resources.add(new Clay());
     }

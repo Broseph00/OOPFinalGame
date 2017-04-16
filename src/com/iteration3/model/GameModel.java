@@ -21,15 +21,19 @@ public class GameModel {
     private String path;
     private Player player1;
     private Player player2;
+    private ValidationManager validationManager;
+    private ExecutionManager executionManager;
 
     public GameModel(){
         map = new Map();
+        validationManager = new ValidationManager(map);
+        executionManager = new ExecutionManager(map);
         exchangeManager = new ExchangeManager(map);
-        movementManager = new MovementManager(map);
+        movementManager = new MovementManager(validationManager, executionManager);
         productionManager = new ProductionManager();
         turnManager = new TurnManager();
-        player1 = new Player(map, 1);
-        player2 = new Player(map, 2);
+        player1 = new Player(map, 1, movementManager);
+        player2 = new Player(map, 2, movementManager);
     }
 
     public void setPath(String path){
@@ -51,6 +55,14 @@ public class GameModel {
 
     public void fillTextFileFromMap() throws IOException{
         mapFileManager.fillTextFileFromMap();
+    }
+
+    public Player getPlayer1(){
+        return player1;
+    }
+
+    public  Player getPlayer2() {
+        return player2;
     }
 
 }

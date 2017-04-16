@@ -17,34 +17,49 @@ public class Player {
     private TransportList transportersList;
     private AbilityManager abilityManager;
     private ResearchManager researchManager;
+    private MovementManager movementManager;
 
-    public Player(Map map, int id){
+    public Player(Map map, int id, MovementManager movementManager){
         researchManager = new ResearchManager();
         transportersList = new TransportList();
-        MovementManager movementManager = new MovementManager(map);
-        abilityManager = new AbilityManager(map,movementManager, researchManager);
+        this.movementManager = movementManager;
+        abilityManager = new AbilityManager(map,this.movementManager, researchManager);
         this.id = id;
     }
 
     public void updateTransporterAbilities(){
+        //System.out.println("Step 1");
         updateLandTransportAbilities();
-        updateRoadTransportAbilities();
+        updateRoadTransporterAbilities();
         updateWaterTransporterAbilties();
     }
 
-    public void updateLandTransportAbilities(){
+    private void updateLandTransportAbilities(){
+        //System.out.println("Step 2");
         ArrayList<LandTransporter> landTransporters = this.transportersList.getLandTransports();
         abilityManager.updateLandTransporters(landTransporters);
     }
 
 
-    public void updateWaterTransporterAbilties(){
+    private void updateWaterTransporterAbilties(){
         ArrayList<WaterTransporter> waterTransporters = this.transportersList.getWaterTransports();
         abilityManager.updateWaterTransporters(waterTransporters);
     }
 
-    public void updateRoadTransportAbilities(){
+    private void updateRoadTransporterAbilities(){
         ArrayList<OnRoadLandTransporter> roadTransporters = this.transportersList.getRoadTransports();
         abilityManager.updateRoadTransporters(roadTransporters);
+    }
+
+    public void addTransporter(Transporter transporter){
+        transportersList.addTransport(transporter);
+    }
+
+    public TransportList getTransportersList(){
+        return transportersList;
+    }
+
+    public ResearchManager getResearchManager(){
+        return researchManager;
     }
 }

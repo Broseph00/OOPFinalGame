@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TransportList {
 
-    ArrayList<Transporter> transports;
+    private ArrayList<Transporter> transports;
 
     public TransportList() {
         this.transports = new ArrayList<>();
@@ -22,6 +22,10 @@ public class TransportList {
 
     public ArrayList<Transporter> getTransports() {
         return transports;
+    }
+
+    public boolean isEmpty(){
+        return transports.isEmpty();
     }
 
     public ArrayList<WaterTransporter> getWaterTransports() {
