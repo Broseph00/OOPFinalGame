@@ -26,6 +26,10 @@ public class ResourceList {
         }
     }
 
+    public void addAll(ResourceList resourceList){
+        this.resources.addAll(resourceList.getResources());
+    }
+
     public boolean isEmpty(){
         return resources.isEmpty();
     }

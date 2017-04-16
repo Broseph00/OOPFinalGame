@@ -424,4 +424,28 @@ public class Map {
         }
     }
 
+    public boolean adjacentSea(Location location){
+        HashMap<Location, Tile> seas = getSeaTiles();
+
+        if(seas.containsKey(location.getNorth())){
+            return true;
+        }
+        if(seas.containsKey(location.getNorthEast())){
+            return true;
+        }
+        if(seas.containsKey(location.getSouthEast())){
+            return true;
+        }
+        if(seas.containsKey(location.getSouth())){
+            return true;
+        }
+        if(seas.containsKey(location.getSouthWest())){
+            return true;
+        }
+        if(seas.containsKey(location.getNorthWest())){
+            return true;
+        }
+        return false;
+    }
+
 }
