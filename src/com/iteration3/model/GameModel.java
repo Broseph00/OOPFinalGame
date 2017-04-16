@@ -28,8 +28,8 @@ public class GameModel {
         movementManager = new MovementManager(map);
         productionManager = new ProductionManager();
         turnManager = new TurnManager();
-        player1 = new Player(new AbilityManager(map,movementManager),new ResearchManager());
-        player2 = new Player(new AbilityManager(map,movementManager),new ResearchManager());
+        player1 = new Player(map, 1);
+        player2 = new Player(map, 2);
     }
 
     public void setPath(String path){

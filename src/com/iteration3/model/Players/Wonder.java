@@ -9,10 +9,12 @@ public class Wonder {
     private ArrayList<WonderRow> rows;
     private int bricksPerRow;
     private int rowMultiplierCounter;
-    // TODO: need brick cost manager?
+    private int currentTier;
+    // TODO: need brick cost manager
 
     public Wonder() {
-        rows = new ArrayList<>();
+        currentTier = 1;
+        rows = new ArrayList<WonderRow>();
         bricksPerRow = 4;
         rowMultiplierCounter = 1;
         newRow();
@@ -57,10 +59,12 @@ public class Wonder {
 
     private void resetMultiplier() {
         ++bricksPerRow;
+        ++currentTier;
         rowMultiplierCounter = 1;
     }
 
-    public void addBrick(Player owner) {
+    public void addBricks(Player owner, int quantity) {
+
         // TODO: need brick cost
         // TODO: decrement cost from owner
         if(isFull()){
@@ -74,6 +78,14 @@ public class Wonder {
         }
 
         currentRow.addBrick(owner);
+    }
+
+    private int calculateTotalBrickCost(int quantity) {
+        int brickCost = 0;
+        for (int i = 1; i <= quantity; i++) {
+            brickCost += (i + (currentTier - 1));
+        }
+        return brickCost;
     }
 
     public void addNeutralBrick() {

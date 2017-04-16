@@ -17,12 +17,12 @@ public class Assets {
 
     public void initializeImages() {
         // TODO: Consider making these values enums?
-        images.put("desert", new Image("desert.png"));
-        images.put("mountains", new Image("mountains.png"));
-        images.put("pasture", new Image("pasture.png"));
-        images.put("rock", new Image("rock.png"));
-        images.put("sea", new Image("sea.png"));
-        images.put("woods", new Image("woods.png"));
+        images.put(GameLibrary.DESERT, new Image("desert.png"));
+        images.put(GameLibrary.MOUNTAINS, new Image("mountains.png"));
+        images.put(GameLibrary.PASTURE, new Image("pasture.png"));
+        images.put(GameLibrary.ROCK, new Image("rock.png"));
+        images.put(GameLibrary.SEA, new Image("sea.png"));
+        images.put(GameLibrary.WOODS, new Image("woods.png"));
         images.put("empty", new Image("empty.png"));
         images.put("cursor", new Image("cursor.png"));
         images.put("adj1", new Image("adj1.png"));

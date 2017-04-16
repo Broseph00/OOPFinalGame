@@ -6,12 +6,20 @@ public class RegionLocation{
     private int z;
     private int region;
 
+    public RegionLocation(Location location , int region){
+        this.x=location.getX();
+        this.y=location.getY();
+        this.z=location.getZ();
+        this.region=region;
+    }
+
     public RegionLocation(int x, int y, int z, int region){
         this.x=x;
         this.y=y;
         this.z=z;
         this.region=region;
     }
+
     public int getX() {
         return this.x;
     }

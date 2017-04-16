@@ -2,6 +2,7 @@ package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.Players.Research.Research;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
@@ -13,12 +14,12 @@ import java.util.List;
 public class AbilityManager {
     Map map;
     MovementManager movementManager;
+    ResearchManager researchManager;
 
-
-    public AbilityManager(Map map, MovementManager movementManager){
+    public AbilityManager(Map map, MovementManager movementManager, ResearchManager researchManager){
         this.map = map;
         this.movementManager = movementManager;
-        //???
+        this.researchManager = researchManager;
     }
 
     public void updateRoadTransporters(ArrayList<OnRoadLandTransporter> roadLandTransporters){
@@ -59,11 +60,8 @@ public class AbilityManager {
 
     public ArrayList<Ability> populateList(WaterTransporter transporter) {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-
         addConstructionAbilities(transporter, abilitiesList);
-
         addMoveAbilities(transporter, abilitiesList);
-
         return abilitiesList;
     }
 
@@ -82,12 +80,11 @@ public class AbilityManager {
 
     public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
         //construction abilities
-        if (verifyClayPitAbility(transporter)) {
-            abilitiesList.add(new BuildClaypitAbility(transporter));
-        }
-        if (verifyCoalBurnerAbility(transporter)) {
-            abilitiesList.add(new BuildCoalBurnerAbility(transporter));
-        }
+        if (verifyClayPitAbility(transporter)) { abilitiesList.add(new BuildClaypitAbility(transporter)); }
+        if (verifyCoalBurnerAbility(transporter)) { abilitiesList.add(new BuildCoalBurnerAbility(transporter)); }
+        if (verifyMineAbility(transporter)) { abilitiesList.add(new BuildMineAbility(transporter)); }
+        if (verifyMintAbility(transporter)) { abilitiesList.add(new BuildMintAbility(transporter)); }
+        if (verifyOilRigAbility(transporter)) { abilitiesList.add(new BuildOilRigAbility(transporter)); }
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
@@ -184,6 +181,14 @@ public class AbilityManager {
         return true; //TODO: make proper verifier
     }
 
+    private boolean verifyMineAbility(Transporter transporter) { return true; } //TODO: make proper verifier
+
+    private boolean verifyMintAbility(Transporter transporter) { return true; } //TODO: make proper verifier
+
+    private boolean verifyOilRigAbility(Transporter transporter) {
+        return researchManager.isFinishedOilResearch();
+    }
+
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){
         return movementManager.validateWaterMoveAbility(moveAbility, transporter);
     }
@@ -195,5 +200,9 @@ public class AbilityManager {
     private boolean verifyRoadMoveAbility(MoveAbility moveAbility, OnRoadLandTransporter transporter){
         return movementManager.validateRoadMoveAbility(moveAbility, transporter);
     }
+
+    /*public String getAbilityName(Ability ability){
+        return null;
+    }*/
 
 }
