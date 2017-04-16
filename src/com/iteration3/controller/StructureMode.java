@@ -18,6 +18,7 @@ public class StructureMode implements CycleMode {
         index = 0;
     }
 
+    //TODO: add all possible building types
     public void initActions(){
         buildings.add(new Action(){
             public void execute() {
