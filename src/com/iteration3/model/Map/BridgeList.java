@@ -21,4 +21,7 @@ public class BridgeList {
         return bridges.contains(edge);
     }
 
+    public ArrayList<Integer> getBridges() {
+        return bridges;
+    }
 }

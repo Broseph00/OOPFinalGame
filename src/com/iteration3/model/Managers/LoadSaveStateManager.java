@@ -1,14 +1,18 @@
 package com.iteration3.model.Managers;
 
 
-import com.iteration3.model.Map.Map;
-import com.iteration3.model.Map.Region;
-import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
+import com.iteration3.model.Transporters.TransportList;
+import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.model.Transporters.Water.Rowboat;
+import com.iteration3.model.Transporters.Water.Steamship;
+import com.iteration3.model.Transporters.Water.WaterTransporter;
 
 import java.io.*;
 
@@ -42,7 +46,7 @@ public class LoadSaveStateManager {
                 addTransportToMap(splitLine);
             }
             else if(splitLine[0].contains("producer")) {
-
+                addProducerToMap(splitLine);    // TODO: FINISH
             }
             else if(splitLine[0].contains("research")) {
 
@@ -51,7 +55,7 @@ public class LoadSaveStateManager {
 
             }
             else if(splitLine[0].contains("bridge")) {
-
+                addBridgeToMap(splitLine);
             }
             else if(splitLine[0].contains("wonder")) {
 
@@ -68,6 +72,8 @@ public class LoadSaveStateManager {
         FileWriter fw = new FileWriter(pathToSaveStateFile, false);
 
         saveResourcesFromMap(fw);
+        saveTransportsFromMap(fw);
+        saveBridgesFromMap(fw);
 
         fw.close();
     }
@@ -129,31 +135,119 @@ public class LoadSaveStateManager {
         String transportType = splitLine[6];
         Player player;
 
-        // get the correct player
+        // get the correct player and initialize dummy transport
         if(splitLine[7].equals("1")) {
             player = this.player1;
         } else {
             player = this.player2;
         }
+        Transporter transport = new Donkey(player);
 
         // handle each transport type
         if(transportType.contains("truck")) {
-            this.map.addTransport(new Truck(player), new RegionLocation(x,y,z,region));
+            transport = new Truck(player);
         }
         else if(transportType.contains("wagon")) {
-            this.map.addTransport(new Wagon(player), new RegionLocation(x,y,z,region));
+            transport = new Wagon(player);
         }
         else if(transportType.contains("donkey")) {
-            this.map.addTransport(new Donkey(player), new RegionLocation(x,y,z,region));
+            transport = new Donkey(player);
         }
-        else if(transportType.contains("donkey")) {
-            this.map.addTransport(new Donkey(player), new RegionLocation(x,y,z,region));
+        else if(transportType.contains("raft")) {
+            transport = new Raft(player);
+            if(transportType.contains("docked")) {
+                ((WaterTransporter) transport).dock();
+            }
         }
+        else if(transportType.contains("rowboat")) {
+            transport = new Rowboat(player);
+            if(transportType.contains("docked")) {
+                ((WaterTransporter) transport).dock();
+            }
+        }
+        else if(transportType.contains("steamship")) {
+            transport = new Steamship(player);
+            if(transportType.contains("docked")) {
+                ((WaterTransporter) transport).dock();
+            }
+        }
+
+
+        // add resources for each transport
+        if(splitLine.length > 8){
+            for(int i = 9; i < splitLine.length; i++) {
+                String resourceType = splitLine[i];
+
+                if(resourceType.equals("board")) {
+                    transport.addResource(new Board());
+                }
+                else if(resourceType.equals("clay")) {
+                    transport.addResource(new Clay());
+                }
+                else if(resourceType.equals("coin")) {
+                    transport.addResource(new Coin());
+                }
+                else if(resourceType.equals("fuel")) {
+                    transport.addResource(new Fuel());
+                }
+                else if(resourceType.equals("gold")) {
+                    transport.addResource(new Gold());
+                }
+                else if(resourceType.equals("goose")) {
+                    transport.addResource(new Goose());
+                }
+                else if(resourceType.equals("iron")) {
+                    transport.addResource(new Iron());
+                }
+                else if(resourceType.equals("paper")) {
+                    transport.addResource(new Paper());
+                }
+                else if(resourceType.equals("stock")) {
+                    transport.addResource(new Stock());
+                }
+                else if(resourceType.equals("stone")) {
+                    transport.addResource(new Stock());
+                }
+                else if(resourceType.equals("trunk")) {
+                    transport.addResource(new Trunk());
+                }
+            }
+        }
+
+
+        this.map.addTransport(transport, new RegionLocation(x,y,z,region));
+
+    }
+
+     // TODO: FINISH
+    private void addProducerToMap(String[] splitLine) {
+
+        // handle location
+        int x = Integer.parseInt(splitLine[2]);
+        int y = Integer.parseInt(splitLine[3]);
+        int z = Integer.parseInt(splitLine[4]);
+        int region = Integer.parseInt((splitLine[5]));
+        String producerType = splitLine[6];
+
 
 
     }
 
 
+    private void addBridgeToMap(String[] splitLine) {
+
+        // handle location
+        int x = Integer.parseInt(splitLine[2]);
+        int y = Integer.parseInt(splitLine[3]);
+        int z = Integer.parseInt(splitLine[4]);
+
+        if(splitLine.length > 5){
+            for(int i = 6; i < splitLine.length; i++){
+                this.map.addBridge(new Location(x,y,z), Integer.parseInt(splitLine[i]));
+            }
+        }
+
+    }
 
 
 
@@ -211,11 +305,123 @@ public class LoadSaveStateManager {
                 }
 
                 fw.write(line + '\n');
-
             }
-
         }
     }
 
+
+    private void saveTransportsFromMap (FileWriter fw) throws IOException {
+        int id = 0;
+        for (RegionLocation regionLocation : map.getTransports().keySet()) {
+            int x = regionLocation.getX();
+            int y = regionLocation.getY();
+            int z = regionLocation.getZ();
+            int region = regionLocation.getRegion();
+
+            TransportList transportList = map.getTransports().get(regionLocation);
+
+            for(Transporter transport: transportList.getTransports()) {
+                String line = "transport" + id + " ::= ";
+                id++;
+
+                if(transport instanceof Truck) {
+                    line += x + " " + y + " " + z + " " + region + " " + "truck" + " " + transport.getOwner().getId() + " ";
+                }
+                else if(transport instanceof Wagon) {
+                    line += x + " " + y + " " + z + " " + region + " " + "wagon" + " " + transport.getOwner().getId() + " ";
+                }
+                else if(transport instanceof Donkey) {
+                    line += x + " " + y + " " + z + " " + region + " " + "wagon" + " " + transport.getOwner().getId() + " ";
+                }
+                else if(transport instanceof Raft) {
+                    String raftString = "raft";
+                    if(((WaterTransporter) transport).isDocked()){
+                        raftString += "-docked";
+                    }
+
+                    line += x + " " + y + " " + z + " " + region + " " + raftString + " " + transport.getOwner().getId() + " ";
+                }
+                else if(transport instanceof Rowboat) {
+                    String rowboatString = "rowboat";
+                    if(((WaterTransporter) transport).isDocked()){
+                        rowboatString += "-docked";
+                    }
+
+                    line += x + " " + y + " " + z + " " + region + " " + rowboatString + " " + transport.getOwner().getId() + " ";
+                }
+                else if(transport instanceof Steamship) {
+                    String steamshipString = "steamship";
+                    if(((WaterTransporter) transport).isDocked()){
+                        steamshipString += "-docked";
+                    }
+
+                    line += x + " " + y + " " + z + " " + region + " " + steamshipString + " " + transport.getOwner().getId() + " ";
+                }
+
+                if(transport.getResourceList().getResources().size() > 0) {
+                    line += "::= ";
+                    for(Resource resource: transport.getResourceList().getResources()) {
+                        if(resource instanceof Board) {
+                            line += "board ";
+                        }
+                        else if(resource instanceof  Clay) {
+                            line += "clay ";
+                        }
+                        else if(resource instanceof  Coin) {
+                            line += "coin ";
+                        }
+                        else if(resource instanceof  Fuel) {
+                            line += "fuel ";
+                        }
+                        else if(resource instanceof  Gold) {
+                            line += "gold ";
+                        }
+                        else if(resource instanceof  Goose) {
+                            line += "goose ";
+                        }
+                        else if(resource instanceof  Iron) {
+                            line += "iron ";
+                        }
+                        else if(resource instanceof  Paper) {
+                            line += "paper ";
+                        }
+                        else if(resource instanceof  Stock) {
+                            line += "stock ";
+                        }
+                        else if(resource instanceof  Stone) {
+                            line += "stone ";
+                        }
+                        else if(resource instanceof  Trunk) {
+                            line += "trunk ";
+                        }
+                    }
+                }
+
+                fw.write(line + '\n');
+            }
+        }
+    }
+
+    private void saveBridgesFromMap(FileWriter fw) throws IOException {
+        int id = 0;
+        for (Location location : map.getBridges().keySet()) {
+            int x = location.getX();
+            int y = location.getY();
+            int z = location.getZ();
+
+            BridgeList bridgeList = map.getBridges().get(location);
+
+            String line = "bridge" + id + " ::= " + Integer.toString(x) + " " + Integer.toString(y) + " " + Integer.toString(z) + " ::= ";
+            id++;
+
+            for(int bridge: bridgeList.getBridges()) {
+                line += Integer.toString(bridge) + " ";
+            }
+
+            fw.write(line + '\n');
+        }
+
+
+    }
 
 }

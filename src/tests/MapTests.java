@@ -4,18 +4,20 @@ import com.iteration3.model.Managers.LoadSaveStateManager;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
-import com.iteration3.model.Resource.Gold;
-import com.iteration3.model.Resource.Goose;
-import com.iteration3.model.Resource.Iron;
+import com.iteration3.model.Resource.*;
 import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Tiles.WoodTerrain;
+import com.iteration3.model.Transporters.Land.Donkey;
+import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.Raft;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -149,26 +151,41 @@ public class MapTests {
     @Test
     public void testLoadState() throws Exception {
         Map map = new Map();
+        Player player1 = new Player(map, 1);
+        Player player2 = new Player(map, 2);
+        RegionLocation regionLocation = new RegionLocation(0,0,0,1);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
-        LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/loadStateTest.txt");
+        LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/loadStateTest.txt", player1, player2);
 
-        Player player1 = new Player(map, 1, null);
-        Player player2 = new Player(map, 2, null);
+
         mapManager.fillMapFromTextFile();
 
         saveStateManager.loadState();
-        assertEquals(map.getResources().size(), 1);
+
+        // check resources are all there
+        assertTrue(map.getResources().get(regionLocation).getResources().get(0) instanceof Board);
+
+        // check transports are all there
+        assertTrue(map.getTransports().get(regionLocation).getTransports().get(0) instanceof Donkey);
+        assertTrue(map.getTransports().get(regionLocation).getTransports().get(0).getResourceList().isEmpty() == false);
+        assertTrue(map.getTransports().get(regionLocation).getTransports().get(1) instanceof Raft);
+        assertTrue(map.getTransports().get(regionLocation).getTransports().get(1).getResourceList().isEmpty() == false);
+
+        // check bridges are all there
+        assertTrue(map.getBridges().get(new Location(0,0,0)).contains(1));
+        assertTrue(map.getBridges().get(new Location(0,0,0)).contains(3));
 
     }
 
     @Test
     public void testSaveState() throws Exception {
         Map map = new Map();
+        Player player1 = new Player(map, 1);
+        Player player2 = new Player(map, 2);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
-        LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/saveStateTest.txt");
+        LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/saveStateTest.txt", player1, player2);
 
-        Player player1 = new Player(map, 1, null);
-        Player player2 = new Player(map, 2, null);
+
         mapManager.fillMapFromTextFile();
 
         map.addResource(new Gold(), new RegionLocation(0,0,0,1));
@@ -177,6 +194,17 @@ public class MapTests {
         map.addResource(new Gold(), new RegionLocation(1,2,0,1));
         map.addResource(new Gold(), new RegionLocation(0,1,0,4));
 
+        Raft raft = new Raft(player1);
+        Donkey donkey = new Donkey(player2);
+
+        donkey.addResource(new Gold());
+        donkey.addResource(new Board());
+        donkey.addResource(new Paper());
+
+        map.addTransport(donkey, new RegionLocation(0,0,0,1));
+        map.addTransport(raft, new RegionLocation(1,1,1,1));
+
+//        map.addBridge();
 
         saveStateManager.saveState();
 

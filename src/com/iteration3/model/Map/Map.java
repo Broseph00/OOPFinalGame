@@ -428,7 +428,6 @@ public class Map {
         }
     }
 
-
     public boolean adjacentSea(Location location){
         HashMap<Location, Tile> seas = getSeaTiles();
 
