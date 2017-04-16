@@ -7,24 +7,15 @@ import java.util.Random;
 
 public class Mine extends PrimaryProducer {
     private ArrayList<Resource> oreBag;
-//    Tile location;
 
-    public Mine(/*Tile buildLocation*/) {
+    public Mine() {
         oreBag = new ArrayList<>();
         buildDefaultShaft();
-/*
-        super(new MountainTerrain());
-*/
     }
 
     @Override
     public Resource produce() {
         Resource ore = decrementCapacity() ? getOre() : null;
-/*
-        if (verifyLocation(location)) {
-            // TODO: confirm produces only one ore when ore class updated
-        }
-*/
         return ore;
     }
 
