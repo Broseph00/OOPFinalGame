@@ -141,6 +141,11 @@ public class ValidationManager {
     }
 
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
+        ResourceList resourceList = getAvailableResources(transporter);
+        return resourceList.getBoards().size()>=boardCost && resourceList.getStones().size()>=stoneCost;
+    }
+
+    public ResourceList getAvailableResources(Transporter transporter){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         int region = regionLocation.getRegion();
         Location location = regionLocation.getLocation();
@@ -155,7 +160,7 @@ public class ValidationManager {
                 resourceList.addAll(map.getResources().get(newReg));
             }
         }
-        return resourceList.getBoards().size()>=boardCost && resourceList.getStones().size()>=stoneCost;
+        return resourceList;
     }
 
     public boolean validateShore(Transporter transporter){
@@ -178,6 +183,11 @@ public class ValidationManager {
             return map.getTiles().get(location).getTerrain(new TerrainTypeVisitor());
         }
         return "";
+    }
+
+    public boolean existingProducer(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        return map.existingProducer(regionLocation);
     }
 
     private int oppositeEdge(int edge){

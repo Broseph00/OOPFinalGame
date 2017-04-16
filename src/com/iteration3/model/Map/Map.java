@@ -24,7 +24,7 @@ public class Map {
     private HashMap<RegionLocation, TransportList> transports;
     private HashMap<RegionLocation, ResourceList> resources;
     private HashMap<Location, RoadList> roads;
-    private HashMap<Location, Producer> producers;
+    private HashMap<RegionLocation, Producer> producers;
 
     public Map() {
         tiles = new HashMap<>();
@@ -443,6 +443,29 @@ public class Map {
             return true;
         }
         if(seas.containsKey(location.getNorthWest())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean existingProducer(RegionLocation regionLocation){
+        Location location = regionLocation.getLocation();
+        if(producers.containsKey(new RegionLocation(location, 1))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 2))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 3))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 4))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 5))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 6))){
             return true;
         }
         return false;
