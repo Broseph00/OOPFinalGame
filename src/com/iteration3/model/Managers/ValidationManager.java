@@ -19,7 +19,14 @@ public class ValidationManager {
         this.map = map;
     }
 
+    public boolean validateUndock(WaterTransporter transporter){
+        return !transporter.isDocked();
+    }
+
     public boolean validateSeaDock(WaterTransporter transporter, DockatSeaAbility dockatSeaAbility){
+        if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
+            return false;
+        }
         if(transporter.isDocked()){
             return false;
         }
@@ -35,6 +42,9 @@ public class ValidationManager {
     }
 
     public boolean validateRiverDock(WaterTransporter transporter){
+        if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
+            return false;
+        }
         if(transporter.isDocked()){
             return false;
         }
@@ -44,6 +54,9 @@ public class ValidationManager {
     }
 
     public boolean validateLandMove(LandTransporter transporter, MoveAbility moveAbility){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
         Player owner = transporter.getOwner();
         int moves = transporter.getRemainingMovePoints();
         int exitRegion = moveAbility.getRegion();
@@ -62,6 +75,9 @@ public class ValidationManager {
     }
 
     public boolean validateRoadMove(OnRoadLandTransporter transporter, MoveAbility moveAbility){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
         Player owner = transporter.getOwner();
         int exitRegion = moveAbility.getRegion();
         int exitEdge = moveAbility.getBorder();
@@ -79,6 +95,9 @@ public class ValidationManager {
     }
 
     public boolean validateWaterMove(WaterTransporter transporter, MoveAbility moveAbility){
+        if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
+            return false;
+        }
         Player owner = transporter.getOwner();
         int exitEdge = moveAbility.getBorder();
         RegionLocation start = map.getTransportRegionLocation(transporter);

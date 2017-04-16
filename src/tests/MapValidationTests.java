@@ -124,15 +124,6 @@ public class MapValidationTests {
 
         assertEquals(validationManager.validateRiverDock(raft), false);
 
-        raft.dock();
-
-        assertEquals(validationManager.validateSeaDock(raft, new DockatSea1Ability(raft)), false);
-        assertEquals(validationManager.validateSeaDock(raft, new DockatSea2Ability(raft)), false);
-        assertEquals(validationManager.validateSeaDock(raft, new DockatSea3Ability(raft)), false);
-        assertEquals(validationManager.validateSeaDock(raft, new DockatSea4Ability(raft)), false);
-        assertEquals(validationManager.validateSeaDock(raft, new DockatSea5Ability(raft)), false);
-        assertEquals(validationManager.validateSeaDock(raft, new DockatSea6Ability(raft)), false);
-
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge4Ability(raft)),true);
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge1Ability(raft)),true);
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge2Ability(raft)),false);
@@ -142,6 +133,16 @@ public class MapValidationTests {
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge4Ability(raft)),false);
         assertEquals(validationManager.validateWaterMove(raft1, new MoveEdge4Ability(raft1)),true);
         assertEquals(validationManager.validateSeaDock(raft, new DockatSea4Ability(raft)), false);
+
+        raft.dock();
+
+        assertEquals(validationManager.validateSeaDock(raft, new DockatSea1Ability(raft)), false);
+        assertEquals(validationManager.validateSeaDock(raft, new DockatSea2Ability(raft)), false);
+        assertEquals(validationManager.validateSeaDock(raft, new DockatSea3Ability(raft)), false);
+        assertEquals(validationManager.validateSeaDock(raft, new DockatSea4Ability(raft)), false);
+        assertEquals(validationManager.validateSeaDock(raft, new DockatSea5Ability(raft)), false);
+        assertEquals(validationManager.validateSeaDock(raft, new DockatSea6Ability(raft)), false);
+
     }
 
     @Test
@@ -164,10 +165,6 @@ public class MapValidationTests {
 
         assertEquals(validationManager.validateRiverDock(raft), true);
 
-        raft.dock();
-
-        assertEquals(validationManager.validateRiverDock(raft), false);
-
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge4Ability(raft)),false);
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge1Ability(raft)),true);
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge3Ability(raft)),true);
@@ -178,6 +175,10 @@ public class MapValidationTests {
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge1Ability(raft)),true);
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge3Ability(raft)),false);
         assertEquals(validationManager.validateWaterMove(raft, new MoveEdge5Ability(raft)),false);
+
+        raft.dock();
+
+        assertEquals(validationManager.validateRiverDock(raft), false);
     }
 
 }
