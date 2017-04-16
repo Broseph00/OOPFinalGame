@@ -3,6 +3,7 @@ package com.iteration3.model.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
@@ -23,6 +24,7 @@ public class Map {
     private HashMap<RegionLocation, TransportList> transports;
     private HashMap<RegionLocation, ResourceList> resources;
     private HashMap<Location, ArrayList<Location>> roads;
+    private HashMap<Location, Producer> producers;
 
     public Map() {
         tiles = new HashMap<>();
@@ -33,6 +35,7 @@ public class Map {
         transports = new HashMap<>();
         resources = new HashMap<>();
         roads = new HashMap<>();
+        producers = new HashMap<>();
     }
 
     public void transportMove(Transporter transporter, int exitRegion, int exitEdge){
