@@ -14,24 +14,18 @@ import java.util.ArrayList;
 public class GameModel {
     private Map map;
     private ExchangeManager exchangeManager;
-    private MovementManager movementManager;
     private ProductionManager productionManager;
     private TurnManager turnManager;
     private Player player1;
     private Player player2;
-    private ValidationManager validationManager;
-    private ExecutionManager executionManager;
 
     public GameModel(){
         map = new Map();
-        validationManager = new ValidationManager(map);
-        executionManager = new ExecutionManager(map);
         exchangeManager = new ExchangeManager(map);
-        movementManager = new MovementManager(validationManager);
         productionManager = new ProductionManager();
         turnManager = new TurnManager();
-        player1 = new Player(map, 1, movementManager);
-        player2 = new Player(map, 2, movementManager);
+        player1 = new Player(map, 1);
+        player2 = new Player(map, 2);
     }
 
 

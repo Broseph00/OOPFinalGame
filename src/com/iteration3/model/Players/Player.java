@@ -1,8 +1,6 @@
 package com.iteration3.model.Players;
 
-import com.iteration3.model.Managers.AbilityManager;
-import com.iteration3.model.Managers.MovementManager;
-import com.iteration3.model.Managers.ResearchManager;
+import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
@@ -17,13 +15,11 @@ public class Player {
     private TransportList transportersList;
     private AbilityManager abilityManager;
     private ResearchManager researchManager;
-    private MovementManager movementManager;
 
-    public Player(Map map, int id, MovementManager movementManager){
+    public Player(Map map, int id){
         researchManager = new ResearchManager();
         transportersList = new TransportList();
-        this.movementManager = movementManager;
-        abilityManager = new AbilityManager(map,this.movementManager, researchManager);
+        abilityManager = new AbilityManager(map, new ValidationManager(map), researchManager, new ExecutionManager(map));
         this.id = id;
     }
 

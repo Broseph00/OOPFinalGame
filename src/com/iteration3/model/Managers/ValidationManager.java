@@ -19,8 +19,12 @@ public class ValidationManager {
         this.map = map;
     }
 
+    public boolean validateUndock(WaterTransporter transporter){
+        return !transporter.isDocked();
+    }
+
     public boolean validateSeaDock(WaterTransporter transporter, DockatSeaAbility dockatSeaAbility){
-        if(transporter.isDocked()){
+        if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
             return false;
         }
         Player owner = transporter.getOwner();
@@ -35,7 +39,7 @@ public class ValidationManager {
     }
 
     public boolean validateRiverDock(WaterTransporter transporter){
-        if(transporter.isDocked()){
+        if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
             return false;
         }
         RegionLocation start = map.getTransportRegionLocation(transporter);
@@ -44,6 +48,9 @@ public class ValidationManager {
     }
 
     public boolean validateLandMove(LandTransporter transporter, MoveAbility moveAbility){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
         Player owner = transporter.getOwner();
         int moves = transporter.getRemainingMovePoints();
         int exitRegion = moveAbility.getRegion();
@@ -62,6 +69,9 @@ public class ValidationManager {
     }
 
     public boolean validateRoadMove(OnRoadLandTransporter transporter, MoveAbility moveAbility){
+        if(transporter.getRemainingMovePoints()<1){
+            return false;
+        }
         Player owner = transporter.getOwner();
         int exitRegion = moveAbility.getRegion();
         int exitEdge = moveAbility.getBorder();
@@ -79,6 +89,9 @@ public class ValidationManager {
     }
 
     public boolean validateWaterMove(WaterTransporter transporter, MoveAbility moveAbility){
+        if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
+            return false;
+        }
         Player owner = transporter.getOwner();
         int exitEdge = moveAbility.getBorder();
         RegionLocation start = map.getTransportRegionLocation(transporter);
@@ -122,6 +135,22 @@ public class ValidationManager {
             }
         }
     }
+
+    public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
+        return true;
+    }
+
+    public boolean validateShore(Transporter transporter){
+        return true; //TODO
+    }
+
+    public boolean validateTerrain(Transporter transporter, String terrainType){
+        return true; //TODO
+    }
+
+
+
+
     private String getTerrain(Location location){
         if(map.getTiles().containsKey(location)){
             return map.getTiles().get(location).getTerrain(new TerrainTypeVisitor());
