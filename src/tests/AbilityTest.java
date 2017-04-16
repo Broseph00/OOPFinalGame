@@ -1,3 +1,4 @@
+
 package tests;
 
 import com.iteration3.model.Abilities.Ability;
@@ -10,14 +11,18 @@ import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Transporter;
 import org.junit.jupiter.api.Test;
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+
 /**
  * Created by test on 04/15/2017.
  */
+
+
 
 /*--------------------------------------------------------------------------------------
 |    AbilityTest Module: Created by test on 04/15/2017.
@@ -26,10 +31,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 |
 ---------------------------------------------------------------------------------------*/
 
+
 public class AbilityTest {
 
     @Test
     public void testAbility(){
+
         GameModel gameModel = new GameModel();
         Player player1 = gameModel.getPlayer1();
         Transporter transporter = new Donkey(player1);
@@ -72,5 +79,6 @@ public class AbilityTest {
         for(Ability ability : abilityList){
             System.out.println(ability.getClass());
         }
+
     }
 }
