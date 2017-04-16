@@ -1,5 +1,7 @@
 package tests;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * Created by test on 04/15/2017.
  */
@@ -12,4 +14,9 @@ package tests;
 ---------------------------------------------------------------------------------------*/
 
 public class AbilityTest {
+
+    @Test
+    public void testAbility(){
+        
+    }
 }
