@@ -66,6 +66,7 @@ public class AbilityManager {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
+        addDockAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
@@ -117,6 +118,28 @@ public class AbilityManager {
         addMoveAbility(moveAbility, transporter, abilitiesList);
         moveAbility = new MoveEdge6Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
+    }
+
+    public void addDockAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList){
+        //abilities to dock
+        UndockAbility undockAbility = new UndockAbility(transporter);
+        addUndockAbility(undockAbility, transporter, abilitiesList);
+
+        DockatRiverAbility dockAbility = new DockatRiverAbility(transporter);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+
+        DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter);
+        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+        dockatSeaAbility = new DockatSea2Ability(transporter);
+        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+        dockatSeaAbility = new DockatSea3Ability(transporter);
+        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+        dockatSeaAbility = new DockatSea4Ability(transporter);
+        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+        dockatSeaAbility = new DockatSea5Ability(transporter);
+        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+        dockatSeaAbility = new DockatSea6Ability(transporter);
+        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
     }
 
     public void addMoveAbilities(LandTransporter transporter, ArrayList<Ability> abilitiesList){
@@ -175,6 +198,18 @@ public class AbilityManager {
         addMoveAbility(moveAbility, transporter, abilitiesList);
         moveAbility = new MoveDegree330Ability(transporter);
         addMoveAbility(moveAbility, transporter, abilitiesList);
+    }
+
+    private void addRiverDockAbility(DockatRiverAbility dockAbility, WaterTransporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifyRiverDockAbility(dockAbility, transporter)){abilitiesList.add(dockAbility);}
+    }
+
+    private void addSeaDockAbility(DockatSeaAbility dockAbility, WaterTransporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifySeaDockAbility(dockAbility, transporter)){abilitiesList.add(dockAbility);}
+    }
+
+    private void addUndockAbility(UndockAbility undockAbility, WaterTransporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifyUndockAbility(undockAbility, transporter)){abilitiesList.add(undockAbility);}
     }
 
     private void addMoveAbility(MoveAbility moveAbility, WaterTransporter transporter, ArrayList<Ability> abilitiesList){
@@ -259,6 +294,18 @@ public class AbilityManager {
 
     private boolean verifyRoadMoveAbility(MoveAbility moveAbility, OnRoadLandTransporter transporter){
         return movementManager.validateRoadMoveAbility(moveAbility, transporter);
+    }
+
+    private boolean verifyRiverDockAbility(DockatRiverAbility dockatRiverAbility, WaterTransporter transporter){
+        return movementManager.validateRiverDockAbility(dockatRiverAbility, transporter);
+    }
+
+    private boolean verifySeaDockAbility(DockatSeaAbility dockatSeaAbility, WaterTransporter transporter){
+        return movementManager.validateSeaDockAbility(dockatSeaAbility, transporter);
+    }
+
+    private boolean verifyUndockAbility(UndockAbility undockAbility, WaterTransporter transporter){
+        return movementManager.validateUndockAbility(undockAbility, transporter);
     }
 
     /*public String getAbilityName(Ability ability){
