@@ -14,7 +14,7 @@ import com.iteration3.utilities.GameLibrary;
 |
 ---------------------------------------------------------------------------------------*/
 
-public class AbilityTypeVisitor implements  iAbilityVisitor{
+public class AbilityTypeVisitor implements iAbilityVisitor{
 
     @Override
     public String getType(BuildClaypitAbility ability) {
@@ -196,7 +196,22 @@ public class AbilityTypeVisitor implements  iAbilityVisitor{
     public String getType(DockatSea6Ability ability) { return GameLibrary.DOCK_SEA6; }
 
     @Override
-    public String getType(DockatRiverAbility ability) { return GameLibrary.DOCK_RIVER; }
+    public String getType(DockatRiver1Ability ability) { return GameLibrary.DOCK_SEA1; }
+
+    @Override
+    public String getType(DockatRiver2Ability ability) { return GameLibrary.DOCK_SEA2; }
+
+    @Override
+    public String getType(DockatRiver3Ability ability) { return GameLibrary.DOCK_SEA3; }
+
+    @Override
+    public String getType(DockatRiver4Ability ability) { return GameLibrary.DOCK_SEA4; }
+
+    @Override
+    public String getType(DockatRiver5Ability ability) { return GameLibrary.DOCK_SEA5; }
+
+    @Override
+    public String getType(DockatRiver6Ability ability) { return GameLibrary.DOCK_SEA6; }
 
     @Override
     public String getType(UndockAbility ability) { return GameLibrary.UNDOCK; }

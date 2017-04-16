@@ -61,6 +61,11 @@ public interface Visitor {
     public void visit(DockatSea4Ability ability);
     public void visit(DockatSea5Ability ability);
     public void visit(DockatSea6Ability ability);
-    public void visit(DockatRiverAbility ability);
     public void visit(UndockAbility ability);
+    public void visit(DockatRiver1Ability ability);
+    public void visit(DockatRiver2Ability ability);
+    public void visit(DockatRiver3Ability ability);
+    public void visit(DockatRiver4Ability ability);
+    public void visit(DockatRiver5Ability ability);
+    public void visit(DockatRiver6Ability ability);
 }

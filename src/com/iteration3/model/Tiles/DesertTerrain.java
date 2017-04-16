@@ -5,14 +5,10 @@ import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iTerrainVisitable;
 import com.iteration3.model.Visitors.iTerrainVisitor;
 
-public class DesertTerrain extends Terrain implements iTerrainVisitable {
+public class DesertTerrain extends Terrain {
     @Override
-    public String getTerrainType(iTerrainVisitor visitor) {
-        return visitor.getType(this);
+    public String getTerrainType() {
+        return "desert";
     }
 
-    public void acceptVisitor(Visitor visitor) {
-        // TODO Auto-generated method stub
-        visitor.visit(this);
-    }
 }
