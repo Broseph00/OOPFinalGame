@@ -33,8 +33,5 @@ public class DockatRiverAbility extends Ability {
         return visitor.getType(this);
     }
 
-    @Override
-    public void execute(){
-        ((WaterTransporter) getTransporter()).dock(7);
-    }
+
 }

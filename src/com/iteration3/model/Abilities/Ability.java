@@ -14,8 +14,6 @@ public abstract class Ability implements Visitable {
         this.name = name;
     }
 
-    public abstract void execute();
-
     public abstract String getAbilityType(iAbilityVisitor visitor);
 
     public Transporter getTransporter(){

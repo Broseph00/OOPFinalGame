@@ -33,9 +33,4 @@ public class DockatSea4Ability extends DockatSeaAbility {
         return visitor.getType(this);
     }
 
-    @Override
-    public void execute(){
-        ((WaterTransporter) getTransporter()).dock(4);
-    }
-
 }

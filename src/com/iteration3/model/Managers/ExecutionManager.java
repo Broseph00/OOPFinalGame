@@ -1,5 +1,6 @@
 package com.iteration3.model.Managers;
 
+import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.RegionLocation;
@@ -88,5 +89,50 @@ public class ExecutionManager {
         }
         return 0;
     }
+
+    
+    public void execute(BuildClaypitAbility ability) { }
+    public void execute(BuildCoalBurnerAbility ability) { }
+    public void execute(BuildMineAbility ability) { }
+    public void execute(BuildMintAbility ability) { }
+    public void execute(BuildOilRigAbility ability) { }
+    public void execute(BuildPapermillAbility ability) { }
+    public void execute(BuildRaftFactoryAbility ability) { }
+    public void execute(BuildRowboatFactoryAbility ability) { }
+    public void execute(BuildSteamerFactoryAbility ability) { }
+    public void execute(BuildStockExchangeAbility ability) { }
+    public void execute(BuildStoneFactoryAbility ability) { }
+    public void execute(BuildStoneQuarryAbility ability) { }
+    public void execute(BuildTruckFactoryAbility ability) { }
+    public void execute(BuildWagonFactoryAbility ability) { }
+    public void execute(BuildWoodcutterAbility ability) { }
+
+    public void execute(MoveDegree0Ability ability) { }
+    public void execute(MoveDegree30Ability ability) { }
+    public void execute(MoveDegree60Ability ability) { }
+    public void execute(MoveDegree90Ability ability) { }
+    public void execute(MoveDegree120Ability ability) { }
+    public void execute(MoveDegree150Ability ability) { }
+    public void execute(MoveDegree180Ability ability) { }
+    public void execute(MoveDegree210Ability ability) { }
+    public void execute(MoveDegree240Ability ability) { }
+    public void execute(MoveDegree270Ability ability) { }
+    public void execute(MoveDegree300Ability ability) { }
+    public void execute(MoveDegree330Ability ability) { }
+    public void execute(MoveEdge1Ability ability) { }
+    public void execute(MoveEdge2Ability ability) { }
+    public void execute(MoveEdge3Ability ability) { }
+    public void execute(MoveEdge4Ability ability) { }
+    public void execute(MoveEdge5Ability ability) { }
+    public void execute(MoveEdge6Ability ability) { }
+
+    public void execute(DockatSea1Ability ability) { }
+    public void execute(DockatSea2Ability ability) { }
+    public void execute(DockatSea3Ability ability) { }
+    public void execute(DockatSea4Ability ability) { }
+    public void execute(DockatSea5Ability ability) { }
+    public void execute(DockatSea6Ability ability) { }
+    public void execute(DockatRiverAbility ability) { }
+    public void execute(UndockAbility ability) { }
 
 }
