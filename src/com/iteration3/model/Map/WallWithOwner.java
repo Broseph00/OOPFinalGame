@@ -15,6 +15,10 @@ public class WallWithOwner extends Wall {
         this.setStrength(strength);
     }
 
+    public boolean oppositeOwner(Player player){
+        return !(player==owner);
+    }
+
     public Player getOwner() {
         return owner;
     }
