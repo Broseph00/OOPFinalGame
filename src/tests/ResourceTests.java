@@ -23,16 +23,16 @@ public class ResourceTests {
         RegionLocation location = new RegionLocation(0,0,0,1);
         mapManager.fillMapFromTextFile();
 
-//        map.getResources().get(location).addBoard();
-//        assertEquals(map.getResources().get(location).getBoards().size(), 1);
-//        map.getResources().get(location).removeBoard();
-//        assertEquals(map.getResources().get(location).getBoards().size(), 0);
-//        map.getResources().get(location).removeBoard();
-//        assertEquals(map.getResources().get(location).getBoards().size(), 0);
-//
-//        map.getResources().get(location).addGoose();
-//        map.getResources().get(location).addGold();
-//        assertEquals(map.getResources().get(location).getResources().size(), 2);
+        map.getResources().get(location).addBoard();
+        assertEquals(map.getResources().get(location).getBoards().size(), 1);
+        map.getResources().get(location).removeBoard();
+        assertEquals(map.getResources().get(location).getBoards().size(), 0);
+        map.getResources().get(location).removeBoard();
+        assertEquals(map.getResources().get(location).getBoards().size(), 0);
+
+        map.getResources().get(location).addGoose();
+        map.getResources().get(location).addGold();
+        assertEquals(map.getResources().get(location).getResources().size(), 2);
 
     }
 
