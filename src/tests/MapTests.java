@@ -101,6 +101,7 @@ public class MapTests {
     public void testAddWalls() throws Exception {
         Map map = new Map();
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+
         Player player1 = new Player(map, 1, null);
         Player player2 = new Player(map, 2, null);
         Location location = new Location(0,0,0);

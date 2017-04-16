@@ -1,3 +1,5 @@
+package tests;
+
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Map.Location;
@@ -15,6 +17,7 @@ public class MapValidationTests {
     @Before
     public void setUp() throws Exception{
         Map map = new Map();
+
         player1 = new Player(map,1, null);
         player2 = new Player(map, 2,null);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
