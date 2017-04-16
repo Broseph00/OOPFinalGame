@@ -5,15 +5,14 @@ import java.util.ArrayList;
 public class Wonder {
     private final int MAX_WONDER_ROWS = 15;
     private final int IRRIGATION_ROW = 10;
+    private final int INCREASED_COST_ROW = 5;
 
     private ArrayList<WonderRow> rows;
     private int bricksPerRow;
     private int rowMultiplierCounter;
     private int currentTier;
-    // TODO: need brick cost manager
 
     public Wonder() {
-        currentTier = 1;
         rows = new ArrayList<WonderRow>();
         bricksPerRow = 4;
         rowMultiplierCounter = 1;
@@ -64,26 +63,35 @@ public class Wonder {
     }
 
     public void addBricks(Player owner, int quantity) {
-
-        // TODO: need brick cost
-        // TODO: decrement cost from owner
         if(isFull()){
             return;
         }
 
-        WonderRow currentRow = getCurrentRow();
-        if(currentRow.isFull()){
-            newRow();
-            currentRow = getCurrentRow();
-        }
+        int bricksAdded = 0;
+        int alreadyPaid = 0;
 
-        currentRow.addBrick(owner);
+        WonderRow currentRow = getCurrentRow();
+        for(int i = 0; i < quantity; ++i){
+            if(currentRow.isFull()){
+                newRow();
+                currentRow = getCurrentRow();
+            }
+
+            int brickCost = calculateTotalBrickCost(i) - alreadyPaid;
+            boolean playerPaid = false;
+            // TODO: decrement cost from owner
+            if(playerPaid){
+                alreadyPaid += brickCost;
+                bricksAdded += currentRow.addBrick(owner) ? 1 : 0;
+            }
+        }
     }
 
     private int calculateTotalBrickCost(int quantity) {
         int brickCost = 0;
         for (int i = 1; i <= quantity; i++) {
-            brickCost += (i + (currentTier - 1));
+            int currentTier = (rows.size() < INCREASED_COST_ROW) ? 1 : 2;
+            brickCost += (i + currentTier);
         }
         return brickCost;
     }
