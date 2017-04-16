@@ -27,7 +27,7 @@ public class GameModel {
         validationManager = new ValidationManager(map);
         executionManager = new ExecutionManager(map);
         exchangeManager = new ExchangeManager(map);
-        movementManager = new MovementManager(validationManager, executionManager);
+        movementManager = new MovementManager(validationManager);
         productionManager = new ProductionManager();
         turnManager = new TurnManager();
         player1 = new Player(map, 1, movementManager);

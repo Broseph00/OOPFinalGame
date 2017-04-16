@@ -32,8 +32,4 @@ public class BuildClaypitAbility extends Ability {
         return visitor.getType(this);
     }
 
-    @Override
-    public void execute(){
-
-    }
 }

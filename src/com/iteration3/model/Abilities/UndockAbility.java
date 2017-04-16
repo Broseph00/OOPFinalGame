@@ -33,8 +33,4 @@ public class UndockAbility extends Ability {
         return visitor.getType(this);
     }
 
-    @Override
-    public void execute(){
-        ((WaterTransporter) getTransporter()).undock();
-    }
 }

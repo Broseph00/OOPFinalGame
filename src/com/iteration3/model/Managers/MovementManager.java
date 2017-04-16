@@ -15,11 +15,9 @@ import java.util.HashMap;
 
 public class MovementManager {
     private ValidationManager validationManager;
-    private ExecutionManager executionManager;
 
-    public MovementManager(ValidationManager validationManager, ExecutionManager executionManager){
+    public MovementManager(ValidationManager validationManager){
         this.validationManager = validationManager;
-        this.executionManager = executionManager;
     }
 
     //TODO FINISH WHEN DOCK ABILITIES CREATED
