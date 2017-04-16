@@ -6,6 +6,7 @@ import com.iteration3.model.Transporters.Transporter;
 public class WaterTransporter extends Transporter {
     private boolean docked;
     private int dockedRegion;
+
     public WaterTransporter(Player player, int maxMove, int cap) {
         super(player, maxMove, cap);
         docked = false;

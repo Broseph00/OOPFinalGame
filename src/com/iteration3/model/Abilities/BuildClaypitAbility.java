@@ -31,4 +31,9 @@ public class BuildClaypitAbility extends Ability {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+
+    @Override
+    public void execute(){
+        
+    }
 }
