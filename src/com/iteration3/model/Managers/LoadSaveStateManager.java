@@ -4,7 +4,11 @@ package com.iteration3.model.Managers;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.*;
+import com.iteration3.model.Transporters.Land.Donkey;
+import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
+import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
 
 import java.io.*;
 
@@ -12,10 +16,14 @@ public class LoadSaveStateManager {
 
     private String pathToSaveStateFile;
     private Map map;
+    private Player player1;
+    private Player player2;
 
-    public LoadSaveStateManager(Map m, String path)  {
+    public LoadSaveStateManager(Map m, String path, Player player1, Player player2)  {
         this.map = m;
         this.pathToSaveStateFile = path;
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
 
@@ -113,6 +121,35 @@ public class LoadSaveStateManager {
 
 
     private void addTransportToMap(String[] splitLine) {
+        // handle location
+        int x = Integer.parseInt(splitLine[2]);
+        int y = Integer.parseInt(splitLine[3]);
+        int z = Integer.parseInt(splitLine[4]);
+        int region = Integer.parseInt((splitLine[5]));
+        String transportType = splitLine[6];
+        Player player;
+
+        // get the correct player
+        if(splitLine[7].equals("1")) {
+            player = this.player1;
+        } else {
+            player = this.player2;
+        }
+
+        // handle each transport type
+        if(transportType.contains("truck")) {
+            this.map.addTransport(new Truck(player), new RegionLocation(x,y,z,region));
+        }
+        else if(transportType.contains("wagon")) {
+            this.map.addTransport(new Wagon(player), new RegionLocation(x,y,z,region));
+        }
+        else if(transportType.contains("donkey")) {
+            this.map.addTransport(new Donkey(player), new RegionLocation(x,y,z,region));
+        }
+        else if(transportType.contains("donkey")) {
+            this.map.addTransport(new Donkey(player), new RegionLocation(x,y,z,region));
+        }
+
 
     }
 

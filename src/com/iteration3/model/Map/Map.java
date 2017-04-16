@@ -428,6 +428,7 @@ public class Map {
         }
     }
 
+
     public boolean adjacentSea(Location location){
         HashMap<Location, Tile> seas = getSeaTiles();
 
@@ -473,6 +474,7 @@ public class Map {
             return true;
         }
         return false;
+
     }
 
 }

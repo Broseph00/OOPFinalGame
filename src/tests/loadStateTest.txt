@@ -1,1 +1,3 @@
 resource0 ::= 0 0 0 1 board
+transport0 ::= 0 0 0 1 donkey ::= gold gold iron
+transport1 ::= 0 0 1 1 raft-undocked 1 ::= goose board
