@@ -14,7 +14,6 @@ public class AbilityManager {
     Map map;
     MovementManager movementManager;
 
-
     public AbilityManager(Map map, MovementManager movementManager){
         this.map = map;
         this.movementManager = movementManager;
@@ -59,11 +58,8 @@ public class AbilityManager {
 
     public ArrayList<Ability> populateList(WaterTransporter transporter) {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-
         addConstructionAbilities(transporter, abilitiesList);
-
         addMoveAbilities(transporter, abilitiesList);
-
         return abilitiesList;
     }
 
@@ -195,5 +191,9 @@ public class AbilityManager {
     private boolean verifyRoadMoveAbility(MoveAbility moveAbility, OnRoadLandTransporter transporter){
         return movementManager.validateRoadMoveAbility(moveAbility, transporter);
     }
+
+    /*public String getAbilityName(Ability ability){
+        return null;
+    }*/
 
 }

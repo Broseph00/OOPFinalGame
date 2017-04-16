@@ -1,0 +1,42 @@
+package com.iteration3.utilities;
+
+/**
+ * Created by test on 04/15/2017.
+ */
+
+/*--------------------------------------------------------------------------------------
+|    GameLibrary Module: Created by test on 04/15/2017.
+|---------------------------------------------------------------------------------------
+|   Description: holds static strings and names
+|
+---------------------------------------------------------------------------------------*/
+
+public class GameLibrary {
+
+    public static final String ENLARGEMENT_RESEARCH = "ENLARGEMENT RESEARCH", SHAFT_RESEARCH = "NEW SHAFT RESEARCH",
+            OIL_RESEARCH = "DRILLING RESEARCH", ROWING_RESEARCH = "ROWING RESEARCH", SHIP_RESEARCH = "SHIP RESEARCH",
+            SPECIALIZATION_RESEARCH = "SPECIALIZATION RESEARCH", TRUCK_RESEARCH = "TRUCK RESEARCH";
+
+    public static final String BUILD_CLAYPIT_ABILITY = "BUILD CLAYPIT",
+            BUILD_COALBURNER_ABILITY = "BUILD COAL BURNER", BUILD_MINE_ABILITY = "BUILD MINE",
+            BUILD_MINT_ABILITY = "BUILD MINT", BUILD_OILRIG_ABILITY = "BUILD OILRIG",
+            BUILD_PAPERMILL_ABILITY = "BUILD PAPERMILL", BUILD_RAFTFACTORY_ABILITY = "BUILD RAFT FACTORY",
+            BUILD_ROWBOAT_ABILITY = "BUILD ROWBOAT FACTORY", BUILD_STEAMER_ABILITY = "BUILD STEAMER FACTORY",
+            BUILD_STOCK_ABILITY = "BUILD STOCK EXCHANGE", BUILD_STONEFACTORY_ABILITY = "BUILD STONE FACTORY",
+            BUILD_STONEQUARY_ABILITY = "BUILD STONE QUARRY", BUILD_TRUCK_ABILITY = "BUILD TRUCK FACTORY",
+            BUILD_WAGON_ABILITY = "BUILD WAGON FACTORY", BUILD_WOODCUTTER_ABILITY = "BUILD WOODCUTTER";
+
+    public static final String MOVE_ANGLE0_ABILITY = "MOVE NORTH", MOVE_ANGLE30_ABILITY = "MOVE NORTHEAST",
+            MOVE_ANGLE60_ABILITY = "MOVE NORTHEAST", MOVE_ANGLE90_ABILITY = "MOVE SOUTHEAST",
+            MOVE_ANGLE120_ABILITY = "MOVE SOUTHEAST", MOVE_ANGLE150_ABILITY = "MOVE SOUTH",
+            MOVE_ANGLE180_ABILITY = "MOVE SOUTH", MOVE_ANGLE210_ABILITY = "MOVE SOUTHWEST",
+            MOVE_ANGLE240_ABILITY = "MOVE SOUTHWEST", MOVE_ANGLE270_ABILITY = "MOVE NORTHWEST",
+            MOVE_ANGLE300_ABILITY = "MOVE NORTHWEST", MOVE_ANGLE330_ABILITY = "MOVE NORTH";
+
+    public static final String MOVE_EDGE1_ABILITY = "MOVE NORTH", MOVE_EDGE2_ABILITY = "MOVE NORTHEAST",
+            MOVE_EDGE3_ABILITY = "MOVE SOUTHEAST", MOVE_EDGE4_ABILITY = "MOVE SOUTH",
+            MOVE_EDGE5_ABILITY = "MOVE SOUTHWEST", MOVE_EDGE6_ABILITY = "MOVE NORTHWEST";
+
+    public static final String DESERT = "desert", MOUNTAINS = "mountains", PASTURE = "pasture", ROCK = "rock",
+            SEA = "sea", WOODS = "woods";
+}

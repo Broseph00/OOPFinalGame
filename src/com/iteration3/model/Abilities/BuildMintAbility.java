@@ -2,6 +2,9 @@ package com.iteration3.model.Abilities;
 
 
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Visitors.Visitor;
+import com.iteration3.model.Visitors.iAbilityVisitor;
+import com.iteration3.utilities.GameLibrary;
 
 /**
  * Created by test on 04/14/2017.
@@ -16,6 +19,16 @@ import com.iteration3.model.Transporters.Transporter;
 
 public class BuildMintAbility extends Ability {
     public BuildMintAbility(Transporter transporter){
-        super(transporter, "BUILD MINT");
+        super(transporter, GameLibrary.BUILD_MINT_ABILITY);
+    }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public String getAbilityType(iAbilityVisitor visitor) {
+        return visitor.getType(this);
     }
 }

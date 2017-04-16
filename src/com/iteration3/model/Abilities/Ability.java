@@ -2,8 +2,10 @@ package com.iteration3.model.Abilities;
 
 
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Visitors.Visitable;
+import com.iteration3.model.Visitors.iAbilityVisitor;
 
-public abstract class Ability {
+public abstract class Ability implements Visitable {
     private Transporter transporter;
     private String name;
 
@@ -15,6 +17,8 @@ public abstract class Ability {
     public void execute(){
 
     }
+
+    public abstract String getAbilityType(iAbilityVisitor visitor);
 
     public Transporter getTransporter(){
         return  transporter;

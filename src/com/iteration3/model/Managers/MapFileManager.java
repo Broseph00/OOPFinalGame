@@ -5,6 +5,7 @@ import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.River;
 import com.iteration3.model.Tiles.*;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
+import com.iteration3.utilities.GameLibrary;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -44,22 +45,22 @@ public class MapFileManager {
             String terrainString = splitLine[5];
             Terrain terrain = new PastureTerrain();
 
-            if(terrainString.equals("pasture")) {
+            if(terrainString.equals(GameLibrary.PASTURE)) {
                 terrain = new PastureTerrain();
             }
-            else if(terrainString.equals("woods")) {
+            else if(terrainString.equals(GameLibrary.WOODS)) {
                 terrain = new WoodTerrain();
             }
-            else if(terrainString.equals("rock")) {
+            else if(terrainString.equals(GameLibrary.ROCK)) {
                 terrain = new RockTerrain();
             }
-            else if(terrainString.equals("mountains")) {
+            else if(terrainString.equals(GameLibrary.MOUNTAINS)) {
                 terrain = new MountainTerrain();
             }
-            else if(terrainString.equals("desert")) {
+            else if(terrainString.equals(GameLibrary.DESERT)) {
                 terrain = new DesertTerrain();
             }
-            else if(terrainString.equals("sea")){
+            else if(terrainString.equals(GameLibrary.SEA)){
                 terrain = new SeaTerrain();
             }
             else {
