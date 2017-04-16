@@ -1,5 +1,7 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Modes;
 
+import com.iteration3.controller.BuildingAction;
+import com.iteration3.controller.Modes.CycleMode;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 

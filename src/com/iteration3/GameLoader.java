@@ -1,6 +1,6 @@
 package com.iteration3;
 
-import com.iteration3.controller.WelcomeViewController;
+import com.iteration3.controller.Controllers.WelcomeViewController;
 import com.iteration3.view.WelcomeViewWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;

@@ -1,4 +1,4 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 /*--------------------------------------------------------------------------------------
 |    StatusController: Created by Ricardo on 3/28/17.
 |---------------------------------------------------------------------------------------
@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
+import com.iteration3.controller.Action;
+import com.iteration3.controller.Observer;
 import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Visitors.Visitor;
 import javafx.event.ActionEvent;

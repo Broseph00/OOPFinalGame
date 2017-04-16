@@ -1,5 +1,11 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 
+/**
+ * Created by Clay on 4/14/2017.
+ */
+import com.iteration3.controller.Action;
+import com.iteration3.controller.Observable;
+import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
@@ -10,57 +16,77 @@ import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Clay on 4/14/2017.
- */
-public class WonderController{
+public class MovementController implements Observable {
 
     private GameModel model;
     private GameWindow window;
     ArrayList<Observer> subscribers;
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
-    private EventHandler<ActionEvent> endTurn;
-    int numBricks;
+    private EventHandler<ActionEvent> pickupResources, endTurn;
+    //TODO - Iterator over transporters, valid tiles around them
 
-    public WonderController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
+    public MovementController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
         this.window = window;
         this.keyMap = keyMap;
         subscribers = new ArrayList<>();
         lastPlayer = false;
-        numBricks = 0;
 
         initializeKeyMap();
         createHandlers();
     }
 
     private void initializeKeyMap() {
-        keyMap.put(KeyCode.UP, new Action() {
+        keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                numBricks++;
+                //transIter.next();
 
             }
         });
 
-        keyMap.put(KeyCode.DOWN, new Action() {
+        keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                numBricks--;
+                //transIter.prev();
 
             }
         });
 
-        keyMap.put(KeyCode.ENTER, new Action() {
+        keyMap.put(KeyCode.NUMPAD6, new Action() {
             public void execute() {
-                //model.buildBricks(numBricks);
+                //locationIter.next();
 
             }
         });
+
+        keyMap.put(KeyCode.NUMPAD4, new Action() {
+            public void execute() {
+                //locationIter.prev();
+
+            }
+        });
+
+        keyMap.put(KeyCode.SPACE, new Action() {
+            public void execute() {
+                //pickUpResources();
+
+            }
+        });
+
+
 
     }
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+                //model.nextPlayer();
+            }
+        };
+
+        pickupResources = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
 

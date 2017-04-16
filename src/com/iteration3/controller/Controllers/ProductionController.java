@@ -1,8 +1,8 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 
-/**
- * Created by Clay on 4/14/2017.
- */
+import com.iteration3.controller.Action;
+import com.iteration3.controller.Observable;
+import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
@@ -13,22 +13,23 @@ import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MovementController implements Observable{
+public class ProductionController implements Observable {
 
-    private GameModel model;
-    private GameWindow window;
+    GameModel model;
+    GameWindow window;
     ArrayList<Observer> subscribers;
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
-    private EventHandler<ActionEvent> pickupResources, endTurn;
-    //TODO - Iterator over transporters, valid tiles around them
+    private EventHandler<ActionEvent> endTurn, useFactory;
+    // Location current;
+    //TODO: Iterator of transporters (or locations)
 
-    public MovementController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
+    public ProductionController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
         this.window = window;
         this.keyMap = keyMap;
-        subscribers = new ArrayList<>();
         lastPlayer = false;
+        subscribers = new ArrayList<>();
 
         initializeKeyMap();
         createHandlers();
@@ -37,57 +38,36 @@ public class MovementController implements Observable{
     private void initializeKeyMap() {
         keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                //transIter.next();
+                //iter.next();
 
             }
         });
 
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                //transIter.prev();
+                //iter.prev();
 
             }
         });
-
-        keyMap.put(KeyCode.NUMPAD6, new Action() {
-            public void execute() {
-                //locationIter.next();
-
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD4, new Action() {
-            public void execute() {
-                //locationIter.prev();
-
-            }
-        });
-
-        keyMap.put(KeyCode.SPACE, new Action() {
-            public void execute() {
-                //pickUpResources();
-
-            }
-        });
-
-
 
     }
 
     private void createHandlers() {
-        endTurn = new EventHandler<ActionEvent>() {
-            @Override
+        useFactory = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-
                 //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                notifyAllObservers();
             }
         };
 
-        pickupResources = new EventHandler<ActionEvent>() {
-            @Override
+        endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-
                 //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                    notifyAllObservers();
             }
         };
     }
@@ -105,3 +85,6 @@ public class MovementController implements Observable{
             o.update();
     }
 }
+
+
+

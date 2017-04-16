@@ -1,27 +1,32 @@
-package com.iteration3.controller;
+package com.iteration3.controller.PhaseStates;
 
+import com.iteration3.controller.*;
+import com.iteration3.controller.Controllers.BuildingController;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 
-public class ProductionPhaseState implements ControlDispatchState, Observer {
+/**
+ * Created by Clay on 4/14/2017.
+ */
+public class BuildingPhaseState implements ControlDispatchState, Observer {
     private GameModel model;
     private GameWindow window;
     private ControlDispatch dispatch;
-    private ProductionController productionController;
+    private BuildingController buildingController;
     private HashMap<KeyCode,Action> keyMap;
 
-    public ProductionPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
+
+    public BuildingPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
         this.model = model;
         this.window = window;
         this.dispatch = dispatch;
         keyMap = new HashMap<>();
-        productionController = new ProductionController(model, window, keyMap);
-        productionController.addObserver(this);
+        buildingController = new BuildingController(model, window, keyMap);
+        buildingController.addObserver(this);
     }
 
     @Override
@@ -32,9 +37,10 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
 
     @Override
     public void nextState() {
-        dispatch.changeState(new MovementPhaseState(dispatch, model, window));
+        dispatch.changeState(new WonderPhaseState(dispatch, model, window));
     }
 
+    @Override
     public void update() {
         nextState();
     }

@@ -1,14 +1,16 @@
-package com.iteration3.controller;
+package com.iteration3.controller.PhaseStates;
 
+import com.iteration3.controller.ControlDispatch;
+import com.iteration3.controller.Observer;
+import com.iteration3.controller.Controllers.WelcomeViewController;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.scene.input.KeyEvent;
 
     /**
      * Created by Clay on 4/13/2017.
      */
-    public class WelcomeState implements ControlDispatchState, Observer{
+    public class WelcomeState implements ControlDispatchState, Observer {
         private GameModel model;
         private GameWindow window;
         private ControlDispatch dispatch;
