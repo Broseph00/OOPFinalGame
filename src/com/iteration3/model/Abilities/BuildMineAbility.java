@@ -1,5 +1,6 @@
 package com.iteration3.model.Abilities;
 
+import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iAbilityVisitor;
@@ -18,8 +19,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class BuildMineAbility extends Ability {
 
-    public BuildMineAbility(Transporter transporter){
-        super(transporter, GameLibrary.BUILD_MINE_ABILITY);
+    public BuildMineAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, GameLibrary.BUILD_MINE_ABILITY, executionManager);
     }
 
     @Override
