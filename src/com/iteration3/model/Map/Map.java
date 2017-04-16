@@ -253,6 +253,9 @@ public class Map {
     public HashMap<Location, Tile> getTiles() {
         return tiles;
     }
+    public Tile getTile(Location location) {
+        return getTiles().get(location);
+    }
 
     public HashMap<Location, River> getRivers() {
         return rivers;
@@ -353,7 +356,7 @@ public class Map {
     public void printTiles() {
         for(Location location : tiles.keySet()) {
             System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            System.out.println("Terrain: " + tiles.get(location).getTerrain(new TerrainTypeVisitor()));
+            System.out.println("Terrain: " + tiles.get(location).getTerrainType());
         }
     }
 
