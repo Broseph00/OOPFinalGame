@@ -18,12 +18,12 @@ public class Map {
 
     private HashMap<Location, Tile> tiles;
     private HashMap<Location, River> rivers;
-    private HashMap<Location, ArrayList<Integer>> bridges;
+    private HashMap<Location, BridgeList> bridges;
     private HashMap<Location, WallList> walls;
     private HashMap<Location, Region> regions;
     private HashMap<RegionLocation, TransportList> transports;
     private HashMap<RegionLocation, ResourceList> resources;
-    private HashMap<Location, ArrayList<Location>> roads;
+    private HashMap<Location, RoadList> roads;
     private HashMap<Location, Producer> producers;
 
     public Map() {
@@ -43,8 +43,6 @@ public class Map {
         if(validateLocationRange(location)) {
             this.tiles.put(location, tile);
             this.regions.put(location, new Region());
-            this.intializeResourceList(location);
-            this.intializeTansportList(location);
         }
     }
 
@@ -57,25 +55,25 @@ public class Map {
 
     public void addRoad(Location from, Location to){
         if(this.roads.containsKey(from)){
-            ArrayList<Location> roadSet = roads.get(from);
+            RoadList roadSet = roads.get(from);
             if(!roadSet.contains(to)){
                 roadSet.add(to);
             }
         }
         else{
-            ArrayList<Location> roadSet = new ArrayList<>();
+            RoadList roadSet = new RoadList();
             roadSet.add(to);
             this.roads.put(from,roadSet);
         }
 
         if(this.roads.containsKey(to)){
-            ArrayList<Location> roadSet = roads.get(to);
+            RoadList roadSet = roads.get(to);
             if(!roadSet.contains(from)){
                 roadSet.add(from);
             }
         }
         else{
-            ArrayList<Location> roadSet = new ArrayList<>();
+            RoadList roadSet = new RoadList();
             roadSet.add(from);
             this.roads.put(to,roadSet);
         }
@@ -108,11 +106,11 @@ public class Map {
         // check river is on tile and correct number of bridges
         if(this.rivers.containsKey(location)) {
             // get existing bridges
-            ArrayList<Integer> newBridgeSet = new ArrayList<>();
+            BridgeList newBridgeSet = new BridgeList();
             if(this.bridges.containsKey(location)) {
                newBridgeSet = this.bridges.get(location);
             }
-            // check bridge isn't there and river is theere
+            // check bridge isn't there and river is there
             if (this.containsRiverEdge(location, bridgeToAdd) && !this.containsBridge(location, bridgeToAdd) && newBridgeSet.size() < 3) {
                 newBridgeSet.add(bridgeToAdd);
                 this.regions.get(location).addBridge(bridgeToAdd);
@@ -197,7 +195,6 @@ public class Map {
             newWallSet2 = this.walls.get(oppositeLocation);
         }
 
-
         newWallSet1.remove(edge);
         newWallSet1.add(new WallWithoutOwner(edge, 1));
         newWallSet2.remove(edge);
@@ -261,7 +258,7 @@ public class Map {
         return rivers;
     }
 
-    public HashMap<Location, ArrayList<Integer>> getBridges() {
+    public HashMap<Location, BridgeList> getBridges() {
         return bridges;
     }
 
@@ -269,7 +266,7 @@ public class Map {
         return walls;
     }
 
-    public HashMap<Location, ArrayList<Location>> getRoads(){
+    public HashMap<Location, RoadList> getRoads(){
         return roads;
     }
 
@@ -299,27 +296,48 @@ public class Map {
     }
 
     public void removeResource(Resource r, RegionLocation regionLocation) {
-        this.resources.get(regionLocation).removeResource(r);
+        if(resources.containsKey(regionLocation)) {
+            resources.get(regionLocation).removeResource(r);
+            if(resources.get(regionLocation).isEmpty()){
+                resources.remove(regionLocation);
+            }
+        }
     }
 
     public void addResource(Resource r, RegionLocation regionLocation) {
-        this.resources.get(regionLocation).addResource(r);
+        if(resources.containsKey(regionLocation)){
+            resources.get(regionLocation).addResource(r);
+        }
+        else{
+            ResourceList resourceList = new ResourceList();
+            resourceList.addResource(r);
+            resources.put(regionLocation,resourceList);
+        }
     }
 
     public void addTransport(Transporter t, RegionLocation regionLocation) {
-        this.transports.get(regionLocation).addTransport(t);
+        if(transports.containsKey(regionLocation)){
+            transports.get(regionLocation).addTransport(t);
+        }
+        else{
+            TransportList transportList = new TransportList();
+            transportList.addTransport(t);
+            transports.put(regionLocation,transportList);
+        }
     }
 
     public void removeTransport(Transporter t, RegionLocation regionLocation) {
-        this.transports.get(regionLocation).removeTransport(t);
+        if(transports.containsKey(regionLocation)) {
+            transports.get(regionLocation).removeTransport(t);
+            if(transports.get(regionLocation).isEmpty()){
+
+            }
+        }
     }
 
 
 
     /**HELPER FUNCTIONS***********************************************************************************************/
-    /*****************************************************************************************************************/
-    /*****************************************************************************************************************/
-    /*****************************************************************************************************************/
 
     public void printRivers() {
         for(Location location : rivers.keySet()) {

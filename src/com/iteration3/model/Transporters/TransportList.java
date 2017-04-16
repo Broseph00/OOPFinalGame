@@ -24,6 +24,10 @@ public class TransportList {
         return transports;
     }
 
+    public boolean isEmpty(){
+        return transports.isEmpty();
+    }
+
     public ArrayList<WaterTransporter> getWaterTransports() {
         ArrayList<WaterTransporter> waterTransporters = new ArrayList<>();
         for(int i = 0; i < this.transports.size(); i++) {
