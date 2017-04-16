@@ -27,9 +27,6 @@ public class ValidationManager {
         if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
             return false;
         }
-        if(transporter.isDocked()){
-            return false;
-        }
         Player owner = transporter.getOwner();
         RegionLocation start = map.getTransportRegionLocation(transporter);
         int edge = dockatSeaAbility.getBorder();
@@ -43,9 +40,6 @@ public class ValidationManager {
 
     public boolean validateRiverDock(WaterTransporter transporter){
         if(transporter.getRemainingMovePoints()<1 || transporter.isDocked()){
-            return false;
-        }
-        if(transporter.isDocked()){
             return false;
         }
         RegionLocation start = map.getTransportRegionLocation(transporter);
@@ -141,6 +135,22 @@ public class ValidationManager {
             }
         }
     }
+
+    public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
+        return true;
+    }
+
+    public boolean validateShore(Transporter transporter){
+        return true; //TODO
+    }
+
+    public boolean validateTerrain(Transporter transporter, String terrainType){
+        return true; //TODO
+    }
+
+
+
+
     private String getTerrain(Location location){
         if(map.getTiles().containsKey(location)){
             return map.getTiles().get(location).getTerrain(new TerrainTypeVisitor());

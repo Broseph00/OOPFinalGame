@@ -102,8 +102,8 @@ public class MapTests {
         Map map = new Map();
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
 
-        Player player1 = new Player(map, 1, null);
-        Player player2 = new Player(map, 2, null);
+        Player player1 = new Player(map, 1);
+        Player player2 = new Player(map, 2);
         Location location = new Location(0,0,0);
         Location waterLocation = new Location(-2,1,1);
 
