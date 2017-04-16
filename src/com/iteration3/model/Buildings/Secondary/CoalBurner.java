@@ -1,7 +1,7 @@
 package com.iteration3.model.Buildings.Secondary;
 
 public class CoalBurner extends SecondaryProducer {
-    public CoalBurner(int maxCapacity) {
-        super(maxCapacity);
+    public CoalBurner() {
+        super(6);
     }
 }

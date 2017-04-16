@@ -1,5 +1,6 @@
 package com.iteration3.model.Abilities;
 
+import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 
 /**
@@ -16,8 +17,10 @@ import com.iteration3.model.Transporters.Transporter;
 public abstract class DockatSeaAbility extends Ability {
     private int border;
 
-    public DockatSeaAbility(Transporter transporter, int border, String name){
-        super(transporter, name);
+    public DockatSeaAbility(Transporter transporter, int border, String name, ExecutionManager executionManager){
+        super(transporter, name, executionManager);
         this.border = border;
     }
+
+    public int getBorder(){return border;}
 }

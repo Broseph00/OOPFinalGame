@@ -1,5 +1,6 @@
 package com.iteration3.model.Abilities;
 
+import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iAbilityVisitor;
@@ -18,8 +19,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class MoveDegree150Ability extends MoveAbility{
 
-    public MoveDegree150Ability(Transporter transporter){
-        super(transporter,3,4, GameLibrary.MOVE_ANGLE150_ABILITY);
+    public MoveDegree150Ability(Transporter transporter, ExecutionManager executionManager){
+        super(transporter,3,4, GameLibrary.MOVE_ANGLE150_ABILITY, executionManager);
     }
 
     @Override
