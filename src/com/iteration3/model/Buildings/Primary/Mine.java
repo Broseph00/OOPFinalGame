@@ -1,31 +1,54 @@
 package com.iteration3.model.Buildings.Primary;
 
 import com.iteration3.model.Resource.*;
-import com.iteration3.model.Tiles.*;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Mine extends PrimaryProducer {
-    // TODO: need specialized mines
-    Tile location;
+    private ArrayList<Resource> oreBag;
 
-    public Mine(Tile buildLocation) {
-        super(new MountainTerrain());
+    public Mine() {
+        oreBag = new ArrayList<>();
+        buildDefaultShaft();
     }
 
     @Override
     public Resource produce() {
-        Resource ore = null;
-
-        if (verifyLocation(location)) {
-            // TODO: confirm produces only one ore when ore class updated
-        }
+        Resource ore = decrementCapacity() ? getOre() : null;
         return ore;
     }
 
-    private Iron produceIron(){
-        return null;
+    private Resource getOre(){
+        if(oreBag.isEmpty()){
+            return null;
+        }
+        Random generator = new Random();
+        int randomIdx = generator.nextInt(oreBag.size());
+
+        return oreBag.get(randomIdx);
     }
 
-    private Gold produceGold(){
-        return null;
+    private void buildDefaultShaft(){
+        for(int i = 0; i < this.getBaseOreAmount(); ++i){
+            oreBag.add(new Gold());
+            oreBag.add(new Iron());
+        }
+    }
+
+    private int getBaseOreAmount(){
+        return 3;
+    }
+
+    public void buildIronShaft(){
+        for(int i = 0; i < 4; ++i){
+            oreBag.add(new Iron());
+        }
+    }
+
+    public void buildGoldShaft(){
+        for(int i = 0; i < 4; ++i){
+            oreBag.add(new Gold());
+        }
     }
 }
