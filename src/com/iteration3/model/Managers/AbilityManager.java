@@ -129,6 +129,16 @@ public class AbilityManager {
 
         DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
         addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver2Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver3Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver4Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver5Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver6Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
 
         DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
         addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
