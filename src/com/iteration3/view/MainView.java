@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
  * Created by LesliesLaptop on 4/11/17.
  */
 
-//Renamed GameWindow to MainView
+// Renamed GameWindow to MainView
 public class MainView extends BorderPane implements View {
     private MapView mapView;
     private StatusView statusView;
@@ -31,13 +31,22 @@ public class MainView extends BorderPane implements View {
     }
 
     public void drawTile(String imageURL, int x, int y) {
-        mapView.drawTile(imageURL, x, y);
+        getMapView().drawTile(imageURL, x, y);
     }
     public void drawRiver(String imageURL, int x, int y) {
-        mapView.drawRiver(imageURL, x, y);
+        getMapView().drawRiver(imageURL, x, y);
+    }
+    public void drawPreviewImage(String imageURL) {
+        getStatusView().drawPreviewImage(imageURL);
     }
 
     public void update() {
-        mapView.update();
+        getMapView().update();
+    }
+    public MapView getMapView() {
+        return mapView;
+    }
+    public StatusView getStatusView() {
+        return statusView;
     }
 }

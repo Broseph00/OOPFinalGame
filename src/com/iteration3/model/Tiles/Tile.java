@@ -13,9 +13,8 @@ public class Tile {
     public Terrain getTerrain() {
         return terrain;
     }
-
-    public String getTerrain(TerrainTypeVisitor v) {
-        return terrain.getTerrainType(v);
+    public String getTerrainType() {
+        return terrain.getTerrainType();
     }
 
     public void setTerrain(Terrain terrain) {

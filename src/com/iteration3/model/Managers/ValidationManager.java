@@ -97,7 +97,7 @@ public class ValidationManager {
     }
     private String getTerrain(Location location){
         if(map.getTiles().containsKey(location)){
-            return map.getTiles().get(location).getTerrain(new TerrainTypeVisitor());
+            return map.getTiles().get(location).getTerrainType();
         }
         return "";
     }
