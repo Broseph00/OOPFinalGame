@@ -26,6 +26,10 @@ public abstract class Transporter {
         this.remainingMovePoints = this.maxMovePoints;
     }
 
+    public void decreaseMovePoints(int moves){
+        this.remainingMovePoints = this.remainingMovePoints-moves;
+    }
+
     public ResourceList getResourceList() {
         return resourceList;
     }

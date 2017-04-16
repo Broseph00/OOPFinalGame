@@ -1,9 +1,9 @@
 package com.iteration3.model.Buildings;
 
-public abstract class ResourceProducer {
+public abstract class Producer {
     ProducerCapacity capacity;
 
-    public ResourceProducer(int maxCapacity){
+    public Producer(int maxCapacity){
         capacity = new ProducerCapacity(maxCapacity);
     }
 
