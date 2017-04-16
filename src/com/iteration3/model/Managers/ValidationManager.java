@@ -5,6 +5,7 @@ import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 public class ValidationManager {
@@ -104,5 +105,9 @@ public class ValidationManager {
             default:
                 return edge;
         }
+    }
+
+    public boolean validateResourceCost(Transporter transporter, int boardCost, int stoneCost){
+        return true;
     }
 }

@@ -177,5 +177,27 @@ public class AbilityTypeVisitor implements  iAbilityVisitor{
         return GameLibrary.MOVE_EDGE6_ABILITY;
     }
 
+    @Override
+    public String getType(DockatSea1Ability ability) { return GameLibrary.DOCK_SEA1; }
 
+    @Override
+    public String getType(DockatSea2Ability ability) { return GameLibrary.DOCK_SEA2; }
+
+    @Override
+    public String getType(DockatSea3Ability ability) { return GameLibrary.DOCK_SEA3; }
+
+    @Override
+    public String getType(DockatSea4Ability ability) { return GameLibrary.DOCK_SEA4; }
+
+    @Override
+    public String getType(DockatSea5Ability ability) { return GameLibrary.DOCK_SEA5; }
+
+    @Override
+    public String getType(DockatSea6Ability ability) { return GameLibrary.DOCK_SEA6; }
+
+    @Override
+    public String getType(DockatRiverAbility ability) { return GameLibrary.DOCK_RIVER; }
+
+    @Override
+    public String getType(UndockAbility ability) { return GameLibrary.UNDOCK; }
 }

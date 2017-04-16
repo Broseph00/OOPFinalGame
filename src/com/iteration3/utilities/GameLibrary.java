@@ -39,4 +39,42 @@ public class GameLibrary {
 
     public static final String DESERT = "desert", MOUNTAINS = "mountains", PASTURE = "pasture", ROCK = "rock",
             SEA = "sea", WOODS = "woods";
+
+    public static final String DOCK_SEA1 = "DOCK NORTH", DOCK_SEA2 = "DOCK NORTHEAST", DOCK_SEA3 = "DOCK SOUTHEAST",
+            DOCK_SEA4 = "DOCK SOUTH", DOCK_SEA5 = "DOCK SOUTHWEST", DOCK_SEA6 = "DOCK NORTHWEST",
+            DOCK_RIVER = "DOCK RIVER", UNDOCK = "UNDOCL";
+
+    public static final int WOODCUTTER_BOARD = 1, WOODCUTTER_STONE = 0;
+
+    public static final int QUARRY_BOARD = 2, QUARRY_STONE = 0;
+
+    public static final int CLAYPIT_BOARD = 3, CLAYPIT_STONE = 0;
+
+    public static final int MINE_BOARD = 3, MINE_STONE = 1;
+
+    public static final int OILRIG_BOARD = 3, OILRIG_STONE = 1;
+
+    public static final int SAWMILL_BOARD = 2, SAWMILL_STONE = 1;
+
+    public static final int COALBURNER_BOARD = 3, COALBURNER_STONE = 0;
+
+    public static final int PAPERMILL_BOARD = 1, PAPERMILL_STONE = 1;
+
+    public static final int STONEFACTORY_BOARD = 2, STONEFACTORY_STONE = 1;
+
+    public static final int MINT_BOARD = 2, MINT_STONE = 1;
+
+    public static final int STOCK_BOARD = 2, STOCK_STONE = 1;
+
+    public static final int WAGONFACTORY_BOARD = 2, WAGONFACTORY_STONE = 1;
+
+    public static final int TRUCKFACTORY_BOARD = 2, TRUCKFACTORY_STONE = 2;
+
+    public static final int RAFTFACTORY_BOARD = 1, RAFTFACTORY_STONE = 1;
+
+    public static final int ROWBOATFACTORY_BOARD = 2, ROWBOATFACTORY_STONE = 1;
+
+    public static final int STEAMER_BOARD = 2, STEAMER_STONE = 2;
+
+
 }
