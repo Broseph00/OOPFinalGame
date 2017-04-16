@@ -29,10 +29,9 @@ public class AbilityManager {
     }
 
     public void updateLandTransporters(ArrayList<LandTransporter> landTransporters){
-        System.out.println("Step 3");
+        //System.out.println("Step 3");
         for(LandTransporter transporter : landTransporters){
             giveAbilities(transporter);
-            System.out.println("Step 4");
         }
     }
 
@@ -49,7 +48,7 @@ public class AbilityManager {
     }
 
     public void giveAbilities(LandTransporter transporter){
-        System.out.println("Step 5");
+        //System.out.println("Step 4");
         transporter.clearAbilityList();
         ArrayList<Ability> abilityList = populateList(transporter);
         transporter.setAbilityList(abilityList);
@@ -69,7 +68,9 @@ public class AbilityManager {
     }
 
     public ArrayList<Ability> populateList(LandTransporter transporter) {
+        //System.out.println("Step 5");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
+        addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
         return abilitiesList;
     }

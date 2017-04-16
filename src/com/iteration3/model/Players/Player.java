@@ -27,14 +27,14 @@ public class Player {
     }
 
     public void updateTransporterAbilities(){
-        System.out.println("Step 1");
+        //System.out.println("Step 1");
         updateLandTransportAbilities();
         updateRoadTransporterAbilities();
         updateWaterTransporterAbilties();
     }
 
     private void updateLandTransportAbilities(){
-        System.out.println("Step 2");
+        //System.out.println("Step 2");
         ArrayList<LandTransporter> landTransporters = this.transportersList.getLandTransports();
         abilityManager.updateLandTransporters(landTransporters);
     }
@@ -56,5 +56,9 @@ public class Player {
 
     public TransportList getTransportersList(){
         return transportersList;
+    }
+
+    public ResearchManager getResearchManager(){
+        return researchManager;
     }
 }
