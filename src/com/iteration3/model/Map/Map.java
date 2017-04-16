@@ -335,6 +335,10 @@ public class Map {
         }
     }
 
+    public void addProducer(Producer producer, RegionLocation regionLocation) {
+        producers.put(regionLocation, producer);
+    }
+
 
 
     /**HELPER FUNCTIONS***********************************************************************************************/
