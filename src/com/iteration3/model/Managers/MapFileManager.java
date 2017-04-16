@@ -15,14 +15,12 @@ import java.io.IOException;
 
 public class MapFileManager {
 
-    private String pathToMapTextFile;
-    private String pathToSaveStateTextFile;
+    private String pathToTextFile;
     private Map map;
 
-    public MapFileManager(Map m, String mapPath, String saveStatePath) {
+    public MapFileManager(Map m, String path) {
         this.map = m;
-        this.pathToMapTextFile = mapPath;
-        this.pathToSaveStateTextFile = saveStatePath;
+        this.pathToTextFile = path;
     }
 
     // TODO: Methods to move map to text file and text file to map
@@ -30,7 +28,7 @@ public class MapFileManager {
     // Reads file line by line, extracts info and creates a map out of it
     public void fillMapFromTextFile() throws IOException{
         map.clearMap();
-        BufferedReader br = new BufferedReader(new FileReader(this.pathToMapTextFile));
+        BufferedReader br = new BufferedReader(new FileReader(this.pathToTextFile));
         String line;
         // divide line and create Tile/Rivers
         while ((line = br.readLine()) != null) {
@@ -91,7 +89,7 @@ public class MapFileManager {
 
     public void fillTextFileFromMap() throws IOException{
         // clear file
-        FileWriter fw = new FileWriter(pathToMapTextFile, false);
+        FileWriter fw = new FileWriter(pathToTextFile, false);
 
         int id = 0;
         // go through all locations in the list of the map's tiles
