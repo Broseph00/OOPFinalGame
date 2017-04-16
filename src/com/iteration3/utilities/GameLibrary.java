@@ -44,6 +44,9 @@ public class GameLibrary {
             DOCK_SEA4 = "DOCK SOUTH", DOCK_SEA5 = "DOCK SOUTHWEST", DOCK_SEA6 = "DOCK NORTHWEST",
             DOCK_RIVER = "DOCK RIVER", UNDOCK = "UNDOCL";
 
+    public static final String DOCK_RIVER1 = "DOCK NORTHEAST", DOCK_RIVER2 = "DOCK EAST", DOCK_RIVER3 = "DOCK SOUTHEAST",
+            DOCK_RIVER4 = "DOCK SOUTHWEST", DOCK_RIVER5 = "DOCK WEST", DOCK_RIVER6 = "DOCK NORTHWEST";
+
     public static final int WOODCUTTER_BOARD = 1, WOODCUTTER_STONE = 0;
 
     public static final int QUARRY_BOARD = 2, QUARRY_STONE = 0;
