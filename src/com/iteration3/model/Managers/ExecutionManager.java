@@ -187,7 +187,7 @@ public class ExecutionManager {
         map.addProducer(producer, regionLocation);
     }
 
-    public void execute(MoveDegree0Ability ability) { } 
+    public void execute(MoveDegree0Ability ability) { }
     public void execute(MoveDegree30Ability ability) { }
     public void execute(MoveDegree60Ability ability) { }
     public void execute(MoveDegree90Ability ability) { }
