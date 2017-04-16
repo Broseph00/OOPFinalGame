@@ -27,7 +27,7 @@ public class MovementManager {
         if(transporter.getRemainingMovePoints()<1){
             return false;
         }
-        return validationManager.validateSeaDock(transporter, dockatSeaAbility, transporter.getOwner());
+        return validationManager.validateSeaDock(transporter, dockatSeaAbility);
     }
 
     public boolean validateRiverDockAbility(DockatRiverAbility dockatRiverAbility, WaterTransporter transporter){
@@ -51,7 +51,7 @@ public class MovementManager {
         if(movesLeft<1 || waterTransporter.isDocked()){
             return false;
         }
-        return validationManager.validateWaterMove(waterTransporter, moveAbility, waterTransporter.getOwner());
+        return validationManager.validateWaterMove(waterTransporter, moveAbility);
 
     }
 
@@ -60,7 +60,7 @@ public class MovementManager {
         if(movesLeft<1){
             return false;
         }
-        return validationManager.validateRoadMove(onRoadLandTransporter, moveAbility, onRoadLandTransporter.getOwner());
+        return validationManager.validateRoadMove(onRoadLandTransporter, moveAbility);
     }
 
     public boolean validateLandMoveAbility(MoveAbility moveAbility, LandTransporter landTransporter){
@@ -68,7 +68,7 @@ public class MovementManager {
         if(movesLeft<1){
             return false;
         }
-        return validationManager.validateLandMove(landTransporter, moveAbility, landTransporter.getOwner(), movesLeft);
+        return validationManager.validateLandMove(landTransporter, moveAbility);
     }
 
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){

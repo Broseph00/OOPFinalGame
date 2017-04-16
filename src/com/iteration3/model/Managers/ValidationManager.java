@@ -19,7 +19,11 @@ public class ValidationManager {
         this.map = map;
     }
 
-    public boolean validateSeaDock(WaterTransporter transporter, DockatSeaAbility dockatSeaAbility, Player owner){
+    public boolean validateSeaDock(WaterTransporter transporter, DockatSeaAbility dockatSeaAbility){
+        if(transporter.isDocked()){
+            return false;
+        }
+        Player owner = transporter.getOwner();
         RegionLocation start = map.getTransportRegionLocation(transporter);
         int edge = dockatSeaAbility.getBorder();
         Location location = start.getLocation();
@@ -31,12 +35,17 @@ public class ValidationManager {
     }
 
     public boolean validateRiverDock(WaterTransporter transporter){
+        if(transporter.isDocked()){
+            return false;
+        }
         RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
         return map.getRivers().containsKey(location);
     }
 
-    public boolean validateLandMove(LandTransporter transporter, MoveAbility moveAbility, Player owner, int moves){
+    public boolean validateLandMove(LandTransporter transporter, MoveAbility moveAbility){
+        Player owner = transporter.getOwner();
+        int moves = transporter.getRemainingMovePoints();
         int exitRegion = moveAbility.getRegion();
         int exitEdge = moveAbility.getBorder();
         RegionLocation start = map.getTransportRegionLocation(transporter);
@@ -52,7 +61,8 @@ public class ValidationManager {
         return connectedRegion && passableWall && terrainMatch;
     }
 
-    public boolean validateRoadMove(OnRoadLandTransporter transporter, MoveAbility moveAbility, Player owner){
+    public boolean validateRoadMove(OnRoadLandTransporter transporter, MoveAbility moveAbility){
+        Player owner = transporter.getOwner();
         int exitRegion = moveAbility.getRegion();
         int exitEdge = moveAbility.getBorder();
         RegionLocation start = map.getTransportRegionLocation(transporter);
@@ -68,7 +78,8 @@ public class ValidationManager {
         return connectedRegion && passableWall && terrainMatch;
     }
 
-    public boolean validateWaterMove(WaterTransporter transporter, MoveAbility moveAbility, Player owner){
+    public boolean validateWaterMove(WaterTransporter transporter, MoveAbility moveAbility){
+        Player owner = transporter.getOwner();
         int exitEdge = moveAbility.getBorder();
         RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
