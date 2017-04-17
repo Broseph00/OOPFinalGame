@@ -181,6 +181,23 @@ public class ValidationManager {
         return resourceList;
     }
 
+    public ResourceList getAvailableResources(RegionLocation regionLocation){
+        int region = regionLocation.getRegion();
+        Location location = regionLocation.getLocation();
+        Region regions = map.getRegions().get(location);
+        ArrayList<Integer> connected = regions.getRegion(region);
+        ResourceList resourceList = new ResourceList();
+        Iterator<Integer> iterator = connected.iterator();
+        while(iterator.hasNext()){
+            int hold = iterator.next();
+            RegionLocation newReg = new RegionLocation(location, hold);
+            if(map.getResources().containsKey(newReg)){
+                resourceList.addAll(map.getResources().get(newReg));
+            }
+        }
+        return resourceList;
+    }
+
     public boolean validateShore(Transporter transporter){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         int region = regionLocation.getRegion();
