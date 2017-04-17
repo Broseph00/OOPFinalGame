@@ -1,11 +1,12 @@
 package com.iteration3.model.Visitors;
 
 import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.ConstructAbility.*;
 import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.ExchangeAbility.DropResourceAbility;
 import com.iteration3.model.Abilities.ExchangeAbility.PickupResourceAbility;
 import com.iteration3.model.Abilities.MoveAbility.*;
-import com.iteration3.model.Abilities.ProductionAbility.ProduceWoodAbility;
+import com.iteration3.model.Abilities.ProductionAbility.*;
 
 /**
  * Created by test on 04/15/2017.
@@ -37,8 +38,24 @@ public interface iAbilityVisitor {
     String getType(BuildIronMineAbility ability);
     String getType(BuildBigMineAbility ability);
     String getType(BuildGoldMineAbility ability);
-    String getType(BuildWallAbility ability);
-    String getType(BuildRoadAbility ability);
+    String getType(ConstructWall1Ability ability);
+    String getType(ConstructWall2Ability ability);
+    String getType(ConstructWall3Ability ability);
+    String getType(ConstructWall4Ability ability);
+    String getType(ConstructWall5Ability ability);
+    String getType(ConstructWall6Ability ability);
+    String getType(ConstructRoad1Ability ability);
+    String getType(ConstructRoad2Ability ability);
+    String getType(ConstructRoad3Ability ability);
+    String getType(ConstructRoad4Ability ability);
+    String getType(ConstructRoad5Ability ability);
+    String getType(ConstructRoad6Ability ability);
+    String getType(ConstructBridge1Ability ability);
+    String getType(ConstructBridge2Ability ability);
+    String getType(ConstructBridge3Ability ability);
+    String getType(ConstructBridge4Ability ability);
+    String getType(ConstructBridge5Ability ability);
+    String getType(ConstructBridge6Ability ability);
 
     String getType(MoveDegree0Ability ability);
     String getType(MoveDegree30Ability ability);
@@ -76,5 +93,10 @@ public interface iAbilityVisitor {
     String getType(DropResourceAbility ability);
     String getType(PickupResourceAbility ability);
 
-    String getType(ProduceWoodAbility ability);
+    String getType(ProduceBoardAbility ability);
+    String getType(ProduceFuelAbility ability);
+    String getType(ProducePaperAbility ability);
+    String getType(ProduceBrickAbility ability);
+    String getType(ProduceCoinAbility ability);
+    String getType(ProduceStockAbility ability);
 }

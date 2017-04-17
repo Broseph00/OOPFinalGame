@@ -3,6 +3,8 @@ package com.iteration3.model.Managers;
 import static com.iteration3.utilities.GameLibrary.*;
 import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructRoadAbility;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructWallAbility;
 import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Map.Map;
@@ -82,12 +84,13 @@ public class AbilityManager {
 
     public ArrayList<Ability> populateList(OnRoadLandTransporter transporter) {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
+        addBuildAbilities(transporter, abilitiesList);
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
-    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+    public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
         //construction abilities
         if (verifyClayPitAbility(transporter)) { abilitiesList.add(new BuildClaypitAbility(transporter, executionManager)); }
         if (verifyCoalBurnerAbility(transporter)) { abilitiesList.add(new BuildCoalBurnerAbility(transporter, executionManager)); }
@@ -107,8 +110,10 @@ public class AbilityManager {
         if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
         if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildIronMineAbility(transporter, executionManager)); }
         if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildGoldMineAbility(transporter, executionManager)); }
-        if (verifyBuildWallAbility(transporter)) { abilitiesList.add(new BuildWallAbility(transporter, executionManager)); }
-        if (verifyBuildRoadAbility(transporter)) { abilitiesList.add(new BuildRoadAbility(transporter, executionManager)); }
+    }
+
+    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> arrayList){
+        //TODO: ADD VERIFIATION FOR ALL ABILITIES
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {

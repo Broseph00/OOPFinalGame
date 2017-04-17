@@ -1,7 +1,7 @@
 package com.iteration3.model.Abilities.ProductionAbility;
 
-import com.iteration3.model.Buildings.Primary.Woodcutter;
-import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Buildings.Secondary.StockExchange;
+import com.iteration3.model.Managers.ExchangeManager;
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
@@ -9,20 +9,20 @@ import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/16/2017.
+ * Created by test on 04/17/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    ProduceWoodAbility Module: Created by test on 04/16/2017.
+|    ProduceStockAbility Module: Created by test on 04/17/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class ProduceWoodAbility extends ProductionAbility {
+public class ProduceStockAbility extends ProductionAbility {
 
-    public ProduceWoodAbility(Woodcutter woodcutter, Transporter transporter, ExecutionManager executionManager){
-        super(woodcutter, transporter, executionManager, GameLibrary.PRODUCE_WOOD);
+    public ProduceStockAbility(StockExchange stockExchange, Transporter transporter, ExecutionManager executionManager){
+        super(stockExchange, transporter, executionManager, GameLibrary.PRODUCE_STOCK);
     }
 
     @Override
