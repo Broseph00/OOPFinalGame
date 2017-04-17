@@ -5,6 +5,7 @@ import com.iteration3.controller.Controllers.BuildingController;
 import com.iteration3.controller.Controllers.CursorController;
 import com.iteration3.controller.Controllers.TileViewController;
 import com.iteration3.model.GameModel;
+import com.iteration3.utilities.Observer;
 import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -45,6 +46,7 @@ public class BuildingPhaseState implements ControlDispatchState, Observer {
     @Override
     public void nextState() {
         dispatch.changeState(new WonderPhaseState(dispatch, model, window));
+        window.swapToProductionView();
     }
 
     @Override

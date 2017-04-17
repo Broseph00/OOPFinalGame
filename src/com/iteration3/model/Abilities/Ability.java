@@ -10,7 +10,7 @@ import com.iteration3.model.Visitors.iAbilityVisitor;
 public abstract class Ability implements Visitable {
     private Transporter transporter;
     private String name;
-    private ExecutionManager executionManager;
+    protected ExecutionManager executionManager;
 
     public Ability(Transporter transporter, String name, ExecutionManager executionManager){
         this.transporter = transporter;
