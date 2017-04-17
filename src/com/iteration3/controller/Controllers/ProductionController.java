@@ -116,10 +116,11 @@ public class ProductionController implements Observable {
 
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                //model.nextPlayer();
+                model.changeTurn();
                 if (lastPlayer)
                     notifyAllObservers();
                 lastPlayer = !lastPlayer;
+                player = model.getCurrentPlayer();
             }
         };
 
@@ -155,17 +156,17 @@ public class ProductionController implements Observable {
         window.setTileResourceList(tile);
 
         String transporter = "";
-        transporter += "Trunks: " + transporterResourceList.getTrunks() + "\n";
-        transporter += "Boards: " + transporterResourceList.getBoards() + "\n";
-        transporter += "Paper: " + transporterResourceList.getPaper() + "\n";
-        transporter += "Goose: " + transporterResourceList.getGeese() + "\n";
-        transporter += "Clay: " + transporterResourceList.getClay() + "\n";
-        transporter += "Stone: " + transporterResourceList.getStones() + "\n";
-        transporter += "Fuel: " + transporterResourceList.getFuel() + "\n";
-        transporter += "Iron: " + transporterResourceList.getIron() + "\n";
-        transporter += "Gold: " + transporterResourceList.getGold() + "\n";
-        transporter += "Coins: " + transporterResourceList.getCoins() + "\n";
-        transporter += "Stock: " + transporterResourceList.getStock() + "\n";
+        transporter += "Trunks: " + transporterResourceList.getTrunks().size() + "\n";
+        transporter += "Boards: " + transporterResourceList.getBoards().size() + "\n";
+        transporter += "Paper: " + transporterResourceList.getPaper().size() + "\n";
+        transporter += "Goose: " + transporterResourceList.getGeese().size() + "\n";
+        transporter += "Clay: " + transporterResourceList.getClay().size() + "\n";
+        transporter += "Stone: " + transporterResourceList.getStones().size() + "\n";
+        transporter += "Fuel: " + transporterResourceList.getFuel().size() + "\n";
+        transporter += "Iron: " + transporterResourceList.getIron().size() + "\n";
+        transporter += "Gold: " + transporterResourceList.getGold().size() + "\n";
+        transporter += "Coins: " + transporterResourceList.getCoins().size() + "\n";
+        transporter += "Stock: " + transporterResourceList.getStock().size() + "\n";
         window.setTransportResourceList(transporter);
 
     }

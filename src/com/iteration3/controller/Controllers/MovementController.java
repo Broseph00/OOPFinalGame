@@ -54,7 +54,6 @@ public class MovementController implements Observable {
         abilityIter = currTrans.makeAbilityIterator();
 
         initializeKeyMap();
-        initializeModes();
         createHandlers();
         System.out.println("Move Controller");
         System.out.println(keyMap);
@@ -65,43 +64,32 @@ public class MovementController implements Observable {
     private void initializeKeyMap() {
         keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                //modes.get(index).next();
                 transIter.next();
                 currTrans = transIter.current();
-                currAbility = abilityIter.current();
-                System.out.println(currTrans);
 
             }
         });
 
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                //modes.get(index).prev();
                 transIter.prev();
                 currTrans = transIter.current();
-                currAbility = abilityIter.current();
-                System.out.println(currTrans);
 
             }
         });
 
         keyMap.put(KeyCode.UP, new Action() {
             public void execute() {
-                index++;
-                index %= modes.size();
-                current = modes.get(index);
+                abilityIter.next();
+                currAbility = abilityIter.current();
 
             }
         });
 
         keyMap.put(KeyCode.DOWN, new Action() {
             public void execute() {
-                index--;
-                if (index < 0)
-                    index = modes.size()-1;
-                current = modes.get(index);
-
-
+                abilityIter.next();
+                currAbility = abilityIter.current();
             }
         });
 
@@ -112,31 +100,16 @@ public class MovementController implements Observable {
 
             }
         });
-
-        keyMap.put(KeyCode.ESCAPE, new Action() {
-            public void execute() {
-                //pickUpResources();
-
-            }
-        });
     }
-
-    private void initializeModes(){
-        //modes.add(new TransporterMode(transIter));
-        //modes.add(new ResourceOnTileMode(currTrans));
-        //modes.add(new ResourceOnTransporterMode(currTrans));
-
-        //current = modes.get(0);
-    }
-
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                //model.nextPlayer();
+                model.changeTurn();
                 if (lastPlayer)
                     notifyAllObservers();
                 lastPlayer = !lastPlayer;
+                player = model.getCurrentPlayer();
             }
         };
 
