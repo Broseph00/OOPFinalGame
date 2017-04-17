@@ -3,7 +3,7 @@ package com.iteration3.model.Players;
 import java.util.ArrayList;
 
 public class WonderRow {
-    private static int maxScore = 10;
+    private static int MAX_ROW_SCORE = 10;
     private int maxBrickCount;
     private ArrayList<Integer> neutralBricks;
     private ArrayList<Brick> bricks;
@@ -50,7 +50,7 @@ public class WonderRow {
         int ownerBricks = countOwnerBricks(owner);
         int totalPlayerBricks = countTotalPlayerBricks();
 
-        int ownerScore = (maxScore * ownerBricks) / totalPlayerBricks;
+        int ownerScore = (MAX_ROW_SCORE * ownerBricks) / totalPlayerBricks;
         return ownerScore;
     }
 

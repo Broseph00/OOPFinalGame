@@ -16,16 +16,16 @@ public class Wonder {
         rows = new ArrayList<WonderRow>();
         bricksPerRow = 4;
         rowMultiplierCounter = 1;
-        newRow();
+        rows.add(new WonderRow(4));
     }
 
     private void newRow() {
-        if (isFull()) {
+        if (isFull() || (getRowCount() == MAX_WONDER_ROWS)) {
             return;
         } else {
-            incrementRowMultiplierCounter();
             WonderRow wonderRow = new WonderRow(bricksPerRow);
             rows.add(wonderRow);
+            incrementRowMultiplierCounter();
         }
     }
 
@@ -53,7 +53,6 @@ public class Wonder {
 
     private void resetMultiplier() {
         ++bricksPerRow;
-        ++currentTier;
         rowMultiplierCounter = 1;
     }
 
@@ -71,9 +70,9 @@ public class Wonder {
         return currentRow.addBrick(owner);
     }
 
-    public void addNeutralBrick() {
+    public boolean addNeutralBrick() {
         if (isFull()) {
-            return;
+            return false;
         }
 
         WonderRow currentRow = getCurrentRow();
@@ -82,7 +81,7 @@ public class Wonder {
             currentRow = getCurrentRow();
         }
 
-        currentRow.addNeutralBrick();
+        return currentRow.addNeutralBrick();
     }
 
     public int getScore(Player owner) {
