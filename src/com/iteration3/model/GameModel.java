@@ -144,4 +144,27 @@ public class GameModel {
         }
     }
 
+    public void loadState() throws Exception{
+        this.loadSaveStateManager.loadState();
+    }
+
+    public void saveState() throws Exception{
+        this.loadSaveStateManager.saveState();
+    }
+
+    public Wonder getWonder() {
+        return wonder;
+    }
+
+    public WonderManager getWonderManager() {
+        return wonderManager;
+    }
+
+    public ExchangeManager getExchangeManager() {
+        return exchangeManager;
+    }
+
+    public ProductionManager getProductionManager() {
+        return productionManager;
+    }
 }
