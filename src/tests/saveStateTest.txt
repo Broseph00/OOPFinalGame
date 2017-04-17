@@ -3,5 +3,8 @@ resource1 ::= -1 0 1 3 goose
 resource2 ::= 0 -1 0 2 iron
 resource3 ::= 1 2 0 1 gold
 resource4 ::= 0 1 0 4 gold
-transport0 ::= 0 0 0 1 wagon 2 ::= gold board paper 
-transport1 ::= 1 1 1 1 raft 1 
+transport0 ::= 0 0 0 1 wagon player2 ::= gold board paper 
+transport1 ::= 1 1 1 1 raft player1 
+wall0 ::= 0 0 0 ::= player1:1-1 
+wall1 ::= 0 1 -1 ::= player1:4-1 
+bridge0 ::= 0 0 0 ::= 1 

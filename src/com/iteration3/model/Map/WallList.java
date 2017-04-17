@@ -54,4 +54,7 @@ public class WallList {
         return 0;
     }
 
+    public ArrayList<Wall> getWalls() {
+        return walls;
+    }
 }

@@ -52,7 +52,7 @@ public class LoadSaveStateManager {
 
             }
             else if(splitLine[0].contains("wall")) {
-
+                addWallToMap(splitLine);
             }
             else if(splitLine[0].contains("bridge")) {
                 addBridgeToMap(splitLine);
@@ -73,6 +73,7 @@ public class LoadSaveStateManager {
 
         saveResourcesFromMap(fw);
         saveTransportsFromMap(fw);
+        saveWallsFromMap(fw);
         saveBridgesFromMap(fw);
 
         fw.close();
@@ -136,7 +137,7 @@ public class LoadSaveStateManager {
         Player player;
 
         // get the correct player and initialize dummy transport
-        if(splitLine[7].equals("1")) {
+        if(splitLine[7].equals("player1")) {
             player = this.player1;
         } else {
             player = this.player2;
@@ -251,6 +252,44 @@ public class LoadSaveStateManager {
 
 
 
+    private void addWallToMap(String[] splitLine) {
+
+        // handle location
+        int x = Integer.parseInt(splitLine[2]);
+        int y = Integer.parseInt(splitLine[3]);
+        int z = Integer.parseInt(splitLine[4]);
+
+        if(splitLine.length > 5) {
+            for(int i = 6; i < splitLine.length; i++) {
+                String wallString = splitLine[i];
+
+                if(wallString.length() > 6) {
+                    Player player;
+                    if(wallString.charAt(6) == '1') {
+                        player = this.player1;
+                    } else {
+                        player = player2;
+                    }
+
+                    int edge = Integer.parseInt(Character.toString(wallString.charAt(8)));
+                    int strength = Integer.parseInt(Character.toString(wallString.charAt(10)));
+
+                    map.addWall(new Location(x,y,z),player,edge,strength);
+                }
+                else {
+
+                    int edge = Integer.parseInt(Character.toString(wallString.charAt(0)));
+                    int strength = Integer.parseInt(Character.toString(wallString.charAt(2)));
+
+                    map.addNeutralWall(new Location(x,y,z), edge,strength);
+                }
+            }
+        }
+
+
+    }
+
+
 
 
     // SAVE HELPER FUNCTIONS *********************************************************************
@@ -325,13 +364,13 @@ public class LoadSaveStateManager {
                 id++;
 
                 if(transport instanceof Truck) {
-                    line += x + " " + y + " " + z + " " + region + " " + "truck" + " " + transport.getOwner().getId() + " ";
+                    line += x + " " + y + " " + z + " " + region + " " + "truck" + " player" + transport.getOwner().getId() + " ";
                 }
                 else if(transport instanceof Wagon) {
-                    line += x + " " + y + " " + z + " " + region + " " + "wagon" + " " + transport.getOwner().getId() + " ";
+                    line += x + " " + y + " " + z + " " + region + " " + "wagon" + " player" + transport.getOwner().getId() + " ";
                 }
                 else if(transport instanceof Donkey) {
-                    line += x + " " + y + " " + z + " " + region + " " + "wagon" + " " + transport.getOwner().getId() + " ";
+                    line += x + " " + y + " " + z + " " + region + " " + "wagon" + " player" + transport.getOwner().getId() + " ";
                 }
                 else if(transport instanceof Raft) {
                     String raftString = "raft";
@@ -339,7 +378,7 @@ public class LoadSaveStateManager {
                         raftString += "-docked";
                     }
 
-                    line += x + " " + y + " " + z + " " + region + " " + raftString + " " + transport.getOwner().getId() + " ";
+                    line += x + " " + y + " " + z + " " + region + " " + raftString + " player" + transport.getOwner().getId() + " ";
                 }
                 else if(transport instanceof Rowboat) {
                     String rowboatString = "rowboat";
@@ -347,7 +386,7 @@ public class LoadSaveStateManager {
                         rowboatString += "-docked";
                     }
 
-                    line += x + " " + y + " " + z + " " + region + " " + rowboatString + " " + transport.getOwner().getId() + " ";
+                    line += x + " " + y + " " + z + " " + region + " " + rowboatString + " player" + transport.getOwner().getId() + " ";
                 }
                 else if(transport instanceof Steamship) {
                     String steamshipString = "steamship";
@@ -355,7 +394,7 @@ public class LoadSaveStateManager {
                         steamshipString += "-docked";
                     }
 
-                    line += x + " " + y + " " + z + " " + region + " " + steamshipString + " " + transport.getOwner().getId() + " ";
+                    line += x + " " + y + " " + z + " " + region + " " + steamshipString + " player" + transport.getOwner().getId() + " ";
                 }
 
                 if(transport.getResourceList().getResources().size() > 0) {
@@ -420,8 +459,42 @@ public class LoadSaveStateManager {
 
             fw.write(line + '\n');
         }
-
-
     }
+
+    private void saveWallsFromMap(FileWriter fw) throws IOException {
+        int id = 0;
+        for(Location location: map.getWalls().keySet()) {
+            int x = location.getX();
+            int y = location.getY();
+            int z = location.getZ();
+
+            WallList wallList = this.map.getWalls().get(location);
+
+            String line = "wall" + id + " ::= " + Integer.toString(x) + " " + Integer.toString(y) + " " + Integer.toString(z) + " ::= ";
+            id++;
+
+            for(Wall wall: wallList.getWalls()) {
+                if(wall instanceof WallWithOwner) {
+                    String playerID = "";
+                    if(((WallWithOwner) wall).getOwner() == player1) {
+                        playerID = "1";
+                    } else {
+                        playerID = "2";
+                    }
+                    line += "player" + playerID + ":";
+                }
+
+                int edge = wall.getEdge();
+                int strength = wall.getStrength();
+
+                line += Integer.toString(edge) + "-" + Integer.toString(strength) + " ";
+
+            }
+
+            fw.write(line + '\n');
+        }
+    }
+
+
 
 }

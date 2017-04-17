@@ -175,6 +175,9 @@ public class MapTests {
         assertTrue(map.getBridges().get(new Location(0,0,0)).contains(1));
         assertTrue(map.getBridges().get(new Location(0,0,0)).contains(3));
 
+        // check walls are there
+        assertTrue(map.getWalls().get(new Location(0,0,0)).getWalls().size() == 3);
+
     }
 
     @Test
@@ -188,12 +191,14 @@ public class MapTests {
 
         mapManager.fillMapFromTextFile();
 
+        // test resources
         map.addResource(new Gold(), new RegionLocation(0,0,0,1));
         map.addResource(new Goose(), new RegionLocation(-1,0,1,3));
         map.addResource(new Iron(), new RegionLocation(0,-1,0,2));
         map.addResource(new Gold(), new RegionLocation(1,2,0,1));
         map.addResource(new Gold(), new RegionLocation(0,1,0,4));
 
+        // test transports
         Raft raft = new Raft(player1);
         Donkey donkey = new Donkey(player2);
 
@@ -204,7 +209,11 @@ public class MapTests {
         map.addTransport(donkey, new RegionLocation(0,0,0,1));
         map.addTransport(raft, new RegionLocation(1,1,1,1));
 
-//        map.addBridge();
+        // test bridges
+        map.addBridge(new Location(0,0,0), 1);
+
+        // test walls
+        map.addWall(new Location(0,0,0), player1, 1,1);
 
         saveStateManager.saveState();
 
