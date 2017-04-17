@@ -1,4 +1,6 @@
-package com.iteration3.model.Players;
+package com.iteration3.model.Players.Wonder;
+
+import com.iteration3.model.Players.Player;
 
 import java.util.ArrayList;
 
@@ -9,23 +11,23 @@ public class Wonder {
 
     private ArrayList<WonderRow> rows;
     private int bricksPerRow;
-    private int rowMultiplierCounter;
+    private int nextRow;
     private int currentTier;
 
     public Wonder() {
         rows = new ArrayList<WonderRow>();
         bricksPerRow = 4;
-        rowMultiplierCounter = 1;
+        nextRow = 1;
         newRow();
     }
 
     private void newRow() {
-        if (isFull()) {
+        if (isFull() || (getRowCount() == MAX_WONDER_ROWS)) {
             return;
         } else {
-            incrementRowMultiplierCounter();
             WonderRow wonderRow = new WonderRow(bricksPerRow);
             rows.add(wonderRow);
+            incrementRowMultiplierCounter();
         }
     }
 
@@ -45,16 +47,15 @@ public class Wonder {
     }
 
     private void incrementRowMultiplierCounter() {
-        ++rowMultiplierCounter;
-        if (rowMultiplierCounter == bricksPerRow) {
+        ++nextRow;
+        if (nextRow == bricksPerRow) {
             resetMultiplier();
         }
     }
 
     private void resetMultiplier() {
         ++bricksPerRow;
-        ++currentTier;
-        rowMultiplierCounter = 1;
+        nextRow = 1;
     }
 
     public boolean addBrick(Player owner) {
@@ -71,9 +72,9 @@ public class Wonder {
         return currentRow.addBrick(owner);
     }
 
-    public void addNeutralBrick() {
+    public boolean addNeutralBrick() {
         if (isFull()) {
-            return;
+            return false;
         }
 
         WonderRow currentRow = getCurrentRow();
@@ -82,7 +83,7 @@ public class Wonder {
             currentRow = getCurrentRow();
         }
 
-        currentRow.addNeutralBrick();
+        return currentRow.addNeutralBrick();
     }
 
     public int getScore(Player owner) {

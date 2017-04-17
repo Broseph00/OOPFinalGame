@@ -1,4 +1,7 @@
-package com.iteration3.model.Players;
+package com.iteration3.model.Managers;
+
+import com.iteration3.model.Players.Player;
+import com.iteration3.model.Players.Wonder.Wonder;
 
 public class WonderManager {
     private final int IRRIGATION_ROW = 10;
