@@ -3,6 +3,7 @@ package com.iteration3.controller.Controllers;
 import com.iteration3.controller.Action;
 import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
+import com.iteration3.model.Players.Player;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ public class WonderController{
     HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> endTurn;
     int numBricks;
+    Player player;
 
     public WonderController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
@@ -54,7 +56,7 @@ public class WonderController{
 
         keyMap.put(KeyCode.ENTER, new Action() {
             public void execute() {
-                //model.buildBricks(numBricks);
+                //model.buildBricks(player, numBricks);
 
             }
         });
@@ -63,10 +65,11 @@ public class WonderController{
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
-            @Override
             public void handle(ActionEvent e) {
-
                 //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                notifyAllObservers();
             }
         };
     }

@@ -49,7 +49,7 @@ public class MovementController implements Observable {
         lastPlayer = false;
         index = 0;
 
-        model.getCurrentPlayer();
+        player = model.getCurrentPlayer();
         transIter = player.getTransportIterator();
         currTrans = transIter.first();
         abilityIter = currTrans.makeAbilityIterator();
@@ -99,7 +99,7 @@ public class MovementController implements Observable {
 
         keyMap.put(KeyCode.ENTER, new Action() {
             public void execute() {
-                //pickUpResources();
+                currAbility.execute();
 
             }
         });
@@ -123,10 +123,11 @@ public class MovementController implements Observable {
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
-            @Override
             public void handle(ActionEvent e) {
-
                 //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                notifyAllObservers();
             }
         };
 
