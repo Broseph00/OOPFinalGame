@@ -1,5 +1,8 @@
 package com.iteration3.model.Managers;
 
+import com.iteration3.model.Abilities.ConstructAbility.ConstructBridgeAbility;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructRoadAbility;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructWallAbility;
 import com.iteration3.model.Abilities.DockAbility.DockatSeaAbility;
 import com.iteration3.model.Abilities.MoveAbility.MoveAbility;
 import com.iteration3.model.Map.Location;
@@ -139,19 +142,19 @@ public class ValidationManager {
         }
     }
 
-    public boolean containsRoad(Transporter transporter){
+    public boolean containsRoad(Transporter transporter, ConstructRoadAbility ability){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         Location location = regionLocation.getLocation();
-        //TODO GETEDGE
-        Location end = location.getLocationEdge(1);
+        int edge = ability.getBorder();
+        Location end = location.getLocationEdge(edge);
         return map.containsRoad(location, end);
     }
 
-    public boolean containsBridge(Transporter transporter){
+    public boolean containsBridge(Transporter transporter, ConstructBridgeAbility ability){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         Location location = regionLocation.getLocation();
-        //TODO GETEDGE
-        return map.containsBridge(location, 1);
+        int edge = ability.getBorder();
+        return map.containsBridge(location, edge);
     }
 
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
@@ -204,9 +207,10 @@ public class ValidationManager {
         return map.existingProducer(regionLocation);
     }
 
-    public boolean wallOwnedByOpposingPlayer(Transporter transporter, int edge){
+    public boolean wallOwnedByOpposingPlayer(Transporter transporter, ConstructWallAbility ability){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         Location location = regionLocation.getLocation();
+        int edge = ability.getBorder();
         return map.wallOwnedByOpposingPlayer(location, transporter.getOwner(), edge);
     }
 

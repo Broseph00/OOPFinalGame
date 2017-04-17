@@ -2,6 +2,7 @@ package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.ConstructAbility.*;
 import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Abilities.ProductionAbility.ProduceBoardAbility;
@@ -236,24 +237,51 @@ public class ExecutionManager {
 
     }
 
-    public void execute(BuildRoadAbility ability){
+    public void executeRoadAbility(ConstructRoadAbility ability){
         Transporter transporter = ability.getTransporter();
         RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
-        //TODO GETEDGE
-        int edge = 1;
+        int edge = ability.getBorder();
         Location end = location.getLocationEdge(edge);
         map.addRoad(location, end);
     }
 
-    public void execute(BuildWallAbility ability){
+    public void execute(ConstructRoad1Ability ability){executeRoadAbility(ability);}
+    public void execute(ConstructRoad2Ability ability){executeRoadAbility(ability);}
+    public void execute(ConstructRoad3Ability ability){executeRoadAbility(ability);}
+    public void execute(ConstructRoad4Ability ability){executeRoadAbility(ability);}
+    public void execute(ConstructRoad5Ability ability){executeRoadAbility(ability);}
+    public void execute(ConstructRoad6Ability ability){executeRoadAbility(ability);}
+
+    public void executeWallAbility(ConstructWallAbility ability){
         Transporter transporter = ability.getTransporter();
         RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
-        //TODO GETEDGE
-        int edge = 1;
+        int edge = ability.getBorder();
         map.addWall(location, transporter.getOwner(), edge, 1);
     }
+
+    public void execute(ConstructWall1Ability ability){executeWallAbility(ability);}
+    public void execute(ConstructWall2Ability ability){executeWallAbility(ability);}
+    public void execute(ConstructWall3Ability ability){executeWallAbility(ability);}
+    public void execute(ConstructWall4Ability ability){executeWallAbility(ability);}
+    public void execute(ConstructWall5Ability ability){executeWallAbility(ability);}
+    public void execute(ConstructWall6Ability ability){executeWallAbility(ability);}
+
+    public void executeBridgeAbility(ConstructBridgeAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        int edge = ability.getBorder();
+        map.addBridge(location, edge);
+    }
+
+    public void execute(ConstructBridge1Ability ability){executeBridgeAbility(ability);}
+    public void execute(ConstructBridge2Ability ability){executeBridgeAbility(ability);}
+    public void execute(ConstructBridge3Ability ability){executeBridgeAbility(ability);}
+    public void execute(ConstructBridge4Ability ability){executeBridgeAbility(ability);}
+    public void execute(ConstructBridge5Ability ability){executeBridgeAbility(ability);}
+    public void execute(ConstructBridge6Ability ability){executeBridgeAbility(ability);}
 
     private int getOppositeRegion(int exitRegion, int exitEdge){
         if(exitEdge==1){
