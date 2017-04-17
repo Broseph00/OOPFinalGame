@@ -64,7 +64,7 @@ public class MovementController implements Observable {
     }
 
     private void initializeKeyMap() {
-        keyMap.put(KeyCode.RIGHT, new Action() {
+        keyMap.put(KeyCode.D, new Action() {
             public void execute() {
                 modes.get(index).next();
                 currTrans = transIter.current();
@@ -74,7 +74,7 @@ public class MovementController implements Observable {
             }
         });
 
-        keyMap.put(KeyCode.LEFT, new Action() {
+        keyMap.put(KeyCode.A, new Action() {
             public void execute() {
                 modes.get(index).prev();
                 currTrans = transIter.current();
@@ -84,7 +84,7 @@ public class MovementController implements Observable {
             }
         });
 
-        keyMap.put(KeyCode.UP, new Action() {
+        keyMap.put(KeyCode.W, new Action() {
             public void execute() {
                 index++;
                 index %= modes.size();
@@ -93,7 +93,7 @@ public class MovementController implements Observable {
             }
         });
 
-        keyMap.put(KeyCode.DOWN, new Action() {
+        keyMap.put(KeyCode.S, new Action() {
             public void execute() {
                 index--;
                 if (index < 0)

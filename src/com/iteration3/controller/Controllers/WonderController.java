@@ -40,14 +40,14 @@ public class WonderController{
     }
 
     private void initializeKeyMap() {
-        keyMap.put(KeyCode.UP, new Action() {
+        keyMap.put(KeyCode.W, new Action() {
             public void execute() {
                 numBricks++;
 
             }
         });
 
-        keyMap.put(KeyCode.DOWN, new Action() {
+        keyMap.put(KeyCode.S, new Action() {
             public void execute() {
                 numBricks--;
 
