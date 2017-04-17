@@ -1,22 +1,20 @@
 package com.iteration3.model;
 
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
-import com.iteration3.model.Players.Wonder;
-import com.iteration3.model.Players.WonderManager;
+import com.iteration3.model.Players.Wonder.Wonder;
+import com.iteration3.model.Managers.WonderManager;
 import com.iteration3.model.Resource.Board;
 import com.iteration3.model.Resource.Goose;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.Stone;
-import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModel {
@@ -77,6 +75,9 @@ public class GameModel {
         return map.getRivers();
     }
 
+    public River getRiver(Location location) { return map.getRiver(location); }
+    public ArrayList<Integer> getRiverEdges(Location location) { return map.getRiverEdges(location); }
+
     public HashMap<Location, BridgeList> getBridges() {
         return map.getBridges();
     }
@@ -99,6 +100,10 @@ public class GameModel {
 
     public HashMap<RegionLocation, ResourceList> getResources() {
         return map.getResources();
+    }
+
+    public HashMap<RegionLocation, Producer> getProducers(){
+        return map.getProducers();
     }
 
     public Tile getTile(Location location) {
@@ -147,6 +152,18 @@ public class GameModel {
         else {
             currentPlayer = player1;
         }
+    }
+
+    public boolean validateWonderTransporter(Player player){
+        RegionLocation regionLocation = player.getStartingRegionLocation();
+        HashMap<RegionLocation, TransportList> transporterHashMap = map.getTransports();
+        TransportList transportList = transporterHashMap.get(regionLocation);
+        for(Transporter transporter : transportList.getTransports()){
+            if(transporter.getOwner() == player){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void loadState() throws Exception{

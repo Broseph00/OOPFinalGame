@@ -1,4 +1,6 @@
-package com.iteration3.model.Players;
+package com.iteration3.model.Players.Wonder;
+
+import com.iteration3.model.Players.Player;
 
 public class PlayerBrick implements Brick {
     private Player owner;

@@ -177,6 +177,24 @@ public class ValidationManager {
                 resourceList.addAll(map.getResources().get(newReg));
             }
         }
+        resourceList.addAll(transporter.getResourceList());
+        return resourceList;
+    }
+
+    public ResourceList getAvailableResources(RegionLocation regionLocation){
+        int region = regionLocation.getRegion();
+        Location location = regionLocation.getLocation();
+        Region regions = map.getRegions().get(location);
+        ArrayList<Integer> connected = regions.getRegion(region);
+        ResourceList resourceList = new ResourceList();
+        Iterator<Integer> iterator = connected.iterator();
+        while(iterator.hasNext()){
+            int hold = iterator.next();
+            RegionLocation newReg = new RegionLocation(location, hold);
+            if(map.getResources().containsKey(newReg)){
+                resourceList.addAll(map.getResources().get(newReg));
+            }
+        }
         return resourceList;
     }
 
@@ -212,6 +230,16 @@ public class ValidationManager {
         Location location = regionLocation.getLocation();
         int edge = ability.getBorder();
         return map.wallOwnedByOpposingPlayer(location, transporter.getOwner(), edge);
+    }
+
+    public boolean transporterHasResource(Transporter transporter){
+        return !transporter.getResourceList().isEmpty();
+    }
+
+    public boolean canPickupResource(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        ResourceList resourceList = map.getAvailableResources(transporter);
+        return !resourceList.isEmpty();
     }
 
     private int oppositeEdge(int edge){
