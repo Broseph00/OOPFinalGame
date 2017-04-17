@@ -1,4 +1,4 @@
-//package tests;
+package tests;//package tests;
 
 import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.Managers.MapFileManager;
@@ -9,6 +9,8 @@ import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Players.Research.OilResearch;
 import com.iteration3.model.Players.Research.Research;
+import com.iteration3.model.Resource.Board;
+import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Transporter;
 import org.junit.Test;
@@ -27,8 +29,10 @@ public class AbilityTest {
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
-
-        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
+        RegionLocation regionLocation = new RegionLocation(0,3,-3,1);
+        Player player1 = new Player(map, 1, regionLocation);
+        Resource resource = new Board();
+        map.addResource(resource, regionLocation);
         Transporter transporter = new Donkey(player1);
         map.addTransport(transporter, new RegionLocation(new Location(0,0,0), 1));
         assertEquals(true, transporter.getAbilityList().isEmpty());
