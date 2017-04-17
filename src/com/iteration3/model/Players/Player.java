@@ -17,7 +17,7 @@ public class Player {
     private TransportList transportersList;
     private AbilityManager abilityManager;
     private ResearchManager researchManager;
-    RegionLocation startingRegionLocation;
+    private RegionLocation startingRegionLocation;
 
     public Player(Map map, int id, RegionLocation startingLocation){
         researchManager = new ResearchManager();

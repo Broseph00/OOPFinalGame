@@ -144,4 +144,16 @@ public class GameModel {
         }
     }
 
+    public boolean validateWonderTransporter(Player player){
+        RegionLocation regionLocation = player.getStartingRegionLocation();
+        HashMap<RegionLocation, TransportList> transporterHashMap = map.getTransports();
+        TransportList transportList = transporterHashMap.get(regionLocation);
+        for(Transporter transporter : transportList.getTransports()){
+            if(transporter.getOwner() == player){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
