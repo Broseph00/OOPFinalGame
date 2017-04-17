@@ -32,5 +32,8 @@ public class MoveDegree210Ability extends MoveAbility {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+    public void execute(){
+        executionManager.execute(this);
+    }
 
 }

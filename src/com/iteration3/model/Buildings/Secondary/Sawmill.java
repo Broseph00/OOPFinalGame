@@ -13,7 +13,7 @@ public class Sawmill extends SecondaryProducer {
         initialize();
     }
 
-    private void initialize(){
+    public void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Trunk());
         addRequirement(req1);
     }

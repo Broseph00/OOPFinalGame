@@ -21,7 +21,6 @@ import java.util.HashMap;
 public class GameModel {
     private Map map;
     private LoadSaveStateManager loadSaveStateManager;
-    private Wonder wonder;
     private WonderManager wonderManager;
     private ExchangeManager exchangeManager;
     private ProductionManager productionManager;
@@ -33,13 +32,13 @@ public class GameModel {
     public GameModel() throws Exception{
         map = new Map();
         exchangeManager = new ExchangeManager(map);
-        productionManager = new ProductionManager();
-        wonder = new Wonder();
-        wonderManager = new WonderManager(wonder);
-        player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
+        productionManager = new ProductionManager(map);
+        wonderManager = new WonderManager(this);
+
+        player1 = new Player(map, 1, new RegionLocation(0,0,0,1));
         player2 = new Player(map, 2, new RegionLocation(0,-3,3,1));
         currentPlayer = player1;
-        loadSaveStateManager = new LoadSaveStateManager(map, "src/com/iteration3/RoadsAndBoatsSavedState.txt", player1, player2, wonder);
+        loadSaveStateManager = new LoadSaveStateManager(map, "src/com/iteration3/RoadsAndBoatsSavedState.txt", player1, player2, getWonder());
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
         this.intializePlayers();
@@ -129,9 +128,9 @@ public class GameModel {
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
 
-        currentPlayer.addTransporter(new Donkey(currentPlayer));
-        currentPlayer.addTransporter(new Donkey(currentPlayer));
-        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        //currentPlayer.addTransporter(new Donkey(currentPlayer));
+        //currentPlayer.addTransporter(new Donkey(currentPlayer));
+        //currentPlayer.addTransporter(new Donkey(currentPlayer));
 
         // initialize player2
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
@@ -177,7 +176,7 @@ public class GameModel {
     }
 
     public Wonder getWonder() {
-        return wonder;
+        return wonderManager.getWonder();
     }
 
     public WonderManager getWonderManager() {

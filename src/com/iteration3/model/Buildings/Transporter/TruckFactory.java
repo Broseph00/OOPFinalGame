@@ -6,8 +6,16 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.utilities.GameLibrary;
 
+import java.util.ArrayList;
+
 public class TruckFactory extends TransporterFactory {
     public TruckFactory() {
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+
     }
 
     @Override
@@ -19,6 +27,7 @@ public class TruckFactory extends TransporterFactory {
         }
         return false;
     }
+
 
     @Override
     public Truck produce(Player player, ResourceList availableResources) {

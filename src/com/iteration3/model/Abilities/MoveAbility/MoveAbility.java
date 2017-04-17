@@ -28,4 +28,8 @@ public abstract class MoveAbility extends Ability {
     public int getRegion(){ return region; }
 
     public int getBorder(){ return border; }
+
+    public void execute(){
+        executionManager.execute(this);
+    }
 }

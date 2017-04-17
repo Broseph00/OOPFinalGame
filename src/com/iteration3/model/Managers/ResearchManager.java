@@ -1,12 +1,13 @@
 package com.iteration3.model.Managers;
 
+import com.iteration3.utilities.Observable;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.Players.Research.*;
-import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.model.Visitors.ResearchTypeVisitor;
 
 import java.util.ArrayList;
 
-public class ResearchManager {
+public class ResearchManager implements Observable{
     private ArrayList<Research> researchList;
     private boolean finishedEnlargementResearch;
     private boolean finishedNewShaftResearch;
@@ -110,4 +111,26 @@ public class ResearchManager {
     public String getResearchName(Research research){
         return research.getResearchType(researchVisitor);
     }
+
+    @Override
+    public void addObserver(Observer obs) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer obs) {
+
+    }
+
+    @Override
+    public void notifyAllObservers() {
+
+    }
+
+
+    // add map as parameter
+    // go through all tiles on map and check for 2 geese 1 paper
+    // if this occurs, remove them from tile/transport
+    // if there is a transport, get the player and give them option of research to complete
+
 }

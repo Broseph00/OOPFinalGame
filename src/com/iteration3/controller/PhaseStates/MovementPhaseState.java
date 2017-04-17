@@ -5,9 +5,9 @@ import com.iteration3.controller.ControlDispatch;
 import com.iteration3.controller.Controllers.CursorController;
 import com.iteration3.controller.Controllers.MovementController;
 import com.iteration3.controller.Controllers.TileViewController;
-import com.iteration3.controller.Observer;
 import com.iteration3.controller.PhaseStates.BuildingPhaseState;
 import com.iteration3.controller.PhaseStates.ControlDispatchState;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyCode;
@@ -39,12 +39,14 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
         tileViewController = new TileViewController(model, window, keyMap);
         cursorController = new CursorController(model, window, keyMap);
         cursorController.addObserver(tileViewController);
+        System.out.println("Move Phase");
+        System.out.println("after " + dispatch.getCurrentState());
 
     }
 
     @Override
     public void handleInput(KeyEvent event) {
-        System.out.print(event);
+        System.out.println("Movement command");
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
     }
@@ -52,7 +54,7 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
     @Override
     public void nextState() {
         dispatch.changeState(new BuildingPhaseState(dispatch, model, window));
-        System.out.println("New state");
+        window.swapToBuildingView();
     }
 
     public void update() {

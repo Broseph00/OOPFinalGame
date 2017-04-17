@@ -1,8 +1,8 @@
 package com.iteration3.controller.Controllers;
 
 import com.iteration3.controller.Action;
-import com.iteration3.controller.Observable;
-import com.iteration3.controller.Observer;
+import com.iteration3.utilities.Observable;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
@@ -11,7 +11,6 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -50,6 +49,7 @@ public class ProductionController implements Observable {
 
         initializeKeyMap();
         createHandlers();
+        player.updateTransporterAbilities();
     }
 
     private void initializeKeyMap() {
@@ -77,16 +77,18 @@ public class ProductionController implements Observable {
 
         keyMap.put(KeyCode.UP, new Action() {
             public void execute() {
-                abilityIter.prev();
+                abilityIter.next();
                 currAbility = abilityIter.current();
+                System.out.println("Ability: " + currAbility.getName());
 
             }
         });
 
         keyMap.put(KeyCode.DOWN, new Action() {
             public void execute() {
-                transIter.prev();
+                abilityIter.prev();
                 currAbility = abilityIter.current();
+                System.out.println("Ability: " + currAbility.getName());
 
             }
         });
@@ -94,6 +96,7 @@ public class ProductionController implements Observable {
         keyMap.put(KeyCode.ENTER, new Action() {
             public void execute() {
                 currAbility.execute();
+                player.updateTransporterAbilities();
             }
         });
 
@@ -138,18 +141,18 @@ public class ProductionController implements Observable {
 
     public void updateResourcesList(){
         String tile = "";
-        tile += "Trunks: " + tileResourceList.getTrunks() + "\n";
-        tile += "Boards: " + tileResourceList.getBoards() + "\n";
-        tile += "Paper: " + tileResourceList.getPaper() + "\n";
-        tile += "Goose: " + tileResourceList.getGeese() + "\n";
-        tile += "Clay: " + tileResourceList.getClay() + "\n";
-        tile += "Stone: " + tileResourceList.getStones() + "\n";
-        tile += "Fuel: " + tileResourceList.getFuel() + "\n";
-        tile += "Iron: " + tileResourceList.getIron() + "\n";
-        tile += "Gold: " + tileResourceList.getGold() + "\n";
-        tile += "Coins: " + tileResourceList.getCoins() + "\n";
-        tile += "Stock: " + tileResourceList.getStock() + "\n";
-        window.setCurrentTileResource(tile);
+        tile += "Trunks: " + tileResourceList.getTrunks().size() + "\n";
+        tile += "Boards: " + tileResourceList.getBoards().size() + "\n";
+        tile += "Paper: " + tileResourceList.getPaper().size() + "\n";
+        tile += "Goose: " + tileResourceList.getGeese().size() + "\n";
+        tile += "Clay: " + tileResourceList.getClay().size() + "\n";
+        tile += "Stone: " + tileResourceList.getStones().size() + "\n";
+        tile += "Fuel: " + tileResourceList.getFuel().size() + "\n";
+        tile += "Iron: " + tileResourceList.getIron().size() + "\n";
+        tile += "Gold: " + tileResourceList.getGold().size() + "\n";
+        tile += "Coins: " + tileResourceList.getCoins().size() + "\n";
+        tile += "Stock: " + tileResourceList.getStock().size() + "\n";
+        window.setTileResourceList(tile);
 
         String transporter = "";
         transporter += "Trunks: " + transporterResourceList.getTrunks() + "\n";
@@ -163,7 +166,7 @@ public class ProductionController implements Observable {
         transporter += "Gold: " + transporterResourceList.getGold() + "\n";
         transporter += "Coins: " + transporterResourceList.getCoins() + "\n";
         transporter += "Stock: " + transporterResourceList.getStock() + "\n";
-        window.setCurrentTransportResource(transporter);
+        window.setTransportResourceList(transporter);
 
     }
 }
