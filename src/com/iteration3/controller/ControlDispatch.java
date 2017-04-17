@@ -1,6 +1,7 @@
 package com.iteration3.controller;
 
 import com.iteration3.controller.PhaseStates.ControlDispatchState;
+import com.iteration3.controller.PhaseStates.ProductionPhaseState;
 import com.iteration3.controller.PhaseStates.WelcomeState;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
@@ -23,6 +24,14 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
         this.welcomeViewWindow = welcomeViewWindow;
         window.setOnKeyPressed(this);
         currentState = new WelcomeState(this, model, window, welcomeViewWindow);
+        window.addKeyHandler(this);
+    }
+
+    public ControlDispatch(GameModel model, GameWindow window){
+        this.model = model;
+        this.window = window;
+        currentState = new ProductionPhaseState(this, model, window);
+        window.addKeyHandler(this);
     }
 
     public void setCurrentState(ControlDispatchState state){
@@ -31,7 +40,7 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
 
     @Override
     public void handle(KeyEvent event) {
-
+        System.out.print(event);
         currentState.handleInput(event);
     }
 

@@ -122,6 +122,10 @@ public class GameModel {
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
 
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+
         // initialize player2
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
