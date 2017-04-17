@@ -9,6 +9,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -26,8 +27,11 @@ public class GameWindow extends VBox implements View {
         this.mainView = new MainView(width, height);
         this.wonderView = new WonderView(width, height, wonderRows);
         tabPane.setFocusTraversable(false);
+        this.setFocusTraversable(true);
+ 
         initializeMenuBar();
         initializeTabs();
+        
     }
 
     private void initializeMenuBar() {
@@ -56,7 +60,7 @@ public class GameWindow extends VBox implements View {
         getTabPane().setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         this.getChildren().add(getTabPane());
     }
-
+    
     public MainView getMainView() {
         return mainView;
     }
@@ -224,5 +228,14 @@ public class GameWindow extends VBox implements View {
 	    }
 	    public void moveCursorSouth(){
 	        mainView.moveCursorSouth();
+	    }
+	    
+	    
+	    public void swapToBuildingView() {
+	    	mainView.swapToBuildingView();
+	    }
+	    
+	    public void swapToResearchView() {
+	    	mainView.swapToResearchView();
 	    }
 }
