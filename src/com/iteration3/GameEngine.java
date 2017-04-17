@@ -38,6 +38,7 @@ public class GameEngine {
 
         //TODO: Make size equal to screen resolution
         Scene scene = new Scene(gameWindow, 1221, 726);
+        scene.setOnKeyPressed(gameWindow.getOnKeyPressed());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Roads & Boats");
         primaryStage.show();
