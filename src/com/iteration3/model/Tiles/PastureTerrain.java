@@ -3,10 +3,11 @@ package com.iteration3.model.Tiles;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iTerrainVisitable;
 import com.iteration3.model.Visitors.iTerrainVisitor;
+import com.iteration3.utilities.GameLibrary;
 
 public class PastureTerrain extends Terrain {
     @Override
     public String getTerrainType() {
-        return "pasture";
+        return GameLibrary.PASTURE;
     }
 }

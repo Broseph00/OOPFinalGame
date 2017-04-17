@@ -1,6 +1,6 @@
 package com.iteration3.model.Managers;
 
-import com.iteration3.model.Abilities.DockatSeaAbility;
+import com.iteration3.model.Abilities.DockAbility.DockatSeaAbility;
 import com.iteration3.model.Abilities.MoveAbility.MoveAbility;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;

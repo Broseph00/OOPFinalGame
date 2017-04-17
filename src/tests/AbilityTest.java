@@ -1,8 +1,6 @@
 package tests;
 
 import com.iteration3.model.Abilities.Ability;
-import com.iteration3.model.Abilities.BuildOilRigAbility;
-import com.iteration3.model.GameModel;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Map.Location;
