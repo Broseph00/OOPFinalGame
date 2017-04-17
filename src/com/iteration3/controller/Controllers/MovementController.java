@@ -58,6 +58,8 @@ public class MovementController implements Observable {
         createHandlers();
         System.out.println("Move Controller");
         System.out.println(keyMap);
+
+        player.updateTransporterAbilities();
     }
 
     private void initializeKeyMap() {
@@ -99,12 +101,14 @@ public class MovementController implements Observable {
                     index = modes.size()-1;
                 current = modes.get(index);
 
+
             }
         });
 
         keyMap.put(KeyCode.ENTER, new Action() {
             public void execute() {
                 currAbility.execute();
+                player.updateTransporterAbilities();
 
             }
         });

@@ -55,8 +55,8 @@ public class BuildingController implements Observable {
         abilityIter = currTrans.makeAbilityIterator();
 
         initializeKeyMap();
-        initializeModes();
         createHandlers();
+        player.updateTransporterAbilities();
 
     }
 
@@ -81,6 +81,7 @@ public class BuildingController implements Observable {
             public void execute() {
                 abilityIter.next();
                 currAbility = abilityIter.current();
+                System.out.println("Ability: " + currAbility.getName());
 
             }
         });
@@ -89,9 +90,19 @@ public class BuildingController implements Observable {
             public void execute() {
                 abilityIter.prev();
                 currAbility = abilityIter.current();
+                System.out.println("Ability: " + currAbility.getName());
 
             }
         });
+
+        keyMap.put(KeyCode.ENTER, new Action() {
+            public void execute() {
+                currAbility.execute();
+                player.updateTransporterAbilities();
+
+            }
+        });
+
 
     }
 
@@ -105,17 +116,6 @@ public class BuildingController implements Observable {
                 lastPlayer = !lastPlayer;
             }
         };
-    }
-
-    private void initializeModes(){
-        //modes.add(new StructureMode(model, window));
-        //modes.add(new RoadMode(model, window));
-        //modes.add(new WallMode(model, window));
-        //modes.add(new BridgeMode(model, window));
-        //modes.add(new MineShaftMode(model, window));
-
-        //current = modes.get(index);
-
     }
 
     public void addObserver(Observer obs) {
