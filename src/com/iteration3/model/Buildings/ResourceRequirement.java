@@ -15,48 +15,9 @@ public class ResourceRequirement {
         }
     }
 
-    public boolean consume(ArrayList<Resource> availableResources){
-        ArrayList<Resource> matchingResources = getMatchingResources(availableResources);
-        boolean verified = verify(matchingResources);
-        if(verified){
-            matchingResources = null;
-        }
-        return verified;
+    public ArrayList<Resource> getResourceRequirements() {
+        return resourceRequirements;
     }
 
-    private ArrayList<Resource> getMatchingResources(ArrayList<Resource> availableResources){
-        ArrayList<Resource> matchingResources = new ArrayList<>();
 
-        for(Resource resource : resourceRequirements){
-            for(Resource suppliedResource : availableResources){
-                if(resource.equal(suppliedResource)){
-                    matchingResources.add(suppliedResource);
-                    availableResources.remove(suppliedResource);
-                    break;
-                }
-            }
-        }
-
-        return matchingResources;
-    }
-
-    public boolean verify(ArrayList<Resource> suppliedResources){
-        ArrayList<Resource> tempList = new ArrayList<>();
-
-        for(Resource supplied : suppliedResources){
-            for(Resource required : resourceRequirements){
-                if(supplied.equal(required)){
-                    tempList.add(required);
-                    resourceRequirements.remove(required);
-                }
-            }
-        }
-
-        boolean verified = resourceRequirements.isEmpty();
-        for(Resource r : tempList){
-            resourceRequirements.add(r);
-        }
-
-        return verified;
-    }
 }

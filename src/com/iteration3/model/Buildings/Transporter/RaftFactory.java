@@ -17,16 +17,15 @@ public class RaftFactory extends TransporterFactory {
 
     @Override
     public void initialize() {
-        ResourceRequirement req1 = new ResourceRequirement(new Trunk(), new Trunk());
-        addRequirement(req1);
+        addRequirement(new Trunk());
     }
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            if(reqs.verify(availableResources.getResources())){
-                return true;
-            }
+        if(availableResources.getTrunks().size() >= 2) {
+            availableResources.removeTrunk();
+            availableResources.removeTrunk();
+            return true;
         }
         return false;
     }
@@ -35,21 +34,17 @@ public class RaftFactory extends TransporterFactory {
 
     @Override
     public Raft produce(Player player, ResourceList availableResources) {
-        boolean canProduce = false;
+
+
+        boolean canProduce = checkResources(availableResources);
         Raft raft = null;
 
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            canProduce = reqs.consume(availableResources.getResources());
-            if(canProduce && (getCapacity() > 0)) {
-
-                raft = (canProduce && (getCapacity() > 0)) ? new Raft(player) : null;
-                decrementCapacity();
-                break;
-            }
+        if(canProduce && (getCapacity() > 0)) {
+            raft = new Raft(player);
+            decrementCapacity();
         }
 
         return raft;
-
 
     }
 

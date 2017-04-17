@@ -4,6 +4,7 @@ import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Buildings.ResourceRequirement;
 
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Transporter;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public abstract class TransporterFactory extends Producer {
 
-    private ArrayList<ResourceRequirement> necessaryResources;
+    private ArrayList<Resource> necessaryResources;
 
     public TransporterFactory() {
         super(1);
@@ -23,11 +24,11 @@ public abstract class TransporterFactory extends Producer {
 
     public abstract Transporter produce(Player player, ResourceList availableResources);
 
-    protected void addRequirement(ResourceRequirement requirement) {
+    protected void addRequirement(Resource requirement) {
         this.necessaryResources.add(requirement);
     }
 
-    protected ArrayList<ResourceRequirement> getNecessaryResources() {
+    public ArrayList<Resource> getNecessaryResources() {
         return necessaryResources;
     }
 
