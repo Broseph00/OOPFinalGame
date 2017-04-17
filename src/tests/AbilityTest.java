@@ -1,6 +1,8 @@
 package tests;//package tests;
 
+import com.iteration3.controller.ControlDispatch;
 import com.iteration3.model.Abilities.Ability;
+import com.iteration3.model.GameModel;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Map.Location;
@@ -14,6 +16,9 @@ import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.Stone;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.view.GameWindow;
+import com.iteration3.view.WelcomeViewWindow;
+import javafx.stage.Stage;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -24,14 +29,14 @@ import static org.junit.Assert.assertEquals;
 public class AbilityTest {
 
     @Test
-    public void testAbility() throws IOException {
-
-        Map map = new Map();
+    public void testAbility() throws Exception {
+        GameModel gameModel = new GameModel();
+        Map map = gameModel.getMap();
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
         RegionLocation regionLocation = new RegionLocation(0,0,0,1);
-        Player player1 = new Player(map, 1, regionLocation);
+        Player player1 = gameModel.getPlayer1();
         Resource resource = new Board();
         map.addResource(resource, regionLocation);
 
