@@ -18,7 +18,7 @@ import com.iteration3.utilities.GameLibrary;
 |
 ---------------------------------------------------------------------------------------*/
 
-public class BuildWallAbility extends Ability {
+public abstract class BuildWallAbility extends Ability {
 
     public BuildWallAbility(Transporter transporter, ExecutionManager executionManager){
         super(transporter, GameLibrary.BUILD_WALL_ABILITY, executionManager);
