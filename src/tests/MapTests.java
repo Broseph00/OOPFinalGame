@@ -190,6 +190,7 @@ public class MapTests {
         // check producer is there
         assertTrue(map.getProducers().size() == 2);
 
+
     }
 
     @Test
