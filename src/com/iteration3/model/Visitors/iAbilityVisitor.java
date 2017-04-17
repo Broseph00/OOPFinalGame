@@ -1,6 +1,11 @@
 package com.iteration3.model.Visitors;
 
-import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.ExchangeAbility.DropResourceAbility;
+import com.iteration3.model.Abilities.ExchangeAbility.PickupResourceAbility;
+import com.iteration3.model.Abilities.MoveAbility.*;
+import com.iteration3.model.Abilities.ProductionAbility.ProduceWoodAbility;
 
 /**
  * Created by test on 04/15/2017.
@@ -29,8 +34,9 @@ public interface iAbilityVisitor {
     String getType(BuildTruckFactoryAbility ability);
     String getType(BuildWagonFactoryAbility ability);
     String getType(BuildWoodcutterAbility ability);
-    String getType(BuildSpecializedMineAbility ability);
+    String getType(BuildIronMineAbility ability);
     String getType(BuildBigMineAbility ability);
+    String getType(BuildGoldMineAbility ability);
     String getType(BuildWallAbility ability);
     String getType(BuildRoadAbility ability);
 
@@ -66,4 +72,9 @@ public interface iAbilityVisitor {
     String getType(DockatRiver5Ability ability);
     String getType(DockatRiver6Ability ability);
     String getType(UndockAbility ability);
+
+    String getType(DropResourceAbility ability);
+    String getType(PickupResourceAbility ability);
+
+    String getType(ProduceWoodAbility ability);
 }

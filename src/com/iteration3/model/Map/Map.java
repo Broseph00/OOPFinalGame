@@ -11,7 +11,6 @@ import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
-import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 
 public class Map {
@@ -500,4 +499,7 @@ public class Map {
 
     }
 
+    public HashMap<RegionLocation, Producer> getProducers() {
+        return producers;
+    }
 }

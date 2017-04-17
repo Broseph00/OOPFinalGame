@@ -1,6 +1,11 @@
 package com.iteration3.model.Visitors;
 
-import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.ExchangeAbility.DropResourceAbility;
+import com.iteration3.model.Abilities.ExchangeAbility.PickupResourceAbility;
+import com.iteration3.model.Abilities.MoveAbility.*;
+import com.iteration3.model.Abilities.ProductionAbility.ProduceWoodAbility;
 import com.iteration3.model.Players.Research.*;
 import com.iteration3.model.Tiles.*;
 
@@ -35,7 +40,8 @@ public interface Visitor {
     public void visit(BuildTruckFactoryAbility ability);
     public void visit(BuildWagonFactoryAbility ability);
     public void visit(BuildWoodcutterAbility ability);
-    public void visit(BuildSpecializedMineAbility ability);
+    public void visit(BuildIronMineAbility ability);
+    public void visit(BuildGoldMineAbility ability);
     public void visit(BuildBigMineAbility ability);
     public void visit(BuildWallAbility ability);
     public void visit(BuildRoadAbility ability);
@@ -72,4 +78,9 @@ public interface Visitor {
     public void visit(DockatRiver4Ability ability);
     public void visit(DockatRiver5Ability ability);
     public void visit(DockatRiver6Ability ability);
+
+    public void visit(DropResourceAbility ability);
+    public void visit(PickupResourceAbility ability);
+
+    public void visit(ProduceWoodAbility ability);
 }

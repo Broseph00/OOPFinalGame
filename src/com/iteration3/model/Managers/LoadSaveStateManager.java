@@ -1,8 +1,13 @@
 package com.iteration3.model.Managers;
 
 
+import com.iteration3.model.Buildings.Primary.*;
+import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Buildings.Secondary.*;
+import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Players.Research.*;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
@@ -40,22 +45,22 @@ public class LoadSaveStateManager {
 
             // determine what Object is stored per line and add it to the game
             if(splitLine[0].contains("resource")) {
-                addResourceToMap(splitLine);
+                loadResource(splitLine);
             }
             else if(splitLine[0].contains("transport")) {
-                addTransportToMap(splitLine);
+                loadTransport(splitLine);
             }
             else if(splitLine[0].contains("producer")) {
-                addProducerToMap(splitLine);    // TODO: FINISH
+                loadProducer(splitLine);
             }
             else if(splitLine[0].contains("research")) {
-
+                loadResearch(splitLine);
             }
             else if(splitLine[0].contains("wall")) {
-                addWallToMap(splitLine);
+                loadWalls(splitLine);
             }
             else if(splitLine[0].contains("bridge")) {
-                addBridgeToMap(splitLine);
+                loadBridges(splitLine);
             }
             else if(splitLine[0].contains("wonder")) {
 
@@ -75,6 +80,8 @@ public class LoadSaveStateManager {
         saveTransportsFromMap(fw);
         saveWallsFromMap(fw);
         saveBridgesFromMap(fw);
+        saveProducersFromMap(fw);
+        saveResearch(fw);
 
         fw.close();
     }
@@ -82,7 +89,7 @@ public class LoadSaveStateManager {
 
     // LOAD HELPER FUNCTIONS *********************************************************************
 
-    private void addResourceToMap(String[] splitLine) {
+    private void loadResource(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -127,7 +134,7 @@ public class LoadSaveStateManager {
     }
 
 
-    private void addTransportToMap(String[] splitLine) {
+    private void loadTransport(String[] splitLine) {
         // handle location
         int x = Integer.parseInt(splitLine[2]);
         int y = Integer.parseInt(splitLine[3]);
@@ -220,8 +227,8 @@ public class LoadSaveStateManager {
 
     }
 
-     // TODO: FINISH
-    private void addProducerToMap(String[] splitLine) {
+
+    private void loadProducer(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -230,12 +237,68 @@ public class LoadSaveStateManager {
         int region = Integer.parseInt((splitLine[5]));
         String producerType = splitLine[6];
 
-
+        if(producerType.equals("bigMine")) {
+            this.map.addProducer(new BigMine(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("claypit")) {
+            this.map.addProducer(new Claypit(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("goldMine")) {
+            this.map.addProducer(new GoldMine(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("ironMine")) {
+            this.map.addProducer(new IronMine(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("oilRig")) {
+            this.map.addProducer(new OilRig(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("standardMine")) {
+            this.map.addProducer(new StandardMine(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("stoneQuarry")) {
+            this.map.addProducer(new StoneQuarry(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("woodcutter")) {
+            this.map.addProducer(new Woodcutter(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("coalBurner")) {
+            this.map.addProducer(new CoalBurner(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("mint")) {
+            this.map.addProducer(new Mint(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("papermill")) {
+            this.map.addProducer(new Papermill(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("sawmill")) {
+            this.map.addProducer(new Sawmill(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("stockExchange")) {
+            this.map.addProducer(new StockExchange(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("stoneFactory")) {
+            this.map.addProducer(new StoneFactory(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("raftFactory")) {
+            this.map.addProducer(new RaftFactory(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("rowboatFactory")) {
+            this.map.addProducer(new RowboatFactory(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("steamerFactory")) {
+            this.map.addProducer(new SteamerFactory(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("truckFactory")) {
+            this.map.addProducer(new TruckFactory(), new RegionLocation(x,y,z,region));
+        }
+        else if(producerType.equals("wagonFactory")) {
+            this.map.addProducer(new WagonFactory(), new RegionLocation(x,y,z,region));
+        }
 
     }
 
 
-    private void addBridgeToMap(String[] splitLine) {
+    private void loadBridges(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -252,7 +315,7 @@ public class LoadSaveStateManager {
 
 
 
-    private void addWallToMap(String[] splitLine) {
+    private void loadWalls(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -284,6 +347,40 @@ public class LoadSaveStateManager {
                     map.addNeutralWall(new Location(x,y,z), edge,strength);
                 }
             }
+        }
+
+
+    }
+
+    private void loadResearch(String[] splitLine) {
+        String researchName = splitLine[2];
+        Player player;
+        if(splitLine[3].equals("player1")) {
+            player = this.player1;
+        } else {
+            player = this.player2;
+        }
+
+        if(researchName.equals("enlargement")) {
+            player.getResearchManager().completeResearch(new EnlargementResearch());
+        }
+        else if(researchName.equals("newShaft")) {
+            player.getResearchManager().completeResearch(new NewShaftResearch());
+        }
+        else if(researchName.equals("oil")) {
+            player.getResearchManager().completeResearch(new OilResearch());
+        }
+        else if(researchName.equals("rowing")) {
+            player.getResearchManager().completeResearch(new RowingResearch());
+        }
+        else if(researchName.equals("ship")) {
+            player.getResearchManager().completeResearch(new ShipResearch());
+        }
+        else if(researchName.equals("specialization")) {
+            player.getResearchManager().completeResearch(new SpecializationResearch());
+        }
+        else if(researchName.equals("truck")) {
+            player.getResearchManager().completeResearch(new TruckResearch());
         }
 
 
@@ -495,6 +592,161 @@ public class LoadSaveStateManager {
         }
     }
 
+
+    private void saveResearch(FileWriter fw) throws IOException{
+        int id = 0;
+        ResearchManager player1Research = player1.getResearchManager();
+        ResearchManager player2Research = player2.getResearchManager();
+
+        if(player1Research.isFinishedEnlargementResearch()) {
+            String line = "research" + id + " ::= enlargement player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedNewShaftResearch()) {
+            String line = "research" + id + " ::= newShaft player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedOilResearch()) {
+            String line = "research" + id + " ::= oil player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedRowingResearch()) {
+            String line = "research" + id + " ::= rowing player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedShipResearch()) {
+            String line = "research" + id + " ::= ship player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedSpecializationResearch()) {
+            String line = "research" + id + " ::= specialization player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedTruckResearch()) {
+            String line = "research" + id + " ::= truck player1";
+            id++;
+            fw.write(line + '\n');
+        }
+
+
+        if(player2Research.isFinishedEnlargementResearch()) {
+            String line = "research" + id + " ::= enlargement player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedNewShaftResearch()) {
+            String line = "research" + id + " ::= newShaft player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedOilResearch()) {
+            String line = "research" + id + " ::= oil player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedRowingResearch()) {
+            String line = "research" + id + " ::= rowing player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedShipResearch()) {
+            String line = "research" + id + " ::= ship player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedSpecializationResearch()) {
+            String line = "research" + id + " ::= specialization player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedTruckResearch()) {
+            String line = "research" + id + " ::= truck player2";
+            id++;
+            fw.write(line + '\n');
+        }
+
+    }
+
+    private void saveProducersFromMap(FileWriter fw) throws IOException {
+        int id = 0;
+        for(RegionLocation regionLocation: map.getProducers().keySet()) {
+
+            int x = regionLocation.getX();
+            int y = regionLocation.getY();
+            int z = regionLocation.getZ();
+            int region = regionLocation.getRegion();
+            Producer producer = map.getProducers().get(regionLocation);
+
+            String line = "producer" + id + " ::= " + x + " " + y + " " + z + " " + region + " ";
+            id++;
+
+            if(producer instanceof BigMine) {
+                line += "bigMine";
+            }
+            else if(producer instanceof Claypit) {
+                line += "claypit";
+            }
+            else if(producer instanceof GoldMine) {
+                line += "goldMine";
+            }
+            else if(producer instanceof IronMine) {
+                line += "ironMine";
+            }
+            else if(producer instanceof OilRig) {
+                line += "oilRig";
+            }
+            else if(producer instanceof StandardMine) {
+                line += "standardMine";
+            }
+            else if(producer instanceof StoneQuarry) {
+                line += "stoneQuarry";
+            }
+            else if(producer instanceof Woodcutter) {
+                line += "woodcutter";
+            }
+            else if(producer instanceof CoalBurner) {
+                line += "coalBurner";
+            }
+            else if(producer instanceof Mint) {
+                line += "mint";
+            }
+            else if(producer instanceof Papermill) {
+                line += "papermill";
+            }
+            else if(producer instanceof Sawmill) {
+                line += "sawmill";
+            }
+            else if(producer instanceof StockExchange) {
+                line += "stockExchange";
+            }
+            else if(producer instanceof StoneFactory) {
+                line += "stoneFactory";
+            }
+            else if(producer instanceof RaftFactory) {
+                line += "raftFactory";
+            }
+            else if(producer instanceof RowboatFactory) {
+                line += "rowboatFactory";
+            }
+            else if(producer instanceof SteamerFactory) {
+                line += "steamerFactory";
+            }
+            else if(producer instanceof TruckFactory) {
+                line += "truckFactory";
+            }
+            else if(producer instanceof WagonFactory) {
+                line += "wagonFactory";
+            }
+
+            fw.write(line + '\n');
+        }
+    }
 
 
 }

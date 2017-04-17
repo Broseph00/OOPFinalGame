@@ -1,6 +1,11 @@
 package com.iteration3.model.Visitors;
 
-import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.ExchangeAbility.DropResourceAbility;
+import com.iteration3.model.Abilities.ExchangeAbility.PickupResourceAbility;
+import com.iteration3.model.Abilities.MoveAbility.*;
+import com.iteration3.model.Abilities.ProductionAbility.ProduceWoodAbility;
 import com.iteration3.utilities.GameLibrary;
 
 /**
@@ -220,11 +225,23 @@ public class AbilityTypeVisitor implements iAbilityVisitor{
     public String getType(BuildBigMineAbility ability) { return GameLibrary.BUILD_BIGMINE_ABILITY; }
 
     @Override
-    public String getType(BuildSpecializedMineAbility ability) { return GameLibrary.BUILD_SPECIALIZEDMINE_ABILITY; }
+    public String getType(BuildIronMineAbility ability) { return GameLibrary.BUILD_IRON_MINE; }
+
+    @Override
+    public String getType(BuildGoldMineAbility ability) { return  GameLibrary.BUILD_GOLD_MINE; }
 
     @Override
     public String getType(BuildWallAbility ability) { return GameLibrary.BUILD_WALL_ABILITY; }
 
     @Override
     public String getType(BuildRoadAbility ability) { return  GameLibrary.BUILD_ROAD_ABILITY; }
+
+    @Override
+    public String getType(DropResourceAbility ability) { return GameLibrary.DROP_RESOURCE; }
+
+    @Override
+    public String getType(PickupResourceAbility ability) { return GameLibrary.PICKUP_RESOURCE; }
+
+    @Override
+    public String getType(ProduceWoodAbility ability) { return GameLibrary.PRODUCE_WOOD; }
 }

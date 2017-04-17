@@ -1,6 +1,7 @@
 package tests;
 
-import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Map.Location;
