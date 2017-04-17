@@ -12,12 +12,10 @@ import javafx.stage.Stage;
 
 public class WelcomeViewController implements Observable{
 
-    GameModel model;
-    GameWindow window;
     Observer o;
     private EventHandler<ActionEvent> startGame, loadGame, exitGame;
 
-    public WelcomeViewController(GameModel model, GameWindow window) {
+    public WelcomeViewController() {
 
     }
 
