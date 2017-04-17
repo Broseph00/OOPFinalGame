@@ -20,8 +20,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class ProduceCoinAbility extends ProductionAbility {
 
-    public ProduceCoinAbility(Mint mint, Transporter transporter, ExecutionManager executionManager){
-        super(mint, transporter, executionManager, GameLibrary.PRODUCE_COIN);
+    public ProduceCoinAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_COIN);
     }
 
     @Override

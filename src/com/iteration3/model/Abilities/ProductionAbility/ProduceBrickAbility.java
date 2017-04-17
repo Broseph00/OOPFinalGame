@@ -20,8 +20,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class ProduceBrickAbility extends ProductionAbility {
 
-    public ProduceBrickAbility(StoneFactory stoneFactory, Transporter transporter, ExecutionManager executionManager){
-        super(stoneFactory, transporter, executionManager, GameLibrary.PRODUCE_BRICK);
+    public ProduceBrickAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_BRICK);
     }
 
     @Override

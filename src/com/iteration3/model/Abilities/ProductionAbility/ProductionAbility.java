@@ -17,15 +17,9 @@ import com.iteration3.model.Transporters.Transporter;
 ---------------------------------------------------------------------------------------*/
 
 public abstract class ProductionAbility extends Ability{
-    private Producer producer;
 
-    public ProductionAbility(Producer producer, Transporter transporter, ExecutionManager executionManager, String name){
+    public ProductionAbility(Transporter transporter, ExecutionManager executionManager, String name){
         super(transporter, name, executionManager);
-        this.producer = producer;
-    }
-
-    public Producer getProducer(){
-        return producer;
     }
 
 }
