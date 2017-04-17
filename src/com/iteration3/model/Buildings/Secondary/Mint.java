@@ -1,5 +1,6 @@
 package com.iteration3.model.Buildings.Secondary;
 
+import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.*;
 

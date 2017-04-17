@@ -26,4 +26,6 @@ public abstract class ConstructBridgeAbility extends Ability {
         this.border = border;
     }
 
+    public int getBorder(){return border;}
+
 }

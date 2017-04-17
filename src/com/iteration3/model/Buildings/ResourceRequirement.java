@@ -1,4 +1,4 @@
-package com.iteration3.model.Buildings.Secondary;
+package com.iteration3.model.Buildings;
 
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
