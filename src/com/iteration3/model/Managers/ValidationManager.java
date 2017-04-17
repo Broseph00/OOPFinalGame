@@ -189,6 +189,12 @@ public class ValidationManager {
         return map.existingProducer(regionLocation);
     }
 
+    public boolean wallOwnedByOpposingPlayer(Transporter transporter, int edge){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        return map.wallOwnedByOpposingPlayer(location, transporter.getOwner(), edge);
+    }
+
     private int oppositeEdge(int edge){
         switch (edge){
             case 1:
