@@ -6,7 +6,9 @@ import com.iteration3.model.Resource.Fuel;
 import com.iteration3.model.Resource.Iron;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
+import com.iteration3.utilities.GameLibrary;
 import com.iteration3.model.Transporters.Water.Steamship;
+
 
 import java.util.ArrayList;
 
@@ -43,5 +45,10 @@ public class TruckFactory extends TransporterFactory {
         }
 
         return truck;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.TRUCKFACTORY;
     }
 }

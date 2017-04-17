@@ -2,6 +2,7 @@ package com.iteration3.model.Buildings.Secondary;
 
 import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Resource.*;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -39,5 +40,10 @@ public class Sawmill extends SecondaryProducer {
 
         return boards;
 
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.SAWMILL;
     }
 }

@@ -6,6 +6,7 @@ import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Board;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Water.Rowboat;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -48,5 +49,10 @@ public class RowboatFactory extends TransporterFactory {
 
         return rowboat;
 
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.ROWBOATFACTORY;
     }
 }

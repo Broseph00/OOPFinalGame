@@ -6,6 +6,7 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -45,5 +46,10 @@ public class RaftFactory extends TransporterFactory {
 
         return raft;
 
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.RAFTFACTORY;
     }
 }

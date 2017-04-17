@@ -118,4 +118,6 @@ public abstract class Transporter {
         };
     }
 
+    public abstract String getType();
+
 }

@@ -44,7 +44,6 @@ public class CursorController implements Observable {
     private void initializeKeyMap(){
         keyMap.put(KeyCode.NUMPAD1, new Action(){
             public void execute(){
-                System.out.println("hi");
                 window.moveCursorSW();
                 notifyAllObservers();
 

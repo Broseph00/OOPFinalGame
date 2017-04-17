@@ -2,6 +2,7 @@ package com.iteration3.model.Transporters.Water;
 
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.utilities.GameLibrary;
 
 public class WaterTransporter extends Transporter {
     private boolean docked;
@@ -13,6 +14,11 @@ public class WaterTransporter extends Transporter {
 
     public boolean isDocked() {
         return docked;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.WATERTRANSPORTER;
     }
 
     public void dock(){

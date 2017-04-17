@@ -5,4 +5,6 @@ public abstract class Resource {
         boolean equal = (otherResource.getClass() == this.getClass());
         return equal;
     }
+
+    public abstract String getType();
 }

@@ -8,6 +8,7 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.Trunk;
 import com.iteration3.model.Transporters.Water.Rowboat;
 import com.iteration3.model.Transporters.Water.Steamship;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -48,5 +49,9 @@ public class SteamerFactory extends TransporterFactory {
 
     }
 
+    @Override
+    public String getType() {
+        return GameLibrary.STEAMERFACTORY;
+    }
 
 }
