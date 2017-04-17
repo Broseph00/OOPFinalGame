@@ -29,31 +29,38 @@ public class ModelViewAdapter {
     }
 
     public void update() {
-        Map map = gameModel.getMap();
+        /*Map map = gameModel.getMap();
         try {
             MapFileManager fileManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
             fileManager.fillMapFromTextFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        map.printRivers();*/
 
-        map.printRivers();
-        drawTiles(map);
-        drawRivers(map);
+        drawTiles();
+        drawRivers();
+        drawBridges();
+        drawRoads();
+        drawWalls();
+        drawProducers();
+        drawResources();
+        drawTransports();
+
     }
 
-    private void drawTiles(Map map) {
-        for(Location location : map.getTiles().keySet()) {
+    private void drawTiles() {
+        for(Location location : gameModel.getTiles().keySet()) {
             currentLocation = location;
-            gameWindow.drawTile(map.getTile(currentLocation).getTerrainType(), currentLocation.getX(), currentLocation.getZ());
+            gameWindow.drawTile(gameModel.getTile(currentLocation).getTerrainType(), currentLocation.getX(), currentLocation.getZ());
         }
     }
 
-    private void drawRivers(Map map) {
+    private void drawRivers() {
 
-        for(Location location : map.getRivers().keySet()) {
+        for(Location location : gameModel.getRivers().keySet()) {
             currentLocation = location;
-            ArrayList<Integer> riverEdges = map.getRivers().get(location).getRiverEdges();
+            ArrayList<Integer> riverEdges = gameModel.getRivers().get(location).getRiverEdges();
 
             // handle river sources
             if(riverEdges.size() == 1) {
@@ -136,10 +143,31 @@ public class ModelViewAdapter {
                     gameWindow.drawRiver("tri2",  currentLocation.getX(), currentLocation.getZ());
                 }
             }
-
         }
+    }
 
+    private void drawBridges(){
+        //TODO: Handle Drawing
+    }
 
+    private void drawRoads(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawWalls(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawProducers(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawResources(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawTransports(){
+        //TODO: Handle Drawing
     }
 
 }
