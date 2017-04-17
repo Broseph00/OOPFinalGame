@@ -51,6 +51,22 @@ public class Assets {
         images.put("welcomeImage", new Image("welcomeImage.png"));
         images.put("bigTri", new Image("bigTri1.png"));
         images.put("bigPasture", new Image("bigPasture.png"));
+        images.put("donkey", new Image("donkey.png"));
+        images.put("wagon", new Image("wagon.png"));
+        images.put("truck", new Image("truck.png"));
+        images.put("raft", new Image("raft.png"));
+        images.put("rowboat", new Image("rowboat.png"));
+        images.put("steamship", new Image("steamship.png"));
+        images.put("boards", new Image("boards.png"));
+        images.put("clay", new Image("clay.png"));
+        images.put("stone", new Image("stone.png"));
+        images.put("coins", new Image("coins.png"));
+        images.put("fuel", new Image("fuel.png"));
+        images.put("gold", new Image("gold.png"));
+        images.put("goose", new Image("goose.png"));
+        images.put("iron", new Image("iron.png"));
+        images.put("paper", new Image("paper.png"));
+        images.put("stock", new Image("stock.png"));
     }
 
     public Image getImage(String imageName) {

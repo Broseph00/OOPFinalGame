@@ -3,20 +3,17 @@ package com.iteration3.model;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
-import com.iteration3.model.Players.Wonder;
-import com.iteration3.model.Players.WonderManager;
+import com.iteration3.model.Players.Wonder.Wonder;
+import com.iteration3.model.Managers.WonderManager;
 import com.iteration3.model.Resource.Board;
 import com.iteration3.model.Resource.Goose;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.Stone;
-import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModel {
@@ -43,8 +40,9 @@ public class GameModel {
         loadSaveStateManager = new LoadSaveStateManager(map, "src/com/iteration3/RoadsAndBoatsSavedState.txt", player1, player2, wonder);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
-
         this.intializePlayers();
+
+
     }
 
 
@@ -121,6 +119,10 @@ public class GameModel {
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
 
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+
         // initialize player2
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
@@ -156,4 +158,27 @@ public class GameModel {
         return false;
     }
 
+    public void loadState() throws Exception{
+        this.loadSaveStateManager.loadState();
+    }
+
+    public void saveState() throws Exception{
+        this.loadSaveStateManager.saveState();
+    }
+
+    public Wonder getWonder() {
+        return wonder;
+    }
+
+    public WonderManager getWonderManager() {
+        return wonderManager;
+    }
+
+    public ExchangeManager getExchangeManager() {
+        return exchangeManager;
+    }
+
+    public ProductionManager getProductionManager() {
+        return productionManager;
+    }
 }

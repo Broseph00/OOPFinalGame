@@ -1,14 +1,27 @@
 package com.iteration3.model;
 
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Buildings.Primary.Mine;
+import com.iteration3.model.Buildings.Secondary.Mint;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Research.*;
+import com.iteration3.model.Resource.*;
 import com.iteration3.model.Tiles.*;
+import com.iteration3.model.Transporters.Land.Donkey;
+import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
+import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
+import com.iteration3.model.Transporters.TransportList;
+import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.model.Transporters.Water.Rowboat;
+import com.iteration3.model.Transporters.Water.Steamship;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
+import sun.plugin2.message.transport.Transport;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -160,11 +173,71 @@ public class ModelViewAdapter {
     }
 
     private void drawResources(){
-        //TODO: Handle Drawing
+        for(RegionLocation regionlocation : gameModel.getResources().keySet()) {
+            currentLocation = regionlocation.getLocation();
+            ResourceList resourceList = gameModel.getResources().get(regionlocation);
+            for(Resource resource : resourceList.getResources()){
+                if(resource instanceof Board) {
+                    gameWindow.drawResource("boards", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Stone){
+                    gameWindow.drawResource("stone", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Clay){
+                    gameWindow.drawResource("clay", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Coin){
+                    gameWindow.drawResource("coins", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Fuel){
+                    gameWindow.drawResource("fuel", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Gold){
+                    gameWindow.drawResource("gold", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Goose){
+                    gameWindow.drawResource("goose", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Iron){
+                    gameWindow.drawResource("iron", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Paper){
+                    gameWindow.drawResource("paper", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Stock){
+                    gameWindow.drawResource("stock", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+
+
+            }
+        }
     }
 
     private void drawTransports(){
-        //TODO: Handle Drawing
+        for(RegionLocation regionlocation : gameModel.getTransports().keySet()) {
+            currentLocation = regionlocation.getLocation();
+            TransportList transportList = gameModel.getTransports().get(regionlocation);
+            for(Transporter transport : transportList.getTransports()){
+                if(transport instanceof Donkey) {
+                    gameWindow.drawTransport("donkey", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(transport instanceof Wagon){
+                    gameWindow.drawTransport("Wagon", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(transport instanceof Truck){
+                    gameWindow.drawTransport("Truck", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(transport instanceof Raft){
+                    gameWindow.drawTransport("Raft", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(transport instanceof Rowboat){
+                    gameWindow.drawTransport("Rowboat", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(transport instanceof Steamship){
+                    gameWindow.drawTransport("Steamship", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+            }
+        }
     }
 
 }

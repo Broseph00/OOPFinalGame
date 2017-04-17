@@ -1,4 +1,6 @@
-package com.iteration3.model.Players;
+package com.iteration3.model.Players.Wonder;
+
+import com.iteration3.model.Players.Player;
 
 import java.util.ArrayList;
 
@@ -9,18 +11,18 @@ public class Wonder {
 
     private ArrayList<WonderRow> rows;
     private int bricksPerRow;
-    private int rowMultiplierCounter;
+    private int nextRow;
     private int currentTier;
 
     public Wonder() {
         rows = new ArrayList<WonderRow>();
         bricksPerRow = 4;
-        rowMultiplierCounter = 1;
-        rows.add(new WonderRow(4));
+        nextRow = 1;
+        newRow();
     }
 
     private void newRow() {
-        System.out.println("new row: " + rowMultiplierCounter);
+        //System.out.println("new row: " + rowMultiplierCounter);
         if (isFull() || (getRowCount() == MAX_WONDER_ROWS)) {
             return;
         } else {
@@ -46,15 +48,15 @@ public class Wonder {
     }
 
     private void incrementRowMultiplierCounter() {
-        ++rowMultiplierCounter;
-        if (rowMultiplierCounter == bricksPerRow) {
+        ++nextRow;
+        if (nextRow == bricksPerRow) {
             resetMultiplier();
         }
     }
 
     private void resetMultiplier() {
         ++bricksPerRow;
-        rowMultiplierCounter = 1;
+        nextRow = 1;
     }
 
     public boolean addBrick(Player owner) {

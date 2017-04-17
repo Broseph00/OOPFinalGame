@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -14,14 +13,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class ProductionView extends VBox {
+public class BuildingView extends VBox {
 
-	Label currentTransportLabel;
-	Button useFactoryButton, endTurnButton;
+	Label currentTransportLabel, currentBuildingLabel;
+	Button buildButton, endTurnButton;
 	TextArea tileResourceList, transportResourceList;
+	Text transporterTitle, buildingTitle; 
 	
-	
-	public ProductionView(double width, double height) {
+	public BuildingView(double width, double height) {
 		
 		super(10);
 		
@@ -29,20 +28,24 @@ public class ProductionView extends VBox {
 		this.setHeight(height);
 		
 		currentTransportLabel = new Label("None");
+		currentBuildingLabel = new Label("None");
+		
 		tileResourceList = new TextArea();
 		transportResourceList = new TextArea(); 
 		
 		
-		useFactoryButton = new Button("Use Factory");
+		buildButton = new Button("Create Building");
 		endTurnButton = new Button("endTurn");
 		
+		transporterTitle = new Text("Transporters on Tile");
+		buildingTitle = new Text("Select the Building");
 		
-		useFactoryButton.setDisable(true);
+		buildButton.setDisable(true);
 		
 		tileResourceList.setEditable(false);
 		transportResourceList.setEditable(false);
 		
-		useFactoryButton.setFocusTraversable(false);
+		buildButton.setFocusTraversable(false);
 		endTurnButton.setFocusTraversable(false);
 		tileResourceList.setFocusTraversable(false);
 		transportResourceList.setFocusTraversable(false);
@@ -53,41 +56,48 @@ public class ProductionView extends VBox {
 		initializeView();
 	}
 	
-	public ProductionView() {
+	public BuildingView() {
 		
 		super(10);
 		
 		currentTransportLabel = new Label("None");
+		currentBuildingLabel = new Label("None");
+		
 		tileResourceList = new TextArea();
 		transportResourceList = new TextArea(); 
 		
-		useFactoryButton = new Button("Use Factory");
-		endTurnButton = new Button("End Turn");
 		
+		buildButton = new Button("Use Factory");
+		endTurnButton = new Button("endTurn");
 		
-		useFactoryButton.setDisable(true);
+		transporterTitle = new Text("Transporters on Tile");
+		buildingTitle = new Text("Select the Building");
+		
+		buildButton.setDisable(true);
 		
 		tileResourceList.setEditable(false);
 		transportResourceList.setEditable(false);
 		
-		useFactoryButton.setFocusTraversable(false);
+		buildButton.setFocusTraversable(false);
 		endTurnButton.setFocusTraversable(false);
 		tileResourceList.setFocusTraversable(false);
 		transportResourceList.setFocusTraversable(false);
-		
+				
 		initializeView();
 	}
 	
 	private void initializeView() {
 		
-		Text mainTitle = new Text("Production Phase");
+		Text mainTitle = new Text("Building Phase");
 		Text tileResourceTitle = new Text("Resources on Tile");
 		Text transportResourceTitle = new Text("Resources on Transport");
-		Text transporterTitle = new Text("Transporters on Tile");
+		
 		
 		this.getChildren().add(mainTitle);
 		this.getChildren().add(transporterTitle);
 		this.getChildren().add(currentTransportLabel);
+		this.getChildren().add(buildingTitle);
+		this.getChildren().add(currentBuildingLabel);
 		
 		VBox resourceTileLayout = new VBox(10);
 		resourceTileLayout.getChildren().add(tileResourceTitle);
@@ -107,29 +117,44 @@ public class ProductionView extends VBox {
 		
 		this.getChildren().add(resourcesLayout);
 		
-		this.getChildren().add(useFactoryButton);
+		this.getChildren().add(buildButton);
 		this.getChildren().add(endTurnButton);
 		
 		this.setAlignment(Pos.TOP_CENTER);
 		
 		mainTitle.setFont(Font.font("Verdana", FontWeight.BOLD,20));
 		transporterTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
-		transporterTitle.setFill(Color.BLUE);
+	
 		tileResourceTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		transportResourceTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
+		buildingTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		
 		tileResourceList.setFont(Font.font(15));
 		transportResourceList.setFont(Font.font(15));
 
 		currentTransportLabel.setFont(Font.font(15));
+		currentBuildingLabel.setFont(Font.font(15));
+	}
+	
+	public void highlightTransportOption() {
+		transporterTitle.setFill(Color.BLUE);
+		currentTransportLabel.setTextFill(Color.BLACK);
 		
+		buildingTitle.setFill(Color.BLACK);
+		currentBuildingLabel.setTextFill(Color.DARKGREY);
 	}
-
-	public void addKeyHandler(EventHandler <KeyEvent> handler) {
-		this.setOnKeyPressed(handler);
+	
+	public void highlightBuildingOption() {
+		
+		buildingTitle.setFill(Color.BLUE);
+		currentBuildingLabel.setTextFill(Color.BLACK);
+		
+		transporterTitle.setFill(Color.BLACK);
+		currentTransportLabel.setTextFill(Color.DARKGRAY);
 	}
-	public void setEnableFactoryButton(Boolean isEnabled){
-		useFactoryButton.setDisable(!isEnabled);
+	
+	public void setEnableBuildButton(Boolean isEnabled){
+		buildButton.setDisable(!isEnabled);
 	}
 	
 	public void setTileResourceList(String list) {
@@ -140,16 +165,19 @@ public class ProductionView extends VBox {
 		transportResourceList.setText(list);
 	}
 	
+	public void setCurrentBuilding(String building) {
+		currentBuildingLabel.setText(building);
+	}
 
 	public void setCurrentTransporter(String currentTransporter) {
 		currentTransportLabel.setText(currentTransporter);
 	}
 	
-	public void setOnClickFactoryButton(EventHandler<ActionEvent> handler) {
-		useFactoryButton.setOnAction(handler);
+	public void setOnClickBuildButton(EventHandler<ActionEvent> handler) {
+		buildButton.setOnAction(handler);
 	}
 	
-	public void setOnClickEndProductionTurn(EventHandler<ActionEvent> handler) {
+	public void setOnClickEndBuildTurn(EventHandler<ActionEvent> handler) {
 		endTurnButton.setOnAction(handler);
 	}
 }

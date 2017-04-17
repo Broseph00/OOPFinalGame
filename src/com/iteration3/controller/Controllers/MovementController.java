@@ -55,8 +55,12 @@ public class MovementController implements Observable {
         abilityIter = currTrans.makeAbilityIterator();
 
         initializeKeyMap();
-        initializeModes();
+        //initializeModes();
         createHandlers();
+        System.out.println("Move Controller");
+        System.out.println(currTrans);
+        transIter.next();
+        System.out.println(currTrans);
     }
 
     private void initializeKeyMap() {
@@ -65,6 +69,7 @@ public class MovementController implements Observable {
                 modes.get(index).next();
                 currTrans = transIter.current();
                 currAbility = abilityIter.current();
+                System.out.println(currTrans);
 
             }
         });
@@ -74,6 +79,7 @@ public class MovementController implements Observable {
                 modes.get(index).prev();
                 currTrans = transIter.current();
                 currAbility = abilityIter.current();
+                System.out.println(currTrans);
 
             }
         });
@@ -114,8 +120,8 @@ public class MovementController implements Observable {
 
     private void initializeModes(){
         modes.add(new TransporterMode(transIter));
-        modes.add(new ResourceOnTileMode(currTrans));
-        modes.add(new ResourceOnTransporterMode(currTrans));
+        //modes.add(new ResourceOnTileMode(currTrans));
+        //modes.add(new ResourceOnTransporterMode(currTrans));
 
         current = modes.get(0);
     }
@@ -125,11 +131,13 @@ public class MovementController implements Observable {
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 //model.nextPlayer();
+                if (lastPlayer)
+                    notifyAllObservers();
                 lastPlayer = !lastPlayer;
-                if (lastPlayer);
-                notifyAllObservers();
             }
         };
+
+        window.setOnClickEndMovementTurn(endTurn);
 
         pickupResources = new EventHandler<ActionEvent>() {
             @Override
@@ -138,6 +146,8 @@ public class MovementController implements Observable {
                 //model.nextPlayer();
             }
         };
+
+        window.setOnClickPickUpResource(pickupResources);
     }
 
     public void addObserver(Observer obs) {

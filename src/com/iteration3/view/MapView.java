@@ -28,6 +28,8 @@ public class MapView extends Pane implements View {
     private final int Y_PIXEL_OFFSET = 60;
     private final int X_OFFSET2 = 30;
 
+    private final int TRANSPORT_OFFSET = 28;
+
     private final double MAX_SCALE = 2.0;
     private final double MIN_SCALE = 0.3;
     private double scale = 1.0;
@@ -213,6 +215,8 @@ public class MapView extends Pane implements View {
         return MIN_MAP_Y_BOUND;
     }
 
+    public int transportOffSet(){return TRANSPORT_OFFSET;}
+
     public int getXOffset() {
         return X_OFFSET;
     }
@@ -275,12 +279,66 @@ public class MapView extends Pane implements View {
 
     public void drawTile(String imageURL, int x, int y) {
         Image image = images.getImage(imageURL);
-        getGc().drawImage(image, ((x + getXOffset()) * getXPixelOffset())*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
+        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset())*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
     }
 
     public void drawRiver(String imageURL, int x, int y) {
         Image image = images.getImage(imageURL);
         gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset())*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x))*getScale() + getCameraY(), image.getWidth()*getScale(), image.getHeight()*getScale());
+    }
+
+    public void drawTransport(String imageURL, int x, int y, int region){
+        Image image = images.getImage(imageURL);
+        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset() + transportOffSet() + (xRegOff(region)*1.3))*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + transportOffSet() + (yRegOff(region)*1.3))*getScale() + getCameraY(), image.getWidth()*0.3*getScale(), image.getHeight()*0.3*getScale());
+    }
+
+    public void drawResource(String imageURL, int x, int y, int region){
+        Image image = images.getImage(imageURL);
+        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset() + transportOffSet() + (xRegOff(region)*0.7))*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + transportOffSet() + (yRegOff(region)*0.7))*getScale() + getCameraY(), image.getWidth()*0.3*getScale(), image.getHeight()*0.3*getScale());
+    }
+
+    private int xRegOff(int region){
+        if(region==1){
+            return 10;
+        }
+        else if(region==2){
+            return 17;
+        }
+        else if(region==3){
+            return 10;
+        }
+        else if(region==4){
+            return -10;
+        }
+        else if(region==5){
+            return -17;
+        }
+        else if(region==6){
+            return -10;
+        }
+        return 0;
+    }
+
+    private int yRegOff(int region){
+        if(region==1){
+            return -16;
+        }
+        else if(region==2){
+            return  0;
+        }
+        else if(region==3){
+            return 17;
+        }
+        else if(region==4){
+            return 17;
+        }
+        else if(region==5){
+            return 0;
+        }
+        else if(region==6){
+            return -16;
+        }
+        return 0;
     }
 
     public int getMapSizeRadius() {
