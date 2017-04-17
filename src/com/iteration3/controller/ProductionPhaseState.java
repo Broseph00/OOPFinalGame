@@ -13,15 +13,21 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
     private GameWindow window;
     private ControlDispatch dispatch;
     private ProductionController productionController;
+    private CursorController cursorController;
+    private TileViewController tileViewController;
     private HashMap<KeyCode,Action> keyMap;
 
     public ProductionPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
+        System.out.println("HI!!!!");
         this.model = model;
         this.window = window;
         this.dispatch = dispatch;
         keyMap = new HashMap<>();
         productionController = new ProductionController(model, window, keyMap);
         productionController.addObserver(this);
+        tileViewController = new TileViewController(model, window, keyMap);
+//        cursorController = new CursorController(model, window.getMainView(), keyMap);
+     //   cursorController.addObserver(tileViewController);
     }
 
     @Override

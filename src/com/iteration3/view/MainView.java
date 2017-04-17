@@ -1,5 +1,6 @@
 package com.iteration3.view;
 
+import com.iteration3.model.Map.Location;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -50,7 +51,7 @@ public class MainView extends BorderPane implements View {
         getMapView().drawRiver(imageURL, x, y);
     }
     public void drawPreviewImage(String imageURL) {
-        //getStatusView().drawPreviewImage(imageURL);
+        tileView.drawPreviewImage(imageURL);
     }
 
     public void update() {
@@ -59,8 +60,28 @@ public class MainView extends BorderPane implements View {
     public MapView getMapView() {
         return mapView;
     }
-//    public StatusView getStatusView() {
-//        return statusView;
-//    }
+
+    public void moveCursorNW(){
+        mapView.moveCursorNW();
+    }
+    public void moveCursorNE(){
+        mapView.moveCursorNE();
+    }
+    public void moveCursorSW(){
+        mapView.moveCursorSW();
+    }
+    public void moveCursorSE(){
+        mapView.moveCursorSE();
+    }
+    public void moveCursorNorth(){
+        mapView.moveCursorNorth();
+    }
+    public void moveCursorSouth(){
+        mapView.moveCursorSouth();
+    }
+
+    public Location getCursorLocation(){
+        return mapView.getCursorLocation();
+    }
 
 }

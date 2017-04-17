@@ -1,5 +1,6 @@
 package com.iteration3.view;
 
+import com.iteration3.model.Map.Location;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
@@ -74,6 +75,10 @@ public class GameWindow extends VBox implements View {
     }
     public void drawRiver(String imageURL, int x, int y) {
         getMainView().drawRiver(imageURL, x, y);
+    }
+
+    public Location getCursorLocation() {
+        return mainView.getCursorLocation();
     }
 
     @Override

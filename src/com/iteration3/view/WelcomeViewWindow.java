@@ -19,7 +19,6 @@ import javafx.stage.Stage;
  * Created by LesliesLaptop on 4/12/17.
  */
 public class WelcomeViewWindow extends StackPane {
-    private WelcomeViewController welcomeViewController;
 
     private Button startNewGameButton;
     private Button loadGameButton;
@@ -27,7 +26,6 @@ public class WelcomeViewWindow extends StackPane {
     private Assets images;
 
     public WelcomeViewWindow(double width, double height) {
-        this.welcomeViewController = new WelcomeViewController();
         this.images = new Assets();
 
         this.setWidth(width);
@@ -44,29 +42,8 @@ public class WelcomeViewWindow extends StackPane {
         vbox.setPrefWidth(150);
         vbox.setSpacing(20);
         this.startNewGameButton = new Button("Start New Game");
-        this.startNewGameButton.setOnAction(event -> {
-            try {
-                startNewGameHandler();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         this.loadGameButton = new Button("Load Game");
-        this.loadGameButton.setOnAction(event -> {
-            try {
-                loadGameHandler();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         this.exitGameButton = new Button("Exit Game");
-        this.exitGameButton.setOnAction(event -> {
-            try {
-                exitGameHandler();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         this.startNewGameButton.setMinWidth(vbox.getPrefWidth());
         this.loadGameButton.setMinWidth(vbox.getPrefWidth());
         this.exitGameButton.setMinWidth(vbox.getPrefWidth());
@@ -75,23 +52,30 @@ public class WelcomeViewWindow extends StackPane {
         this.getChildren().add(vbox);
     }
 
-    public WelcomeViewController getController() {
-        return welcomeViewController;
-    }
-
-    public void startNewGameHandler() throws Exception {
-        getController().startNewGame(this);
-    }
-    //TODO: Add load/save game functionality before implementing this method
-    public void loadGameHandler() throws Exception {
-
-    }
-    public void exitGameHandler() throws Exception {
-        Stage stage = (Stage)this.getScene().getWindow();
-        stage.close();
-    }
+//    public void startNewGameHandler() throws Exception {
+//        getController().startNewGame(this);
+//    }
+//    //TODO: Add load/save game functionality before implementing this method
+//    public void loadGameHandler() throws Exception {
+//
+//    }
+//    public void exitGameHandler() throws Exception {
+//        Stage stage = (Stage)this.getScene().getWindow();
+//        stage.close();
+//    }
 
     public Assets getImages() {
         return images;
     }
+    public void setOnClickStartNewGameButton (EventHandler<ActionEvent> handler) {
+        startNewGameButton.setOnAction(handler);
+    }
+
+    public void setOnClickLoadGameButton(EventHandler<ActionEvent> handler) {
+        loadGameButton.setOnAction(handler);
+    }
+    public void setOnClickExitGameButton(EventHandler<ActionEvent> handler) {
+        exitGameButton.setOnAction(handler);
+    }
+
 }
