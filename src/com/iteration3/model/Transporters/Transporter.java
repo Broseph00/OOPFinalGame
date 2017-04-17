@@ -25,7 +25,7 @@ public abstract class Transporter {
         this.maxMovePoints = maxMove;
         this.capacity = cap;
         this.remainingMovePoints = this.maxMovePoints;
-        this.owner.addTransporter(this);
+//        this.owner.addTransporter(this);
     }
 
     public void decreaseMovePoints(int moves){

@@ -6,8 +6,16 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
 
+import java.util.ArrayList;
+
 public class WagonFactory extends TransporterFactory {
     public WagonFactory() {
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+
     }
 
     @Override
@@ -19,6 +27,7 @@ public class WagonFactory extends TransporterFactory {
         }
         return false;
     }
+
 
     @Override
     public Wagon produce(Player player, ResourceList availableResources) {
