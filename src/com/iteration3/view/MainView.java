@@ -1,6 +1,7 @@
 package com.iteration3.view;
 
 import com.iteration3.model.Map.Location;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -23,6 +24,7 @@ public class MainView extends BorderPane implements View {
     private ProductionView productionView;
     private TileView tileView;
     private MovementView movementView; 
+    private BuildingView buildingView;
 
     public MainView(double width, double height) {
         this.setWidth(width);
@@ -38,6 +40,7 @@ public class MainView extends BorderPane implements View {
       
         this.statusBox.getChildren().addAll(productionView, tileView);
         this.movementView = new MovementView((1.0/4)*this.getWidth(),this.getHeight());
+        this.buildingView = new BuildingView((1.0/4)*this.getWidth(),this.getHeight());
         
         this.setRight(mapView);
         this.setLeft(statusBox);
@@ -53,6 +56,11 @@ public class MainView extends BorderPane implements View {
     	statusBox.getChildren().clear();
     	statusBox.getChildren().addAll(movementView,tileView);
     	
+    }
+    
+    public void swapToBuildingView() {
+    	statusBox.getChildren().clear();
+    	statusBox.getChildren().addAll(buildingView,tileView);
     }
 
     public void drawTile(String imageURL, int x, int y) {
@@ -103,7 +111,7 @@ public class MainView extends BorderPane implements View {
 	public void setCurrentTransporter(String currentTransporter) {
 		movementView.setCurrentTransporter(currentTransporter);
 		productionView.setCurrentTransporter(currentTransporter);
-		movementView.setCurrentTransporter(currentTransporter);
+		buildingView.setCurrentTransporter(currentTransporter);
 	}
 	
 	public void setOnMoveButton(EventHandler<ActionEvent> handler) {
@@ -129,6 +137,7 @@ public class MainView extends BorderPane implements View {
 	
 	public void highlightTransportOption() {
 		movementView.highlightTransportOption();
+		buildingView.highlightTransportOption();
 	}
 	
 	public void highlightMovementOption() {
@@ -163,6 +172,37 @@ public class MainView extends BorderPane implements View {
 	
 	public void setMovementOption(String movementOption) {
 		movementView.setMovementOption(movementOption);
+	}
+	
+	
+	public void highlightBuildingOption() {
+		buildingView.highlightBuildingOption();
+	}
+	
+	public void setEnableBuildButton(Boolean isEnabled){
+		buildingView.setEnableBuildButton(isEnabled);
+	}
+	
+	public void setTileResourceList(String list) {
+		productionView.setTileResourceList(list);
+		buildingView.setTileResourceList(list);
+	}
+	
+	public void setTransportResourceList(String list) {
+		productionView.setTransportResourceList(list);
+		buildingView.setTransportResourceList(list);
+	}
+	
+	public void setCurrentBuilding(String building) {
+		buildingView.setCurrentBuilding(building);
+	}
+
+	public void setOnClickBuildButton(EventHandler<ActionEvent> handler) {
+		buildingView.setOnClickBuildButton(handler);
+	}
+	
+	public void setOnClickEndBuildTurn(EventHandler<ActionEvent> handler) {
+		buildingView.setOnClickEndBuildTurn(handler);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.iteration3.view;
 
 import com.iteration3.model.Map.Location;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -161,6 +162,34 @@ public class GameWindow extends VBox implements View {
 	
 	public void setMovementOption(String movementOption) {
 		mainView.setMovementOption(movementOption);
+	}
+	
+	public void highlightBuildingOption() {
+		mainView.highlightBuildingOption();
+	}
+	
+	public void setEnableBuildButton(Boolean isEnabled){
+		mainView.setEnableBuildButton(isEnabled);
+	}
+	
+	public void setTileResourceList(String list) {
+		mainView.setTileResourceList(list);
+	}
+	
+	public void setTransportResourceList(String list) {
+		mainView.setTransportResourceList(list);
+	}
+	
+	public void setCurrentBuilding(String building) {
+		mainView.setCurrentBuilding(building);
+	}
+
+	public void setOnClickBuildButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickBuildButton(handler);
+	}
+	
+	public void setOnClickEndBuildTurn(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickEndBuildTurn(handler);
 	}
 	
 }
