@@ -67,6 +67,22 @@ public class Assets {
         images.put("iron", new Image("iron.png"));
         images.put("paper", new Image("paper.png"));
         images.put("stock", new Image("stock.png"));
+        images.put("clayPit", new Image("clayPit.png"));
+        images.put("coalBurner", new Image("coalBurner.png"));
+        images.put("mine", new Image("mine.png"));
+        images.put("mint", new Image("mint.png"));
+        images.put("oilRig", new Image("oilRig.png"));
+        images.put("papermill", new Image("papermill.png"));
+        images.put("quarry", new Image("quarry.png"));
+        images.put("raftFactory", new Image("raftFactory.png"));
+        images.put("rowboatFactory", new Image("rowboatFactory.png"));
+        images.put("sawmill", new Image("sawmill.png"));
+        images.put("steamerFactory", new Image("steamerFactory.png"));
+        images.put("stockExchange", new Image("stockExchange.png"));
+        images.put("stoneFactory", new Image("stoneFactory.png"));
+        images.put("truckFactory", new Image("truckFactory.png"));
+        images.put("wagonFactory", new Image("wagonFactory.png"));
+        images.put("woodcutter", new Image("woodcutter.png"));
     }
 
     public Image getImage(String imageName) {

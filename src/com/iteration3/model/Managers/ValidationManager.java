@@ -177,6 +177,7 @@ public class ValidationManager {
                 resourceList.addAll(map.getResources().get(newReg));
             }
         }
+        resourceList.addAll(transporter.getResourceList());
         return resourceList;
     }
 
