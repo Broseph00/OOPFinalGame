@@ -130,6 +130,7 @@ public class GameModel {
         this.map.addResource(new Stone(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
+       // this.map.addRoad(new Location(0,0,0), new Location(-1,0,1));
 
         //currentPlayer.addTransporter(new Donkey(currentPlayer));
         //currentPlayer.addTransporter(new Donkey(currentPlayer));

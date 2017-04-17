@@ -163,6 +163,7 @@ public class ModelViewAdapter {
         for(Location location: this.gameModel.getMap().getRoads().keySet()) {
             for(Location otherLocation: this.gameModel.getMap().getRoads().get(location).getRoads()) {
                 // draw line between locations
+                gameWindow.drawRoad(location.getX(), location.getY(), otherLocation.getX(), otherLocation.getY());
             }
         }
     }
@@ -171,8 +172,7 @@ public class ModelViewAdapter {
         for(Location location: this.gameModel.getMap().getWalls().keySet()) {
             for(Wall wall: this.gameModel.getWalls().get(location).getWalls()){
                 int edge = wall.getEdge();
-                // if this is a WallWithOwner, you draw colored line depending on owner
-                // if this is neutral, draw white wall
+                gameWindow.drawWall(location.getX(), location.getY(), wall.getWallColor());
             }
         }
     }

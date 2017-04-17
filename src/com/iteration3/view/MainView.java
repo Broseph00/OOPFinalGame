@@ -75,6 +75,8 @@ public class MainView extends BorderPane implements View {
     public void drawTransport(String imageURL, int x, int y, int region){getMapView().drawTransport(imageURL,x,y, region);}
     public void drawResource(String imageURL, int x, int y, int region){getMapView().drawResource(imageURL,x,y, region);}
 	public void drawProducer(String imageURL, int x, int y, int region){getMapView().drawProducer(imageURL, x, y, region);}
+	public void drawRoad(int x1, int y1, int x2, int y2){getMapView().drawRoad(x1, y1, x2, y2);}
+	public void drawWall(int x , int y, String color){getMapView().drawWall(x, y, color);}
     public void drawPreviewImage(String imageURL) {
         tileView.drawPreviewImage(imageURL);
     }
