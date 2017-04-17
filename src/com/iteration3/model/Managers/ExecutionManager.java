@@ -4,9 +4,10 @@ import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Abilities.BuildAbility.*;
 import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.MoveAbility.*;
-import com.iteration3.model.Abilities.ProductionAbility.ProduceWoodAbility;
+import com.iteration3.model.Abilities.ProductionAbility.ProduceBoardAbility;
 import com.iteration3.model.Abilities.ProductionAbility.ProductionAbility;
 import com.iteration3.model.Buildings.Primary.*;
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Buildings.Secondary.*;
 import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.Location;
@@ -231,9 +232,7 @@ public class ExecutionManager {
         ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
-    public void execute(ProductionAbility ability){ }
-
-    public void execute(ProduceWoodAbility ability){
+    public void execute(ProduceBoardAbility ability){
 
     }
 

@@ -1,6 +1,5 @@
-package com.iteration3.model.Abilities.BuildAbility;
+package com.iteration3.model.Abilities.ConstructAbility;
 
-import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
@@ -8,20 +7,20 @@ import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/16/2017.
+ * Created by test on 04/17/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    BuildWallAbility Module: Created by test on 04/16/2017.
+|    ConstructWall4Ability Module: Created by test on 04/17/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class BuildRoadAbility extends Ability {
+public class ConstructWall4Ability extends ConstructWallAbility {
 
-    public BuildRoadAbility(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, GameLibrary.BUILD_ROAD_ABILITY, executionManager);
+    public ConstructWall4Ability(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.BUILD_WALL4_ABILITY, 4);
     }
 
     @Override
