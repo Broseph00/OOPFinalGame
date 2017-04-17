@@ -46,6 +46,7 @@ public class ExchangeManager {
             transport1.removeResource(resource);
             transport2.addResource(resource);
 
+
         }
 
 

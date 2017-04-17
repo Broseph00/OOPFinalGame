@@ -5,7 +5,6 @@ import com.iteration3.controller.ControlDispatch;
 import com.iteration3.controller.Controllers.CursorController;
 import com.iteration3.controller.Controllers.MovementController;
 import com.iteration3.controller.Controllers.TileViewController;
-import com.iteration3.controller.Observer;
 import com.iteration3.controller.PhaseStates.BuildingPhaseState;
 import com.iteration3.controller.PhaseStates.ControlDispatchState;
 import com.iteration3.utilities.Observer;

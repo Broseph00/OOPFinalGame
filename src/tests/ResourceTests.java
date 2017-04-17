@@ -1,4 +1,3 @@
-//package tests;
 
 import com.iteration3.model.Buildings.Primary.Claypit;
 import com.iteration3.model.Buildings.Primary.GoldMine;
@@ -53,6 +52,7 @@ public class ResourceTests {
 
         // trade from donkey to truck
         exchangeManager.tradeResource(donkey, truck, board);
+        System.out.println(map.getTransports().get(location).getTransports().get(1).getType());
         assertEquals(map.getTransports().get(location).getTransports().get(1).getResourceList().getResources().size(), 1);
 
         // drop resource
