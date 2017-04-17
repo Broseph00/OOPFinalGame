@@ -127,7 +127,17 @@ public class AbilityManager {
         UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
         addUndockAbility(undockAbility, transporter, abilitiesList);
 
-        DockatRiverAbility dockAbility = new DockatRiverAbility(transporter, executionManager);
+        DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver2Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver3Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver4Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver5Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver6Ability(transporter, executionManager);
         addRiverDockAbility(dockAbility, transporter, abilitiesList);
 
         DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
@@ -227,63 +237,63 @@ public class AbilityManager {
     }
 
     private boolean verifyClayPitAbility(Transporter transporter) {
-       return (validationManager.validateResources(transporter, CLAYPIT_BOARD, CLAYPIT_STONE) && validationManager.validateShore(transporter));
+       return (validationManager.validateResources(transporter, CLAYPIT_BOARD, CLAYPIT_STONE) && validationManager.validateShore(transporter) && !validationManager.existingProducer(transporter));
     }
 
     private boolean verifyCoalBurnerAbility(Transporter transporter) {
-       return validationManager.validateResources(transporter, COALBURNER_BOARD, COALBURNER_STONE);
+       return validationManager.validateResources(transporter, COALBURNER_BOARD, COALBURNER_STONE) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyMineAbility(Transporter transporter) {
-        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS));
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter));
     }
 
     private boolean verifyMintAbility(Transporter transporter) {
-        return validationManager.validateResources(transporter, MINT_BOARD, MINT_STONE);
+        return validationManager.validateResources(transporter, MINT_BOARD, MINT_STONE) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyOilRigAbility(Transporter transporter) {
-        return (researchManager.isFinishedOilResearch() && validationManager.validateResources(transporter, OILRIG_BOARD, OILRIG_STONE) && validationManager.validateTerrain(transporter, SEA));
+        return (researchManager.isFinishedOilResearch() && validationManager.validateResources(transporter, OILRIG_BOARD, OILRIG_STONE) && validationManager.validateTerrain(transporter, SEA)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyPaperMillAbility(Transporter transporter) {
-        return (validationManager.validateResources(transporter, PAPERMILL_BOARD, PAPERMILL_STONE));
+        return (validationManager.validateResources(transporter, PAPERMILL_BOARD, PAPERMILL_STONE)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyRaftFactoryAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, RAFTFACTORY_BOARD, RAFTFACTORY_STONE) && validationManager.validateShore(transporter));
+        return (validationManager.validateResources(transporter, RAFTFACTORY_BOARD, RAFTFACTORY_STONE) && validationManager.validateShore(transporter)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyRowboatFactoryAbility(Transporter transporter){
-        return (validationManager.validateShore(transporter) && researchManager.isFinishedRowingResearch() && validationManager.validateResources(transporter, ROWBOATFACTORY_BOARD, ROWBOATFACTORY_STONE));
+        return (validationManager.validateShore(transporter) && researchManager.isFinishedRowingResearch() && validationManager.validateResources(transporter, ROWBOATFACTORY_BOARD, ROWBOATFACTORY_STONE)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifySteamerFactoryAbility(Transporter transporter){
-        return (validationManager.validateShore(transporter) && researchManager.isFinishedShipResearch() && validationManager.validateResources(transporter, STEAMER_BOARD, STEAMER_STONE));
+        return (validationManager.validateShore(transporter) && researchManager.isFinishedShipResearch() && validationManager.validateResources(transporter, STEAMER_BOARD, STEAMER_STONE)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyStockExchangeAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, STOCK_BOARD, STOCK_STONE));
+        return (validationManager.validateResources(transporter, STOCK_BOARD, STOCK_STONE)) && !validationManager.existingProducer(transporter);
     }
 
     private  boolean verifyStoneFactoryAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, STONEFACTORY_BOARD, STONEFACTORY_STONE));
+        return (validationManager.validateResources(transporter, STONEFACTORY_BOARD, STONEFACTORY_STONE)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyStoneQuarryAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, QUARRY_BOARD, QUARRY_STONE) && validationManager.validateTerrain(transporter, ROCK));
+        return (validationManager.validateResources(transporter, QUARRY_BOARD, QUARRY_STONE) && validationManager.validateTerrain(transporter, ROCK)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyTruckFactoryAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, TRUCKFACTORY_BOARD, TRUCKFACTORY_STONE) && researchManager.isFinishedTruckResearch());
+        return (validationManager.validateResources(transporter, TRUCKFACTORY_BOARD, TRUCKFACTORY_STONE) && researchManager.isFinishedTruckResearch()) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyWagonFactoryAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, WAGONFACTORY_BOARD, WAGONFACTORY_STONE));
+        return (validationManager.validateResources(transporter, WAGONFACTORY_BOARD, WAGONFACTORY_STONE)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyWoodcutterAbility(Transporter transporter){
-        return (validationManager.validateResources(transporter, WOODCUTTER_BOARD, WOODCUTTER_STONE) && validationManager.validateTerrain(transporter, WOODS));
+        return (validationManager.validateResources(transporter, WOODCUTTER_BOARD, WOODCUTTER_STONE) && validationManager.validateTerrain(transporter, WOODS)) && !validationManager.existingProducer(transporter);
     }
 
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){

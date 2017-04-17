@@ -7,11 +7,15 @@ import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
 import com.iteration3.model.Visitors.TerrainTypeVisitor;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ValidationManager {
     private Map map;
@@ -137,25 +141,53 @@ public class ValidationManager {
     }
 
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
-        return true;
+        ResourceList resourceList = getAvailableResources(transporter);
+        return resourceList.getBoards().size()>=boardCost && resourceList.getStones().size()>=stoneCost;
+    }
+
+    public ResourceList getAvailableResources(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        int region = regionLocation.getRegion();
+        Location location = regionLocation.getLocation();
+        Region regions = map.getRegions().get(location);
+        ArrayList<Integer> connected = regions.getRegion(region);
+        ResourceList resourceList = new ResourceList();
+        Iterator<Integer> iterator = connected.iterator();
+        while(iterator.hasNext()){
+            int hold = iterator.next();
+            RegionLocation newReg = new RegionLocation(location, hold);
+            if(map.getResources().containsKey(newReg)){
+                resourceList.addAll(map.getResources().get(newReg));
+            }
+        }
+        return resourceList;
     }
 
     public boolean validateShore(Transporter transporter){
-        return true; //TODO
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        int region = regionLocation.getRegion();
+        Location location = regionLocation.getLocation();
+        Boolean river = map.getRivers().containsKey(regionLocation);
+        Boolean adjacentSea = map.adjacentSea(location);
+        return river || adjacentSea;
     }
 
     public boolean validateTerrain(Transporter transporter, String terrainType){
-        return true; //TODO
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        return getTerrain(location).equals(terrainType);
     }
-
-
-
 
     private String getTerrain(Location location){
         if(map.getTiles().containsKey(location)){
-            return map.getTiles().get(location).getTerrain(new TerrainTypeVisitor());
+            return map.getTiles().get(location).getTerrainType();
         }
         return "";
+    }
+
+    public boolean existingProducer(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        return map.existingProducer(regionLocation);
     }
 
     private int oppositeEdge(int edge){
@@ -175,9 +207,5 @@ public class ValidationManager {
             default:
                 return edge;
         }
-    }
-
-    public boolean validateResourceCost(Transporter transporter, int boardCost, int stoneCost){
-        return true;
     }
 }

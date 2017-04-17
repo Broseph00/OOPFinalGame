@@ -1,5 +1,7 @@
 package com.iteration3.model.Buildings;
 
+import com.iteration3.model.Resource.Resource;
+
 public abstract class Producer {
     int capacity;
     private int capacityUsage;
@@ -29,4 +31,5 @@ public abstract class Producer {
     public void resetCapacity(){
         capacityUsage = 0;
     }
+
 }

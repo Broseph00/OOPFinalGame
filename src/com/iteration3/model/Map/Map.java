@@ -24,7 +24,7 @@ public class Map {
     private HashMap<RegionLocation, TransportList> transports;
     private HashMap<RegionLocation, ResourceList> resources;
     private HashMap<Location, RoadList> roads;
-    private HashMap<Location, Producer> producers;
+    private HashMap<RegionLocation, Producer> producers;
 
     public Map() {
         tiles = new HashMap<>();
@@ -253,6 +253,9 @@ public class Map {
     public HashMap<Location, Tile> getTiles() {
         return tiles;
     }
+    public Tile getTile(Location location) {
+        return getTiles().get(location);
+    }
 
     public HashMap<Location, River> getRivers() {
         return rivers;
@@ -335,6 +338,10 @@ public class Map {
         }
     }
 
+    public void addProducer(Producer producer, RegionLocation regionLocation) {
+        producers.put(regionLocation, producer);
+    }
+
 
 
     /**HELPER FUNCTIONS***********************************************************************************************/
@@ -349,7 +356,7 @@ public class Map {
     public void printTiles() {
         for(Location location : tiles.keySet()) {
             System.out.println(tiles.get(location) + " " + Integer.toString(location.getX()) + " " +  Integer.toString(location.getY()) + " " + Integer.toString(location.getZ()));
-            System.out.println("Terrain: " + tiles.get(location).getTerrain(new TerrainTypeVisitor()));
+            System.out.println("Terrain: " + tiles.get(location).getTerrainType());
         }
     }
 
@@ -422,6 +429,53 @@ public class Map {
             default:
                 return edge;
         }
+    }
+
+    public boolean adjacentSea(Location location){
+        HashMap<Location, Tile> seas = getSeaTiles();
+
+        if(seas.containsKey(location.getNorth())){
+            return true;
+        }
+        if(seas.containsKey(location.getNorthEast())){
+            return true;
+        }
+        if(seas.containsKey(location.getSouthEast())){
+            return true;
+        }
+        if(seas.containsKey(location.getSouth())){
+            return true;
+        }
+        if(seas.containsKey(location.getSouthWest())){
+            return true;
+        }
+        if(seas.containsKey(location.getNorthWest())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean existingProducer(RegionLocation regionLocation){
+        Location location = regionLocation.getLocation();
+        if(producers.containsKey(new RegionLocation(location, 1))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 2))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 3))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 4))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 5))){
+            return true;
+        }
+        if(producers.containsKey(new RegionLocation(location, 6))){
+            return true;
+        }
+        return false;
     }
 
 }

@@ -18,21 +18,14 @@ import com.iteration3.utilities.GameLibrary;
 |
 ---------------------------------------------------------------------------------------*/
 
-public class DockatRiverAbility extends Ability {
+public abstract class DockatRiverAbility extends Ability {
+    int region;
 
-    public DockatRiverAbility(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, GameLibrary.DOCK_RIVER, executionManager);
+    public DockatRiverAbility(Transporter transporter, ExecutionManager executionManager, String name, int region){
+        super(transporter, name, executionManager);
+        this.region = region;
     }
 
-    @Override
-    public void acceptVisitor(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    @Override
-    public String getAbilityType(iAbilityVisitor visitor) {
-        return visitor.getType(this);
-    }
-
+    public int getRegion(){return region;}
 
 }

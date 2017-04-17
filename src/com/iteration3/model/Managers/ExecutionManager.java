@@ -1,9 +1,14 @@
 package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Buildings.Primary.*;
+import com.iteration3.model.Buildings.Secondary.*;
+import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
 import com.iteration3.model.Transporters.Transporter;
 
 public class ExecutionManager {
@@ -12,30 +17,177 @@ public class ExecutionManager {
         this.map = map;
     }
 
+    public void execute(Ability ability){ }
+    //execution will be done with out checking - assume checks have been done already
 
-    public void transportMove(Transporter transporter, int exitRegion, int exitEdge){
-        RegionLocation startRegionLocation = map.getTransportRegionLocation(transporter);
-        Location startLocation = startRegionLocation.getLocation();
-        Location endLocation = startLocation.getLocationEdge(exitEdge);
-        int enterRegion;
-        //Boat
-        if(startRegionLocation.getRegion()==7){
-            enterRegion=7;
-            transporter.decreaseMovePoints(1);
-        }
-        //NotBoat
-        else {
-            enterRegion = getOppositeRegion(exitRegion, exitEdge);
-            if(map.containsRoad(startLocation,endLocation)){
-                transporter.decreaseMovePoints(1);
-            }
-            else{
-                transporter.decreaseMovePoints(2);
-            }
-        }
-        RegionLocation endRegionLocation = new RegionLocation(startLocation, enterRegion);
-        map.removeTransport(transporter,startRegionLocation);
-        map.addTransport(transporter,endRegionLocation);
+    public void execute(BuildClaypitAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        Claypit producer = new Claypit();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildCoalBurnerAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        CoalBurner producer = new CoalBurner();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildMineAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        Mine producer = new Mine();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildMintAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        Mint producer = new Mint();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildOilRigAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        OilRig producer = new OilRig();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildPapermillAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        Papermill producer = new Papermill();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildRaftFactoryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        RaftFactory producer = new RaftFactory();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildRowboatFactoryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        RowboatFactory producer = new RowboatFactory();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildSteamerFactoryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        SteamerFactory producer = new SteamerFactory();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildStockExchangeAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        StockExchange producer = new StockExchange();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildStoneFactoryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        StoneFactory producer = new StoneFactory();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildStoneQuarryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        StoneQuarry producer = new StoneQuarry();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildTruckFactoryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        TruckFactory producer = new TruckFactory();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildWagonFactoryAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        WagonFactory producer = new WagonFactory();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildWoodcutterAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        Woodcutter producer = new Woodcutter();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void executeMoveDegree(MoveAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, getOppositeRegion(ability.getRegion(), ability.getBorder()));
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    public void execute(MoveDegree0Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree30Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree60Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree90Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree120Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree150Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree180Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree210Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree240Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree270Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree300Ability ability) {executeMoveDegree(ability);}
+    public void execute(MoveDegree330Ability ability) {executeMoveDegree(ability);}
+
+    public void executeMoveEdge(MoveAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        //Region 7 because boats are restricted to region 7 when moving
+        RegionLocation end = new RegionLocation(location.getLocationEdge(ability.getBorder()), 7);
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    public void execute(MoveEdge1Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge2Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge3Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge4Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge5Ability ability) {executeMoveEdge(ability);}
+    public void execute(MoveEdge6Ability ability) {executeMoveEdge(ability);}
+
+    public void executeSeaDock(DockatSeaAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, ability.getBorder());
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    public void execute(DockatSea1Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea2Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea3Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea4Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea5Ability ability) {executeSeaDock(ability);}
+    public void execute(DockatSea6Ability ability) {executeSeaDock(ability);}
+
+    public void executeRiverDock(DockatRiverAbility ability) {
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, ability.getRegion());
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
+
+    public void execute(DockatRiver1Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver2Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver3Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver4Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver5Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver6Ability ability) {executeRiverDock(ability);}
+    
+    public void execute(UndockAbility ability) {
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, 7);
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
     }
 
     private int getOppositeRegion(int exitRegion, int exitEdge){
@@ -89,51 +241,4 @@ public class ExecutionManager {
         }
         return 0;
     }
-
-    public void execute(Ability ability){ }
-
-    public void execute(BuildClaypitAbility ability) { }
-    public void execute(BuildCoalBurnerAbility ability) { }
-    public void execute(BuildMineAbility ability) { }
-    public void execute(BuildMintAbility ability) { }
-    public void execute(BuildOilRigAbility ability) { }
-    public void execute(BuildPapermillAbility ability) { }
-    public void execute(BuildRaftFactoryAbility ability) { }
-    public void execute(BuildRowboatFactoryAbility ability) { }
-    public void execute(BuildSteamerFactoryAbility ability) { }
-    public void execute(BuildStockExchangeAbility ability) { }
-    public void execute(BuildStoneFactoryAbility ability) { }
-    public void execute(BuildStoneQuarryAbility ability) { }
-    public void execute(BuildTruckFactoryAbility ability) { }
-    public void execute(BuildWagonFactoryAbility ability) { }
-    public void execute(BuildWoodcutterAbility ability) { }
-
-    public void execute(MoveDegree0Ability ability) { }
-    public void execute(MoveDegree30Ability ability) { }
-    public void execute(MoveDegree60Ability ability) { }
-    public void execute(MoveDegree90Ability ability) { }
-    public void execute(MoveDegree120Ability ability) { }
-    public void execute(MoveDegree150Ability ability) { }
-    public void execute(MoveDegree180Ability ability) { }
-    public void execute(MoveDegree210Ability ability) { }
-    public void execute(MoveDegree240Ability ability) { }
-    public void execute(MoveDegree270Ability ability) { }
-    public void execute(MoveDegree300Ability ability) { }
-    public void execute(MoveDegree330Ability ability) { }
-    public void execute(MoveEdge1Ability ability) { }
-    public void execute(MoveEdge2Ability ability) { }
-    public void execute(MoveEdge3Ability ability) { }
-    public void execute(MoveEdge4Ability ability) { }
-    public void execute(MoveEdge5Ability ability) { }
-    public void execute(MoveEdge6Ability ability) { }
-
-    public void execute(DockatSea1Ability ability) { }
-    public void execute(DockatSea2Ability ability) { }
-    public void execute(DockatSea3Ability ability) { }
-    public void execute(DockatSea4Ability ability) { }
-    public void execute(DockatSea5Ability ability) { }
-    public void execute(DockatSea6Ability ability) { }
-    public void execute(DockatRiverAbility ability) { }
-    public void execute(UndockAbility ability) { }
-
 }
