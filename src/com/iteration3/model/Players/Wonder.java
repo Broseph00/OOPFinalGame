@@ -20,6 +20,7 @@ public class Wonder {
     }
 
     private void newRow() {
+        System.out.println("new row: " + rowMultiplierCounter);
         if (isFull() || (getRowCount() == MAX_WONDER_ROWS)) {
             return;
         } else {

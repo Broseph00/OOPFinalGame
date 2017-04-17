@@ -24,9 +24,12 @@ public class PickupResourceAbility extends Ability {
     private ExchangeManager exchangeManager;
     private Resource resource;
 
-    public PickupResourceAbility(Transporter transporter,Resource resource, ExecutionManager executionManager, ExchangeManager exchangeManager){
+    public PickupResourceAbility(Transporter transporter, ExecutionManager executionManager, ExchangeManager exchangeManager){
         super(transporter, GameLibrary.DROP_RESOURCE, executionManager);
         this.exchangeManager = exchangeManager;
+    }
+
+    public void chooseResource(Resource resource){
         this.resource = resource;
     }
 

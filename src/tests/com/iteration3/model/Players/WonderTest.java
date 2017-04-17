@@ -32,6 +32,7 @@ public class WonderTest {
         int brickCount = 0;
         while(wonder.addBrick(player1)){
             ++brickCount;
+            System.out.println(brickCount);
         }
         assertEquals(83, brickCount);
         assertEquals(15, wonder.getRowCount());

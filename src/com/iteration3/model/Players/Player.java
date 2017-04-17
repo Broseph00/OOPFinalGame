@@ -22,7 +22,7 @@ public class Player {
     public Player(Map map, int id, RegionLocation startingLocation){
         researchManager = new ResearchManager();
         transportersList = new TransportList();
-        abilityManager = new AbilityManager(map, new ValidationManager(map), researchManager, new ExecutionManager(map));
+        abilityManager = new AbilityManager(map, new ValidationManager(map), researchManager, new ExecutionManager(map), new ExchangeManager(map));
         this.id = id;
         this.startingRegionLocation = startingLocation;
     }
