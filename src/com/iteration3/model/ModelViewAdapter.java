@@ -169,7 +169,42 @@ public class ModelViewAdapter {
     }
 
     private void drawProducers(){
-        //TODO: Handle Drawing
+        for(RegionLocation regionlocation : gameModel.getProducers().keySet()) {
+            currentLocation = regionlocation.getLocation();
+            ResourceList resourceList = gameModel.getResources().get(regionlocation);
+            for(Resource resource : resourceList.getResources()){
+                if(resource instanceof Board) {
+                    gameWindow.drawResource("boards", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Stone){
+                    gameWindow.drawResource("stone", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Clay){
+                    gameWindow.drawResource("clay", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Coin){
+                    gameWindow.drawResource("coins", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Fuel){
+                    gameWindow.drawResource("fuel", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Gold){
+                    gameWindow.drawResource("gold", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Goose){
+                    gameWindow.drawResource("goose", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Iron){
+                    gameWindow.drawResource("iron", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Paper){
+                    gameWindow.drawResource("paper", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+                else if(resource instanceof Stock){
+                    gameWindow.drawResource("stock", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                }
+            }
+        }
     }
 
     private void drawResources(){
@@ -207,8 +242,6 @@ public class ModelViewAdapter {
                 else if(resource instanceof Stock){
                     gameWindow.drawResource("stock", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
                 }
-
-
             }
         }
     }

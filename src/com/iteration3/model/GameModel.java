@@ -1,5 +1,6 @@
 package com.iteration3.model;
 
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
@@ -96,6 +97,10 @@ public class GameModel {
 
     public HashMap<RegionLocation, ResourceList> getResources() {
         return map.getResources();
+    }
+
+    public HashMap<RegionLocation, Producer> getProducers(){
+        return map.getProducers();
     }
 
     public Tile getTile(Location location) {
