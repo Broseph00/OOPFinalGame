@@ -116,10 +116,11 @@ public class ProductionController implements Observable {
 
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                //model.nextPlayer();
+                model.changeTurn();
                 if (lastPlayer)
                     notifyAllObservers();
                 lastPlayer = !lastPlayer;
+                player = model.getCurrentPlayer();
             }
         };
 

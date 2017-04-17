@@ -109,16 +109,49 @@ public class BuildingController implements Observable {
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                //model.nextPlayer();
-
+                model.changeTurn();
                 if (lastPlayer)
                     notifyAllObservers();
                 lastPlayer = !lastPlayer;
+                player = model.getCurrentPlayer();
             }
         };
 
         window.setOnClickEndBuildTurn(endTurn);
     }
+
+    /*TODO: implement resources in builder
+    public void updateResourcesList(){
+        String tile = "";
+        tile += "Trunks: " + tileResourceList.getTrunks().size() + "\n";
+        tile += "Boards: " + tileResourceList.getBoards().size() + "\n";
+        tile += "Paper: " + tileResourceList.getPaper().size() + "\n";
+        tile += "Goose: " + tileResourceList.getGeese().size() + "\n";
+        tile += "Clay: " + tileResourceList.getClay().size() + "\n";
+        tile += "Stone: " + tileResourceList.getStones().size() + "\n";
+        tile += "Fuel: " + tileResourceList.getFuel().size() + "\n";
+        tile += "Iron: " + tileResourceList.getIron().size() + "\n";
+        tile += "Gold: " + tileResourceList.getGold().size() + "\n";
+        tile += "Coins: " + tileResourceList.getCoins().size() + "\n";
+        tile += "Stock: " + tileResourceList.getStock().size() + "\n";
+        window.setTileResourceList(tile);
+
+        String transporter = "";
+        transporter += "Trunks: " + transporterResourceList.getTrunks() + "\n";
+        transporter += "Boards: " + transporterResourceList.getBoards() + "\n";
+        transporter += "Paper: " + transporterResourceList.getPaper() + "\n";
+        transporter += "Goose: " + transporterResourceList.getGeese() + "\n";
+        transporter += "Clay: " + transporterResourceList.getClay() + "\n";
+        transporter += "Stone: " + transporterResourceList.getStones() + "\n";
+        transporter += "Fuel: " + transporterResourceList.getFuel() + "\n";
+        transporter += "Iron: " + transporterResourceList.getIron() + "\n";
+        transporter += "Gold: " + transporterResourceList.getGold() + "\n";
+        transporter += "Coins: " + transporterResourceList.getCoins() + "\n";
+        transporter += "Stock: " + transporterResourceList.getStock() + "\n";
+        window.setTransportResourceList(transporter);
+
+    }
+    */
 
     public void addObserver(Observer obs) {
         subscribers.add(obs);
