@@ -6,6 +6,7 @@ package com.iteration3.controller.Controllers;
 |   Cursor keeps track of its location on the map
 ---------------------------------------------------------------------------------------*/
 import com.iteration3.controller.Action;
+import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
 //import com.iteration3.model.map.Location;
 //import com.iteration3.model.map.Map;
@@ -13,23 +14,24 @@ import com.iteration3.view.MainView;
 //import com.iteration3.view.Observable;
 //import com.iteration3.view.Observer;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CursorController{
+public class CursorController implements Observable {
 
-    HashMap<KeyCode,Action> keyMap;
-    //ArrayList<Observer> observers;
-    MainView window;
+    private HashMap<KeyCode,Action> keyMap;
+    private ArrayList<Observer> observers;
+    private MainView window;
 
-    public CursorController(GameModel model, MainView window, HashMap<KeyCode, Action> keymap){
-
+    public CursorController(GameModel model, MainView window, HashMap<KeyCode, Action> keymap) {
         this.keyMap = keymap;
         this.window = window;
 
-
-        //observers = new ArrayList<>();
+        observers = new ArrayList<>();
 
         initializeKeyMap();
     }
@@ -38,84 +40,75 @@ public class CursorController{
     //could be adjusted to read from a file for custom controls
 
     private void initializeKeyMap(){
-        keyMap.put(KeyCode.NUMPAD1, new Action(){
+        keyMap.put(KeyCode.DIGIT0, new Action(){
             public void execute(){
-                //window.moveCursorSW();
-
-
-                //notifyAllObservers();
+                System.out.println("hi");
+                window.moveCursorSW();
+                notifyAllObservers();
 
             }
         });
 
         keyMap.put(KeyCode.NUMPAD7, new Action(){
             public void execute(){
-                //window.moveCursorNW();
-
-
-                //notifyAllObservers();
+                window.moveCursorNW();
+                notifyAllObservers();
 
             }
         });
 
         keyMap.put(KeyCode.NUMPAD8, new Action(){
             public void execute(){
-                //window.moveCursorNorth();
-
-
-                //notifyAllObservers();
+                window.moveCursorNorth();
+                notifyAllObservers();
 
             }
         });
 
         keyMap.put(KeyCode.NUMPAD9, new Action(){
             public void execute(){
-                //window.moveCursorNE();
-
-
-                //notifyAllObservers();
+                window.moveCursorNE();
+                notifyAllObservers();
 
             }
         });
 
         keyMap.put(KeyCode.NUMPAD3, new Action(){
             public void execute(){
-                //window.moveCursorSE();
-
-                //notifyAllObservers();
+                window.moveCursorSE();
+                notifyAllObservers();
 
             }
         });
 
         keyMap.put(KeyCode.NUMPAD2, new Action(){
             public void execute(){
-                //window.moveCursorSouth();
-
-                //notifyAllObservers();
+                window.moveCursorSouth();
+                notifyAllObservers();
 
             }
         });
     }
-/*
-    @Override
+
+
     public void addObserver(Observer obs) {
         // TODO Auto-generated method stub
         observers.add(obs);
     }
 
-    @Override
+
     public void removeObserver(Observer obs) {
         // TODO Auto-generated method stub
         observers.remove(obs);
     }
 
-    @Override
-    public void notifyObserver(Observer obs) {
-        // TODO Auto-generated method stub
-        obs.update();
-    }
+//    @Override
+//    public void notifyObserver(Observer obs) {
+//        // TODO Auto-generated method stub
+//        obs.update();
+//    }
 
-    @Override
+
     public void notifyAllObservers() {
         // TODO Auto-generated method stub
         for(Observer obs: observers) {
@@ -123,5 +116,13 @@ public class CursorController{
         }
     }
 
-*/
+    @Override
+    public void addListener(InvalidationListener listener) {
+
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+
+    }
 }

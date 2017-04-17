@@ -15,11 +15,11 @@ public class GameEngine {
     private GameModel gameModel;
     private ModelViewAdapter MVA;
 
-    public GameEngine (Stage primaryStage) throws Exception {
-        gameWindow = new GameWindow(1221,726, 15);
-        gameModel = new GameModel();
+    public GameEngine (Stage primaryStage, GameModel gameModel, GameWindow gameWindow) throws Exception {
+        this.gameWindow = gameWindow;
+        this.gameModel = gameModel;
         MVA = new ModelViewAdapter(gameModel, gameWindow);
-        ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
+        //ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
 
 
         new AnimationTimer() {
@@ -37,6 +37,7 @@ public class GameEngine {
         }.start();
 
         //TODO: Make size equal to screen resolution
+
         Scene scene = new Scene(gameWindow, 1221, 726);
         scene.setOnKeyPressed(gameWindow.getOnKeyPressed());
         primaryStage.setScene(scene);

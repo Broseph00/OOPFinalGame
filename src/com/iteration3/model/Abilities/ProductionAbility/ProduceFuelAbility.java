@@ -20,8 +20,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class ProduceFuelAbility extends ProductionAbility {
 
-    public ProduceFuelAbility(CoalBurner coalBurner, Transporter transporter, ExecutionManager executionManager){
-        super(coalBurner, transporter, executionManager, GameLibrary.PRODUCE_FUEL);
+    public ProduceFuelAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_FUEL);
     }
 
     @Override

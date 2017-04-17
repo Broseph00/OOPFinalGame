@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
+import com.iteration3.model.Map.Location;
 import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Visitors.Visitor;
 import javafx.event.ActionEvent;
@@ -32,7 +33,7 @@ public class TileViewController implements Observer {
 
     int selectedTerrainIndex;
     int selectedRiverIndex;
-//    Location cursorLocation;
+    Location cursorLocation;
 //
 //    StatusControllerState currentState;
 //    StatusControllerState selectTerrain;
@@ -173,7 +174,7 @@ public class TileViewController implements Observer {
     }
 
     public void displayCurrentTerrain() {
-        window.drawPreviewImage(terrainTypes.get(selectedTerrainIndex));
+       // window.drawPreviewImage(terrainTypes.get(selectedTerrainIndex));
     }
 
     public void displayCurrentRiver() {
@@ -411,7 +412,7 @@ public class TileViewController implements Observer {
     @Override
     public void update() {
         // TODO Auto-generated method stub
-        //cursorLocation = window.getCursorLocation();
+        cursorLocation = window.getCursorLocation();
         //validateState();
     }
 }
