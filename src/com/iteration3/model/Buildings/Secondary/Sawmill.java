@@ -2,6 +2,7 @@ package com.iteration3.model.Buildings.Secondary;
 
 import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Resource.*;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -13,35 +14,36 @@ public class Sawmill extends SecondaryProducer {
     }
 
     public void initialize(){
-        ResourceRequirement req1 = new ResourceRequirement(new Trunk());
-        addRequirement(req1);
+        addRequirement(new Trunk());
     }
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            if(reqs.verify(availableResources.getResources())){
-                return true;
-            }
+        if(availableResources.getTrunks().size() >= 1) {
+            availableResources.removeTrunk();
+            return true;
         }
         return false;
     }
 
     @Override
     public ArrayList<Resource> produce(ResourceList availableResources) {
-        boolean canProduce = false;
+        boolean canProduce = checkResources(availableResources);
         ArrayList<Resource> boards = new ArrayList<>();
 
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            canProduce = reqs.consume(availableResources.getResources());
-            if(canProduce && (getCapacity() > 0)) {
-                boards.add(new Board());
-                boards.add(new Board());
-                decrementCapacity();
-                break;
-            }
+        while(canProduce && getCapacity() > 0) {
+            boards.add(new Board());
+            decrementCapacity();
+            canProduce = checkResources(availableResources);
+
         }
 
         return boards;
+
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.SAWMILL;
     }
 }

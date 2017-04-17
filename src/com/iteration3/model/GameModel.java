@@ -72,6 +72,7 @@ public class GameModel {
     public HashMap<Location, Tile> getTiles() {
         return map.getTiles();
     }
+    public String getTerrainType(Location location) { return map.getTerrainType(location); }
 
     public HashMap<Location, River> getRivers() {
         return map.getRivers();

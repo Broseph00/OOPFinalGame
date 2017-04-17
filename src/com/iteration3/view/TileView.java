@@ -31,8 +31,6 @@ public class TileView extends StackPane {
     public void clearPreviewImage() {
         gc.setFill(Color.TRANSPARENT);
         gc.fillRect(0,0,previewImageCanvas.getWidth(),previewImageCanvas.getHeight());
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0,0,previewImageCanvas.getWidth(),previewImageCanvas.getHeight());
         gc.setFill(Color.WHITE);
     }
 

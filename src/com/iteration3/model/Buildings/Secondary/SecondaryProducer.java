@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class SecondaryProducer extends Producer {
 
-    private ArrayList<ResourceRequirement> necessaryResources;
+    private ArrayList<Resource> necessaryResources;
 
     public SecondaryProducer(int maxCapacity){
         super(maxCapacity);
@@ -20,11 +20,11 @@ public abstract class SecondaryProducer extends Producer {
 
     public abstract ArrayList<Resource> produce(ResourceList availableResources);
 
-    protected void addRequirement(ResourceRequirement requirement) {
+    public void addRequirement(Resource requirement) {
         this.necessaryResources.add(requirement);
     }
 
-    protected ArrayList<ResourceRequirement> getNecessaryResources() {
+    public ArrayList<Resource> getNecessaryResources() {
         return necessaryResources;
     }
 }

@@ -1,5 +1,7 @@
 package com.iteration3.model.Resource;
 
+import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
+
 import java.util.ArrayList;
 
 public class ResourceList {
@@ -19,10 +21,14 @@ public class ResourceList {
         this.resources.add(new Board());
     }
 
-    public void removeBoard() {
+    public boolean removeBoard() {
         ArrayList<Board> boards = getBoards();
         if(boards.size() > 0) {
             this.resources.remove(boards.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -38,21 +44,30 @@ public class ResourceList {
         this.resources.add(new Clay());
     }
 
-    public void removeClay() {
+    public boolean removeClay() {
         ArrayList<Clay> clay = getClay();
         if(clay.size() > 0) {
             this.resources.remove(clay.get(0));
+            return true;
         }
+        else {
+            return false;
+        }
+
     }
 
     public void addCoin() {
         this.resources.add(new Coin());
     }
 
-    public void removeCoin() {
+    public boolean removeCoin() {
         ArrayList<Coin> coins = getCoins();
         if(coins.size() > 0) {
             this.resources.remove(coins.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -60,10 +75,14 @@ public class ResourceList {
         this.resources.add(new Fuel());
     }
 
-    public void removeFuel() {
+    public boolean removeFuel() {
         ArrayList<Fuel> fuel = getFuel();
         if(fuel.size() > 0) {
             this.resources.remove(fuel.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -71,10 +90,14 @@ public class ResourceList {
         this.resources.add(new Gold());
     }
 
-    public void removeGold() {
+    public boolean removeGold() {
         ArrayList<Gold> gold = getGold();
         if(gold.size() > 0) {
             this.resources.remove(gold.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -82,10 +105,14 @@ public class ResourceList {
         this.resources.add(new Goose());
     }
 
-    public void removeGoose() {
+    public boolean removeGoose() {
         ArrayList<Goose> geese = getGeese();
         if(geese.size() > 0) {
             this.resources.remove(geese.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -93,10 +120,14 @@ public class ResourceList {
         this.resources.add(new Iron());
     }
 
-    public void removeIron() {
+    public boolean removeIron() {
         ArrayList<Iron> iron = getIron();
         if(iron.size() > 0) {
             this.resources.remove(iron.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -104,10 +135,14 @@ public class ResourceList {
         this.resources.add(new Paper());
     }
 
-    public void removePaper() {
+    public boolean removePaper() {
         ArrayList<Paper> paper = getPaper();
         if(paper.size() > 0) {
             this.resources.remove(paper.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -115,10 +150,14 @@ public class ResourceList {
         this.resources.add(new Stock());
     }
 
-    public void removeStock() {
+    public boolean removeStock() {
         ArrayList<Stock> stock = getStock();
         if(stock.size() > 0) {
             this.resources.remove(stock.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -126,10 +165,14 @@ public class ResourceList {
         this.resources.add(new Stone());
     }
 
-    public void removeStone() {
+    public boolean removeStone() {
         ArrayList<Stone> stones = getStones();
         if(stones.size() > 0) {
             this.resources.remove(stones.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -137,10 +180,14 @@ public class ResourceList {
         this.resources.add(new Trunk());
     }
 
-    public void removeTrunk() {
+    public boolean removeTrunk() {
         ArrayList<Trunk> trunks = getTrunks();
         if(trunks.size() > 0) {
             this.resources.remove(trunks.get(0));
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -261,8 +308,43 @@ public class ResourceList {
         return resources;
     }
 
-    public void removeResource(Resource r) {
-        this.resources.remove(r);
+    public boolean removeResource(Resource r) {
+        if(r instanceof Board) {
+            return removeBoard();
+        }
+        else if(r instanceof Clay) {
+            return removeClay();
+        }
+        else if(r instanceof Coin) {
+            return removeCoin();
+        }
+        else if(r instanceof Fuel) {
+            return removeFuel();
+        }
+        else if(r instanceof Gold) {
+            return removeGold();
+        }
+        else if(r instanceof Goose) {
+            return removeGoose();
+        }
+        else if(r instanceof Iron) {
+            return removeIron();
+        }
+        else if(r instanceof Paper) {
+            return removePaper();
+        }
+        else if(r instanceof Stock) {
+            return removeStock();
+        }
+        else if(r instanceof Stone) {
+            return removeStone();
+        }
+        else if(r instanceof Trunk) {
+            return removeTrunk();
+        }
+        else {
+            return false;
+        }
     }
 
     public void addResource(Resource r) {

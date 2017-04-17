@@ -2,6 +2,7 @@ package com.iteration3.model.Buildings.Secondary;
 
 import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Resource.*;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -13,35 +14,40 @@ public class StockExchange extends SecondaryProducer {
     }
 
     public void initialize(){
-        ResourceRequirement req1 = new ResourceRequirement(new Paper(), new Coin(), new Coin());
-        addRequirement(req1);
+        addRequirement(new Paper());
+        addRequirement(new Coin());
+        addRequirement(new Coin());
     }
 
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            if(reqs.verify(availableResources.getResources())){
-                return true;
-            }
+        if(availableResources.getPaper().size() >= 1 && availableResources.getCoins().size() >= 2) {
+            availableResources.removePaper();
+            availableResources.removeCoin();
+            availableResources.removeCoin();
+            return true;
         }
         return false;
     }
 
     @Override
     public ArrayList<Resource> produce(ResourceList availableResources) {
-        boolean canProduce;
+
+        boolean canProduce = checkResources(availableResources);
         ArrayList<Resource> stocks = new ArrayList<>();
 
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            canProduce = reqs.consume(availableResources.getResources());
-            if(canProduce && (getCapacity() > 0)) {
-                stocks.add(new Stock());
-                decrementCapacity();
-                break;
-            }
+        while(canProduce && getCapacity() > 0) {
+            stocks.add(new Stock());
+            decrementCapacity();
+            canProduce = checkResources(availableResources);
         }
 
         return stocks;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.STOCKEXCHANGE;
     }
 }

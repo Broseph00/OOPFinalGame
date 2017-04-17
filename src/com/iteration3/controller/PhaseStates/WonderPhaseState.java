@@ -2,6 +2,8 @@ package com.iteration3.controller.PhaseStates;
 
 import com.iteration3.controller.Action;
 import com.iteration3.controller.ControlDispatch;
+import com.iteration3.controller.Controllers.CursorController;
+import com.iteration3.controller.Controllers.TileViewController;
 import com.iteration3.controller.Controllers.WonderController;
 import com.iteration3.utilities.Observer;
 import com.iteration3.model.GameModel;
@@ -20,6 +22,8 @@ public class WonderPhaseState implements ControlDispatchState, Observer {
     private ControlDispatch dispatch;
     private WonderController wonderController;
     private HashMap<KeyCode,Action> keyMap;
+    private CursorController cursorController;
+    private TileViewController tileViewController;
 
 
     public WonderPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
@@ -29,6 +33,9 @@ public class WonderPhaseState implements ControlDispatchState, Observer {
         keyMap = new HashMap<>();
         wonderController = new WonderController(model, window, keyMap);
         wonderController.addObserver(this);
+        tileViewController = new TileViewController(model, window, keyMap);
+        cursorController = new CursorController(model, window, keyMap);
+        cursorController.addObserver(tileViewController);
 
     }
 
