@@ -1,10 +1,11 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 /*--------------------------------------------------------------------------------------
 |    CursorController: Created by Clay on 3/27/17.
 |---------------------------------------------------------------------------------------
 |   Controller to define functions for moving around the map to select a tile
 |   Cursor keeps track of its location on the map
 ---------------------------------------------------------------------------------------*/
+import com.iteration3.controller.Action;
 import com.iteration3.model.GameModel;
 //import com.iteration3.model.map.Location;
 //import com.iteration3.model.map.Map;

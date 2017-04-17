@@ -1,4 +1,4 @@
-package com.iteration3.controller;
+package com.iteration3.controller.PhaseStates;
 
 /**
  * Created by Clay on 4/13/2017.

@@ -8,3 +8,5 @@ transport1 ::= 1 1 1 1 raft player1
 wall0 ::= 0 0 0 ::= player1:1-1 
 wall1 ::= 0 1 -1 ::= player1:4-1 
 bridge0 ::= 0 0 0 ::= 1 
+research0 ::= enlargement player1
+research1 ::= rowing player2
