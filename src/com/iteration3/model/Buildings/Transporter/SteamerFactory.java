@@ -1,5 +1,7 @@
 package com.iteration3.model.Buildings.Transporter;
 
+import com.iteration3.model.Buildings.ResourceRequirement;
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Water.Steamship;
 
@@ -9,11 +11,28 @@ public class SteamerFactory extends TransporterFactory {
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
+        for(ResourceRequirement reqs : getNecessaryResources()){
+            if(reqs.verify(availableResources.getResources())){
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public Steamship produce() {
-        return null;
+    public Steamship produce(Player player, ResourceList availableResources) {
+        boolean canProduce = false;
+        Steamship steamship = null;
+
+        for(ResourceRequirement reqs : getNecessaryResources()){
+            canProduce = reqs.consume(availableResources.getResources());
+            if(canProduce && (getCapacity() > 0)) {
+                steamship = (canProduce && (getCapacity() > 0)) ? new Steamship(player) : null;
+                decrementCapacity();
+                break;
+            }
+        }
+
+        return steamship;
     }
 }

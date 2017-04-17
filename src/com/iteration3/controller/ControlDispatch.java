@@ -22,6 +22,7 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
         this.model = model;
         this.window = window;
         this.welcomeViewWindow = welcomeViewWindow;
+        window.setOnKeyPressed(this);
         currentState = new WelcomeState(this, model, window, welcomeViewWindow);
         window.addKeyHandler(this);
     }

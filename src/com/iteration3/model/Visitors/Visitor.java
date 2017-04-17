@@ -106,5 +106,9 @@ public interface Visitor {
     public void visit(ProduceCoinAbility ability);
     public void visit(ProduceStockAbility ability);
     public void visit(ProduceWagonAbility ability);
+    public void visit(ProduceTruckAbility ability);
+    public void visit(ProduceRaftAbility ability);
+    public void visit(ProduceRowboatAbility ability);
+    public void visit(ProduceSteamerAbility ability);
 
 }

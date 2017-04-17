@@ -1,7 +1,6 @@
 package com.iteration3;
 
 import com.iteration3.controller.ControlDispatch;
-import com.iteration3.controller.WelcomeViewController;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.WelcomeViewWindow;

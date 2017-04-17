@@ -20,4 +20,8 @@ public class PlayerBrick implements Brick {
         // TODO: owner needs a color string or player ID
         return null;
     }
+
+    public Player getOwner() {
+        return owner;
+    }
 }

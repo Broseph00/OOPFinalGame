@@ -20,8 +20,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class ProducePaperAbility extends ProductionAbility {
 
-    public ProducePaperAbility(Papermill papermill, Transporter transporter, ExecutionManager executionManager){
-        super(papermill, transporter, executionManager, GameLibrary.PRODUCE_PAPER);
+    public ProducePaperAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_PAPER);
     }
 
     @Override

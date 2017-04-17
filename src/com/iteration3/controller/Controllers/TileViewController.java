@@ -1,4 +1,4 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 /*--------------------------------------------------------------------------------------
 |    TileViewController: Created by Ricardo on 3/28/17.
 |---------------------------------------------------------------------------------------
@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
+import com.iteration3.controller.Action;
+import com.iteration3.controller.Observer;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Visitors.Visitor;
@@ -55,7 +57,7 @@ public class TileViewController implements Observer {
 
         selectedTerrainIndex = 0;
         selectedRiverIndex = 0;
-//        cursorLocation = window.getCursorLocation();
+        cursorLocation = window.getCursorLocation();
 
 //        window.setTerrainType(terrainTypes.get(selectedTerrainIndex));
 //        window.setRiverType(riverTypes.get(selectedRiverIndex));
@@ -174,7 +176,8 @@ public class TileViewController implements Observer {
     }
 
     public void displayCurrentTerrain() {
-       // window.drawPreviewImage(terrainTypes.get(selectedTerrainIndex));
+        System.out.println(terrainTypes.get(selectedTerrainIndex));
+        window.drawPreviewImage(terrainTypes.get(selectedTerrainIndex));
     }
 
     public void displayCurrentRiver() {

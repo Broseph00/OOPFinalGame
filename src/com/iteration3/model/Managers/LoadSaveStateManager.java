@@ -6,9 +6,8 @@ import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Buildings.Secondary.*;
 import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.*;
-import com.iteration3.model.Players.Player;
+import com.iteration3.model.Players.*;
 import com.iteration3.model.Players.Research.*;
-import com.iteration3.model.Players.Wonder;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
@@ -391,7 +390,20 @@ public class LoadSaveStateManager {
 
 
     private void loadWonder(String[] splitLine) {
-
+        if(splitLine.length > 2) {
+            for(int i = 2; i < splitLine.length; i++) {
+                String player = splitLine[i];
+                if(player.equals("neutral")) {
+                    this.wonder.addNeutralBrick();
+                }
+                else if (player.equals("player1")) {
+                    this.wonder.addBrick(this.player1);
+                }
+                else if (player.equals("player2")) {
+                    this.wonder.addBrick(this.player2);
+                }
+            }
+        }
     }
 
 
@@ -753,6 +765,26 @@ public class LoadSaveStateManager {
 
             fw.write(line + '\n');
         }
+    }
+
+    private void saveWonder(FileWriter fw) throws IOException {
+        String line = "wonder ::= ";
+
+        for(WonderRow row: wonder.getRows()) {
+            for(Brick brick: row.getBricks()) {
+                if(brick instanceof PlayerBrick) {
+                    if(((PlayerBrick) brick).getOwner() == player1) {
+                        line += "player1 ";
+                    }
+                    else {
+                        line += "player2 ";
+                    }
+                } else {
+                    line += "neutral ";
+                }
+            }
+        }
+        fw.write(line + '\n');
     }
 
 

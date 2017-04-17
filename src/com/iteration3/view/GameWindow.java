@@ -1,6 +1,7 @@
 package com.iteration3.view;
 
 import com.iteration3.model.Map.Location;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -80,6 +81,8 @@ public class GameWindow extends VBox implements View {
     public void drawRiver(String imageURL, int x, int y) {
         getMainView().drawRiver(imageURL, x, y);
     }
+    public void drawTransport(String imageURL, int x, int y, int region){getMainView().drawTransport(imageURL, x, y, region);}
+    public void drawResource(String imageURL, int x, int y, int region){getMainView().drawResource(imageURL, x, y, region);}
 
     public Location getCursorLocation() {
         return mainView.getCursorLocation();
@@ -162,5 +165,45 @@ public class GameWindow extends VBox implements View {
 	
 	public void setOnClickDropResource(EventHandler<ActionEvent> handler) {
 		mainView.setOnClickDropResource(handler);
+	}
+	
+	public void setMovementOption(String movementOption) {
+		mainView.setMovementOption(movementOption);
+	}
+	
+	public void highlightBuildingOption() {
+		mainView.highlightBuildingOption();
+	}
+	
+	public void setEnableBuildButton(Boolean isEnabled){
+		mainView.setEnableBuildButton(isEnabled);
+	}
+	
+	public void setTileResourceList(String list) {
+		mainView.setTileResourceList(list);
+	}
+	
+	public void setTransportResourceList(String list) {
+		mainView.setTransportResourceList(list);
+	}
+	
+	public void setCurrentBuilding(String building) {
+		mainView.setCurrentBuilding(building);
+	}
+
+	public void setOnClickBuildButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickBuildButton(handler);
+	}
+	
+	public void setOnClickEndBuildTurn(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickEndBuildTurn(handler);
+	}
+	
+	public void setCurrentResearch(String research) {
+		mainView.setCurrentResearch(research);
+	}
+	
+	public void setOnClickResearchButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickResearchButton(handler);
 	}
 }

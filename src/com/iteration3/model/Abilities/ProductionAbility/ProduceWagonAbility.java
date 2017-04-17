@@ -21,8 +21,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class ProduceWagonAbility extends ProductionAbility {
 
-    public ProduceWagonAbility(WagonFactory wagonFactory, Transporter transporter, ExecutionManager executionManager){
-        super(wagonFactory, transporter, executionManager, GameLibrary.PRODUCE_WAGON);
+    public ProduceWagonAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_WAGON);
     }
 
     @Override

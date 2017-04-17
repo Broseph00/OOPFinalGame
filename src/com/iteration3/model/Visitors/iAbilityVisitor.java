@@ -100,4 +100,8 @@ public interface iAbilityVisitor {
     String getType(ProduceCoinAbility ability);
     String getType(ProduceStockAbility ability);
     String getType(ProduceWagonAbility ability);
+    String getType(ProduceRaftAbility ability);
+    String getType(ProduceRowboatAbility ability);
+    String getType(ProduceSteamerAbility ability);
+    String getType(ProduceTruckAbility ability);
 }

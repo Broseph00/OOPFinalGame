@@ -58,7 +58,8 @@ public class GameLibrary {
 
     public static final String PRODUCE_BOARD = "PRODUCE BOARD", PRODUCE_FUEL = "PRODUCE FUEL",
             PRODUCE_PAPER = "PRODUCE PAPER", PRODUCE_BRICK = "PRODUCE BRICK", PRODUCE_COIN = "PRODUCE COIN",
-            PRODUCE_STOCK = "PRODUCE STOCK", PRODUCE_WAGON = "PRODUCE WAGON";
+            PRODUCE_STOCK = "PRODUCE STOCK", PRODUCE_WAGON = "PRODUCE WAGON", PRODUCE_TRUCK = "PRODUCE TRUCK",
+            PRODUCE_RAFT = "PRODUCE RAFT", PRODUCE_ROWBOAT = "PRODUCE ROWBOAT", PRODUCE_STEAMER = "PRODUCE STEAMER";
 
     public static final int WOODCUTTER_BOARD = 1, WOODCUTTER_STONE = 0;
 
@@ -97,4 +98,8 @@ public class GameLibrary {
     public static final int ROAD_BOARD = 0, ROAD_STONE = 1;
 
     public static final int BRIDGE_BOARD = 0, BRIDGE_STONE = 1;
+
+    public static final String PLAYER1_COLOR = "Red";
+    public static final String PLAYER2_COLOR = "Blue";
+    
 }

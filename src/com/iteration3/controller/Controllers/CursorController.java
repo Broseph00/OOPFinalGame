@@ -30,7 +30,7 @@ public class CursorController implements Observable {
     public CursorController(GameModel model, MainView window, HashMap<KeyCode, Action> keymap) {
         this.keyMap = keymap;
         this.window = window;
-
+        System.out.println("Cursor Controller Constructing");
         observers = new ArrayList<>();
 
         initializeKeyMap();

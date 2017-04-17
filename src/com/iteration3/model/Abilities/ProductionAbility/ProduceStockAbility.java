@@ -21,8 +21,8 @@ import com.iteration3.utilities.GameLibrary;
 
 public class ProduceStockAbility extends ProductionAbility {
 
-    public ProduceStockAbility(StockExchange stockExchange, Transporter transporter, ExecutionManager executionManager){
-        super(stockExchange, transporter, executionManager, GameLibrary.PRODUCE_STOCK);
+    public ProduceStockAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_STOCK);
     }
 
     @Override
