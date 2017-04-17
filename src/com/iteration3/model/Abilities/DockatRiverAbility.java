@@ -26,4 +26,6 @@ public abstract class DockatRiverAbility extends Ability {
         this.region = region;
     }
 
+    public int getRegion(){return region;}
+
 }
