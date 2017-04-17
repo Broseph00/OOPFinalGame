@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class WonderRow {
     private static int MAX_ROW_SCORE = 10;
     private int maxBrickCount;
-    private ArrayList<Integer> neutralBricks;
     private ArrayList<Brick> bricks;
 
     public WonderRow(int maxSize) {
@@ -72,11 +71,15 @@ public class WonderRow {
         return ownerBricks;
     }
 
-    private ArrayList<String> getBricksList() {
+    public ArrayList<String> getBricksList() {
         ArrayList<String> bricksList = new ArrayList<>();
         for(Brick b : bricks){
             bricksList.add(b.getColor());
         }
         return bricksList;
+    }
+
+    public ArrayList<Brick> getBricks() {
+        return bricks;
     }
 }

@@ -15,14 +15,18 @@ public class TileView extends StackPane {
     private GraphicsContext gc;
 
     public TileView() {
+        this.setWidth(250);
+        this.setHeight(250);
         this.images = new Assets();
-        this.previewImageCanvas = new Canvas();
+        this.previewImageCanvas = new Canvas(this.getWidth(), this.getHeight());
+        this.getChildren().add(previewImageCanvas);
         this.gc = previewImageCanvas.getGraphicsContext2D();
     }
 
     public void drawPreviewImage(String imageURL) {
         Image image = images.getImage(imageURL);
-        gc.drawImage(image, 0, 0, 250, 250);
+        gc.drawImage(image, 0, 0, image.getHeight(), image.getHeight());
+
     }
 
 }

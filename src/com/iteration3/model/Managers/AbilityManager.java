@@ -73,6 +73,7 @@ public class AbilityManager {
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
         addDockAbilities(transporter, abilitiesList);
+        addProduceAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
@@ -81,6 +82,7 @@ public class AbilityManager {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
+        addProduceAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
@@ -89,6 +91,7 @@ public class AbilityManager {
         addBuildAbilities(transporter, abilitiesList);
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
+        addProduceAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 

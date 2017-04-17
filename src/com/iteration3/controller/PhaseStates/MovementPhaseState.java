@@ -37,6 +37,7 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
 
     @Override
     public void handleInput(KeyEvent event) {
+        System.out.print(event);
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
     }
@@ -44,6 +45,7 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
     @Override
     public void nextState() {
         dispatch.changeState(new BuildingPhaseState(dispatch, model, window));
+        System.out.println("New state");
     }
 
     public void update() {

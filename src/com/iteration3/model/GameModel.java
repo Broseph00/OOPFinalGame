@@ -26,7 +26,7 @@ public class GameModel {
     private WonderManager wonderManager;
     private ExchangeManager exchangeManager;
     private ProductionManager productionManager;
-    private TurnManager turnManager;
+
     private Player player1;
     private Player player2;
     private Player currentPlayer;
@@ -37,15 +37,15 @@ public class GameModel {
         productionManager = new ProductionManager();
         wonder = new Wonder();
         wonderManager = new WonderManager(wonder);
-        turnManager = new TurnManager();
         player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
         player2 = new Player(map, 2, new RegionLocation(0,-3,3,1));
         currentPlayer = player1;
         loadSaveStateManager = new LoadSaveStateManager(map, "src/com/iteration3/RoadsAndBoatsSavedState.txt", player1, player2, wonder);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
-
         this.intializePlayers();
+
+
     }
 
 
@@ -122,6 +122,10 @@ public class GameModel {
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
 
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        currentPlayer.addTransporter(new Donkey(currentPlayer));
+
         // initialize player2
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
@@ -136,4 +140,36 @@ public class GameModel {
         this.map.addResource(new Goose(), player2.getStartingRegionLocation());
     }
 
+    public void changeTurn() {
+        if(currentPlayer == player1) {
+            currentPlayer = player2;
+        }
+        else {
+            currentPlayer = player1;
+        }
+    }
+
+    public void loadState() throws Exception{
+        this.loadSaveStateManager.loadState();
+    }
+
+    public void saveState() throws Exception{
+        this.loadSaveStateManager.saveState();
+    }
+
+    public Wonder getWonder() {
+        return wonder;
+    }
+
+    public WonderManager getWonderManager() {
+        return wonderManager;
+    }
+
+    public ExchangeManager getExchangeManager() {
+        return exchangeManager;
+    }
+
+    public ProductionManager getProductionManager() {
+        return productionManager;
+    }
 }
