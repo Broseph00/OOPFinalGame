@@ -9,14 +9,14 @@ public class Wonder {
 
     private ArrayList<WonderRow> rows;
     private int bricksPerRow;
-    private int rowMultiplierCounter;
+    private int nextRow;
     private int currentTier;
 
     public Wonder() {
         rows = new ArrayList<WonderRow>();
         bricksPerRow = 4;
-        rowMultiplierCounter = 1;
-        rows.add(new WonderRow(4));
+        nextRow = 1;
+        newRow();
     }
 
     private void newRow() {
@@ -45,15 +45,15 @@ public class Wonder {
     }
 
     private void incrementRowMultiplierCounter() {
-        ++rowMultiplierCounter;
-        if (rowMultiplierCounter == bricksPerRow) {
+        ++nextRow;
+        if (nextRow == bricksPerRow) {
             resetMultiplier();
         }
     }
 
     private void resetMultiplier() {
         ++bricksPerRow;
-        rowMultiplierCounter = 1;
+        nextRow = 1;
     }
 
     public boolean addBrick(Player owner) {

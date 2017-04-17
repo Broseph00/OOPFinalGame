@@ -10,9 +10,6 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Philip on 4/17/2017.
- */
 public class WonderTest {
     Map map;
     Wonder wonder;
@@ -50,22 +47,25 @@ public class WonderTest {
         for(WonderRow row : wonder.getRows()){
             fullRowCount += row.isFull() ? 1 : 0;
         }
+        assertEquals(15, fullRowCount);
     }
 
     @Test
-    public void addBrick() throws Exception {
+    public void addPlayerBrick() throws Exception {
+        WonderRow wonderRow = new WonderRow(7);
+        boolean brickAdded;
+        brickAdded = wonderRow.addBrick(player1);
+
+        assertTrue(brickAdded);
     }
 
     @Test
     public void addNeutralBrick() throws Exception {
-    }
+        WonderRow wonderRow = new WonderRow(7);
+        boolean brickAdded;
+        brickAdded = wonderRow.addNeutralBrick();
 
-    @Test
-    public void getScore() throws Exception {
-    }
-
-    @Test
-    public void getRowCount() throws Exception {
+        assertTrue(brickAdded);
     }
 
     @Test
@@ -75,27 +75,43 @@ public class WonderTest {
             wonderRow.addNeutralBrick();
         }
 
-        ArrayList<Brick> bricks = wonderRow.getBricks();
-
         assertTrue(wonderRow.isFull());
-        assertEquals(4, bricks.size());
         assertEquals(4, wonderRow.getBrickCount());
     }
 
     @Test
     public void getWonderRowScore(){
-        WonderRow wonderRow = new WonderRow(4);
+        WonderRow wonderRow = new WonderRow(7);
         for(int i = 0; i < 1; ++i){
             wonderRow.addBrick(player1);
         }
         assertFalse(wonderRow.isFull());
 
-        for(int i = 0; i < 3; ++i){
+        for(int i = 0; i < 5; ++i){
             wonderRow.addBrick(player2);
         }
-        assertTrue(wonderRow.isFull());
 
         int player2Score = wonderRow.getScore(player2);
-        assertEquals(7, player2Score);
+        assertEquals(8, player2Score);
+    }
+
+    @Test
+    public void getWonderScore(){
+        for(int i = 0; i < 2; ++i){
+            wonder.addBrick(player2);
+        }
+        for(int i = 0; i < 3; ++i){
+            wonder.addBrick(player1);
+        }
+        wonder.addNeutralBrick();
+        for(int i = 0; i < 2; ++i){
+            wonder.addBrick(player1);
+        }
+
+        int player1Score = wonder.getScore(player1);
+        int player2Score = wonder.getScore(player2);
+
+        assertEquals(15, player1Score);
+        assertEquals(5, player2Score);
     }
 }
