@@ -394,19 +394,6 @@ public class Map {
         }
     }
 
-    private void intializeResourceList(Location location) {
-        for(int i = 1; i < 7; i++) {
-            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
-            this.resources.put(regionLocation, new ResourceList());
-        }
-    }
-
-    private void intializeTansportList(Location location) {
-        for(int i = 1; i < 7; i++) {
-            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
-            this.transports.put(regionLocation, new TransportList());
-        }
-    }
     // return list of all sea tiles
     private HashMap<Location, Tile> getSeaTiles() {
         HashMap<Location, Tile> seaTiles = new HashMap<>();
