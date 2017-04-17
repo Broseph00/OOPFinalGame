@@ -2,16 +2,14 @@ package com.iteration3.model.Managers;
 
 import static com.iteration3.utilities.GameLibrary.*;
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Map.Map;
-import com.iteration3.model.Players.Research.Research;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
 
-import javax.xml.crypto.dsig.TransformService;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityManager {
     Map map;
@@ -105,7 +103,7 @@ public class AbilityManager {
         if (verifyWagonFactoryAbility(transporter)) { abilitiesList.add(new BuildWagonFactoryAbility(transporter, executionManager)); }
         if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager)); }
         if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
-        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildSpecializedMineAbility(transporter, executionManager)); }
+        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildIronMineAbility(transporter, executionManager)); }
         if (verifyBuildWallAbility(transporter)) { abilitiesList.add(new BuildWallAbility(transporter, executionManager)); }
         if (verifyBuildRoadAbility(transporter)) { abilitiesList.add(new BuildRoadAbility(transporter, executionManager)); }
     }

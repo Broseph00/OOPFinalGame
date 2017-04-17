@@ -1,6 +1,7 @@
 package com.iteration3.model.Transporters;
 
 
+import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
@@ -64,6 +65,35 @@ public class TransportList {
 
     public void addTransport(Transporter t) {
         this.transports.add(t);
+    }
+
+    public TransporterIterator makeIterator(){
+        return new TransporterIterator() {
+
+            private int index = 0;
+            private Transporter current;
+
+            public Transporter first() {
+                return transports.get(0);
+            }
+
+            public void next() {
+                index++;
+                index %= transports.size();
+                current = transports.get(index);
+            }
+
+            public void prev() {
+                index--;
+                if (index < 0)
+                    index = transports.size()-1;
+                current = transports.get(index);
+            }
+
+            public Transporter current() {
+                return current;
+            }
+        };
     }
 
 

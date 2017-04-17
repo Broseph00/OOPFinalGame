@@ -32,4 +32,5 @@ public class BuildBigMineAbility extends Ability {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+
 }

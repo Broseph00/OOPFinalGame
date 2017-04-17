@@ -4,6 +4,8 @@ import com.iteration3.model.Managers.LoadSaveStateManager;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Players.Research.EnlargementResearch;
+import com.iteration3.model.Players.Research.RowingResearch;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
@@ -178,6 +180,10 @@ public class MapTests {
         // check walls are there
         assertTrue(map.getWalls().get(new Location(0,0,0)).getWalls().size() == 3);
 
+        // check research is there
+        assertTrue(player1.getResearchManager().isFinishedEnlargementResearch());
+        assertTrue(player2.getResearchManager().isFinishedOilResearch());
+
     }
 
     @Test
@@ -214,6 +220,10 @@ public class MapTests {
 
         // test walls
         map.addWall(new Location(0,0,0), player1, 1,1);
+
+        // test research
+        player1.getResearchManager().completeResearch(new EnlargementResearch());
+        player2.getResearchManager().completeResearch(new RowingResearch());
 
         saveStateManager.saveState();
 

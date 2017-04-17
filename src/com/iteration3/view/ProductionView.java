@@ -119,6 +119,7 @@ public class ProductionView extends VBox {
 		
 		tileResourceList.setFont(Font.font(15));
 		transportResourceList.setFont(Font.font(15));
+
 		currentTransportLabel.setFont(Font.font(15));
 		
 	}
