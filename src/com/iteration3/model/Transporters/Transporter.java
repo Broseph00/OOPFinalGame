@@ -1,6 +1,7 @@
 package com.iteration3.model.Transporters;
 
 import com.iteration3.model.Abilities.Ability;
+import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
@@ -83,5 +84,37 @@ public abstract class Transporter {
     }
 
     public abstract boolean isDocked();
+
+    public AbilityIterator makeAbilityIterator(){
+        return new AbilityIterator() {
+
+            private int index = 0;
+            private Ability current;
+
+            public Ability first() {
+                return abilityList.get(0);
+            }
+
+            @Override
+            public void next() {
+                index++;
+                index %= abilityList.size();
+                current = abilityList.get(index);
+            }
+
+            @Override
+            public void prev() {
+                index--;
+                if (index < 0)
+                    index = abilityList.size()-1;
+                current = abilityList.get(index);
+            }
+
+            @Override
+            public Ability current() {
+                return current;
+            }
+        };
+    }
 
 }

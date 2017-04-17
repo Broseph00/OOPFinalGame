@@ -1,0 +1,6 @@
+resource<ID> ::= <RegionLocation> <Resource>
+transport<ID> ::= <RegionLocation> <Transport> <Owner> ::= [ResourceList ...]
+bridge<ID> ::= <Location> ::= <BridgeEdges>
+wall<ID> ::= <Location> ::= [[<Owner>:]<Edge>-<Strength> ...]
+research<ID> ::= <ResearchName> <Owner>
+wonder ::= [<Row#>-<Brick#>-<Owner> ...]

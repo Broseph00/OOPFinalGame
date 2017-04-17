@@ -2,16 +2,14 @@ package com.iteration3.model.Managers;
 
 import static com.iteration3.utilities.GameLibrary.*;
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Map.Map;
-import com.iteration3.model.Players.Research.Research;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
 
-import javax.xml.crypto.dsig.TransformService;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityManager {
     Map map;
@@ -104,6 +102,10 @@ public class AbilityManager {
         if (verifyTruckFactoryAbility(transporter)) { abilitiesList.add(new BuildTruckFactoryAbility(transporter, executionManager)); }
         if (verifyWagonFactoryAbility(transporter)) { abilitiesList.add(new BuildWagonFactoryAbility(transporter, executionManager)); }
         if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager)); }
+        if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
+        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildIronMineAbility(transporter, executionManager)); }
+        if (verifyBuildWallAbility(transporter)) { abilitiesList.add(new BuildWallAbility(transporter, executionManager)); }
+        if (verifyBuildRoadAbility(transporter)) { abilitiesList.add(new BuildRoadAbility(transporter, executionManager)); }
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
@@ -127,7 +129,17 @@ public class AbilityManager {
         UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
         addUndockAbility(undockAbility, transporter, abilitiesList);
 
-        DockatRiverAbility dockAbility = new DockatRiverAbility(transporter, executionManager);
+        DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver2Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver3Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver4Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver5Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver6Ability(transporter, executionManager);
         addRiverDockAbility(dockAbility, transporter, abilitiesList);
 
         DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
@@ -284,6 +296,23 @@ public class AbilityManager {
 
     private boolean verifyWoodcutterAbility(Transporter transporter){
         return (validationManager.validateResources(transporter, WOODCUTTER_BOARD, WOODCUTTER_STONE) && validationManager.validateTerrain(transporter, WOODS)) && !validationManager.existingProducer(transporter);
+    }
+
+    private boolean verifyBigMineAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter) && researchManager.isFinishedEnlargementResearch());
+    }
+
+    private boolean verifySpecializedMineAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter) && researchManager.isFinishedSpecializationResearch());
+
+    }
+
+    private boolean verifyBuildWallAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, WALL_BOARD, WALL_STONE)); //TODO
+    }
+
+    private boolean verifyBuildRoadAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, ROAD_BOARD, ROAD_STONE)); //TODO
     }
 
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){

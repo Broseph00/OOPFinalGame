@@ -2,6 +2,7 @@ package com.iteration3.model.Players;
 
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.TransportList;
@@ -55,7 +56,15 @@ public class Player {
         return transportersList;
     }
 
+    public TransporterIterator getTransportIterator(){
+        return transportersList.makeIterator();
+    }
+
     public ResearchManager getResearchManager(){
         return researchManager;
+    }
+
+    public int getId() {
+        return id;
     }
 }

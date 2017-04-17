@@ -1,13 +1,13 @@
 package com.iteration3.model.Buildings.Primary;
 
+import com.iteration3.model.Resource.*;
+
 public class BigMine extends Mine {
-    int baseOreAmount;
-
-    public BigMine(){
-        super();
-    }
-
-    private int getBaseOreAmount(){
-        return 5;
+    @Override
+    public void buildShaft() {
+        for(int i = 0; i < 5; ++i){
+            oreBag.add(new Iron());
+            oreBag.add(new Gold());
+        }
     }
 }
