@@ -293,6 +293,7 @@ public class Map {
     public Tile getTile(Location location) {
         return getTiles().get(location);
     }
+    public String getTerrainType(Location location) { return getTile(location).getTerrainType(); }
 
     public HashMap<Location, River> getRivers() {
         return rivers;

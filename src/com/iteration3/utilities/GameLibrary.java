@@ -41,6 +41,21 @@ public class GameLibrary {
     public static final String DESERT = "desert", MOUNTAINS = "mountains", PASTURE = "pasture", ROCK = "rock",
             SEA = "sea", WOODS = "woods";
 
+    public static final String BOARD = "boards", CLAY = "clay", COIN = "coins", FUEL = "fuel", GOLD = "gold", GOOSE = "goose",
+            IRON = "iron", PAPER = "paper", RESOURCE = "resource", STOCK = "stock", STONE = "stone", TRUNK = "trunks";
+
+    public static final String TRUCK = "truck", WAGON = "wagon", DONKEY = "donkey", RAFT = "raft", ROWBOAT = "rowboat",
+            STEAMSHIP = "steamship", WATERTRANSPORTER = "waterTransporter";
+
+    public static final String BIGMINE = "bigMine", CLAYPIT = "clayPit", GOLDMINE = "goldMine", IRONMINE = "ironMine", MINE = "mine",
+            OILRIG = "oilrig", STONEQUARRY = "stoneQuarry", WOODCUTTER = "Woodcutter";
+
+    public static final String COALBURNER = "coalBurner", MINT = "mint", PAPERMILL = "papermill", SAWMILL = "sawmill",
+            STOCKEXCHANGE = "stockExchange", STONEFACTORY = "stoneFactory";
+
+    public static final String RAFTFACTORY = "raftFactory", ROWBOATFACTORY = "rowboatFactory", STEAMERFACTORY = "steamerFactory",
+            TRANSPORTERFACTORY = "transporterFactory", TRUCKFACTORY = "truckFactory", WAGONFACTORY = "wagonFactory";
+
     public static final String DOCK_SEA1 = "DOCK NORTH", DOCK_SEA2 = "DOCK NORTHEAST", DOCK_SEA3 = "DOCK SOUTHEAST",
             DOCK_SEA4 = "DOCK SOUTH", DOCK_SEA5 = "DOCK SOUTHWEST", DOCK_SEA6 = "DOCK NORTHWEST", UNDOCK = "UNDOCK";
 

@@ -3,6 +3,7 @@ package com.iteration3.model.Buildings.Secondary;
 import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.*;
+import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
 
@@ -43,5 +44,10 @@ public class Mint extends SecondaryProducer {
         }
 
         return coins;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.MINT;
     }
 }

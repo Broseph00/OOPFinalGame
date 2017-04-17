@@ -4,6 +4,7 @@ import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
+import com.iteration3.utilities.GameLibrary;
 
 public class TruckFactory extends TransporterFactory {
     public TruckFactory() {
@@ -34,5 +35,10 @@ public class TruckFactory extends TransporterFactory {
         }
 
         return truck;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.TRUCKFACTORY;
     }
 }

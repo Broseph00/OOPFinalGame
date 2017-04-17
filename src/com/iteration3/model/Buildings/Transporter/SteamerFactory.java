@@ -4,6 +4,7 @@ import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Water.Steamship;
+import com.iteration3.utilities.GameLibrary;
 
 public class SteamerFactory extends TransporterFactory {
     public SteamerFactory() {
@@ -34,5 +35,10 @@ public class SteamerFactory extends TransporterFactory {
         }
 
         return steamship;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.STEAMERFACTORY;
     }
 }

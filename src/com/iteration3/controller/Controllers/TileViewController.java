@@ -49,6 +49,7 @@ public class TileViewController implements Observer {
         selectedRiverIndex = 0;
         cursorLocation = window.getCursorLocation();
 
+        this.window.clearPreviewImage();
         displayCurrentTerrain();
         displayCurrentRiver();
     }
@@ -75,8 +76,13 @@ public class TileViewController implements Observer {
     }
 
     public void displayCurrentTerrain() {
-        System.out.println(terrainTypes.get(selectedTerrainIndex));
-        window.drawPreviewImage(terrainTypes.get(selectedTerrainIndex));
+        String terrain = model.getTerrainType(cursorLocation);
+        char upperCase = terrain.substring(0).toUpperCase().toCharArray()[0];
+        System.out.println(upperCase);
+        terrain = terrain.replace(terrain.charAt(0), upperCase);
+        terrain = "big" + terrain;
+        System.out.println(terrain);
+        window.drawPreviewImage(terrain);
     }
 
     public void displayCurrentRiver() {

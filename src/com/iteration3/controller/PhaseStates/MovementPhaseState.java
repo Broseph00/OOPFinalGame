@@ -2,7 +2,9 @@ package com.iteration3.controller.PhaseStates;
 
 import com.iteration3.controller.Action;
 import com.iteration3.controller.ControlDispatch;
+import com.iteration3.controller.Controllers.CursorController;
 import com.iteration3.controller.Controllers.MovementController;
+import com.iteration3.controller.Controllers.TileViewController;
 import com.iteration3.controller.Observer;
 import com.iteration3.controller.PhaseStates.BuildingPhaseState;
 import com.iteration3.controller.PhaseStates.ControlDispatchState;
@@ -22,6 +24,8 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
     private ControlDispatch dispatch;
     private HashMap<KeyCode,Action> keyMap;
     private MovementController movementController;
+    private CursorController cursorController;
+    private TileViewController tileViewController;
 
 
     public MovementPhaseState(ControlDispatch dispatch, GameModel model, GameWindow window) {
@@ -32,6 +36,9 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
         keyMap = new HashMap<>();
         movementController = new MovementController(model, window, keyMap);
         movementController.addObserver(this);
+        tileViewController = new TileViewController(model, window, keyMap);
+        cursorController = new CursorController(model, window, keyMap);
+        cursorController.addObserver(tileViewController);
 
     }
 

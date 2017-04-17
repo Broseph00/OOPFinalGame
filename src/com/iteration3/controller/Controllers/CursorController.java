@@ -42,16 +42,15 @@ public class CursorController implements Observable {
     //could be adjusted to read from a file for custom controls
 
     private void initializeKeyMap(){
-        keyMap.put(KeyCode.NUMPAD1, new Action(){
+        keyMap.put(KeyCode.DIGIT0, new Action(){
             public void execute(){
-                System.out.println("hi");
                 window.moveCursorSW();
                 notifyAllObservers();
 
             }
         });
 
-        keyMap.put(KeyCode.NUMPAD7, new Action(){
+        keyMap.put(KeyCode.DIGIT9, new Action(){
             public void execute(){
                 window.moveCursorNW();
                 notifyAllObservers();

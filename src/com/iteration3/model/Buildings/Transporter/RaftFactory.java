@@ -4,6 +4,7 @@ import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.utilities.GameLibrary;
 
 public class RaftFactory extends TransporterFactory {
     public RaftFactory() {
@@ -34,5 +35,10 @@ public class RaftFactory extends TransporterFactory {
         }
 
         return raft;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.RAFTFACTORY;
     }
 }

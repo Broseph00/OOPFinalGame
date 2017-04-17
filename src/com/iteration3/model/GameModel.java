@@ -15,6 +15,7 @@ import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModel {
@@ -70,6 +71,7 @@ public class GameModel {
     public HashMap<Location, Tile> getTiles() {
         return map.getTiles();
     }
+    public String getTerrainType(Location location) { return map.getTerrainType(location); }
 
     public HashMap<Location, River> getRivers() {
         return map.getRivers();

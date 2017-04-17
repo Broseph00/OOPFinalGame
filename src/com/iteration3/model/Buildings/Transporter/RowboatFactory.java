@@ -3,8 +3,8 @@ package com.iteration3.model.Buildings.Transporter;
 import com.iteration3.model.Buildings.ResourceRequirement;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.ResourceList;
-import com.iteration3.model.Transporters.Water.Raft;
 import com.iteration3.model.Transporters.Water.Rowboat;
+import com.iteration3.utilities.GameLibrary;
 
 public class RowboatFactory extends TransporterFactory {
     public RowboatFactory() {
@@ -35,5 +35,10 @@ public class RowboatFactory extends TransporterFactory {
         }
 
         return rowboat;
+    }
+
+    @Override
+    public String getType() {
+        return GameLibrary.ROWBOATFACTORY;
     }
 }
