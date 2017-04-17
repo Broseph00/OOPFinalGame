@@ -2,6 +2,8 @@ package com.iteration3.model.Managers;
 
 import static com.iteration3.utilities.GameLibrary.*;
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Transporters.Land.LandTransporter;
@@ -104,6 +106,7 @@ public class AbilityManager {
         if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager)); }
         if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
         if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildIronMineAbility(transporter, executionManager)); }
+        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildGoldMineAbility(transporter, executionManager)); }
         if (verifyBuildWallAbility(transporter)) { abilitiesList.add(new BuildWallAbility(transporter, executionManager)); }
         if (verifyBuildRoadAbility(transporter)) { abilitiesList.add(new BuildRoadAbility(transporter, executionManager)); }
     }

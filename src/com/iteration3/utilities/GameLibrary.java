@@ -49,7 +49,10 @@ public class GameLibrary {
 
     public static final String DROP_RESOURCE = "DROP RESOURCE", PICKUP_RESOURCE = "PICKUP RESOURCE";
 
-    public static final String BUILD_WALL_ABILITY = "BUILD WALL", BUILD_ROAD_ABILITY = "BUILD ROAD";
+    public static final String BUILD_WALL_ABILITY = "BUILD WALL", BUILD_ROAD_ABILITY = "BUILD ROAD",
+            BUILD_BRIDGE_ABILITY = "BUILD BRIDGE", DEMOLISH_WALL = "DEMOLISH WALL";
+
+    public static final String PRODUCE_WOOD = "PRODUE WOOD";
 
     public static final int WOODCUTTER_BOARD = 1, WOODCUTTER_STONE = 0;
 
@@ -83,9 +86,9 @@ public class GameLibrary {
 
     public static final int STEAMER_BOARD = 2, STEAMER_STONE = 2;
 
-    public static final int WALL_BOARD = 0, WALL_STONE = 0; //TODO
+    public static final int WALL_BOARD = 0, WALL_STONE = 1;
 
-    public static final int ROAD_BOARD = 0, ROAD_STONE = 0; //TODO
+    public static final int ROAD_BOARD = 0, ROAD_STONE = 1;
 
-
+    public static final int BRIDGE_BOARD = 0, BRIDGE_STONE = 1;
 }

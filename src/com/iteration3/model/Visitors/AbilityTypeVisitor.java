@@ -1,7 +1,11 @@
 package com.iteration3.model.Visitors;
 
-import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.ExchangeAbility.DropResourceAbility;
+import com.iteration3.model.Abilities.ExchangeAbility.PickupResourceAbility;
 import com.iteration3.model.Abilities.MoveAbility.*;
+import com.iteration3.model.Abilities.ProductionAbility.ProduceWoodAbility;
 import com.iteration3.utilities.GameLibrary;
 
 /**
@@ -237,4 +241,7 @@ public class AbilityTypeVisitor implements iAbilityVisitor{
 
     @Override
     public String getType(PickupResourceAbility ability) { return GameLibrary.PICKUP_RESOURCE; }
+
+    @Override
+    public String getType(ProduceWoodAbility ability) { return GameLibrary.PRODUCE_WOOD; }
 }
