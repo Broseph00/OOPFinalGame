@@ -2,6 +2,10 @@
 
 import com.iteration3.model.Buildings.Primary.Claypit;
 import com.iteration3.model.Buildings.Primary.GoldMine;
+import com.iteration3.model.Buildings.Secondary.CoalBurner;
+import com.iteration3.model.Buildings.Secondary.Mint;
+import com.iteration3.model.Buildings.Transporter.RaftFactory;
+import com.iteration3.model.Buildings.Transporter.SteamerFactory;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
@@ -11,6 +15,8 @@ import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.model.Transporters.Water.Steamship;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -78,9 +84,92 @@ public class ResourceTests {
         assertTrue(map.getResources().get(regionLocation).getResources().get(0) instanceof Clay);
         assertTrue(map.getResources().get(new RegionLocation(1,1,1,1)).getResources().get(0) instanceof Gold);
 
+    }
+
+
+    @Test
+    public void testSecondaryProducers() throws Exception {
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        ProductionManager productionManager = new ProductionManager(map);
+        RegionLocation regionLocation = new RegionLocation(0, 0, 0, 1);
+        Location location = new Location(0,0,0);
+
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+
+        mapManager.fillMapFromTextFile();
+
+
+        map.addProducer(new CoalBurner(), regionLocation);
+        map.addResource(new Trunk(), regionLocation);
+
+
+        Donkey donkey = new Donkey(player1);
+        donkey.addResource(new Trunk());
+
+        map.addTransport(donkey, regionLocation);
+
+
+        productionManager.produceSecondaryProducers(donkey);
+
+        assertEquals(map.getTransports().get(regionLocation).getTransports().get(0).getResourceList().getFuel().size(),1);
+        assertEquals(map.getResources().size(), 0);
+        assertEquals(map.getTransports().get(regionLocation).getTransports().get(0).getResourceList().getResources().size(),1);
+
+        map.addProducer(new Mint(), regionLocation);
+        map.addResource(new Fuel(), regionLocation);
+        map.addResource(new Gold(), regionLocation);
+        map.addResource(new Gold(), regionLocation);
+        productionManager.produceSecondaryProducers();
+        assertEquals(map.getResources().get(regionLocation).getResources().size(), 1);
+        assertEquals(map.getResources().get(regionLocation).getCoins().size(), 1);
+
 
     }
 
+    @Test
+    public void testTransportProducers() throws Exception {
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        ProductionManager productionManager = new ProductionManager(map);
+        RegionLocation regionLocation = new RegionLocation(0, 0, 0, 1);
+        Location location = new Location(0,0,0);
+
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+
+        mapManager.fillMapFromTextFile();
+
+
+        map.addProducer(new RaftFactory(), regionLocation);
+        map.addResource(new Trunk(), regionLocation);
+
+
+        Donkey donkey = new Donkey(player1);
+        donkey.addResource(new Trunk());
+
+        map.addTransport(donkey, regionLocation);
+
+
+        productionManager.produceTransports(donkey);
+
+        assertEquals(player1.getTransportersList().getTransports().size(),2);
+        assertTrue(player1.getTransportersList().getTransports().get(1) instanceof Raft);
+        assertEquals(map.getResources().size(), 0);
+
+        map.addProducer(new SteamerFactory(), regionLocation);
+        map.addResource(new Fuel(), regionLocation);
+        map.addResource(new Iron(), regionLocation);
+        map.addResource(new Iron(), regionLocation);
+        productionManager.produceTransports();
+        assertEquals(player1.getTransportersList().getTransports().size(),3);
+        assertTrue(player1.getTransportersList().getTransports().get(2) instanceof Steamship);
+        assertEquals(map.getResources().size(), 0);
+
+
+
+    }
 
 
 }
