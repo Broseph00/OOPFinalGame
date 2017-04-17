@@ -7,6 +7,7 @@ import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
@@ -32,6 +33,8 @@ public class ProductionController implements Observable {
 
     TransporterIterator transIter;
     AbilityIterator abilityIter;
+    ResourceList tileResourceList;
+    ResourceList transporterResourceList;
 
     public ProductionController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
@@ -54,6 +57,9 @@ public class ProductionController implements Observable {
             public void execute() {
                 transIter.next();
                 currTrans = transIter.current();
+                tileResourceList = model.getAvailableResources(currTrans);
+                transporterResourceList = currTrans.getResourceList();
+                updateResourcesList();
 
             }
         });
@@ -62,6 +68,9 @@ public class ProductionController implements Observable {
             public void execute() {
                 transIter.prev();
                 currTrans = transIter.current();
+                tileResourceList = model.getAvailableResources(currTrans);
+                transporterResourceList = currTrans.getResourceList();
+                updateResourcesList();
 
             }
         });
@@ -121,6 +130,37 @@ public class ProductionController implements Observable {
     public void notifyAllObservers() {
         for (Observer o: subscribers)
             o.update();
+    }
+
+    public void updateResourcesList(){
+        String tile = "";
+        tile += "Trunks: " + tileResourceList.getTrunks() + "\n";
+        tile += "Boards: " + tileResourceList.getBoards() + "\n";
+        tile += "Paper: " + tileResourceList.getPaper() + "\n";
+        tile += "Goose: " + tileResourceList.getGeese() + "\n";
+        tile += "Clay: " + tileResourceList.getClay() + "\n";
+        tile += "Stone: " + tileResourceList.getStones() + "\n";
+        tile += "Fuel: " + tileResourceList.getFuel() + "\n";
+        tile += "Iron: " + tileResourceList.getIron() + "\n";
+        tile += "Gold: " + tileResourceList.getGold() + "\n";
+        tile += "Coins: " + tileResourceList.getCoins() + "\n";
+        tile += "Stock: " + tileResourceList.getStock() + "\n";
+        window.setCurrentTileResource(tile);
+
+        String transporter = "";
+        transporter += "Trunks: " + transporterResourceList.getTrunks() + "\n";
+        transporter += "Boards: " + transporterResourceList.getBoards() + "\n";
+        transporter += "Paper: " + transporterResourceList.getPaper() + "\n";
+        transporter += "Goose: " + transporterResourceList.getGeese() + "\n";
+        transporter += "Clay: " + transporterResourceList.getClay() + "\n";
+        transporter += "Stone: " + transporterResourceList.getStones() + "\n";
+        transporter += "Fuel: " + transporterResourceList.getFuel() + "\n";
+        transporter += "Iron: " + transporterResourceList.getIron() + "\n";
+        transporter += "Gold: " + transporterResourceList.getGold() + "\n";
+        transporter += "Coins: " + transporterResourceList.getCoins() + "\n";
+        transporter += "Stock: " + transporterResourceList.getStock() + "\n";
+        window.setCurrentTransportResource(transporter);
+
     }
 }
 
