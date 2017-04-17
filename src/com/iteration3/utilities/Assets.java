@@ -69,7 +69,6 @@ public class Assets {
         images.put("stock", new Image("stock.png"));
         images.put("clayPit", new Image("clayPit.png"));
         images.put("coalBurner", new Image("coalBurner.png"));
-        images.put("stock", new Image("stock.png"));
         images.put("mine", new Image("mine.png"));
         images.put("mint", new Image("mint.png"));
         images.put("oilRig", new Image("oilRig.png"));

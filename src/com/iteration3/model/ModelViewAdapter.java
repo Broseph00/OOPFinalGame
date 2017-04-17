@@ -1,8 +1,10 @@
 package com.iteration3.model;
 
 import com.iteration3.model.Abilities.*;
-import com.iteration3.model.Buildings.Primary.Mine;
-import com.iteration3.model.Buildings.Secondary.Mint;
+import com.iteration3.model.Buildings.Primary.*;
+import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Buildings.Secondary.*;
+import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
@@ -171,38 +173,54 @@ public class ModelViewAdapter {
     private void drawProducers(){
         for(RegionLocation regionlocation : gameModel.getProducers().keySet()) {
             currentLocation = regionlocation.getLocation();
-            ResourceList resourceList = gameModel.getResources().get(regionlocation);
-            for(Resource resource : resourceList.getResources()){
-                if(resource instanceof Board) {
-                    gameWindow.drawResource("boards", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Stone){
-                    gameWindow.drawResource("stone", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Clay){
-                    gameWindow.drawResource("clay", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Coin){
-                    gameWindow.drawResource("coins", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Fuel){
-                    gameWindow.drawResource("fuel", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Gold){
-                    gameWindow.drawResource("gold", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Goose){
-                    gameWindow.drawResource("goose", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Iron){
-                    gameWindow.drawResource("iron", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Paper){
-                    gameWindow.drawResource("paper", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
-                else if(resource instanceof Stock){
-                    gameWindow.drawResource("stock", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
-                }
+            Producer producer = gameModel.getProducers().get(regionlocation);
+            if(producer instanceof Claypit) {
+                gameWindow.drawProducer("clayPit", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof CoalBurner){
+                gameWindow.drawProducer("coalBurner", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof Mine){
+                gameWindow.drawProducer("mine", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof Mint){
+                gameWindow.drawProducer("mint", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof OilRig){
+                gameWindow.drawProducer("oilRig", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof Papermill){
+                gameWindow.drawProducer("papermill", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof StoneQuarry){
+                gameWindow.drawProducer("quarry", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof RaftFactory){
+                gameWindow.drawProducer("raftFactory", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof RowboatFactory){
+                gameWindow.drawProducer("rowboatFactory", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof Sawmill){
+                gameWindow.drawProducer("sawmill", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof SteamerFactory){
+                gameWindow.drawProducer("steamerFactory", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof StockExchange){
+                gameWindow.drawProducer("stockExchange", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof StoneFactory){
+                gameWindow.drawProducer("stoneFactory", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof TruckFactory){
+                gameWindow.drawProducer("truckFactory", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof WagonFactory){
+                gameWindow.drawProducer("wagonFactory", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+            else if(producer instanceof Woodcutter){
+                gameWindow.drawProducer("woodcutter", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
             }
         }
     }
