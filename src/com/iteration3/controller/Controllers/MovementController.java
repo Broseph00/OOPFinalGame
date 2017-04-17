@@ -123,10 +123,11 @@ public class MovementController implements Observable {
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
-            @Override
             public void handle(ActionEvent e) {
-
                 //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                notifyAllObservers();
             }
         };
 

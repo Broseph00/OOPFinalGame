@@ -86,6 +86,7 @@ public class ProductionController implements Observable {
             public void execute() {
                 currAbility.execute();
             }
+        });
 
     }
 
