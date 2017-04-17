@@ -192,4 +192,11 @@ public class GameWindow extends VBox implements View {
 		mainView.setOnClickEndBuildTurn(handler);
 	}
 	
+	public void setCurrentResearch(String research) {
+		mainView.setCurrentResearch(research);
+	}
+	
+	public void setOnClickResearchButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickResearchButton(handler);
+	}
 }

@@ -37,11 +37,16 @@ public class ViewTests extends Application {
 		buildingViewTab.setText("Building View");
 		buildingViewTab.setContent(new BuildingView(500,500));
 		
+		Tab researchViewTab = new Tab();
+		researchViewTab.setText("Research View");
+		researchViewTab.setContent(new ResearchView(500,500));
+		
 		tabPane.getTabs().add(statusViewTab);
 		tabPane.getTabs().add(mapViewTab);
 		tabPane.getTabs().add(productionViewTab);
 		tabPane.getTabs().add(movementViewTab);
 		tabPane.getTabs().add(buildingViewTab);
+		tabPane.getTabs().add(researchViewTab);
 		
 		Scene scene = new Scene(tabPane,500,500);
 		

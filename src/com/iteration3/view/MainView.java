@@ -25,6 +25,7 @@ public class MainView extends BorderPane implements View {
     private TileView tileView;
     private MovementView movementView; 
     private BuildingView buildingView;
+    private ResearchView researchView;
 
     public MainView(double width, double height) {
         this.setWidth(width);
@@ -41,6 +42,7 @@ public class MainView extends BorderPane implements View {
         this.statusBox.getChildren().addAll(productionView, tileView);
         this.movementView = new MovementView((1.0/4)*this.getWidth(),this.getHeight());
         this.buildingView = new BuildingView((1.0/4)*this.getWidth(),this.getHeight());
+        this.researchView = new ResearchView((1.0/4)*this.getWidth(),this.getHeight());
         
         this.setRight(mapView);
         this.setLeft(statusBox);
@@ -61,6 +63,11 @@ public class MainView extends BorderPane implements View {
     public void swapToBuildingView() {
     	statusBox.getChildren().clear();
     	statusBox.getChildren().addAll(buildingView,tileView);
+    }
+    
+    public void swapToResearchView() {
+    	statusBox.getChildren().clear();
+    	statusBox.getChildren().addAll(researchView,tileView);
     }
 
     public void drawTile(String imageURL, int x, int y) {
@@ -205,4 +212,11 @@ public class MainView extends BorderPane implements View {
 		buildingView.setOnClickEndBuildTurn(handler);
 	}
 	
+	public void setCurrentResearch(String research) {
+		researchView.setCurrentResearch(research);
+	}
+	
+	public void setOnClickResearchButton(EventHandler<ActionEvent> handler) {
+		researchView.setOnClickResearchButton(handler);
+	}
 }
