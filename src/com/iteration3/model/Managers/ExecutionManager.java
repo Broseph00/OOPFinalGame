@@ -165,8 +165,21 @@ public class ExecutionManager {
     public void execute(DockatSea5Ability ability) {executeSeaDock(ability);}
     public void execute(DockatSea6Ability ability) {executeSeaDock(ability);}
 
-    public void execute(DockatRiverAbility ability) { }
+    public void executeRiverDock(DockatRiverAbility ability) {
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        RegionLocation end = new RegionLocation(location, ability.getRegion());
+        map.removeTransport(transporter, start);
+        map.addTransport(transporter, end);
+    }
 
+    public void execute(DockatRiver1Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver2Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver3Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver4Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver5Ability ability) {executeRiverDock(ability);}
+    public void execute(DockatRiver6Ability ability) {executeRiverDock(ability);}
     
     public void execute(UndockAbility ability) {
         Transporter transporter = ability.getTransporter();

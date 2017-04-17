@@ -2,30 +2,34 @@ package com.iteration3.model.Abilities;
 
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
-import com.iteration3.model.Transporters.Water.WaterTransporter;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/16/2017.
+ * Created by test on 04/14/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    DockatRiver Module: Created by test on 04/16/2017.
+|    BuildMineAbility Module: Created by test on 04/14/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public abstract class DockatRiverAbility extends Ability {
-    int region;
+public class BuildBigMineAbility extends Ability {
 
-    public DockatRiverAbility(Transporter transporter, ExecutionManager executionManager, String name, int region){
-        super(transporter, name, executionManager);
-        this.region = region;
+    public BuildBigMineAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, GameLibrary.BUILD_BIGMINE_ABILITY, executionManager);
     }
 
-    public int getRegion(){return region;}
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        visitor.visit(this);
+    }
 
+    @Override
+    public String getAbilityType(iAbilityVisitor visitor) {
+        return visitor.getType(this);
+    }
 }

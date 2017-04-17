@@ -29,6 +29,10 @@ public interface iAbilityVisitor {
     String getType(BuildTruckFactoryAbility ability);
     String getType(BuildWagonFactoryAbility ability);
     String getType(BuildWoodcutterAbility ability);
+    String getType(BuildSpecializedMineAbility ability);
+    String getType(BuildBigMineAbility ability);
+    String getType(BuildWallAbility ability);
+    String getType(BuildRoadAbility ability);
 
     String getType(MoveDegree0Ability ability);
     String getType(MoveDegree30Ability ability);

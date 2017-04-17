@@ -35,6 +35,10 @@ public interface Visitor {
     public void visit(BuildTruckFactoryAbility ability);
     public void visit(BuildWagonFactoryAbility ability);
     public void visit(BuildWoodcutterAbility ability);
+    public void visit(BuildSpecializedMineAbility ability);
+    public void visit(BuildBigMineAbility ability);
+    public void visit(BuildWallAbility ability);
+    public void visit(BuildRoadAbility ability);
 
     public void visit(MoveDegree0Ability ability);
     public void visit(MoveDegree30Ability ability);
