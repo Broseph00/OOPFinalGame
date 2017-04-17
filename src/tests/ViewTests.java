@@ -29,9 +29,14 @@ public class ViewTests extends Application {
 		productionViewTab.setText("ProductionView");
 		productionViewTab.setContent(new ProductionView(500,500));
 		
+		Tab movementViewTab = new Tab();
+		movementViewTab.setText("Movement View");
+		movementViewTab.setContent(new MovementView(500,500));
+		
 		tabPane.getTabs().add(statusViewTab);
 		tabPane.getTabs().add(mapViewTab);
 		tabPane.getTabs().add(productionViewTab);
+		tabPane.getTabs().add(movementViewTab);
 		
 		Scene scene = new Scene(tabPane,500,500);
 		
