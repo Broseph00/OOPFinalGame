@@ -3,10 +3,10 @@ package com.iteration3.model.Players;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Players.Wonder.Wonder;
+import com.iteration3.model.Players.Wonder.WonderRow;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 

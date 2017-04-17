@@ -8,21 +8,18 @@ import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Players.Research.EnlargementResearch;
 import com.iteration3.model.Players.Research.RowingResearch;
-import com.iteration3.model.Players.Wonder;
+import com.iteration3.model.Players.Wonder.Wonder;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Tiles.PastureTerrain;
 import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Tiles.WoodTerrain;
 import com.iteration3.model.Transporters.Land.Donkey;
-import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.Raft;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

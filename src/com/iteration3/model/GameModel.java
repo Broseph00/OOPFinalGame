@@ -3,20 +3,17 @@ package com.iteration3.model;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
-import com.iteration3.model.Players.Wonder;
-import com.iteration3.model.Players.WonderManager;
+import com.iteration3.model.Players.Wonder.Wonder;
+import com.iteration3.model.Managers.WonderManager;
 import com.iteration3.model.Resource.Board;
 import com.iteration3.model.Resource.Goose;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Resource.Stone;
-import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModel {
