@@ -25,4 +25,6 @@ public abstract class ConstructRoadAbility extends Ability {
         super(transporter, name, executionManager);
         this.border = border;
     }
+
+    public int getBorder(){return border;}
 }

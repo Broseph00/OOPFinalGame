@@ -1,4 +1,4 @@
-package tests;
+//package tests;
 
 import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.Managers.MapFileManager;
@@ -18,20 +18,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
-/**
- * Created by test on 04/15/2017.
- */
-
-
-
-/*--------------------------------------------------------------------------------------
-|    AbilityTest Module: Created by test on 04/15/2017.
-|---------------------------------------------------------------------------------------
-|   Description:
-|
----------------------------------------------------------------------------------------*/
-
-
 public class AbilityTest {
 
     @Test
@@ -42,7 +28,7 @@ public class AbilityTest {
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
 
-        Player player1 = new Player(map, 1);
+        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
         Transporter transporter = new Donkey(player1);
         map.addTransport(transporter, new RegionLocation(new Location(0,0,0), 1));
         assertEquals(true, transporter.getAbilityList().isEmpty());

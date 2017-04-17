@@ -8,6 +8,7 @@ import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Players.Research.*;
+import com.iteration3.model.Players.Wonder;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
@@ -25,14 +26,16 @@ public class LoadSaveStateManager {
 
     private String pathToSaveStateFile;
     private Map map;
+    private Wonder wonder;
     private Player player1;
     private Player player2;
 
-    public LoadSaveStateManager(Map m, String path, Player player1, Player player2)  {
+    public LoadSaveStateManager(Map m, String path, Player player1, Player player2, Wonder wonder)  {
         this.map = m;
         this.pathToSaveStateFile = path;
         this.player1 = player1;
         this.player2 = player2;
+        this.wonder = wonder;
     }
 
 
@@ -63,7 +66,7 @@ public class LoadSaveStateManager {
                 loadBridges(splitLine);
             }
             else if(splitLine[0].contains("wonder")) {
-
+                loadWonder(splitLine);
             }
 
 
@@ -386,6 +389,10 @@ public class LoadSaveStateManager {
 
     }
 
+
+    private void loadWonder(String[] splitLine) {
+
+    }
 
 
 

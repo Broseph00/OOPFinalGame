@@ -310,4 +310,7 @@ public class AbilityTypeVisitor implements iAbilityVisitor{
 
     @Override
     public String getType(ProduceStockAbility ability) { return GameLibrary.PRODUCE_STOCK; }
+
+    @Override
+    public String getType(ProduceWagonAbility ability) { return GameLibrary.PRODUCE_WAGON; }
 }

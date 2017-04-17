@@ -1,23 +1,9 @@
 package com.iteration3.model.Players;
 
-public class Brick {
-    private Player owner;
+import com.iteration3.model.Players.Player;
 
-    public Brick(Player player){
-        owner = player;
-    }
+public interface Brick {
 
-    public int count(Player player){
-        if(owner.equals(player)){
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public String getColor(){
-        // return owner.colorString();
-        // TODO: owner needs a color string or player ID
-        return null;
-    }
+    public abstract int count(Player player);
+    public abstract String getColor();
 }

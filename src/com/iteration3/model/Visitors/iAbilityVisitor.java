@@ -99,4 +99,5 @@ public interface iAbilityVisitor {
     String getType(ProduceBrickAbility ability);
     String getType(ProduceCoinAbility ability);
     String getType(ProduceStockAbility ability);
+    String getType(ProduceWagonAbility ability);
 }
