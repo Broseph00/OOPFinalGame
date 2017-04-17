@@ -215,4 +215,16 @@ public class AbilityTypeVisitor implements iAbilityVisitor{
 
     @Override
     public String getType(UndockAbility ability) { return GameLibrary.UNDOCK; }
+
+    @Override
+    public String getType(BuildBigMineAbility ability) { return GameLibrary.BUILD_BIGMINE_ABILITY; }
+
+    @Override
+    public String getType(BuildSpecializedMineAbility ability) { return GameLibrary.BUILD_SPECIALIZEDMINE_ABILITY; }
+
+    @Override
+    public String getType(BuildWallAbility ability) { return GameLibrary.BUILD_WALL_ABILITY; }
+
+    @Override
+    public String getType(BuildRoadAbility ability) { return  GameLibrary.BUILD_ROAD_ABILITY; }
 }

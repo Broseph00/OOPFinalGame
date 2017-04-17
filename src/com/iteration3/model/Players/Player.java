@@ -63,4 +63,8 @@ public class Player {
     public ResearchManager getResearchManager(){
         return researchManager;
     }
+
+    public int getId() {
+        return id;
+    }
 }
