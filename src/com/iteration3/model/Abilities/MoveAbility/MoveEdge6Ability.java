@@ -1,4 +1,4 @@
-package com.iteration3.model.Abilities;
+package com.iteration3.model.Abilities.MoveAbility;
 
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
@@ -7,20 +7,20 @@ import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/14/2017.
+ * Created by test on 04/15/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    MoveDegree210Ability Module: Created by test on 04/14/2017.
+|    MoveEdge6Ability Module: Created by test on 04/15/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class MoveDegree210Ability extends MoveAbility {
+public class MoveEdge6Ability extends MoveAbility {
 
-    public MoveDegree210Ability(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, 4,5, GameLibrary.MOVE_ANGLE210_ABILITY, executionManager);
+    public MoveEdge6Ability(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, 7, 6, GameLibrary.MOVE_EDGE6_ABILITY, executionManager);
     }
 
     @Override

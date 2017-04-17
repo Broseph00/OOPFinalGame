@@ -7,20 +7,20 @@ import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/15/2017.
+ * Created by test on 04/14/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    MoveEdge1Ability Module: Created by test on 04/15/2017.
+|    BuildMineAbility Module: Created by test on 04/14/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class MoveEdge1Ability extends MoveAbility {
+public class BuildIronMineAbility extends Ability {
 
-    public MoveEdge1Ability(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, 7, 1, GameLibrary.MOVE_EDGE1_ABILITY, executionManager);
+    public BuildIronMineAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, GameLibrary.BUILD_IRON_MINE, executionManager);
     }
 
     @Override
@@ -32,5 +32,4 @@ public class MoveEdge1Ability extends MoveAbility {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
-
 }

@@ -1,7 +1,7 @@
 package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.DockatSeaAbility;
-import com.iteration3.model.Abilities.MoveAbility;
+import com.iteration3.model.Abilities.MoveAbility.MoveAbility;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
@@ -12,7 +12,6 @@ import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
-import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 import java.util.ArrayList;
 import java.util.Iterator;

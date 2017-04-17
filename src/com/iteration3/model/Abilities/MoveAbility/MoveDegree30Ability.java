@@ -1,4 +1,4 @@
-package com.iteration3.model.Abilities;
+package com.iteration3.model.Abilities.MoveAbility;
 
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
@@ -11,16 +11,16 @@ import com.iteration3.utilities.GameLibrary;
  */
 
 /*--------------------------------------------------------------------------------------
-|    BuildMineAbility Module: Created by test on 04/14/2017.
+|    MoveDegree30Ability Module: Created by test on 04/14/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class BuildSpecializedMineAbility extends Ability {
+public class MoveDegree30Ability extends MoveAbility {
 
-    public BuildSpecializedMineAbility(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, GameLibrary.BUILD_SPECIALIZEDMINE_ABILITY, executionManager);
+    public MoveDegree30Ability(Transporter transporter, ExecutionManager executionManager){
+        super(transporter,1,2, GameLibrary.MOVE_ANGLE30_ABILITY, executionManager);
     }
 
     @Override
