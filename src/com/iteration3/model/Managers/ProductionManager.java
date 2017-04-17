@@ -7,6 +7,7 @@ import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Transporter;
@@ -39,14 +40,20 @@ public class ProductionManager {
 
         HashMap<RegionLocation, SecondaryProducer> secondaryProducers = getSecondaryProducers();
         for(RegionLocation regionLocation: secondaryProducers.keySet()) {
-            if(regionLocation.getLocation() == transportLocation.getLocation()){
-                SecondaryProducer secondaryProducer = getSecondaryProducers().get(regionLocation);
-                ArrayList<Resource> createdResources = new ArrayList<>();
-                if(secondaryProducer.checkResources(availableResources)) {
-                    createdResources= secondaryProducer.produce(availableResources);
-                }
+            if(regionLocation.getLocation().equals(transportLocation.getLocation())){
+                SecondaryProducer secondaryProducer = secondaryProducers.get(regionLocation);
+                ArrayList<Resource> createdResources = secondaryProducer.produce(availableResources);
+                ArrayList<Resource> usedResources = secondaryProducer.getNecessaryResources();
 
                 for(Resource resource: createdResources) {
+                    for(Resource usedResource: usedResources) {
+                        if(transport.removeResource(usedResource)) {
+
+                        } else {
+                            // WILL ONLY REMOVE IF IT IS ON SPECIFIC REGION LOCATION
+                            map.removeResource(usedResource, regionLocation);
+                        }
+                    }
                     transport.addResource(resource);
                 }
             }
@@ -58,19 +65,60 @@ public class ProductionManager {
         HashMap<RegionLocation, SecondaryProducer> secondaryProducers = getSecondaryProducers();
         for(RegionLocation regionLocation: secondaryProducers.keySet()) {
             ResourceList availableResources = validationManager.getAvailableResources(regionLocation);
-            SecondaryProducer secondaryProducer = getSecondaryProducers().get(regionLocation);
-            ArrayList<Resource> createdResources = new ArrayList<>();
-
-            if(secondaryProducer.checkResources(availableResources)) {
-                createdResources= secondaryProducer.produce(availableResources);
-            }
+            SecondaryProducer secondaryProducer = secondaryProducers.get(regionLocation);
+            ArrayList<Resource> createdResources = secondaryProducer.produce(availableResources);
+            ArrayList<Resource> usedResources = secondaryProducer.getNecessaryResources();
 
             for(Resource resource: createdResources) {
+                for(Resource usedResource: usedResources) {
+                        map.removeResource(usedResource, regionLocation);
+                }
                 this.map.addResource(resource, regionLocation);
             }
         }
     }
 
+    public void produceTransports(Transporter transport) {
+        RegionLocation transportLocation = this.map.getTransportRegionLocation(transport);
+        ResourceList availableResources = validationManager.getAvailableResources(transport);
+
+        HashMap<RegionLocation, TransporterFactory> transportFactories = getTransporterFactories();
+        for(RegionLocation regionLocation: transportFactories.keySet()) {
+            if(regionLocation.getLocation().equals(transportLocation.getLocation())){
+                TransporterFactory transporterFactory = transportFactories.get(regionLocation);
+                Transporter transporter = transporterFactory.produce(transport.getOwner(), availableResources);
+                ArrayList<Resource> usedResources = transporterFactory.getNecessaryResources();
+
+                for(Resource usedResource: usedResources) {
+                    if(transport.removeResource(usedResource)) {
+                    } else {
+                        // WILL ONLY REMOVE IF IT IS ON SPECIFIC REGION LOCATION
+                        map.removeResource(usedResource, regionLocation);
+                        System.out.println(usedResource);
+                    }
+                }
+                map.addTransport(transporter, regionLocation);
+
+            }
+        }
+    }
+
+
+    public void produceTransports() {
+
+        HashMap<RegionLocation, TransporterFactory> transporterFactories = getTransporterFactories();
+        for(RegionLocation regionLocation: transporterFactories.keySet()) {
+            ResourceList availableResources = validationManager.getAvailableResources(regionLocation);
+            TransporterFactory transporterFactory = transporterFactories.get(regionLocation);
+            ArrayList<Resource> usedResources = transporterFactory.getNecessaryResources();
+
+            for(Resource usedResource: usedResources) {
+                System.out.println(usedResource);
+                map.removeResource(usedResource, regionLocation);
+            }
+
+        }
+    }
 
 
     private HashMap<RegionLocation, PrimaryProducer> getPrimaryProducers() {
@@ -85,11 +133,13 @@ public class ProductionManager {
 
     private HashMap<RegionLocation, SecondaryProducer> getSecondaryProducers() {
         HashMap<RegionLocation, SecondaryProducer> secondaryProducers = new HashMap<>();
+
         for(RegionLocation regionLocation: this.map.getProducers().keySet()) {
             if(this.map.getProducers().get(regionLocation) instanceof SecondaryProducer) {
                 secondaryProducers.put(regionLocation, (SecondaryProducer) this.map.getProducers().get(regionLocation));
             }
         }
+
         return secondaryProducers;
     }
 

@@ -15,32 +15,33 @@ public class Mint extends SecondaryProducer {
     }
 
     public void initialize(){
-        ResourceRequirement req1 = new ResourceRequirement(new Fuel(), new Gold(), new Gold());
-        addRequirement(req1);
+        addRequirement(new Fuel());
+        addRequirement(new Gold());
+        addRequirement(new Gold());
     }
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            if(reqs.verify(availableResources.getResources())){
-                return true;
-            }
+        if(availableResources.getFuel().size() >= 1 && availableResources.getGold().size() >= 2) {
+            availableResources.removeGold();
+            availableResources.removeGold();
+            availableResources.removeFuel();
+            return true;
         }
         return false;
     }
 
     @Override
     public ArrayList<Resource> produce(ResourceList availableResources) {
-        boolean canProduce;
-        ArrayList<Resource> coins = null;
 
-        for(ResourceRequirement reqs : getNecessaryResources()){
-            canProduce = reqs.consume(availableResources.getResources());
-            if(canProduce && (getCapacity() > 0)) {
-                coins.add(new Coin());
-                decrementCapacity();
-                break;
-            }
+        boolean canProduce = checkResources(availableResources);
+        ArrayList<Resource> coins = new ArrayList<>();
+
+        while(canProduce && getCapacity() > 0) {
+            coins.add(new Coin());
+            decrementCapacity();
+            canProduce = checkResources(availableResources);
+
         }
 
         return coins;

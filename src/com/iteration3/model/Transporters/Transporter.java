@@ -76,8 +76,8 @@ public abstract class Transporter {
         return owner;
     }
 
-    public void removeResource(Resource r) {
-        this.resourceList.removeResource(r);
+    public boolean removeResource(Resource r) {
+        return this.resourceList.removeResource(r);
     }
 
     public void addResource(Resource r) {

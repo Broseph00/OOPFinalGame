@@ -4,7 +4,6 @@ import static com.iteration3.utilities.GameLibrary.*;
 
 import com.iteration3.controller.ControlDispatch;
 import com.iteration3.controller.PhaseStates.BuildingPhaseState;
-import com.iteration3.controller.PhaseStates.ControlDispatchState;
 import com.iteration3.controller.PhaseStates.MovementPhaseState;
 import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Abilities.BuildAbility.*;
@@ -30,7 +29,6 @@ public class AbilityManager {
     ExecutionManager executionManager;
     ResearchManager researchManager;
     ExchangeManager exchangeManager;
-    ControlDispatch controlDispatch;
 
     public AbilityManager(Map map, ValidationManager validationManager, ResearchManager researchManager, ExecutionManager executionManager, ExchangeManager exchangeManager){
         this.map = map;
@@ -38,10 +36,6 @@ public class AbilityManager {
         this.executionManager = executionManager;
         this.researchManager = researchManager;
         this.exchangeManager = exchangeManager;
-    }
-
-    public void updateControlDispatch(ControlDispatch controlDispatch){
-        this.controlDispatch = controlDispatch;
     }
 
     public void updateRoadTransporters(ArrayList<OnRoadLandTransporter> roadLandTransporters){
@@ -85,50 +79,47 @@ public class AbilityManager {
 
     public ArrayList<Ability> populateList(WaterTransporter transporter) {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-        addConstructionAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
-        addMoveAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
-        addDockAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addConstructionAbilities(transporter, abilitiesList );
+        addMoveAbilities(transporter, abilitiesList  );
+        addDockAbilities(transporter, abilitiesList  );
         //addProduceAbilities(transporter, abilitiesList);
-        addExchangeAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addExchangeAbilities(transporter, abilitiesList  );
         return abilitiesList;
     }
 
     public ArrayList<Ability> populateList(LandTransporter transporter) {
         //System.out.println("Step 5");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-        addConstructionAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
-        addMoveAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addConstructionAbilities(transporter, abilitiesList  );
+        addMoveAbilities(transporter, abilitiesList  );
         //addProduceAbilities(transporter, abilitiesList);
-        addExchangeAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addExchangeAbilities(transporter, abilitiesList  );
         return abilitiesList;
     }
 
     public ArrayList<Ability> populateList(OnRoadLandTransporter transporter) {
         //System.out.print("Step 6");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-        addBuildAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
-        addConstructionAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
-        addMoveAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addBuildAbilities(transporter, abilitiesList  );
+        addConstructionAbilities(transporter, abilitiesList  );
+        addMoveAbilities(transporter, abilitiesList  );
         //addProduceAbilities(transporter, abilitiesList);
-        addExchangeAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addExchangeAbilities(transporter, abilitiesList  );
         return abilitiesList;
     }
 
-    public void addExchangeAbilities(Transporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+    public void addExchangeAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
         //System.out.println("lol");
-        if(controlDispatchState instanceof MovementPhaseState) {
             if (verifyDropResourceAbility(transporter)) {
                 abilitiesList.add(new DropResourceAbility(transporter, exchangeManager, executionManager));
             }
             if (verifyPickupResourceAbility(transporter)) {
                 abilitiesList.add(new PickupResourceAbility(transporter, executionManager, exchangeManager));
             }
-        }
     }
 
-    public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+    public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList      ){
         //construction abilities
-        if(controlDispatchState instanceof BuildingPhaseState) {
             if (verifyClayPitAbility(transporter)) {
                 abilitiesList.add(new BuildClaypitAbility(transporter, executionManager));
             }
@@ -183,11 +174,12 @@ public class AbilityManager {
             if (verifySpecializedMineAbility(transporter)) {
                 abilitiesList.add(new BuildGoldMineAbility(transporter, executionManager));
             }
-        }
+
     }
 
-    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
-        if(controlDispatchState instanceof BuildingPhaseState) {
+    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList      )
+    {
+
             ConstructWallAbility constructWallAbility = new ConstructWall1Ability(transporter, executionManager);
             addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
             constructWallAbility = new ConstructWall2Ability(transporter, executionManager);
@@ -226,7 +218,7 @@ public class AbilityManager {
             addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
             constructBridgeAbility = new ConstructBridge6Ability(transporter, executionManager);
             addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
-        }
+
     }
 
     public void addProduceAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
@@ -245,9 +237,8 @@ public class AbilityManager {
 
     }
 
-    public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState) {
+    public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList      ) {
         //abilities to move
-        if(controlDispatchState instanceof MovementPhaseState) {
             MoveAbility moveAbility = new MoveEdge1Ability(transporter, executionManager);
             addMoveAbility(moveAbility, transporter, abilitiesList);
             moveAbility = new MoveEdge2Ability(transporter, executionManager);
@@ -260,12 +251,11 @@ public class AbilityManager {
             addMoveAbility(moveAbility, transporter, abilitiesList);
             moveAbility = new MoveEdge6Ability(transporter, executionManager);
             addMoveAbility(moveAbility, transporter, abilitiesList);
-        }
+
     }
 
-    public void addDockAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+    public void addDockAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList      ){
         //abilities to dock
-        if(controlDispatchState instanceof MovementPhaseState) {
             UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
             addUndockAbility(undockAbility, transporter, abilitiesList);
 
@@ -294,13 +284,12 @@ public class AbilityManager {
             addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
             dockatSeaAbility = new DockatSea6Ability(transporter, executionManager);
             addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
-        }
+
     }
 
-    public void addMoveAbilities(LandTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+    public void addMoveAbilities(LandTransporter transporter, ArrayList<Ability> abilitiesList      ){
 
         //abilities to move
-        if(controlDispatchState instanceof MovementPhaseState) {
             MoveAbility moveAbility = new MoveDegree0Ability(transporter, executionManager);
             addMoveAbility(moveAbility, transporter, abilitiesList);
             moveAbility = new MoveDegree30Ability(transporter, executionManager);
@@ -325,13 +314,13 @@ public class AbilityManager {
             addMoveAbility(moveAbility, transporter, abilitiesList);
             moveAbility = new MoveDegree330Ability(transporter, executionManager);
             addMoveAbility(moveAbility, transporter, abilitiesList);
-        }
+
     }
 
-    public void addMoveAbilities(OnRoadLandTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+    public void addMoveAbilities(OnRoadLandTransporter transporter, ArrayList<Ability> abilitiesList      ){
 
-        //abilities to move
-        if(controlDispatchState instanceof MovementPhaseState) {
+          //abilities to move
+
             MoveAbility moveAbility = new MoveDegree0Ability(transporter, executionManager);
             addMoveAbility(moveAbility, transporter, abilitiesList);
             moveAbility = new MoveDegree30Ability(transporter, executionManager);
@@ -356,7 +345,7 @@ public class AbilityManager {
             addMoveAbility(moveAbility, transporter, abilitiesList);
             moveAbility = new MoveDegree330Ability(transporter, executionManager);
             addMoveAbility(moveAbility, transporter, abilitiesList);
-        }
+
     }
 
     private void addRiverDockAbility(DockatRiverAbility dockAbility, WaterTransporter transporter, ArrayList<Ability> abilitiesList){

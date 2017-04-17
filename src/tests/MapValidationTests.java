@@ -11,6 +11,7 @@ import com.iteration3.model.Players.Player;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
 import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.utilities.GameLibrary;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -22,8 +23,8 @@ public class MapValidationTests {
     @Before
     public void setUp() throws Exception{
         Map map = new Map();
-        player1 = new Player(map,1, new RegionLocation(0,3,-3,1));
-        player2 = new Player(map, 2, new RegionLocation(0,3,-3,1));
+        player1 = new Player(map,1, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER1_COLOR);
+        player2 = new Player(map, 2, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER2_COLOR);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
     }
