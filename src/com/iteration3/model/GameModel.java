@@ -7,6 +7,7 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.TransportList;
+import com.iteration3.model.Transporters.Transporter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -89,5 +90,9 @@ public class GameModel {
 
     public Tile getTile(Location location) {
         return getTiles().get(location);
+    }
+
+    public ResourceList getAvailableResources(Transporter transporter){
+        return map.getAvailableResources(transporter);
     }
 }
