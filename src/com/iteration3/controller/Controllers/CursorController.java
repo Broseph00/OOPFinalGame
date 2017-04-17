@@ -6,13 +6,15 @@ package com.iteration3.controller.Controllers;
 |   Cursor keeps track of its location on the map
 ---------------------------------------------------------------------------------------*/
 import com.iteration3.controller.Action;
-import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
+import com.iteration3.utilities.Observer;
+import com.iteration3.view.GameWindow;
 //import com.iteration3.model.map.Location;
 //import com.iteration3.model.map.Map;
 import com.iteration3.view.MainView;
 //import com.iteration3.view.Observable;
 //import com.iteration3.view.Observer;
+
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -25,9 +27,9 @@ public class CursorController implements Observable {
 
     private HashMap<KeyCode,Action> keyMap;
     private ArrayList<Observer> observers;
-    private MainView window;
+    private GameWindow window;
 
-    public CursorController(GameModel model, MainView window, HashMap<KeyCode, Action> keymap) {
+    public CursorController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keymap) {
         this.keyMap = keymap;
         this.window = window;
         System.out.println("Cursor Controller Constructing");
@@ -40,7 +42,7 @@ public class CursorController implements Observable {
     //could be adjusted to read from a file for custom controls
 
     private void initializeKeyMap(){
-        keyMap.put(KeyCode.DIGIT0, new Action(){
+        keyMap.put(KeyCode.NUMPAD1, new Action(){
             public void execute(){
                 System.out.println("hi");
                 window.moveCursorSW();

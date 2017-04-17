@@ -1,8 +1,8 @@
 package com.iteration3.controller.Controllers;
 
 import com.iteration3.controller.Action;
-import com.iteration3.controller.Observable;
-import com.iteration3.controller.Observer;
+import com.iteration3.utilities.Observable;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
@@ -11,7 +11,6 @@ import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -50,6 +49,7 @@ public class ProductionController implements Observable {
 
         initializeKeyMap();
         createHandlers();
+        System.out.println(keyMap);
     }
 
     private void initializeKeyMap() {
@@ -57,9 +57,9 @@ public class ProductionController implements Observable {
             public void execute() {
                 transIter.next();
                 currTrans = transIter.current();
-                tileResourceList = model.getAvailableResources(currTrans);
-                transporterResourceList = currTrans.getResourceList();
-                updateResourcesList();
+                //tileResourceList = model.getAvailableResources(currTrans);
+                //transporterResourceList = currTrans.getResourceList();
+                //updateResourcesList();
 
             }
         });
@@ -68,16 +68,16 @@ public class ProductionController implements Observable {
             public void execute() {
                 transIter.prev();
                 currTrans = transIter.current();
-                tileResourceList = model.getAvailableResources(currTrans);
-                transporterResourceList = currTrans.getResourceList();
-                updateResourcesList();
+                //tileResourceList = model.getAvailableResources(currTrans);
+                //transporterResourceList = currTrans.getResourceList();
+                window.setCurrentTileResource("HI");
 
             }
         });
 
         keyMap.put(KeyCode.UP, new Action() {
             public void execute() {
-                abilityIter.prev();
+                abilityIter.next();
                 currAbility = abilityIter.current();
 
             }
@@ -85,7 +85,7 @@ public class ProductionController implements Observable {
 
         keyMap.put(KeyCode.DOWN, new Action() {
             public void execute() {
-                transIter.prev();
+                abilityIter.prev();
                 currAbility = abilityIter.current();
 
             }

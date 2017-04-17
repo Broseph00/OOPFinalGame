@@ -1,4 +1,4 @@
-package com.iteration3.controller;
+package com.iteration3.utilities;
 
 public interface Observable {
 

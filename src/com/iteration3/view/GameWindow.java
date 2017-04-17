@@ -78,11 +78,13 @@ public class GameWindow extends VBox implements View {
     public void drawPreviewImage(String imageURL) {
         getMainView().drawPreviewImage(imageURL);
     }
+    public void clearPreviewImage() { getMainView().clearPreviewImage(); }
     public void drawRiver(String imageURL, int x, int y) {
         getMainView().drawRiver(imageURL, x, y);
     }
     public void drawTransport(String imageURL, int x, int y, int region){getMainView().drawTransport(imageURL, x, y, region);}
     public void drawResource(String imageURL, int x, int y, int region){getMainView().drawResource(imageURL, x, y, region);}
+	public void drawProducer(String imageURL, int x, int y, int region){getMainView().drawProducer(imageURL, x, y, region);}
 
     public Location getCursorLocation() {
         return mainView.getCursorLocation();
@@ -206,4 +208,23 @@ public class GameWindow extends VBox implements View {
 	public void setOnClickResearchButton(EventHandler<ActionEvent> handler) {
 		mainView.setOnClickResearchButton(handler);
 	}
+	
+	 public void moveCursorNW(){
+	        mainView.moveCursorNW();
+	    }
+	    public void moveCursorNE(){
+	        mainView.moveCursorNE();
+	    }
+	    public void moveCursorSW(){
+	        mainView.moveCursorSW();
+	    }
+	    public void moveCursorSE(){
+	        mainView.moveCursorSE();
+	    }
+	    public void moveCursorNorth(){
+	        mainView.moveCursorNorth();
+	    }
+	    public void moveCursorSouth(){
+	        mainView.moveCursorSouth();
+	    }
 }

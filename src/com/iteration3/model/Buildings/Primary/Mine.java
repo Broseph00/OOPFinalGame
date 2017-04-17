@@ -30,12 +30,5 @@ public abstract class Mine extends PrimaryProducer {
     }
 
     public abstract void buildShaft();
-/*
-    {
-        for(int i = 0; i < this.getBaseOreAmount(); ++i){
-            oreBag.add(new Gold());
-            oreBag.add(new Iron());
-        }
-    }
-*/
+
 }

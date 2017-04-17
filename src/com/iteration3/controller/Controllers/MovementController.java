@@ -5,8 +5,8 @@ package com.iteration3.controller.Controllers;
  */
 import com.iteration3.controller.Action;
 import com.iteration3.controller.Modes.*;
-import com.iteration3.controller.Observable;
-import com.iteration3.controller.Observer;
+import com.iteration3.utilities.Observable;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
@@ -14,7 +14,6 @@ import com.iteration3.model.Players.Player;
 import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -55,18 +54,17 @@ public class MovementController implements Observable {
         abilityIter = currTrans.makeAbilityIterator();
 
         initializeKeyMap();
-        //initializeModes();
+        initializeModes();
         createHandlers();
         System.out.println("Move Controller");
-        System.out.println(currTrans);
-        transIter.next();
-        System.out.println(currTrans);
+        System.out.println(keyMap);
     }
 
     private void initializeKeyMap() {
         keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                modes.get(index).next();
+                //modes.get(index).next();
+                transIter.next();
                 currTrans = transIter.current();
                 currAbility = abilityIter.current();
                 System.out.println(currTrans);
@@ -76,7 +74,8 @@ public class MovementController implements Observable {
 
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                modes.get(index).prev();
+                //modes.get(index).prev();
+                transIter.prev();
                 currTrans = transIter.current();
                 currAbility = abilityIter.current();
                 System.out.println(currTrans);
@@ -119,11 +118,11 @@ public class MovementController implements Observable {
     }
 
     private void initializeModes(){
-        modes.add(new TransporterMode(transIter));
+        //modes.add(new TransporterMode(transIter));
         //modes.add(new ResourceOnTileMode(currTrans));
         //modes.add(new ResourceOnTransporterMode(currTrans));
 
-        current = modes.get(0);
+        //current = modes.get(0);
     }
 
 
