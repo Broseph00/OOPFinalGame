@@ -15,6 +15,7 @@ import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModel {
@@ -31,8 +32,9 @@ public class GameModel {
     public GameModel() throws Exception{
         map = new Map();
         exchangeManager = new ExchangeManager(map);
-        productionManager = new ProductionManager();
+        productionManager = new ProductionManager(map);
         wonderManager = new WonderManager(this);
+
         player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
         player2 = new Player(map, 2, new RegionLocation(0,-3,3,1));
         currentPlayer = player1;

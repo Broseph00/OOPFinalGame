@@ -6,8 +6,8 @@ package com.iteration3.controller.Controllers;
 |   Cursor keeps track of its location on the map
 ---------------------------------------------------------------------------------------*/
 import com.iteration3.controller.Action;
-import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
+import com.iteration3.utilities.Observer;
 import com.iteration3.view.GameWindow;
 //import com.iteration3.model.map.Location;
 //import com.iteration3.model.map.Map;

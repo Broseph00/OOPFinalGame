@@ -4,8 +4,10 @@ import com.iteration3.controller.Action;
 import com.iteration3.controller.ControlDispatch;
 import com.iteration3.controller.Controllers.CursorController;
 import com.iteration3.controller.Controllers.ProductionController;
-import com.iteration3.controller.Observer;
 import com.iteration3.controller.Controllers.TileViewController;
+
+import com.iteration3.utilities.Observer;
+
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyCode;

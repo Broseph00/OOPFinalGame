@@ -8,6 +8,8 @@ import com.iteration3.model.GameModel;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.utilities.Observable;
+import com.iteration3.utilities.Observer;
 import com.iteration3.view.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

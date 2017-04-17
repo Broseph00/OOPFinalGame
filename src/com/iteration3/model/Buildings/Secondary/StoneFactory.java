@@ -9,9 +9,10 @@ public class StoneFactory extends SecondaryProducer {
 
     public StoneFactory() {
         super(6);
+        initialize();
     }
 
-    private void initialize(){
+    public void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Clay());
         addRequirement(req1);
     }
