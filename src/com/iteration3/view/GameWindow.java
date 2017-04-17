@@ -158,4 +158,9 @@ public class GameWindow extends VBox implements View {
 	public void setOnClickDropResource(EventHandler<ActionEvent> handler) {
 		mainView.setOnClickDropResource(handler);
 	}
+	
+	public void setMovementOption(String movementOption) {
+		mainView.setMovementOption(movementOption);
+	}
+	
 }

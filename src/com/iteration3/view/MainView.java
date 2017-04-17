@@ -161,4 +161,8 @@ public class MainView extends BorderPane implements View {
 		movementView.setOnClickDropResource(handler);
 	}
 	
+	public void setMovementOption(String movementOption) {
+		movementView.setMovementOption(movementOption);
+	}
+	
 }

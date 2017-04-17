@@ -34,7 +34,7 @@ public class MovementView extends VBox {
 		moveButton = new Button("Move Transporter");
 		endTurnButton = new Button("End Turn");
 		pickUpResourceButton = new Button ("Pick Up Resource");
-		dropResourceButton = new Button("Drop Button");
+		dropResourceButton = new Button("Drop Resource");
 		
 		transporterTitle = new Text("Transporter on Tile");
 		movementOptionTitle = new Text("Choose a Direction");
@@ -207,6 +207,10 @@ public class MovementView extends VBox {
 	
 	public void setCurrentTransporter(String currentTransporter) {
 		currentTransportLabel.setText(currentTransporter);
+	}
+	
+	public void setMovementOption(String movementOption) {
+		this.movementOption.setText(movementOption);
 	}
 	
 	public void setOnMoveButton(EventHandler<ActionEvent> handler) {
