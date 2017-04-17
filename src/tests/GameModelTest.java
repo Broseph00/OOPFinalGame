@@ -17,5 +17,10 @@ public class GameModelTest {
 
     }
 
+    @Test
+    public void WonderManager(){
+
+    }
+
 
 }
