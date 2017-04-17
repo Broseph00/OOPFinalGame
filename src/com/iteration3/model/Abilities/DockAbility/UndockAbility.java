@@ -35,4 +35,8 @@ public class UndockAbility extends Ability {
         return visitor.getType(this);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }

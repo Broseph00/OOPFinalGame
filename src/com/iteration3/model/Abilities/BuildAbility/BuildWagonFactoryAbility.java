@@ -34,4 +34,8 @@ public class BuildWagonFactoryAbility extends Ability {
         return visitor.getType(this);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }

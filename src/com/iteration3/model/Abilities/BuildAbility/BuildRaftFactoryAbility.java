@@ -32,4 +32,8 @@ public class BuildRaftFactoryAbility extends Ability {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+
+    public void execute(){
+        executionManager.execute(this);
+    }
 }

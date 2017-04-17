@@ -34,7 +34,7 @@ public class MapView extends Pane implements View {
     private final double MIN_SCALE = 0.3;
     private double scale = 1.0;
 
-    private double cameraX = -200, cameraY = -200;
+    private double cameraX = -150, cameraY = 100;
     private int cameraSpeed = 16;
     private Assets images;
     private Canvas mapCanvas;
