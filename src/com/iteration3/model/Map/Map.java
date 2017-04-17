@@ -155,6 +155,40 @@ public class Map {
         }
     }
 
+    // for use from LoadSaveStateManager
+    public void addNeutralWall(Location location, int edge, int strength) {
+        if(!this.betweenTwoSeaTiles(location, edge)) {
+
+            Location oppositeLocation = location.getLocationEdge(edge);
+            int oppositeEdge = oppositeEdge(edge);
+
+            // check if there are already existing walls
+            WallList newWallSet1 = new WallList();
+            if(this.walls.containsKey(location)) {
+                newWallSet1 = this.walls.get(location);
+            }
+            else{
+                this.walls.put(location, newWallSet1);
+            }
+            // check if there are already existing walls
+            WallList newWallSet2 = new WallList();
+            if(this.walls.containsKey(oppositeLocation)) {
+                newWallSet2 = this.walls.get(oppositeLocation);
+            }
+            else{
+                this.walls.put(oppositeLocation, newWallSet2);
+            }
+
+            newWallSet1.add(new WallWithoutOwner(edge, getWallStrength(location, edge) + strength));
+            newWallSet2.add(new WallWithoutOwner(oppositeEdge, getWallStrength(oppositeLocation, oppositeEdge) + strength));
+
+        } else {
+            System.out.println("Wall not added!");
+        }
+    }
+
+
+
     public void removeWall(Location location, int edge) {
         // check if there are already existing walls
         Location oppositeLocation = location.getLocationEdge(edge);
@@ -476,6 +510,7 @@ public class Map {
             return true;
         }
         return false;
+
     }
 
 }
