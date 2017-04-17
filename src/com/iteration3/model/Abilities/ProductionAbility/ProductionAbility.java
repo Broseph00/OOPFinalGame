@@ -27,5 +27,5 @@ public abstract class ProductionAbility extends Ability{
     public Producer getProducer(){
         return producer;
     }
-    
+
 }
