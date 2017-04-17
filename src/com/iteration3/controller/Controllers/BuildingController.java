@@ -116,6 +116,8 @@ public class BuildingController implements Observable {
                 lastPlayer = !lastPlayer;
             }
         };
+
+        window.setOnClickEndBuildTurn(endTurn);
     }
 
     public void addObserver(Observer obs) {
