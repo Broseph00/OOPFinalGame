@@ -30,7 +30,7 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
         productionController = new ProductionController(model, window, keyMap);
         productionController.addObserver(this);
         tileViewController = new TileViewController(model, window, keyMap);
-        cursorController = new CursorController(model, window.getMainView(), keyMap);
+        cursorController = new CursorController(model, window, keyMap);
         cursorController.addObserver(tileViewController);
     }
 
@@ -39,12 +39,12 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
         System.out.print("Production phase input");
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
-            System.out.println("Handling input");
     }
 
     @Override
     public void nextState() {
         dispatch.changeState(new MovementPhaseState(dispatch, model, window));
+        System.out.println("Change state to move");
         window.swapToMovementView();
     }
 

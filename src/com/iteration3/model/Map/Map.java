@@ -297,6 +297,10 @@ public class Map {
     public HashMap<Location, River> getRivers() {
         return rivers;
     }
+    public River getRiver(Location location) { return getRivers().get(location); }
+    public ArrayList<Integer> getRiverEdges(Location location) {
+        return getRiver(location).getRiverEdges();
+    }
 
     public HashMap<Location, BridgeList> getBridges() {
         return bridges;
@@ -321,6 +325,7 @@ public class Map {
     public HashMap<RegionLocation, ResourceList> getResources() {
         return resources;
     }
+
 
     public RegionLocation getTransportRegionLocation(Transporter transport) {
         for(RegionLocation regionLocation: this.transports.keySet()) {

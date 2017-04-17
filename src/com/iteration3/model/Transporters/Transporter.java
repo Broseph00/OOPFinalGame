@@ -107,7 +107,8 @@ public abstract class Transporter {
             public void prev() {
                 index--;
                 if (index < 0)
-                    index = abilityList.size()-1;
+                    //index = abilityList.size()-1;
+                    index = 0;
                 current = abilityList.get(index);
             }
 

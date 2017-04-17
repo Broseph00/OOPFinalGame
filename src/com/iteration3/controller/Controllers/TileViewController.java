@@ -5,19 +5,14 @@ package com.iteration3.controller.Controllers;
 |   Controller responsible for defining actions related to cycling through tiles
 |   options and finally submitting a tile for creation
 ---------------------------------------------------------------------------------------*/
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 
 import com.iteration3.controller.Action;
 import com.iteration3.controller.Observer;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Tiles.Terrain;
-import com.iteration3.model.Visitors.Visitor;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 
 import com.iteration3.model.GameModel;
@@ -36,11 +31,6 @@ public class TileViewController implements Observer {
     int selectedTerrainIndex;
     int selectedRiverIndex;
     Location cursorLocation;
-//
-//    StatusControllerState currentState;
-//    StatusControllerState selectTerrain;
-//    StatusControllerState selectRiver;
-//    StatusControllerState rotateState;
 
     public TileViewController(GameModel model, GameWindow window, HashMap<KeyCode,Action> keyMap){
         this.model = model;
@@ -59,113 +49,22 @@ public class TileViewController implements Observer {
         selectedRiverIndex = 0;
         cursorLocation = window.getCursorLocation();
 
-//        window.setTerrainType(terrainTypes.get(selectedTerrainIndex));
-//        window.setRiverType(riverTypes.get(selectedRiverIndex));
-//        window.setRotateOption("Must Select River to Rotate with Arrow Keys");
-
-//        selectTerrain = new SelectTerrain(this,window);
-//        selectRiver = new SelectRiver(this,window);
-//        rotateState = new RotateState(this,window);
-
-//        setCurrentState(selectTerrain);
-//        if(isValidSubmission())window.highlightTerrainOption();
-//        else window.invalidateTerrainOption();
-
-//        mapControls();
-//        setOnClickSubmit();
         displayCurrentTerrain();
-    }
-
-//    public void cycleUP(){
-//        currentState.cycleUp();
-//    }
-//
-//    public void cycleDown(){
-//        currentState.cycleDown();
-//    }
-//
-//    public void cycleLeft(){
-//        currentState.cycleLeft();
-//    }
-//
-//    public void cylceRight(){
-//        currentState.cycleRight();
-//    }
-//
-//    public void validateState() {
-//        currentState.validateState();
-//    }
-//
-//    public void setCurrentState(StatusControllerState state) {
-//        currentState = state;
-//    }
-//
-//    public StatusControllerState getSelectRiverState() {
-//        return selectRiver;
-//    }
-//
-//    public StatusControllerState getSelectTerrainState() {
-//        return selectTerrain;
-//    }
-//
-//    public StatusControllerState getRotateState() {
-//        return rotateState;
-//    }
-
-    public void incrementTerrainIndex() {
-        selectedTerrainIndex++;
-        if(selectedTerrainIndex >= terrainTypes.size()) selectedTerrainIndex = 0;
-    }
-
-    public void decrementTerrainIndex() {
-        selectedTerrainIndex--;
-        if(selectedTerrainIndex < 0) selectedTerrainIndex = terrainTypes.size() - 1;
-    }
-
-    public void incrementRiverIndex() {
-        selectedRiverIndex++;
-        if(selectedRiverIndex >= riverTypes.size()) selectedRiverIndex = 0;
-    }
-
-    public void decrementRiverIndex() {
-        selectedRiverIndex--;
-        if(selectedRiverIndex < 0) selectedRiverIndex = riverTypes.size() - 1;
+        displayCurrentRiver();
     }
 
     public String getSelectedTerrainType() {
         return terrainTypes.get(selectedTerrainIndex);
     }
 
-    public ArrayList<Integer> rotateEdgesClockWise(ArrayList<Integer> edges) {
-        for(int i = 0; i < edges.size();i++) {
-            edges.set(i, edges.get(i) + 1);
-            if(edges.get(i) > 6) edges.set(i, 1);
-
-        }
-
-        return edges;
-    }
-
-    public ArrayList<Integer> rotateEdgesCounterClockWise(ArrayList<Integer> edges) {
-        for(int i = 0; i < edges.size();i++) {
-            edges.set(i, edges.get(i) - 1);
-            if(edges.get(i) < 1) edges.set(i, 6);
-
-        }
-
-        return edges;
-    }
 
     public ArrayList<Integer> getCurrentRiverEdges() {
+        System.out.println(getSelectedRiverType());
         ArrayList<Integer> newList = new ArrayList<Integer>(riverMap.get(getSelectedRiverType()) );
 
         return newList;
     }
 
-    public boolean hasSelectedRiver() {
-        if(riverMap.get(getSelectedRiverType()) != null) return true;
-        return false;
-    }
 
     public String getSelectedRiverType() {
         return riverTypes.get(selectedRiverIndex);
@@ -181,7 +80,7 @@ public class TileViewController implements Observer {
     }
 
     public void displayCurrentRiver() {
-        ArrayList<Integer> edges = getCurrentRiverEdges();
+        ArrayList<Integer> edges = model.getRiverEdges(cursorLocation);
         displayRiverEdges(edges);
 
     }
@@ -272,62 +171,9 @@ public class TileViewController implements Observer {
 
     }
 
-
     public void setCurrentlySelectedRiverEdges(ArrayList<Integer> edges) {
         riverMap.put(getSelectedRiverType(), edges);
     }
-
-//    private void mapControls() {
-//
-//        Action upAction = new Action() {
-//            public void execute() {
-//                currentState.cycleUp();
-//            }
-//
-//        };
-//
-//        Action downAction = new Action() {
-//            public void execute() {
-//                currentState.cycleDown();
-//            }
-//
-//        };
-//
-//        Action leftAction = new Action() {
-//            public void execute() {
-//                currentState.cycleLeft();
-//            }
-//
-//        };
-//
-//        Action rightAction = new Action() {
-//            public void execute() {
-//                currentState.cycleRight();
-//            }
-//
-//        };
-//
-//        Action enterAction = new Action() {
-//            public void execute() {
-//                if(isValidSubmission()) {
-//                    if(hasSelectedRiver()) {
-//
-//                        model.addRiverFromGUI(cursorLocation, riverMap.get(riverTypes.get(selectedRiverIndex)));
-//                    }
-//
-//                    model.addTileFromGUI(cursorLocation, terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
-//
-//                }
-//            }
-//
-//        };
-//
-//        keyMap.put(KeyCode.UP, upAction);
-//        keyMap.put(KeyCode.DOWN, downAction);
-//        keyMap.put(KeyCode.LEFT, leftAction);
-//        keyMap.put(KeyCode.RIGHT, rightAction);
-//        keyMap.put(KeyCode.ENTER, enterAction);
-//    }
 
     private void intializeTerrainOptions() {
 
@@ -373,49 +219,12 @@ public class TileViewController implements Observer {
 
     }
 
-//    public boolean isValidSubmission() {
-//        if(hasSelectedRiver()) {
-//            if(model.isValidPlacement(cursorLocation,getSlectedTerrain(), getCurrentRiverEdges())) {
-//                return true;
-//            }
-//            else {
-//                return false;
-//            }
-//        }
-//        else {
-//            if(model.isValidPlacement(cursorLocation,getSlectedTerrain())) {
-//                return true;
-//            }
-//            else {
-//                return false;
-//            }
-//        }
-//
-//    }
-
-//    public void setOnClickSubmit() {
-//
-//        EventHandler<ActionEvent> onSumbit = new EventHandler<ActionEvent> () {
-//
-//            public void handle(ActionEvent event) {
-//
-//                if(hasSelectedRiver()) {
-//
-//                    model.addRiverFromGUI(cursorLocation, riverMap.get(riverTypes.get(selectedRiverIndex)));
-//                }
-//
-//                model.addTileFromGUI(cursorLocation, terrainMap.get(terrainTypes.get(selectedTerrainIndex)));
-//            }
-//
-//        };
-//
-//        window.setOnClickSubmit(onSumbit);
-//    }
-
     @Override
     public void update() {
         // TODO Auto-generated method stub
         cursorLocation = window.getCursorLocation();
-        //validateState();
+        window.clearPreviewImage();
+        displayCurrentTerrain();
+        displayCurrentRiver();
     }
 }
