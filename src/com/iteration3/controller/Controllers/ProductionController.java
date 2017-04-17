@@ -53,29 +53,29 @@ public class ProductionController implements Observable {
     }
 
     private void initializeKeyMap() {
-        keyMap.put(KeyCode.RIGHT, new Action() {
+        keyMap.put(KeyCode.D, new Action() {
             public void execute() {
                 transIter.next();
                 currTrans = transIter.current();
                 tileResourceList = model.getAvailableResources(currTrans);
                 transporterResourceList = currTrans.getResourceList();
                 updateResourcesList();
-
+                window.setCurrentTransporter(currTrans.getType());
             }
         });
 
-        keyMap.put(KeyCode.LEFT, new Action() {
+        keyMap.put(KeyCode.A, new Action() {
             public void execute() {
                 transIter.prev();
                 currTrans = transIter.current();
                 tileResourceList = model.getAvailableResources(currTrans);
                 transporterResourceList = currTrans.getResourceList();
                 updateResourcesList();
-
+                window.setCurrentTransporter(currTrans.getType());
             }
         });
 
-        keyMap.put(KeyCode.UP, new Action() {
+        keyMap.put(KeyCode.W, new Action() {
             public void execute() {
                 abilityIter.next();
                 currAbility = abilityIter.current();
@@ -84,7 +84,7 @@ public class ProductionController implements Observable {
             }
         });
 
-        keyMap.put(KeyCode.DOWN, new Action() {
+        keyMap.put(KeyCode.S, new Action() {
             public void execute() {
                 abilityIter.prev();
                 currAbility = abilityIter.current();
