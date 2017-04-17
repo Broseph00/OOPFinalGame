@@ -1,6 +1,7 @@
 package com.iteration3.model.Players;
 
 import com.iteration3.controller.ControlDispatch;
+import com.iteration3.controller.PhaseStates.ControlDispatchState;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.RegionLocation;
@@ -81,7 +82,4 @@ public class Player {
         return id;
     }
 
-    public void updateAbilityManager(ControlDispatch controlDispatch){
-        abilityManager.updateControlDispatch(controlDispatch);
-    }
 }
