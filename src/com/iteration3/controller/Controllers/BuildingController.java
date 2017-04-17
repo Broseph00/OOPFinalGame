@@ -2,7 +2,12 @@ package com.iteration3.controller.Controllers;
 
 import com.iteration3.controller.*;
 import com.iteration3.controller.Modes.*;
+import com.iteration3.model.Abilities.Ability;
+import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
+import com.iteration3.model.Players.Player;
+import com.iteration3.model.TransporterIterator;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,6 +23,7 @@ public class BuildingController implements Observable {
 
     private GameModel model;
     private GameWindow window;
+    Player player;
     private ArrayList<Observer> subscribers;
     private boolean lastPlayer;
     private HashMap<KeyCode, Action> keyMap;
@@ -25,6 +31,12 @@ public class BuildingController implements Observable {
     private ArrayList<PhaseMode> modes;
     private PhaseMode current;
     private int index;
+
+    private Transporter currTrans;
+    private Ability currAbility;
+
+    TransporterIterator transIter;
+    AbilityIterator abilityIter;
 
     //TODO: iterator over transporters
     //TODO: building modes (factory, bridge, etc)
@@ -38,6 +50,11 @@ public class BuildingController implements Observable {
         modes = new ArrayList<>();
         index = 0;
 
+        player = model.getCurrentPlayer();
+        transIter = player.getTransportIterator();
+        currTrans = transIter.first();
+        abilityIter = currTrans.makeAbilityIterator();
+
         initializeKeyMap();
         initializeModes();
         createHandlers();
@@ -47,92 +64,33 @@ public class BuildingController implements Observable {
     private void initializeKeyMap() {
         keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                //iter.next();
+                transIter.next();
+                currTrans = transIter.current();
 
             }
         });
 
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                //iter.prev();
+                transIter.prev();
+                currTrans = transIter.current();
 
             }
         });
 
         keyMap.put(KeyCode.UP, new Action() {
             public void execute() {
-                index++;
-                index %= modes.size();
-                current = modes.get(index);
+                abilityIter.next();
+                currAbility = abilityIter.current();
 
             }
         });
 
         keyMap.put(KeyCode.DOWN, new Action() {
             public void execute() {
-                index--;
-                if (index < 0)
-                    index = modes.size()-1;
-                current = modes.get(index);
+                abilityIter.prev();
+                currAbility = abilityIter.current();
 
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD6, new Action() {
-            public void execute() {
-                if (current instanceof CycleMode)
-                    ((CycleMode) current).next();
-
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD4, new Action() {
-            public void execute() {
-                if (current instanceof CycleMode)
-                    ((CycleMode) current).next();
-
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD8, new Action() {
-            public void execute() {
-                if (current instanceof DirectionalMode)
-                    ((DirectionalMode) current).execute(KeyCode.NUMPAD8);
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD9, new Action() {
-            public void execute() {
-                if (current instanceof DirectionalMode)
-                    ((DirectionalMode) current).execute(KeyCode.NUMPAD9);
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD3, new Action() {
-            public void execute() {
-                if (current instanceof DirectionalMode)
-                    ((DirectionalMode) current).execute(KeyCode.NUMPAD3);
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD2, new Action() {
-            public void execute() {
-                if (current instanceof DirectionalMode)
-                    ((DirectionalMode) current).execute(KeyCode.NUMPAD2);
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD1, new Action() {
-            public void execute() {
-                if (current instanceof DirectionalMode)
-                    ((DirectionalMode) current).execute(KeyCode.NUMPAD1);
-            }
-        });
-
-        keyMap.put(KeyCode.NUMPAD7, new Action() {
-            public void execute() {
-                if (current instanceof DirectionalMode)
-                    ((DirectionalMode) current).execute(KeyCode.NUMPAD7);
             }
         });
 
@@ -140,10 +98,11 @@ public class BuildingController implements Observable {
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
-            @Override
             public void handle(ActionEvent e) {
-
                 //model.nextPlayer();
+                lastPlayer = !lastPlayer;
+                if (lastPlayer);
+                notifyAllObservers();
             }
         };
     }

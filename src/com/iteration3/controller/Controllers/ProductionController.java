@@ -3,7 +3,12 @@ package com.iteration3.controller.Controllers;
 import com.iteration3.controller.Action;
 import com.iteration3.controller.Observable;
 import com.iteration3.controller.Observer;
+import com.iteration3.model.Abilities.Ability;
+import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
+import com.iteration3.model.Players.Player;
+import com.iteration3.model.TransporterIterator;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
@@ -17,12 +22,16 @@ public class ProductionController implements Observable {
 
     GameModel model;
     GameWindow window;
+    Player player;
     ArrayList<Observer> subscribers;
     boolean lastPlayer;
     HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> endTurn, useFactory;
-    // Location current;
-    //TODO: Iterator of transporters (or locations)
+    private Transporter currTrans;
+    private Ability currAbility;
+
+    TransporterIterator transIter;
+    AbilityIterator abilityIter;
 
     public ProductionController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
@@ -31,6 +40,11 @@ public class ProductionController implements Observable {
         lastPlayer = false;
         subscribers = new ArrayList<>();
 
+        player = model.getCurrentPlayer();
+        transIter = player.getTransportIterator();
+        currTrans = transIter.first();
+        abilityIter = currTrans.makeAbilityIterator();
+
         initializeKeyMap();
         createHandlers();
     }
@@ -38,15 +52,39 @@ public class ProductionController implements Observable {
     private void initializeKeyMap() {
         keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                //iter.next();
+                transIter.next();
+                currTrans = transIter.current();
 
             }
         });
 
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                //iter.prev();
+                transIter.prev();
+                currTrans = transIter.current();
 
+            }
+        });
+
+        keyMap.put(KeyCode.UP, new Action() {
+            public void execute() {
+                abilityIter.prev();
+                currAbility = abilityIter.current();
+
+            }
+        });
+
+        keyMap.put(KeyCode.DOWN, new Action() {
+            public void execute() {
+                transIter.prev();
+                currAbility = abilityIter.current();
+
+            }
+        });
+
+        keyMap.put(KeyCode.ENTER, new Action() {
+            public void execute() {
+                currAbility.execute();
             }
         });
 
