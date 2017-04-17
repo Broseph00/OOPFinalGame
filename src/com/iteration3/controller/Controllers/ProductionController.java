@@ -60,7 +60,7 @@ public class ProductionController implements Observable {
                 tileResourceList = model.getAvailableResources(currTrans);
                 transporterResourceList = currTrans.getResourceList();
                 updateResourcesList();
-
+                window.setCurrentTransporter(currTrans.getType());
             }
         });
 
@@ -71,7 +71,7 @@ public class ProductionController implements Observable {
                 tileResourceList = model.getAvailableResources(currTrans);
                 transporterResourceList = currTrans.getResourceList();
                 updateResourcesList();
-
+                window.setCurrentTransporter(currTrans.getType());
             }
         });
 
