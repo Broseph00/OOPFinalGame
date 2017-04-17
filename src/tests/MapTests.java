@@ -1,4 +1,4 @@
-//package tests;
+package tests;
 
 import com.iteration3.model.Buildings.Primary.StandardMine;
 import com.iteration3.model.Buildings.Secondary.StockExchange;
@@ -16,6 +16,7 @@ import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Tiles.WoodTerrain;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Water.Raft;
+import com.iteration3.utilities.GameLibrary;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -110,8 +111,8 @@ public class MapTests {
         Map map = new Map();
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
 
-        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
-        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1));
+        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER2_COLOR);
         Location location = new Location(0,0,0);
         Location waterLocation = new Location(-2,1,1);
 
@@ -153,8 +154,8 @@ public class MapTests {
     @Test
     public void testLoadState() throws Exception {
         Map map = new Map();
-        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
-        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1));
+        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER2_COLOR);
         RegionLocation regionLocation = new RegionLocation(0,0,0,1);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/loadStateTest.txt", player1, player2, new Wonder());
@@ -193,8 +194,8 @@ public class MapTests {
     @Test
     public void testSaveState() throws Exception {
         Map map = new Map();
-        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
-        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1));
+        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1), GameLibrary.PLAYER2_COLOR);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         LoadSaveStateManager saveStateManager = new LoadSaveStateManager(map, "src/tests/saveStateTest.txt", player1, player2, new Wonder());
 

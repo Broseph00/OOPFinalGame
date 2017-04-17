@@ -41,7 +41,7 @@ public class ExchangeManager {
         RegionLocation dropLocation = this.map.getTransportRegionLocation(transport1);
         RegionLocation validateLocation = this.map.getTransportRegionLocation(transport2);
 
-        if(dropLocation.getLocation() == validateLocation.getLocation()) {
+        if(dropLocation.getLocation().equals(validateLocation.getLocation())) {
             // remove Resource from Transport1's list and add to Transport2's
             transport1.removeResource(resource);
             transport2.addResource(resource);

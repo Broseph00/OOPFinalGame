@@ -9,6 +9,7 @@ public class WallWithoutOwner extends Wall {
 
     public WallWithoutOwner(int edge, int strength) {
         this.setEdge(edge);
+        super.setWallColor("white");
         this.setStrength(strength);
     }
 

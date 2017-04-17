@@ -16,4 +16,8 @@ public class RoadList {
     public void add(Location location){
         roads.add(location);
     }
+
+    public ArrayList<Location> getRoads() {
+        return roads;
+    }
 }

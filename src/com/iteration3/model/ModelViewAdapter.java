@@ -6,6 +6,7 @@ import com.iteration3.model.Buildings.Secondary.*;
 import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Map.Wall;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
@@ -151,22 +152,36 @@ public class ModelViewAdapter {
     }
 
     private void drawBridges(){
-        //TODO: Handle Drawing
+        for(Location location: this.gameModel.getMap().getBridges().keySet()) {
+//            for(Integer edge: this.gameModel.getMap().getBridges().get(location)) {
+//                // check what edge it is, and daw rectangle in middle of that edge to cross river
+//            }
+        }
     }
 
     private void drawRoads(){
-        //TODO: Handle Drawing
+        for(Location location: this.gameModel.getMap().getRoads().keySet()) {
+            for(Location otherLocation: this.gameModel.getMap().getRoads().get(location).getRoads()) {
+                // draw line between locations
+            }
+        }
     }
 
     private void drawWalls(){
-        //TODO: Handle Drawing
+        for(Location location: this.gameModel.getMap().getWalls().keySet()) {
+            for(Wall wall: this.gameModel.getWalls().get(location).getWalls()){
+                int edge = wall.getEdge();
+                // if this is a WallWithOwner, you draw colored line depending on owner
+                // if this is neutral, draw white wall
+            }
+        }
     }
 
     private void drawProducers(){
         for(RegionLocation regionlocation : gameModel.getProducers().keySet()) {
             currentLocation = regionlocation.getLocation();
             Producer producer = gameModel.getProducers().get(regionlocation);
-            gameWindow.drawProducer(producer.getType(), currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            gameWindow.drawProducer(producer.getType(), currentLocation.getX(), currentLocation.getZ(), regionlocation.getRegion());
         }
     }
 
@@ -175,7 +190,7 @@ public class ModelViewAdapter {
             currentLocation = regionlocation.getLocation();
             ResourceList resourceList = gameModel.getResources().get(regionlocation);
             for(Resource resource : resourceList.getResources()){
-                gameWindow.drawResource(resource.getType(), currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                gameWindow.drawResource(resource.getType(), currentLocation.getX(), currentLocation.getZ(), regionlocation.getRegion());
             }
         }
     }
@@ -185,7 +200,7 @@ public class ModelViewAdapter {
             currentLocation = regionlocation.getLocation();
             TransportList transportList = gameModel.getTransports().get(regionlocation);
             for(Transporter transport : transportList.getTransports()){
-                gameWindow.drawTransport(transport.getType(), currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                gameWindow.drawTransport(transport.getType(), currentLocation.getX(), currentLocation.getZ(), regionlocation.getRegion());
             }
         }
     }

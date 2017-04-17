@@ -1,10 +1,12 @@
-package com.iteration3.model.Players;
+//package com.iteration3.model.Players;
 
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Players.Wonder.Wonder;
 import com.iteration3.model.Players.Wonder.WonderRow;
+import com.iteration3.utilities.GameLibrary;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,8 +22,8 @@ public class WonderTest {
     public void setup(){
         map = new Map();
         wonder = new Wonder();
-        player1 = new Player(map, 1, new RegionLocation(new Location(1,1, -2), 3));
-        player2 = new Player(map, 2, new RegionLocation(new Location(2, 3, -5), 4));
+        player1 = new Player(map, 1, new RegionLocation(new Location(1,1, -2), 3), GameLibrary.PLAYER1_COLOR);
+        player2 = new Player(map, 2, new RegionLocation(new Location(2, 3, -5), 4), GameLibrary.PLAYER2_COLOR);
     }
 
     @Test
