@@ -32,4 +32,7 @@ public class MoveDegree30Ability extends MoveAbility {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+    public void execute(){
+        executionManager.execute(this);
+    }
 }
