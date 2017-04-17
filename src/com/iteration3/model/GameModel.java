@@ -25,7 +25,7 @@ public class GameModel {
     private WonderManager wonderManager;
     private ExchangeManager exchangeManager;
     private ProductionManager productionManager;
-    private TurnManager turnManager;
+
     private Player player1;
     private Player player2;
     private Player currentPlayer;
@@ -36,7 +36,6 @@ public class GameModel {
         productionManager = new ProductionManager();
         wonder = new Wonder();
         wonderManager = new WonderManager(wonder);
-        turnManager = new TurnManager();
         player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
         player2 = new Player(map, 2, new RegionLocation(0,-3,3,1));
         currentPlayer = player1;
@@ -130,6 +129,15 @@ public class GameModel {
         this.map.addResource(new Stone(), player2.getStartingRegionLocation());
         this.map.addResource(new Goose(), player2.getStartingRegionLocation());
         this.map.addResource(new Goose(), player2.getStartingRegionLocation());
+    }
+
+    public void changeTurn() {
+        if(currentPlayer == player1) {
+            currentPlayer = player2;
+        }
+        else {
+            currentPlayer = player1;
+        }
     }
 
 }

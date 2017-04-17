@@ -97,4 +97,8 @@ public class GameLibrary {
     public static final int ROAD_BOARD = 0, ROAD_STONE = 1;
 
     public static final int BRIDGE_BOARD = 0, BRIDGE_STONE = 1;
+
+    public static final String PLAYER1_COLOR = "Red";
+    public static final String PLAYER2_COLOR = "Blue";
+    
 }
