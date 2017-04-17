@@ -31,7 +31,8 @@ public class GameWindow extends VBox implements View {
  
         initializeMenuBar();
         initializeTabs();
-        
+        this.setFocusTraversable(true);
+
     }
 
     private void initializeMenuBar() {
