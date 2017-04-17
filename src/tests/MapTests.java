@@ -1,5 +1,7 @@
 //package tests;
 
+import com.iteration3.model.Buildings.Primary.StandardMine;
+import com.iteration3.model.Buildings.Secondary.StockExchange;
 import com.iteration3.model.Managers.LoadSaveStateManager;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.*;
@@ -184,6 +186,9 @@ public class MapTests {
         assertTrue(player1.getResearchManager().isFinishedEnlargementResearch());
         assertTrue(player2.getResearchManager().isFinishedOilResearch());
 
+        // check producer is there
+        assertTrue(map.getProducers().size() == 2);
+
     }
 
     @Test
@@ -224,6 +229,11 @@ public class MapTests {
         // test research
         player1.getResearchManager().completeResearch(new EnlargementResearch());
         player2.getResearchManager().completeResearch(new RowingResearch());
+
+        // test producers
+        map.addProducer(new StockExchange(), new RegionLocation(0,0,0,1));
+        map.addProducer(new StandardMine(), new RegionLocation(0,0,1,1));
+
 
         saveStateManager.saveState();
 
