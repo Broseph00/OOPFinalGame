@@ -31,7 +31,7 @@ public class GameModel {
         map = new Map();
         exchangeManager = new ExchangeManager(map);
         productionManager = new ProductionManager();
-        wonderManager = new WonderManager(map);
+        wonderManager = new WonderManager(this);
         player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
         player2 = new Player(map, 2, new RegionLocation(0,-3,3,1));
         currentPlayer = player1;
