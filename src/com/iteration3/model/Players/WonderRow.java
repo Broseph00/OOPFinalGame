@@ -6,12 +6,11 @@ public class WonderRow {
     private static int maxScore = 10;
     private int maxBrickCount;
     private ArrayList<Integer> neutralBricks;
-    private ArrayList<Brick> playerBricks;
+    private ArrayList<Brick> bricks;
 
     public WonderRow(int maxSize) {
         maxBrickCount = maxSize;
-        neutralBricks = new ArrayList<>();
-        playerBricks = new ArrayList<>();
+        bricks = new ArrayList<>();
     }
 
     public boolean addBrick(Player owner) {
@@ -22,7 +21,8 @@ public class WonderRow {
         if (isFull()) {
             return false;
         } else {
-            Brick newBrick = new Brick(owner);
+            PlayerBrick newPlayerBrick = new PlayerBrick(owner);
+            bricks.add(newPlayerBrick);
             return true;
         }
     }
@@ -31,8 +31,8 @@ public class WonderRow {
         if (isFull()) {
             return false;
         } else {
-            int currentPosition = getBrickCount();
-            neutralBricks.add(currentPosition);
+            NeutralBrick newNeutralBrick = new NeutralBrick();
+            bricks.add(newNeutralBrick);
             return true;
         }
     }
@@ -42,21 +42,31 @@ public class WonderRow {
     }
 
     public int getBrickCount() {
-        int totalBricks = neutralBricks.size() + playerBricks.size();
+        int totalBricks = bricks.size();
         return totalBricks;
     }
 
     public int getScore(Player owner) {
         int ownerBricks = countOwnerBricks(owner);
-        int totalPlayerBricks = playerBricks.size();
+        int totalPlayerBricks = countTotalPlayerBricks();
 
         int ownerScore = (maxScore * ownerBricks) / totalPlayerBricks;
         return ownerScore;
     }
 
+    private int countTotalPlayerBricks(){
+        int count = 0;
+
+        for(Brick b : bricks){
+            count += b instanceof PlayerBrick ? 1 : 0;
+        }
+
+        return count;
+    }
+
     private int countOwnerBricks(Player owner) {
         int ownerBricks = 0;
-        for (Brick b : playerBricks) {
+        for (Brick b : bricks) {
             ownerBricks += b.count(owner);
         }
         return ownerBricks;
@@ -64,22 +74,9 @@ public class WonderRow {
 
     private ArrayList<String> getBricksList() {
         ArrayList<String> bricksList = new ArrayList<>();
-        int neutralBricksAdded = 0;
-        int playerBricksAdded = 0;
-
-        for (int neutralBrickPosition : neutralBricks) {
-            int totalBricksAdded = neutralBricksAdded + playerBricksAdded;
-
-            while (totalBricksAdded != neutralBrickPosition) {
-                Brick brick = playerBricks.get(totalBricksAdded);
-                bricksList.add(brick.getColor());
-                ++playerBricksAdded;
-            }
-
-            bricksList.add("White");
-            ++neutralBricksAdded;
+        for(Brick b : bricks){
+            bricksList.add(b.getColor());
         }
-
         return bricksList;
     }
 }
