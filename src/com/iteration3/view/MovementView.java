@@ -14,10 +14,9 @@ import javafx.scene.text.Text;
 
 public class MovementView extends VBox {
 
-	Label movementOption, currentTransportLabel;
-	Button moveButton,endTurnButton;
-	TextArea tileResourceList, transportResourceList;
-	Text transporterTitle,  movementOptionTitle;
+	Label movementOption, currentTransportLabel, currentTileResource, currentTransportResource;
+	Button moveButton,endTurnButton, pickUpResourceButton,dropResourceButton; 
+	Text transporterTitle,  movementOptionTitle, tileResourceTitle, transportResourceTitle;
 	
 	
 	public MovementView(double width, double height) {
@@ -29,28 +28,27 @@ public class MovementView extends VBox {
 		
 		movementOption = new Label("None");
 		currentTransportLabel = new Label("None");
-		tileResourceList = new TextArea();
-		transportResourceList = new TextArea(); 
-		
-		
-		moveButton = new Button("Use Factory");
-		endTurnButton = new Button("endTurn");
+		currentTileResource  = new Label("None");
+		currentTransportResource = new Label("None");
+ 		
+		moveButton = new Button("Move Transporter");
+		endTurnButton = new Button("End Turn");
+		pickUpResourceButton = new Button ("Pick Up Resource");
+		dropResourceButton = new Button("Drop Button");
 		
 		transporterTitle = new Text("Transporter on Tile");
 		movementOptionTitle = new Text("Choose a Direction");
+		tileResourceTitle = new Text("Tile's Resources");
+		transportResourceTitle = new Text("Transporter's Resources");
 		
 		moveButton.setDisable(true);
+		pickUpResourceButton.setDisable(true);
+		dropResourceButton.setDisable(true);
 		
-		tileResourceList.setEditable(false);
-		transportResourceList.setEditable(false);
-		
+		pickUpResourceButton.setFocusTraversable(false);
+		dropResourceButton.setFocusTraversable(false);
 		moveButton.setFocusTraversable(false);
 		endTurnButton.setFocusTraversable(false);
-		tileResourceList.setFocusTraversable(false);
-		transportResourceList.setFocusTraversable(false);
-		
-		transportResourceList.setMaxWidth(width/2);
-		tileResourceList.setMaxWidth(width/2);
 		
 		initializeView();
 	}
@@ -59,26 +57,30 @@ public class MovementView extends VBox {
 		
 		super(10);
 		
+
 		movementOption = new Label("None");
 		currentTransportLabel = new Label("None");
-		tileResourceList = new TextArea();
-		transportResourceList = new TextArea(); 
+		currentTileResource  = new Label("None");
+		currentTransportResource = new Label("None");
+ 		
+		moveButton = new Button("Use Factory");
+		endTurnButton = new Button("endTurn");
+		pickUpResourceButton = new Button ("Pick Up Resource");
+		dropResourceButton = new Button("Drop Button");
 		
 		transporterTitle = new Text("Transporter on Tile");
 		movementOptionTitle = new Text("Choose a Direction");
-		
-		moveButton = new Button("Use Factory");
-		endTurnButton = new Button("endTurn");
+		tileResourceTitle = new Text("Tile's Resources");
+		transportResourceTitle = new Text("Transporter's Resources");
 		
 		moveButton.setDisable(true);
+		pickUpResourceButton.setDisable(true);
+		dropResourceButton.setDisable(true);
 		
-		tileResourceList.setEditable(false);
-		transportResourceList.setEditable(false);
-		
+		pickUpResourceButton.setFocusTraversable(false);
+		dropResourceButton.setFocusTraversable(false);
 		moveButton.setFocusTraversable(false);
 		endTurnButton.setFocusTraversable(false);
-		tileResourceList.setFocusTraversable(false);
-		transportResourceList.setFocusTraversable(false);
 		
 		initializeView();
 	}
@@ -86,48 +88,37 @@ public class MovementView extends VBox {
 	private void initializeView() {
 		
 		Text mainTitle = new Text("Movement Phase");
-		Text tileResourceTitle = new Text("Resources on Tile");
-		Text transportResourceTitle = new Text("Resources on Transport");
-		
 		
 		this.getChildren().add(mainTitle);
+		
 		this.getChildren().add(transporterTitle);
 		this.getChildren().add(currentTransportLabel);
+		
 		this.getChildren().add(movementOptionTitle);
 		this.getChildren().add(movementOption);
-		
-		VBox resourceTileLayout = new VBox(10);
-		resourceTileLayout.getChildren().add(tileResourceTitle);
-		resourceTileLayout.getChildren().add(tileResourceList);
-		resourceTileLayout.setAlignment(Pos.CENTER);
-		
-		
-		VBox resourceTransportLayout = new VBox(10);
-		resourceTransportLayout.getChildren().add(transportResourceTitle);
-		resourceTransportLayout.getChildren().add(transportResourceList);
-		resourceTransportLayout.setAlignment(Pos.CENTER);
-		
-		HBox resourcesLayout = new HBox(10);
-		resourcesLayout.getChildren().add(resourceTileLayout);
-		resourcesLayout.getChildren().add(resourceTransportLayout);
-		resourcesLayout.setAlignment(Pos.CENTER);
-		
-		this.getChildren().add(resourcesLayout);
-		
 		this.getChildren().add(moveButton);
+		
+		this.getChildren().add(transportResourceTitle);
+		this.getChildren().add(currentTransportResource);
+		
+		this.getChildren().add(tileResourceTitle);
+		this.getChildren().add(currentTileResource);
+		
+		this.getChildren().add(pickUpResourceButton);
+		this.getChildren().add(dropResourceButton);
+		
 		this.getChildren().add(endTurnButton);
 		
 		this.setAlignment(Pos.TOP_CENTER);
 		
 		mainTitle.setFont(Font.font("Verdana", FontWeight.BOLD,20));
 		transporterTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
-		transporterTitle.setFill(Color.BLUE);
 		movementOptionTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		tileResourceTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		transportResourceTitle.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
 		
-		tileResourceList.setFont(Font.font(15));
-		transportResourceList.setFont(Font.font(15));
+		currentTileResource.setFont(Font.font(15));
+		currentTransportResource.setFont(Font.font(15));
 		movementOption.setFont(Font.font(15));
 		currentTransportLabel.setFont(Font.font(15));
 		
@@ -140,6 +131,12 @@ public class MovementView extends VBox {
 		
 		movementOptionTitle.setFill(Color.BLACK);
 		movementOption.setTextFill(Color.DARKGRAY);
+		
+		tileResourceTitle.setFill(Color.BLACK);
+		currentTileResource.setTextFill(Color.DARKGRAY);
+		
+		transportResourceTitle.setFill(Color.BLACK);
+		currentTransportResource.setTextFill(Color.DARKGRAY);
 	}
 	
 	public void highlightMovementOption() {
@@ -148,18 +145,63 @@ public class MovementView extends VBox {
 		
 		transporterTitle.setFill(Color.BLACK);
 		currentTransportLabel.setTextFill(Color.DARKGRAY);
+		
+		tileResourceTitle.setFill(Color.BLACK);
+		currentTileResource.setTextFill(Color.DARKGRAY);
+		
+		transportResourceTitle.setFill(Color.BLACK);
+		currentTransportResource.setTextFill(Color.DARKGRAY);
+	}
+	
+	public void highlightTileResourceOption() {
+		
+		tileResourceTitle.setFill(Color.BLUE);
+		currentTileResource.setTextFill(Color.BLACK);
+		
+		movementOptionTitle.setFill(Color.BLACK);
+		movementOption.setTextFill(Color.DARKGRAY);
+		
+		transporterTitle.setFill(Color.BLACK);
+		currentTransportLabel.setTextFill(Color.DARKGRAY);
+		
+		transportResourceTitle.setFill(Color.BLACK);
+		currentTransportResource.setTextFill(Color.DARKGRAY);
+	}
+	
+	public void highlightTransportResourceOption() {
+		
+		transportResourceTitle.setFill(Color.BLUE);
+		currentTransportResource.setTextFill(Color.BLACK);
+		
+		tileResourceTitle.setFill(Color.BLACK);
+		currentTileResource.setTextFill(Color.DARKGRAY);
+		
+		movementOptionTitle.setFill(Color.BLACK);
+		movementOption.setTextFill(Color.DARKGRAY);
+		
+		transporterTitle.setFill(Color.BLACK);
+		currentTransportLabel.setTextFill(Color.DARKGRAY);
+		
 	}
 	
 	public void setEnableMoveButton(Boolean isEnabled){
 		moveButton.setDisable(!isEnabled);
 	}
 	
-	public void setTileResourceList(String list) {
-		tileResourceList.setText(list);
+	public void setEnablePickUpResourceButton(Boolean isEnabled){
+		pickUpResourceButton.setDisable(!isEnabled);
 	}
 	
-	public void setTransportResourceList(String list) {
-		transportResourceList.setText(list);
+	public void setEnableDropResourceButton(Boolean isEnabled){
+		dropResourceButton.setDisable(!isEnabled);
+	}
+	
+	public void setCurrentTileResource(String resource) {
+		currentTileResource.setText(resource);
+	}
+	
+	public void setCurrentTransportResource(String resource) {
+		currentTransportResource.setText(resource);
 	}
 	
 	
@@ -173,5 +215,13 @@ public class MovementView extends VBox {
 	
 	public void setOnClickEndMovementTurn(EventHandler<ActionEvent> handler) {
 		endTurnButton.setOnAction(handler);
+	}
+	
+	public void setOnClickPickUpResource(EventHandler<ActionEvent> handler) {
+		pickUpResourceButton.setOnAction(handler);
+	}
+	
+	public void setOnClickDropResource(EventHandler<ActionEvent> handler) {
+		dropResourceButton.setOnAction(handler);
 	}
 }

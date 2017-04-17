@@ -22,6 +22,7 @@ public class GameWindow extends VBox implements View {
         this.tabPane = new TabPane();
         this.mainView = new MainView(width, height);
         this.wonderView = new WonderView(width, height, wonderRows);
+        tabPane.setFocusTraversable(false);
         initializeMenuBar();
         initializeTabs();
     }
@@ -87,15 +88,6 @@ public class GameWindow extends VBox implements View {
 		mainView.setEnableMoveButton(isEnabled);
 	}
 	
-	public void setTileResourceList(String list) {
-		mainView.setTileResourceList(list);
-	}
-	
-	public void setTransportResourceList(String list) {
-		mainView.setTransportResourceList(list);
-	}
-	
-	
 	public void setCurrentTransporter(String currentTransporter) {
 		mainView.setCurrentTransporter(currentTransporter);
 	}
@@ -126,5 +118,39 @@ public class GameWindow extends VBox implements View {
 	
 	public void highlightMovementOption() {
 		mainView.highlightMovementOption();
+	}
+	
+	public void swapToProductionView() {
+        mainView.swapToProductionView();
+    }
+    
+    public void swapToMovementView() {
+    	mainView.swapToMovementView();
+    }
+    
+
+	public void setEnablePickUpResourceButton(Boolean isEnabled){
+		mainView.setEnablePickUpResourceButton(isEnabled);
+	}
+	
+	public void setEnableDropResourceButton(Boolean isEnabled){
+		mainView.setEnableDropResourceButton(isEnabled);
+	}
+	
+	public void setCurrentTileResource(String resource) {
+		mainView.setCurrentTileResource(resource);
+	}
+	
+	public void setCurrentTransportResource(String resource) {
+		mainView.setCurrentTransportResource(resource);
+	}
+	
+	
+	public void setOnClickPickUpResource(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickPickUpResource(handler);
+	}
+	
+	public void setOnClickDropResource(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickDropResource(handler);
 	}
 }
