@@ -1,13 +1,13 @@
-package tests;
+//package tests;
 
+import com.iteration3.model.Buildings.Primary.Claypit;
+import com.iteration3.model.Buildings.Primary.GoldMine;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Player;
-import com.iteration3.model.Resource.Board;
-import com.iteration3.model.Resource.ResourceList;
-import com.iteration3.model.Resource.Trunk;
+import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.model.Transporters.Transporter;
@@ -19,36 +19,14 @@ import static org.junit.Assert.assertTrue;
 public class ResourceTests {
 
     @Test
-    public void testAddRemoveFromResourceList() throws Exception {
-        Map map = new Map();
-        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
-        RegionLocation location = new RegionLocation(0,0,0,1);
-        mapManager.fillMapFromTextFile();
-
-//        map.getResources().get(location).addBoard();
-//        assertEquals(map.getResources().get(location).getBoards().size(), 1);
-//        map.getResources().get(location).removeBoard();
-//        assertEquals(map.getResources().get(location).getBoards().size(), 0);
-//        map.getResources().get(location).removeBoard();
-//        assertEquals(map.getResources().get(location).getBoards().size(), 0);
-//
-//        map.getResources().get(location).addGoose();
-//        map.getResources().get(location).addGold();
-//        assertEquals(map.getResources().get(location).getResources().size(), 2);
-
-    }
-
-
-
-    @Test
     public void testPickUpDropAndExchangeResource() throws Exception {
         Map map = new Map();
         ExchangeManager exchangeManager = new ExchangeManager(map);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
-        RegionLocation location = new RegionLocation(0,0,0,1);
+        RegionLocation location = new RegionLocation(0, 0, 0, 1);
 
-        Player player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
-        Player player2 = new Player(map, 2, new RegionLocation(0,3,-3,1));
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
 
         mapManager.fillMapFromTextFile();
 
@@ -75,5 +53,34 @@ public class ResourceTests {
         exchangeManager.dropResource(truck, board);
         assertEquals(map.getResources().get(location).getResources().size(), 1);
     }
+
+
+    @Test
+    public void testPrimaryProducer() throws Exception {
+        Map map = new Map();
+        MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
+        ProductionManager productionManager = new ProductionManager(map);
+        RegionLocation regionLocation = new RegionLocation(0, 0, 0, 1);
+        Location location = new Location(0,0,0);
+
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+
+        mapManager.fillMapFromTextFile();
+
+
+        map.addProducer(new Claypit(), regionLocation);
+
+        map.addProducer(new GoldMine(), new RegionLocation(1,1,1,1));
+
+        productionManager.producePrimaryProducers();
+
+        assertTrue(map.getResources().get(regionLocation).getResources().get(0) instanceof Clay);
+        assertTrue(map.getResources().get(new RegionLocation(1,1,1,1)).getResources().get(0) instanceof Gold);
+
+
+    }
+
+
 
 }

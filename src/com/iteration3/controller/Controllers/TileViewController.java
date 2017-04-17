@@ -10,9 +10,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.iteration3.controller.Action;
-import com.iteration3.controller.Observer;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Tiles.Terrain;
+import com.iteration3.utilities.Observer;
+
 import javafx.scene.input.KeyCode;
 
 import com.iteration3.model.GameModel;

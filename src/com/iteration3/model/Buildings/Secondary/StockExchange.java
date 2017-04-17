@@ -12,7 +12,7 @@ public class StockExchange extends SecondaryProducer {
         initialize();
     }
 
-    private void initialize(){
+    public void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Paper(), new Coin(), new Coin());
         addRequirement(req1);
     }

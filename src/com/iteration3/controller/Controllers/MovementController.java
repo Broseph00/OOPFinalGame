@@ -5,8 +5,8 @@ package com.iteration3.controller.Controllers;
  */
 import com.iteration3.controller.Action;
 import com.iteration3.controller.Modes.*;
-import com.iteration3.controller.Observable;
-import com.iteration3.controller.Observer;
+import com.iteration3.utilities.Observable;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
@@ -14,7 +14,6 @@ import com.iteration3.model.Players.Player;
 import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;

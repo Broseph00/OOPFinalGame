@@ -13,7 +13,7 @@ public class Mint extends SecondaryProducer {
         initialize();
     }
 
-    private void initialize(){
+    public void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Fuel(), new Gold(), new Gold());
         addRequirement(req1);
     }

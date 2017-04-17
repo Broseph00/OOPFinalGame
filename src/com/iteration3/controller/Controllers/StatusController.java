@@ -5,18 +5,13 @@ package com.iteration3.controller.Controllers;
 |   Controller responsible for defining actions related to cycling through tiles
 |   options and finally submitting a tile for creation
 ---------------------------------------------------------------------------------------*/
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 
 import com.iteration3.controller.Action;
-import com.iteration3.controller.Observer;
+import com.iteration3.utilities.Observer;
 import com.iteration3.model.Tiles.Terrain;
-import com.iteration3.model.Visitors.Visitor;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 
 import com.iteration3.model.GameModel;
