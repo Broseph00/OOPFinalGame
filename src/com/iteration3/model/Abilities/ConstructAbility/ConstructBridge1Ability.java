@@ -32,4 +32,8 @@ public class ConstructBridge1Ability extends ConstructBridgeAbility {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+
+    public void execute(){
+        executionManager.execute(this);
+    }
 }

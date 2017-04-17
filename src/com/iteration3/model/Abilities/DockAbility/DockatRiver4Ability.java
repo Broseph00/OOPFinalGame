@@ -33,4 +33,8 @@ public class DockatRiver4Ability extends DockatRiverAbility {
         return visitor.getType(this);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }

@@ -32,4 +32,8 @@ public class ConstructWall4Ability extends ConstructWallAbility {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+
+    public void execute(){
+        executionManager.execute(this);
+    }
 }

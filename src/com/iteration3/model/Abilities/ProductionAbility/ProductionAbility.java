@@ -22,4 +22,8 @@ public abstract class ProductionAbility extends Ability{
         super(transporter, name, executionManager);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }

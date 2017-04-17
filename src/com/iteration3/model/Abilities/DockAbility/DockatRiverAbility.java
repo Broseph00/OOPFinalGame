@@ -29,4 +29,8 @@ public abstract class DockatRiverAbility extends Ability {
 
     public int getRegion(){return region;}
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }
