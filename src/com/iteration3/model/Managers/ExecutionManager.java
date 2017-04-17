@@ -24,90 +24,105 @@ public class ExecutionManager {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         Claypit producer = new Claypit();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildCoalBurnerAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         CoalBurner producer = new CoalBurner();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildMineAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
-        Mine producer = new Mine();
+        Mine producer = new StandardMine();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildMintAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         Mint producer = new Mint();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildOilRigAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         OilRig producer = new OilRig();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildPapermillAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         Papermill producer = new Papermill();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildRaftFactoryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         RaftFactory producer = new RaftFactory();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildRowboatFactoryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         RowboatFactory producer = new RowboatFactory();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildSteamerFactoryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         SteamerFactory producer = new SteamerFactory();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildStockExchangeAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         StockExchange producer = new StockExchange();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildStoneFactoryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         StoneFactory producer = new StoneFactory();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildStoneQuarryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         StoneQuarry producer = new StoneQuarry();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildTruckFactoryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         TruckFactory producer = new TruckFactory();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildWagonFactoryAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         WagonFactory producer = new WagonFactory();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(BuildWoodcutterAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
         Woodcutter producer = new Woodcutter();
         map.addProducer(producer, regionLocation);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void executeMoveDegree(MoveAbility ability){
@@ -117,6 +132,7 @@ public class ExecutionManager {
         RegionLocation end = new RegionLocation(location, getOppositeRegion(ability.getRegion(), ability.getBorder()));
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(MoveDegree0Ability ability) {executeMoveDegree(ability);}
@@ -140,6 +156,7 @@ public class ExecutionManager {
         RegionLocation end = new RegionLocation(location.getLocationEdge(ability.getBorder()), 7);
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(MoveEdge1Ability ability) {executeMoveEdge(ability);}
@@ -156,6 +173,7 @@ public class ExecutionManager {
         RegionLocation end = new RegionLocation(location, ability.getBorder());
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(DockatSea1Ability ability) {executeSeaDock(ability);}
@@ -172,6 +190,7 @@ public class ExecutionManager {
         RegionLocation end = new RegionLocation(location, ability.getRegion());
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     public void execute(DockatRiver1Ability ability) {executeRiverDock(ability);}
@@ -188,6 +207,7 @@ public class ExecutionManager {
         RegionLocation end = new RegionLocation(location, 7);
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
+        ability.getTransporter().getOwner().updateTransporterAbilities();
     }
 
     private int getOppositeRegion(int exitRegion, int exitEdge){
