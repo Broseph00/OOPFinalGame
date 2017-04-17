@@ -49,7 +49,7 @@ public class Assets {
         images.put("tri1", new Image("tri1.png"));
         images.put("tri2", new Image("tri2.png"));
         images.put("welcomeImage", new Image("welcomeImage.png"));
-        images.put("bigTri", new Image("bigTri1.png"));
+        images.put("bigTri1", new Image("bigTri1.png"));
         images.put("bigPasture", new Image("bigPasture.png"));
     }
 
