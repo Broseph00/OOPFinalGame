@@ -43,8 +43,9 @@ public class GameModel {
         loadSaveStateManager = new LoadSaveStateManager(map, "src/com/iteration3/RoadsAndBoatsSavedState.txt", player1, player2, wonder);
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
-
         this.intializePlayers();
+
+
     }
 
 

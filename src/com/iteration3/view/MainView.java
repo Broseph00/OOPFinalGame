@@ -70,12 +70,10 @@ public class MainView extends BorderPane implements View {
     	statusBox.getChildren().addAll(researchView,tileView);
     }
 
-    public void drawTile(String imageURL, int x, int y) {
-        getMapView().drawTile(imageURL, x, y);
-    }
-    public void drawRiver(String imageURL, int x, int y) {
-        getMapView().drawRiver(imageURL, x, y);
-    }
+    public void drawTile(String imageURL, int x, int y) {getMapView().drawTile(imageURL, x, y);}
+    public void drawRiver(String imageURL, int x, int y) {getMapView().drawRiver(imageURL, x, y);}
+    public void drawTransport(String imageURL, int x, int y, int region){getMapView().drawTransport(imageURL,x,y, region);}
+    public void drawResource(String imageURL, int x, int y, int region){getMapView().drawResource(imageURL,x,y, region);}
     public void drawPreviewImage(String imageURL) {
         tileView.drawPreviewImage(imageURL);
     }
