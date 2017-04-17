@@ -45,7 +45,7 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
     @Override
     public void nextState() {
         dispatch.changeState(new BuildingPhaseState(dispatch, model, window));
-        System.out.println("New state");
+        window.swapToBuildingView();
     }
 
     public void update() {
