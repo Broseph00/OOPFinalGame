@@ -134,6 +134,7 @@ public class ResourceTests {
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         ProductionManager productionManager = new ProductionManager(map);
         RegionLocation regionLocation = new RegionLocation(0, 0, 0, 1);
+        RegionLocation regionLocation2 = new RegionLocation(0, -1, 1, 1);
         Location location = new Location(0,0,0);
 
         Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
@@ -141,7 +142,7 @@ public class ResourceTests {
 
         mapManager.fillMapFromTextFile();
 
-
+        // create a raft for player1
         map.addProducer(new RaftFactory(), regionLocation);
         map.addResource(new Trunk(), regionLocation);
 
@@ -151,20 +152,21 @@ public class ResourceTests {
 
         map.addTransport(donkey, regionLocation);
 
-
         productionManager.produceTransports(donkey);
 
         assertEquals(player1.getTransportersList().getTransports().size(),2);
         assertTrue(player1.getTransportersList().getTransports().get(1) instanceof Raft);
         assertEquals(map.getResources().size(), 0);
 
-        map.addProducer(new SteamerFactory(), regionLocation);
-        map.addResource(new Fuel(), regionLocation);
-        map.addResource(new Iron(), regionLocation);
-        map.addResource(new Iron(), regionLocation);
+        // add transport without player present
+        map.addProducer(new SteamerFactory(), regionLocation2);
+        map.addResource(new Fuel(), regionLocation2);
+        map.addResource(new Fuel(), regionLocation2);
+        map.addResource(new Iron(), regionLocation2);
+
         productionManager.produceTransports();
-        assertEquals(player1.getTransportersList().getTransports().size(),3);
-        assertTrue(player1.getTransportersList().getTransports().get(2) instanceof Steamship);
+        System.out.println(player1.getTransportersList().getTransports().get(0));
+        assertEquals(player1.getTransportersList().getTransports().size(),2);
         assertEquals(map.getResources().size(), 0);
 
 

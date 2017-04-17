@@ -5,9 +5,6 @@ import com.iteration3.controller.ControlDispatch;
 import com.iteration3.controller.Controllers.CursorController;
 import com.iteration3.controller.Controllers.MovementController;
 import com.iteration3.controller.Controllers.TileViewController;
-import com.iteration3.controller.Observer;
-import com.iteration3.controller.PhaseStates.BuildingPhaseState;
-import com.iteration3.controller.PhaseStates.ControlDispatchState;
 import com.iteration3.utilities.Observer;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
@@ -16,9 +13,6 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 
-/**
- * Created by Clay on 4/13/2017.
- */
 public class MovementPhaseState implements ControlDispatchState, Observer {
     private GameModel model;
     private GameWindow window;

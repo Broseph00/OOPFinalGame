@@ -18,6 +18,7 @@ public class RaftFactory extends TransporterFactory {
     @Override
     public void initialize() {
         addRequirement(new Trunk());
+        addRequirement(new Trunk());
     }
 
     @Override

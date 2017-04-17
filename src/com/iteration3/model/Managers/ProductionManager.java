@@ -7,6 +7,7 @@ import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Transporter;
@@ -90,10 +91,10 @@ public class ProductionManager {
 
                 for(Resource usedResource: usedResources) {
                     if(transport.removeResource(usedResource)) {
-
                     } else {
                         // WILL ONLY REMOVE IF IT IS ON SPECIFIC REGION LOCATION
                         map.removeResource(usedResource, regionLocation);
+                        System.out.println(usedResource);
                     }
                 }
                 map.addTransport(transporter, regionLocation);
@@ -107,10 +108,12 @@ public class ProductionManager {
 
         HashMap<RegionLocation, TransporterFactory> transporterFactories = getTransporterFactories();
         for(RegionLocation regionLocation: transporterFactories.keySet()) {
+            ResourceList availableResources = validationManager.getAvailableResources(regionLocation);
             TransporterFactory transporterFactory = transporterFactories.get(regionLocation);
             ArrayList<Resource> usedResources = transporterFactory.getNecessaryResources();
 
             for(Resource usedResource: usedResources) {
+                System.out.println(usedResource);
                 map.removeResource(usedResource, regionLocation);
             }
 
