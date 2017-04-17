@@ -152,6 +152,7 @@ public class GameModel {
         this.map.addResource(new Stone(), new RegionLocation(0,0,0,6));
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
+       // this.map.addRoad(new Location(0,0,0), new Location(-1,0,1));
 
 
         // initialize player2

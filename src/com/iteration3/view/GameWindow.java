@@ -4,10 +4,7 @@ import com.iteration3.model.Map.Location;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -20,6 +17,7 @@ public class GameWindow extends VBox implements View {
     private TabPane tabPane;
     private MainView mainView;
     private WonderView wonderView;
+    private MenuItem saveGame;
 
     public GameWindow(double width, double height, int wonderRows) {
         this.menuBar = new MenuBar();
@@ -40,9 +38,9 @@ public class GameWindow extends VBox implements View {
 
         Menu fileMenu = new Menu("File");
 //        MenuItem newMap = new MenuItem("Create New Map");
-//        importMapFileItem = new MenuItem("Import Map File...");
+        saveGame = new MenuItem("Save Game");
 //        exportMapFileItem = new MenuItem("Export Map File...");
-//        fileMenu.getItems().add(newMap);
+        fileMenu.getItems().add(saveGame);
 //        fileMenu.getItems().add(importMapFileItem);
 //        fileMenu.getItems().add(exportMapFileItem);
         getMenuBar().getMenus().add(fileMenu);
@@ -92,9 +90,14 @@ public class GameWindow extends VBox implements View {
     public void drawTransport(String imageURL, int x, int y, int region){getMainView().drawTransport(imageURL, x, y, region);}
     public void drawResource(String imageURL, int x, int y, int region){getMainView().drawResource(imageURL, x, y, region);}
 	public void drawProducer(String imageURL, int x, int y, int region){getMainView().drawProducer(imageURL, x, y, region);}
+
+	public void drawRoad(int x1, int y1, int x2, int y2){getMainView().drawRoad(x1,y1,x2,y2);}
+	public void drawWall(int x, int y, String color){getMainView().drawWall(x, y, color);}
+
 	public void drawBigResource(String imageURL, int region) {getMainView().drawBigResource(imageURL, region);}
 	public void drawBigTransport(String imageURL, int region) {getMainView().drawBigTransport(imageURL, region);};
 	public void drawBigProducer(String imageURL, int region) {getMainView().drawBigProducer(imageURL, region);};
+
 
 
 	public Location getCursorLocation() {
@@ -211,6 +214,8 @@ public class GameWindow extends VBox implements View {
 	public void setOnClickEndBuildTurn(EventHandler<ActionEvent> handler) {
 		mainView.setOnClickEndBuildTurn(handler);
 	}
+
+	public void setOnClickSaveGame(EventHandler<ActionEvent> handler) { saveGame.setOnAction(handler); }
 	
 	public void setCurrentResearch(String research) {
 		mainView.setCurrentResearch(research);

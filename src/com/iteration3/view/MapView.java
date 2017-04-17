@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class MapView extends Pane implements View {
     private final int MAX_CAMERA_X_BOUND = 660;
@@ -300,6 +301,20 @@ public class MapView extends Pane implements View {
     public void drawProducer(String imageURL, int x, int y, int region){
         Image image = images.getImage(imageURL);
         gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset() + transportOffSet() + (xRegOff(region)))*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + transportOffSet() + (yRegOff(region)))*getScale() + getCameraY(), image.getWidth()*0.3*getScale(), image.getHeight()*0.3*getScale());
+    }
+
+    public void drawRoad(int x1, int y1, int x2, int y2) {
+        int offset = 1;
+        int yoffset = -1;
+        gc.setStroke(Color.YELLOW);
+        gc.setLineWidth(10);
+        gc.strokeLine(((x1 + getXOffset() + offset) * getXPixelOffset())*getScale() + getCameraX(), ((y1 + getYOffset() + offset) * getYPixelOffset() + (getXOffset2() * x1))*getScale() + getCameraY(), ((x2 + getXOffset() + offset) * getXPixelOffset())*getScale() + getCameraX(), ((y2 + getYOffset() + offset) * getYPixelOffset() + (getXOffset2() * x2))*getScale() + getCameraY());
+    }
+
+    public void drawWall(int x, int y, String color) {
+        gc.setStroke(Color.WHITE);
+        gc.setLineWidth(5);
+        gc.strokeLine(x, y, 50, 0);
     }
 
     private int xRegOff(int region){

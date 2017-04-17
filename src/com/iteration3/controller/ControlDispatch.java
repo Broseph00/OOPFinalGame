@@ -7,6 +7,7 @@ import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 
 import com.iteration3.view.WelcomeViewWindow;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
@@ -25,6 +26,17 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
         this.welcomeViewWindow = welcomeViewWindow;
         currentState = new WelcomeState(this, model, window, welcomeViewWindow);
         window.addKeyHandler(this);
+
+        window.setOnClickSaveGame(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    model.saveState();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 /*
