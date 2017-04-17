@@ -11,12 +11,18 @@ public class WallWithOwner extends Wall {
 
     public WallWithOwner(Player player, int edge, int strength) {
         this.owner = player;
+        super.setWallColor(player.getColorID());
         this.setEdge(edge);
         this.setStrength(strength);
     }
 
     public boolean oppositeOwner(Player player){
         return !(player==owner);
+    }
+
+    @Override
+    public String getWallColor() {
+        return null;
     }
 
     public Player getOwner() {
@@ -26,4 +32,5 @@ public class WallWithOwner extends Wall {
     public void setOwner(Player owner) {
         this.owner = owner;
     }
+
 }

@@ -6,6 +6,7 @@ public abstract class Wall {
 
     private int edge;
     private int strength;
+    private String wallColor;
 
     public int getEdge() {
         return edge;
@@ -24,6 +25,14 @@ public abstract class Wall {
     }
 
     public abstract boolean oppositeOwner(Player player);
+
+    public String getWallColor() {
+        return wallColor;
+    };
+    public void setWallColor(String wallColor) {
+        this.wallColor = wallColor;
+    }
+
 }
 
 

@@ -15,16 +15,18 @@ import java.util.ArrayList;
 
 public class Player {
     private int id;
+    private String colorID;
     private TransportList transportersList;
     private AbilityManager abilityManager;
     private ResearchManager researchManager;
     private RegionLocation startingRegionLocation;
 
-    public Player(Map map, int id, RegionLocation startingLocation){
+    public Player(Map map, int id, RegionLocation startingLocation, String colorID){
         researchManager = new ResearchManager();
         transportersList = new TransportList();
         abilityManager = new AbilityManager(map, new ValidationManager(map), researchManager, new ExecutionManager(map), new ExchangeManager(map));
         this.id = id;
+        this.colorID = colorID;
         this.startingRegionLocation = startingLocation;
     }
 
@@ -79,6 +81,10 @@ public class Player {
 
     public int getId() {
         return id;
+    }
+
+    public String getColorID() {
+        return colorID;
     }
 
     public void updateAbilityManager(ControlDispatch controlDispatch){
