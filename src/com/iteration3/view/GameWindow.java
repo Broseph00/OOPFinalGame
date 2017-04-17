@@ -54,6 +54,8 @@ public class GameWindow extends VBox implements View {
         Tab mainViewTab = new Tab("Main View");
         Tab wonderViewTab = new Tab("Wonder View");
 
+        mainViewTab.setDisable(true);
+        
         mainViewTab.setContent(getMainView());
         wonderViewTab.setContent(getWonderView());
 
