@@ -1,8 +1,9 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 
+import com.iteration3.controller.*;
+import com.iteration3.controller.Modes.*;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by Clay on 4/14/2017.
  */
-public class BuildingController implements Observable{
+public class BuildingController implements Observable {
 
     private GameModel model;
     private GameWindow window;

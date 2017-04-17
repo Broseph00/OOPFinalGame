@@ -1,5 +1,7 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 
+import com.iteration3.controller.Action;
+import com.iteration3.controller.Observer;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;

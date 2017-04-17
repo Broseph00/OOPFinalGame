@@ -1,4 +1,4 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Controllers;
 
 import com.iteration3.GameEngine;
 import com.iteration3.view.WelcomeViewWindow;

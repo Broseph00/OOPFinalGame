@@ -1,10 +1,11 @@
-package com.iteration3.controller;
+package com.iteration3.controller.Modes;
 
+import com.iteration3.controller.Action;
+import com.iteration3.controller.Modes.DirectionalMode;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
 import javafx.scene.input.KeyCode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

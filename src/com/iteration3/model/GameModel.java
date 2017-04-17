@@ -19,6 +19,7 @@ public class GameModel {
     private TurnManager turnManager;
     private Player player1;
     private Player player2;
+    private Player currentPlayer;
 
     public GameModel() throws Exception{
         map = new Map();
@@ -27,6 +28,8 @@ public class GameModel {
         turnManager = new TurnManager();
         player1 = new Player(map, 1);
         player2 = new Player(map, 2);
+        currentPlayer = player1;
+
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
     }
@@ -46,6 +49,10 @@ public class GameModel {
 
     public  Player getPlayer2() {
         return player2;
+    }
+
+    public Player getCurrentPlayer(){
+        return currentPlayer;
     }
 
     public HashMap<Location, Tile> getTiles() {

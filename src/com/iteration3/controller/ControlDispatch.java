@@ -1,8 +1,9 @@
 package com.iteration3.controller;
 
+import com.iteration3.controller.PhaseStates.ControlDispatchState;
+import com.iteration3.controller.PhaseStates.WelcomeState;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
