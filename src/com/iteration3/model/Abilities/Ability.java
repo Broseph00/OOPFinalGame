@@ -1,6 +1,7 @@
 package com.iteration3.model.Abilities;
 
 
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitable;
@@ -22,8 +23,13 @@ public abstract class Ability implements Visitable {
     public Transporter getTransporter(){
         return  transporter;
     }
+    
+    public String getName() {
+    	return name;
+    }
 
     public void execute(){
         executionManager.execute(this);
     }
+
 }

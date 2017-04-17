@@ -5,12 +5,12 @@ import com.iteration3.model.Resource.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Mine extends PrimaryProducer {
-    private ArrayList<Resource> oreBag;
+public abstract class Mine extends PrimaryProducer {
+    protected ArrayList<Resource> oreBag;
 
     public Mine() {
         oreBag = new ArrayList<>();
-        buildDefaultShaft();
+        buildShaft();
     }
 
     @Override
@@ -19,7 +19,7 @@ public class Mine extends PrimaryProducer {
         return ore;
     }
 
-    private Resource getOre(){
+    protected Resource getOre(){
         if(oreBag.isEmpty()){
             return null;
         }
@@ -29,26 +29,13 @@ public class Mine extends PrimaryProducer {
         return oreBag.get(randomIdx);
     }
 
-    private void buildDefaultShaft(){
+    public abstract void buildShaft();
+/*
+    {
         for(int i = 0; i < this.getBaseOreAmount(); ++i){
             oreBag.add(new Gold());
             oreBag.add(new Iron());
         }
     }
-
-    private int getBaseOreAmount(){
-        return 3;
-    }
-
-    public void buildIronShaft(){
-        for(int i = 0; i < 4; ++i){
-            oreBag.add(new Iron());
-        }
-    }
-
-    public void buildGoldShaft(){
-        for(int i = 0; i < 4; ++i){
-            oreBag.add(new Gold());
-        }
-    }
+*/
 }

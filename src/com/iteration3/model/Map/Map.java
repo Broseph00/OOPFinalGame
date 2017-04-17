@@ -2,8 +2,10 @@ package com.iteration3.model.Map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
@@ -11,7 +13,6 @@ import com.iteration3.model.Tiles.SeaTerrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
-import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 
 public class Map {
@@ -154,6 +155,40 @@ public class Map {
             System.out.println("Wall not added!");
         }
     }
+
+    // for use from LoadSaveStateManager
+    public void addNeutralWall(Location location, int edge, int strength) {
+        if(!this.betweenTwoSeaTiles(location, edge)) {
+
+            Location oppositeLocation = location.getLocationEdge(edge);
+            int oppositeEdge = oppositeEdge(edge);
+
+            // check if there are already existing walls
+            WallList newWallSet1 = new WallList();
+            if(this.walls.containsKey(location)) {
+                newWallSet1 = this.walls.get(location);
+            }
+            else{
+                this.walls.put(location, newWallSet1);
+            }
+            // check if there are already existing walls
+            WallList newWallSet2 = new WallList();
+            if(this.walls.containsKey(oppositeLocation)) {
+                newWallSet2 = this.walls.get(oppositeLocation);
+            }
+            else{
+                this.walls.put(oppositeLocation, newWallSet2);
+            }
+
+            newWallSet1.add(new WallWithoutOwner(edge, getWallStrength(location, edge) + strength));
+            newWallSet2.add(new WallWithoutOwner(oppositeEdge, getWallStrength(oppositeLocation, oppositeEdge) + strength));
+
+        } else {
+            System.out.println("Wall not added!");
+        }
+    }
+
+
 
     public void removeWall(Location location, int edge) {
         // check if there are already existing walls
@@ -360,19 +395,6 @@ public class Map {
         }
     }
 
-    private void intializeResourceList(Location location) {
-        for(int i = 1; i < 7; i++) {
-            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
-            this.resources.put(regionLocation, new ResourceList());
-        }
-    }
-
-    private void intializeTansportList(Location location) {
-        for(int i = 1; i < 7; i++) {
-            RegionLocation regionLocation = new RegionLocation(location.getX(), location.getY(), location.getZ(), i);
-            this.transports.put(regionLocation, new TransportList());
-        }
-    }
     // return list of all sea tiles
     private HashMap<Location, Tile> getSeaTiles() {
         HashMap<Location, Tile> seaTiles = new HashMap<>();
@@ -476,6 +498,29 @@ public class Map {
             return true;
         }
         return false;
+
+    }
+
+    public HashMap<RegionLocation, Producer> getProducers() {
+        return producers;
+    }
+
+    public ResourceList getAvailableResources(Transporter transporter){
+        RegionLocation regionLocation = this.getTransportRegionLocation(transporter);
+        int region = regionLocation.getRegion();
+        Location location = regionLocation.getLocation();
+        Region regions = this.getRegions().get(location);
+        ArrayList<Integer> connected = regions.getRegion(region);
+        ResourceList resourceList = new ResourceList();
+        Iterator<Integer> iterator = connected.iterator();
+        while(iterator.hasNext()){
+            int hold = iterator.next();
+            RegionLocation newReg = new RegionLocation(location, hold);
+            if(this.getResources().containsKey(newReg)){
+                resourceList.addAll(this.getResources().get(newReg));
+            }
+        }
+        return resourceList;
     }
 
 }

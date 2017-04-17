@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -36,7 +35,7 @@ public class ProductionView extends VBox {
 		useFactoryButton = new Button("Use Factory");
 		endTurnButton = new Button("endTurn");
 		
-		useFactoryButton.setVisible(false);
+		
 		useFactoryButton.setDisable(true);
 		
 		tileResourceList.setEditable(false);
@@ -64,7 +63,7 @@ public class ProductionView extends VBox {
 		useFactoryButton = new Button("Use Factory");
 		endTurnButton = new Button("End Turn");
 		
-		useFactoryButton.setVisible(false);
+		
 		useFactoryButton.setDisable(true);
 		
 		tileResourceList.setEditable(false);
@@ -120,6 +119,8 @@ public class ProductionView extends VBox {
 		
 		tileResourceList.setFont(Font.font(15));
 		transportResourceList.setFont(Font.font(15));
+
+		currentTransportLabel.setFont(Font.font(15));
 		
 	}
 	
@@ -135,10 +136,7 @@ public class ProductionView extends VBox {
 		transportResourceList.setText(list);
 	}
 	
-	public void setFactoryButtonVisbile(Boolean isVisible) {
-		useFactoryButton.setVisible(isVisible);
-	}
-	
+
 	public void setCurrentTransporter(String currentTransporter) {
 		currentTransportLabel.setText(currentTransporter);
 	}
@@ -147,7 +145,7 @@ public class ProductionView extends VBox {
 		useFactoryButton.setOnAction(handler);
 	}
 	
-	public void setOnClickEndTurn(EventHandler<ActionEvent> handler) {
+	public void setOnClickEndProductionTurn(EventHandler<ActionEvent> handler) {
 		endTurnButton.setOnAction(handler);
 	}
 }

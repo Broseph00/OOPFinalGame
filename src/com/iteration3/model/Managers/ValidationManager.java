@@ -1,7 +1,10 @@
 package com.iteration3.model.Managers;
 
-import com.iteration3.model.Abilities.DockatSeaAbility;
-import com.iteration3.model.Abilities.MoveAbility;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructBridgeAbility;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructRoadAbility;
+import com.iteration3.model.Abilities.ConstructAbility.ConstructWallAbility;
+import com.iteration3.model.Abilities.DockAbility.DockatSeaAbility;
+import com.iteration3.model.Abilities.MoveAbility.MoveAbility;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
@@ -12,7 +15,6 @@ import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
-import com.iteration3.model.Visitors.TerrainTypeVisitor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -140,6 +142,21 @@ public class ValidationManager {
         }
     }
 
+    public boolean containsRoad(Transporter transporter, ConstructRoadAbility ability){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        int edge = ability.getBorder();
+        Location end = location.getLocationEdge(edge);
+        return map.containsRoad(location, end);
+    }
+
+    public boolean containsBridge(Transporter transporter, ConstructBridgeAbility ability){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        int edge = ability.getBorder();
+        return map.containsBridge(location, edge);
+    }
+
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
         ResourceList resourceList = getAvailableResources(transporter);
         return resourceList.getBoards().size()>=boardCost && resourceList.getStones().size()>=stoneCost;
@@ -188,6 +205,13 @@ public class ValidationManager {
     public boolean existingProducer(Transporter transporter){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         return map.existingProducer(regionLocation);
+    }
+
+    public boolean wallOwnedByOpposingPlayer(Transporter transporter, ConstructWallAbility ability){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        int edge = ability.getBorder();
+        return map.wallOwnedByOpposingPlayer(location, transporter.getOwner(), edge);
     }
 
     private int oppositeEdge(int edge){

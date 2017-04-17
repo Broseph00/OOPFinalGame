@@ -2,5 +2,7 @@
 .idea/OOPFinalGame.iml
 *.class
 OOPFinalGame.iml
+mapFileTest.txt
+saveStateTest.txt
 out/
 /bin/

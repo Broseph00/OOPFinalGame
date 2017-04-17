@@ -2,16 +2,19 @@ package com.iteration3.model.Managers;
 
 import static com.iteration3.utilities.GameLibrary.*;
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.ConstructAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Map.Map;
-import com.iteration3.model.Players.Research.Research;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.WaterTransporter;
+import com.iteration3.model.Visitors.Visitor;
+import com.iteration3.model.Visitors.iAbilityVisitor;
 
-import javax.xml.crypto.dsig.TransformService;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityManager {
     Map map;
@@ -82,12 +85,13 @@ public class AbilityManager {
 
     public ArrayList<Ability> populateList(OnRoadLandTransporter transporter) {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
+        addBuildAbilities(transporter, abilitiesList);
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
-    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+    public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
         //construction abilities
         if (verifyClayPitAbility(transporter)) { abilitiesList.add(new BuildClaypitAbility(transporter, executionManager)); }
         if (verifyCoalBurnerAbility(transporter)) { abilitiesList.add(new BuildCoalBurnerAbility(transporter, executionManager)); }
@@ -104,6 +108,50 @@ public class AbilityManager {
         if (verifyTruckFactoryAbility(transporter)) { abilitiesList.add(new BuildTruckFactoryAbility(transporter, executionManager)); }
         if (verifyWagonFactoryAbility(transporter)) { abilitiesList.add(new BuildWagonFactoryAbility(transporter, executionManager)); }
         if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager)); }
+        if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
+        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildIronMineAbility(transporter, executionManager)); }
+        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildGoldMineAbility(transporter, executionManager)); }
+    }
+
+    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+        ConstructWallAbility constructWallAbility = new ConstructWall1Ability(transporter, executionManager);
+        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+        constructWallAbility = new ConstructWall2Ability(transporter, executionManager);
+        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+        constructWallAbility = new ConstructWall3Ability(transporter, executionManager);
+        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+        constructWallAbility = new ConstructWall4Ability(transporter, executionManager);
+        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+        constructWallAbility = new ConstructWall5Ability(transporter, executionManager);
+        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+        constructWallAbility = new ConstructWall6Ability(transporter, executionManager);
+        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+
+        ConstructRoadAbility constructRoadAbility = new ConstructRoad1Ability(transporter, executionManager);
+        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+        constructRoadAbility = new ConstructRoad2Ability(transporter, executionManager);
+        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+        constructRoadAbility = new ConstructRoad3Ability(transporter, executionManager);
+        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+        constructRoadAbility = new ConstructRoad4Ability(transporter, executionManager);
+        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+        constructRoadAbility = new ConstructRoad5Ability(transporter, executionManager);
+        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+        constructRoadAbility = new ConstructRoad6Ability(transporter, executionManager);
+        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+
+        ConstructBridgeAbility constructBridgeAbility = new ConstructBridge1Ability(transporter, executionManager);
+        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+        constructBridgeAbility = new ConstructBridge2Ability(transporter, executionManager);
+        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+        constructBridgeAbility = new ConstructBridge3Ability(transporter, executionManager);
+        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+        constructBridgeAbility = new ConstructBridge4Ability(transporter, executionManager);
+        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+        constructBridgeAbility = new ConstructBridge5Ability(transporter, executionManager);
+        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+        constructBridgeAbility = new ConstructBridge6Ability(transporter, executionManager);
+        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
@@ -127,7 +175,17 @@ public class AbilityManager {
         UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
         addUndockAbility(undockAbility, transporter, abilitiesList);
 
-        DockatRiverAbility dockAbility = new DockatRiverAbility(transporter, executionManager);
+        DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver2Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver3Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver4Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver5Ability(transporter, executionManager);
+        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+        dockAbility = new DockatRiver6Ability(transporter, executionManager);
         addRiverDockAbility(dockAbility, transporter, abilitiesList);
 
         DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
@@ -226,6 +284,18 @@ public class AbilityManager {
         if(verifyRoadMoveAbility(moveAbility, transporter)) { abilitiesList.add(moveAbility); }
     }
 
+    private void addConstructWallAbility(ConstructWallAbility constructWallAbility, Transporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifyConstructWallAbility(constructWallAbility, transporter)){ abilitiesList.add(constructWallAbility); }
+    }
+
+    private void addConstructBridgeAbility(ConstructBridgeAbility constructBridgeAbility, Transporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifyConstructBridgeAbility(constructBridgeAbility, transporter)){ abilitiesList.add(constructBridgeAbility); }
+    }
+
+    private void addConstructRoadAbility(ConstructRoadAbility constructRoadAbility, Transporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifyConstructRoadAbility(constructRoadAbility, transporter)){ abilitiesList.add(constructRoadAbility); }
+    }
+
     private boolean verifyClayPitAbility(Transporter transporter) {
        return (validationManager.validateResources(transporter, CLAYPIT_BOARD, CLAYPIT_STONE) && validationManager.validateShore(transporter) && !validationManager.existingProducer(transporter));
     }
@@ -284,6 +354,26 @@ public class AbilityManager {
 
     private boolean verifyWoodcutterAbility(Transporter transporter){
         return (validationManager.validateResources(transporter, WOODCUTTER_BOARD, WOODCUTTER_STONE) && validationManager.validateTerrain(transporter, WOODS)) && !validationManager.existingProducer(transporter);
+    }
+
+    private boolean verifyBigMineAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter) && researchManager.isFinishedEnlargementResearch());
+    }
+
+    private boolean verifySpecializedMineAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter) && researchManager.isFinishedSpecializationResearch());
+    }
+
+    private boolean verifyConstructWallAbility(ConstructWallAbility constructWallAbility, Transporter transporter){
+        return ( validationManager.validateResources(transporter, WALL_BOARD, WALL_STONE)) && !validationManager.wallOwnedByOpposingPlayer(transporter, constructWallAbility);
+    }
+
+    private boolean verifyConstructRoadAbility(ConstructRoadAbility constructRoadAbility, Transporter transporter){
+        return ( validationManager.validateResources(transporter, ROAD_BOARD, ROAD_STONE)) && !validationManager.containsRoad(transporter, constructRoadAbility);
+    }
+
+    private boolean verifyConstructBridgeAbility(ConstructBridgeAbility constructBridgeAbility, Transporter transporter){
+        return ( validationManager.validateResources(transporter, BRIDGE_BOARD, BRIDGE_STONE)) && !validationManager.containsBridge(transporter, constructBridgeAbility);
     }
 
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){

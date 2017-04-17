@@ -1,8 +1,9 @@
 package com.iteration3.controller;
 
+import com.iteration3.controller.PhaseStates.ControlDispatchState;
+import com.iteration3.controller.PhaseStates.WelcomeState;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;
-import com.iteration3.view.MainView;
 
 import com.iteration3.view.WelcomeViewWindow;
 import javafx.event.EventHandler;
@@ -35,5 +36,9 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
 
     public void changeState(ControlDispatchState newState){
         currentState = newState;
+    }
+
+    public ControlDispatchState getCurrentState(){
+        return currentState;
     }
 }

@@ -13,9 +13,6 @@ import com.iteration3.view.MainView;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by LesliesLaptop on 4/11/17.
- */
 //TODO: Consider breaking up this class into more manageable chunks?
 public class ModelViewAdapter {
     private GameModel gameModel;
@@ -29,31 +26,38 @@ public class ModelViewAdapter {
     }
 
     public void update() {
-        Map map = gameModel.getMap();
+        /*Map map = gameModel.getMap();
         try {
             MapFileManager fileManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
             fileManager.fillMapFromTextFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        map.printRivers();*/
 
-        map.printRivers();
-        drawTiles(map);
-        drawRivers(map);
+        drawTiles();
+        drawRivers();
+        drawBridges();
+        drawRoads();
+        drawWalls();
+        drawProducers();
+        drawResources();
+        drawTransports();
+
     }
 
-    private void drawTiles(Map map) {
-        for(Location location : map.getTiles().keySet()) {
+    private void drawTiles() {
+        for(Location location : gameModel.getTiles().keySet()) {
             currentLocation = location;
-            gameWindow.drawTile(map.getTile(currentLocation).getTerrainType(), currentLocation.getX(), currentLocation.getZ());
+            gameWindow.drawTile(gameModel.getTile(currentLocation).getTerrainType(), currentLocation.getX(), currentLocation.getZ());
         }
     }
 
-    private void drawRivers(Map map) {
+    private void drawRivers() {
 
-        for(Location location : map.getRivers().keySet()) {
+        for(Location location : gameModel.getRivers().keySet()) {
             currentLocation = location;
-            ArrayList<Integer> riverEdges = map.getRivers().get(location).getRiverEdges();
+            ArrayList<Integer> riverEdges = gameModel.getRivers().get(location).getRiverEdges();
 
             // handle river sources
             if(riverEdges.size() == 1) {
@@ -136,249 +140,31 @@ public class ModelViewAdapter {
                     gameWindow.drawRiver("tri2",  currentLocation.getX(), currentLocation.getZ());
                 }
             }
-
         }
-
-
     }
 
-//    @Override
-//    public void visit(EnlargementResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(NewShaftResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(OilResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(RowingResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(ShipResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(SpecializationResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(TruckResearch research) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildClaypitAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildCoalBurnerAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildMineAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildMintAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildOilRigAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildPapermillAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildRaftFactoryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildRowboatFactoryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildSteamerFactoryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildStockExchangeAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildStoneFactoryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildStoneQuarryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildTruckFactoryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildWagonFactoryAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(BuildWoodcutterAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree0Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree30Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree60Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree90Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree120Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree150Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree180Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree210Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree240Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree270Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree300Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveDegree330Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveEdge1Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveEdge2Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveEdge3Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveEdge4Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveEdge5Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(MoveEdge6Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatSea1Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatSea2Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatSea3Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatSea4Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatSea5Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatSea6Ability ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(DockatRiverAbility ability) {
-//
-//    }
-//
-//    @Override
-//    public void visit(UndockAbility ability) {
-//
-//    }
+    private void drawBridges(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawRoads(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawWalls(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawProducers(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawResources(){
+        //TODO: Handle Drawing
+    }
+
+    private void drawTransports(){
+        //TODO: Handle Drawing
+    }
+
 }

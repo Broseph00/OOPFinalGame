@@ -2,6 +2,8 @@ package com.iteration3.model.Players;
 
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.TransporterIterator;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
 import com.iteration3.model.Transporters.TransportList;
@@ -15,12 +17,14 @@ public class Player {
     private TransportList transportersList;
     private AbilityManager abilityManager;
     private ResearchManager researchManager;
+    RegionLocation startingRegionLocation;
 
-    public Player(Map map, int id){
+    public Player(Map map, int id, RegionLocation startingLocation){
         researchManager = new ResearchManager();
         transportersList = new TransportList();
         abilityManager = new AbilityManager(map, new ValidationManager(map), researchManager, new ExecutionManager(map));
         this.id = id;
+        this.startingRegionLocation = startingLocation;
     }
 
     public void updateTransporterAbilities(){
@@ -55,7 +59,23 @@ public class Player {
         return transportersList;
     }
 
+    public TransporterIterator getTransportIterator(){
+        return transportersList.makeIterator();
+    }
+
     public ResearchManager getResearchManager(){
         return researchManager;
+    }
+
+    public AbilityManager getAbilityManager() {
+        return abilityManager;
+    }
+
+    public RegionLocation getStartingRegionLocation() {
+        return startingRegionLocation;
+    }
+
+    public int getId() {
+        return id;
     }
 }

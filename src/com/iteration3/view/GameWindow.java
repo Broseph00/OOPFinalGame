@@ -1,6 +1,8 @@
 package com.iteration3.view;
 
 import com.iteration3.model.Map.Location;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
@@ -21,6 +23,7 @@ public class GameWindow extends VBox implements View {
         this.tabPane = new TabPane();
         this.mainView = new MainView(width, height);
         this.wonderView = new WonderView(width, height, wonderRows);
+        tabPane.setFocusTraversable(false);
         initializeMenuBar();
         initializeTabs();
     }
@@ -85,4 +88,74 @@ public class GameWindow extends VBox implements View {
     public void update() {
         getMainView().update();
     }
+    
+    public void setEnableMoveButton(Boolean isEnabled){
+		mainView.setEnableMoveButton(isEnabled);
+	}
+	
+	public void setCurrentTransporter(String currentTransporter) {
+		mainView.setCurrentTransporter(currentTransporter);
+	}
+	
+	public void setOnMoveButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnMoveButton(handler);
+	}
+	
+	public void setOnClickEndMovementTurn(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickEndMovementTurn(handler);
+	}
+	
+	public void setEnableFactoryButton(Boolean isEnabled){
+		mainView.setEnableFactoryButton(isEnabled);
+	}
+	
+	public void setOnClickFactoryButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickFactoryButton(handler);
+	}
+	
+	public void setOnClickEndProductionTurn(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickEndProductionTurn(handler);
+	}
+	
+	public void highlightTransportOption() {
+		mainView.highlightTransportOption();
+	}
+	
+	public void highlightMovementOption() {
+		mainView.highlightMovementOption();
+	}
+	
+	public void swapToProductionView() {
+        mainView.swapToProductionView();
+    }
+    
+    public void swapToMovementView() {
+    	mainView.swapToMovementView();
+    }
+    
+
+	public void setEnablePickUpResourceButton(Boolean isEnabled){
+		mainView.setEnablePickUpResourceButton(isEnabled);
+	}
+	
+	public void setEnableDropResourceButton(Boolean isEnabled){
+		mainView.setEnableDropResourceButton(isEnabled);
+	}
+	
+	public void setCurrentTileResource(String resource) {
+		mainView.setCurrentTileResource(resource);
+	}
+	
+	public void setCurrentTransportResource(String resource) {
+		mainView.setCurrentTransportResource(resource);
+	}
+	
+	
+	public void setOnClickPickUpResource(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickPickUpResource(handler);
+	}
+	
+	public void setOnClickDropResource(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickDropResource(handler);
+	}
 }
