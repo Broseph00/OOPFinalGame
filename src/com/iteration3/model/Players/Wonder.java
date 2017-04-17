@@ -20,28 +20,23 @@ public class Wonder {
     }
 
     private void newRow() {
-        if(isFull()) {
+        if (isFull()) {
             return;
         } else {
             incrementRowMultiplierCounter();
             WonderRow wonderRow = new WonderRow(bricksPerRow);
             rows.add(wonderRow);
-            checkIrrigation();
         }
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         boolean reachedMaxRows = (rows.size() == MAX_WONDER_ROWS);
-        if(reachedMaxRows){
+        if (reachedMaxRows) {
             WonderRow currentRow = getCurrentRow();
             return currentRow.isFull();
         } else {
             return false;
         }
-    }
-
-    private void checkIrrigation() {
-        // TODO: make call to Map to update desert tiles
     }
 
     private WonderRow getCurrentRow() {
@@ -62,47 +57,27 @@ public class Wonder {
         rowMultiplierCounter = 1;
     }
 
-    public void addBricks(Player owner, int quantity) {
-        if(isFull()){
-            return;
+    public boolean addBrick(Player owner) {
+        if (isFull()) {
+            return false;
         }
-
-        int bricksAdded = 0;
-        int alreadyPaid = 0;
 
         WonderRow currentRow = getCurrentRow();
-        for(int i = 0; i < quantity; ++i){
-            if(currentRow.isFull()){
-                newRow();
-                currentRow = getCurrentRow();
-            }
-
-            int brickCost = calculateTotalBrickCost(i) - alreadyPaid;
-            boolean playerPaid = false;
-            // TODO: decrement cost from owner
-            if(playerPaid){
-                alreadyPaid += brickCost;
-                bricksAdded += currentRow.addBrick(owner) ? 1 : 0;
-            }
+        if (currentRow.isFull()) {
+            newRow();
+            currentRow = getCurrentRow();
         }
-    }
 
-    private int calculateTotalBrickCost(int quantity) {
-        int brickCost = 0;
-        for (int i = 1; i <= quantity; i++) {
-            int currentTier = (rows.size() < INCREASED_COST_ROW) ? 1 : 2;
-            brickCost += (i + currentTier);
-        }
-        return brickCost;
+        return currentRow.addBrick(owner);
     }
 
     public void addNeutralBrick() {
-        if(isFull()){
+        if (isFull()) {
             return;
         }
 
         WonderRow currentRow = getCurrentRow();
-        if(currentRow.isFull()){
+        if (currentRow.isFull()) {
             newRow();
             currentRow = getCurrentRow();
         }
@@ -110,14 +85,18 @@ public class Wonder {
         currentRow.addNeutralBrick();
     }
 
-    public int getScore(Player owner){
+    public int getScore(Player owner) {
         int ownerScore = 0;
 
-        for(WonderRow row : rows){
+        for (WonderRow row : rows) {
             ownerScore += row.getScore(owner);
         }
 
         return ownerScore;
+    }
+
+    public int getRowCount() {
+        return rows.size();
     }
 
     public ArrayList<WonderRow> getRows() {
