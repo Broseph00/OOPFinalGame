@@ -12,7 +12,7 @@ public class Papermill extends SecondaryProducer {
         initialize();
     }
 
-    private void initialize(){
+    public void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Trunk(), new Trunk());
         addRequirement(req1);
 

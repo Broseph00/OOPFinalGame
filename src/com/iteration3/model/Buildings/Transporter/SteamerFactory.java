@@ -5,8 +5,16 @@ import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Transporters.Water.Steamship;
 
+import java.util.ArrayList;
+
 public class SteamerFactory extends TransporterFactory {
     public SteamerFactory() {
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+
     }
 
     @Override
@@ -34,5 +42,8 @@ public class SteamerFactory extends TransporterFactory {
         }
 
         return steamship;
+
     }
+
+
 }

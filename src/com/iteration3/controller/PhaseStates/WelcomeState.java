@@ -2,7 +2,7 @@ package com.iteration3.controller.PhaseStates;
 
 import com.iteration3.controller.Action;
 import com.iteration3.controller.ControlDispatch;
-import com.iteration3.controller.Observer;
+import com.iteration3.utilities.Observer;
 import com.iteration3.controller.Controllers.WelcomeViewController;
 import com.iteration3.model.GameModel;
 import com.iteration3.view.GameWindow;

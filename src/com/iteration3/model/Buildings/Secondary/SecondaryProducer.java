@@ -14,6 +14,8 @@ public abstract class SecondaryProducer extends Producer {
         necessaryResources = new ArrayList<>();
     }
 
+    public abstract void initialize();
+
     public abstract boolean checkResources(ResourceList availableResources);
 
     public abstract ArrayList<Resource> produce(ResourceList availableResources);
