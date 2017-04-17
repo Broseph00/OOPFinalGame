@@ -15,6 +15,7 @@ import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameModel {

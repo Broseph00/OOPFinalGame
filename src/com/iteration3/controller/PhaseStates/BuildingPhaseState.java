@@ -38,6 +38,7 @@ public class BuildingPhaseState implements ControlDispatchState, Observer {
     @Override
     public void nextState() {
         dispatch.changeState(new WonderPhaseState(dispatch, model, window));
+        //window.view
     }
 
     @Override

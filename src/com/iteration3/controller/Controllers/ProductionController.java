@@ -58,9 +58,9 @@ public class ProductionController implements Observable {
             public void execute() {
                 transIter.next();
                 currTrans = transIter.current();
-                //tileResourceList = model.getAvailableResources(currTrans);
-                //transporterResourceList = currTrans.getResourceList();
-                //updateResourcesList();
+                tileResourceList = model.getAvailableResources(currTrans);
+                transporterResourceList = currTrans.getResourceList();
+                updateResourcesList();
 
             }
         });
@@ -71,7 +71,7 @@ public class ProductionController implements Observable {
                 currTrans = transIter.current();
                 //tileResourceList = model.getAvailableResources(currTrans);
                 //transporterResourceList = currTrans.getResourceList();
-                window.setCurrentTileResource("HI");
+                window.setTransportResourceList("HI");
 
             }
         });
@@ -139,18 +139,18 @@ public class ProductionController implements Observable {
 
     public void updateResourcesList(){
         String tile = "";
-        tile += "Trunks: " + tileResourceList.getTrunks() + "\n";
-        tile += "Boards: " + tileResourceList.getBoards() + "\n";
-        tile += "Paper: " + tileResourceList.getPaper() + "\n";
-        tile += "Goose: " + tileResourceList.getGeese() + "\n";
-        tile += "Clay: " + tileResourceList.getClay() + "\n";
-        tile += "Stone: " + tileResourceList.getStones() + "\n";
-        tile += "Fuel: " + tileResourceList.getFuel() + "\n";
-        tile += "Iron: " + tileResourceList.getIron() + "\n";
-        tile += "Gold: " + tileResourceList.getGold() + "\n";
-        tile += "Coins: " + tileResourceList.getCoins() + "\n";
-        tile += "Stock: " + tileResourceList.getStock() + "\n";
-        window.setCurrentTileResource(tile);
+        tile += "Trunks: " + tileResourceList.getTrunks().size() + "\n";
+        tile += "Boards: " + tileResourceList.getBoards().size() + "\n";
+        tile += "Paper: " + tileResourceList.getPaper().size() + "\n";
+        tile += "Goose: " + tileResourceList.getGeese().size() + "\n";
+        tile += "Clay: " + tileResourceList.getClay().size() + "\n";
+        tile += "Stone: " + tileResourceList.getStones().size() + "\n";
+        tile += "Fuel: " + tileResourceList.getFuel().size() + "\n";
+        tile += "Iron: " + tileResourceList.getIron().size() + "\n";
+        tile += "Gold: " + tileResourceList.getGold().size() + "\n";
+        tile += "Coins: " + tileResourceList.getCoins().size() + "\n";
+        tile += "Stock: " + tileResourceList.getStock().size() + "\n";
+        window.setTileResourceList(tile);
 
         String transporter = "";
         transporter += "Trunks: " + transporterResourceList.getTrunks() + "\n";
@@ -164,7 +164,7 @@ public class ProductionController implements Observable {
         transporter += "Gold: " + transporterResourceList.getGold() + "\n";
         transporter += "Coins: " + transporterResourceList.getCoins() + "\n";
         transporter += "Stock: " + transporterResourceList.getStock() + "\n";
-        window.setCurrentTransportResource(transporter);
+        window.setTransportResourceList(transporter);
 
     }
 }

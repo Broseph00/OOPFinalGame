@@ -16,9 +16,6 @@ import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Clay on 4/14/2017.
- */
 public class BuildingController implements Observable {
 
     private GameModel model;
@@ -100,21 +97,22 @@ public class BuildingController implements Observable {
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 //model.nextPlayer();
+
+                if (lastPlayer)
+                    notifyAllObservers();
                 lastPlayer = !lastPlayer;
-                if (lastPlayer);
-                notifyAllObservers();
             }
         };
     }
 
     private void initializeModes(){
-        modes.add(new StructureMode(model, window));
-        modes.add(new RoadMode(model, window));
-        modes.add(new WallMode(model, window));
+        //modes.add(new StructureMode(model, window));
+        //modes.add(new RoadMode(model, window));
+        //modes.add(new WallMode(model, window));
         //modes.add(new BridgeMode(model, window));
         //modes.add(new MineShaftMode(model, window));
 
-        current = modes.get(index);
+        //current = modes.get(index);
 
     }
 
