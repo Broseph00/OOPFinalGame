@@ -78,6 +78,7 @@ public class GameWindow extends VBox implements View {
     public void drawPreviewImage(String imageURL) {
         getMainView().drawPreviewImage(imageURL);
     }
+    public void clearPreviewImage() { getMainView().clearPreviewImage(); }
     public void drawRiver(String imageURL, int x, int y) {
         getMainView().drawRiver(imageURL, x, y);
     }

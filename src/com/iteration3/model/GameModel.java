@@ -75,6 +75,9 @@ public class GameModel {
         return map.getRivers();
     }
 
+    public River getRiver(Location location) { return map.getRiver(location); }
+    public ArrayList<Integer> getRiverEdges(Location location) { return map.getRiverEdges(location); }
+
     public HashMap<Location, BridgeList> getBridges() {
         return map.getBridges();
     }
