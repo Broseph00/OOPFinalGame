@@ -289,7 +289,12 @@ public class MapView extends Pane implements View {
 
     public void drawTransport(String imageURL, int x, int y, int region){
         Image image = images.getImage(imageURL);
-        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset() + transportOffSet() + xRegOff(region))*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + transportOffSet() + yRegOff(region))*getScale() + getCameraY(), image.getWidth()*0.3*getScale(), image.getHeight()*0.3*getScale());
+        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset() + transportOffSet() + (xRegOff(region)*1.3))*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + transportOffSet() + (yRegOff(region)*1.3))*getScale() + getCameraY(), image.getWidth()*0.3*getScale(), image.getHeight()*0.3*getScale());
+    }
+
+    public void drawResource(String imageURL, int x, int y, int region){
+        Image image = images.getImage(imageURL);
+        gc.drawImage(image, ((x + getXOffset()) * getXPixelOffset() + transportOffSet() + (xRegOff(region)*0.7))*getScale() + getCameraX(), ((y + getYOffset()) * getYPixelOffset() + (getXOffset2() * x) + transportOffSet() + (yRegOff(region)*0.7))*getScale() + getCameraY(), image.getWidth()*0.3*getScale(), image.getHeight()*0.3*getScale());
     }
 
     private int xRegOff(int region){
