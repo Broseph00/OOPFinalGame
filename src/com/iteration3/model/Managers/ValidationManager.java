@@ -139,6 +139,21 @@ public class ValidationManager {
         }
     }
 
+    public boolean containsRoad(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        //TODO GETEDGE
+        Location end = location.getLocationEdge(1);
+        return map.containsRoad(location, end);
+    }
+
+    public boolean containsBridge(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        //TODO GETEDGE
+        return map.containsBridge(location, 1);
+    }
+
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
         ResourceList resourceList = getAvailableResources(transporter);
         return resourceList.getBoards().size()>=boardCost && resourceList.getStones().size()>=stoneCost;

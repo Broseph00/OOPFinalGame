@@ -236,6 +236,25 @@ public class ExecutionManager {
 
     }
 
+    public void execute(BuildRoadAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        //TODO GETEDGE
+        int edge = 1;
+        Location end = location.getLocationEdge(edge);
+        map.addRoad(location, end);
+    }
+
+    public void execute(BuildWallAbility ability){
+        Transporter transporter = ability.getTransporter();
+        RegionLocation start = map.getTransportRegionLocation(transporter);
+        Location location = start.getLocation();
+        //TODO GETEDGE
+        int edge = 1;
+        map.addWall(location, transporter.getOwner(), edge, 1);
+    }
+
     private int getOppositeRegion(int exitRegion, int exitEdge){
         if(exitEdge==1){
             if(exitRegion==1){
