@@ -1,6 +1,6 @@
 package com.iteration3.controller;
 /*--------------------------------------------------------------------------------------
-|    StatusController: Created by Ricardo on 3/28/17.
+|    TileViewController: Created by Ricardo on 3/28/17.
 |---------------------------------------------------------------------------------------
 |   Controller responsible for defining actions related to cycling through tiles
 |   options and finally submitting a tile for creation
@@ -21,7 +21,7 @@ import com.iteration3.model.GameModel;
 
 import com.iteration3.view.GameWindow;
 
-public class StatusController implements Observer {
+public class TileViewController implements Observer {
     private GameModel model;
     private GameWindow window;
     private HashMap<KeyCode,Action> keyMap;
@@ -39,7 +39,7 @@ public class StatusController implements Observer {
 //    StatusControllerState selectRiver;
 //    StatusControllerState rotateState;
 
-    public StatusController(GameModel model, GameWindow window, HashMap<KeyCode,Action> keyMap){
+    public TileViewController(GameModel model, GameWindow window, HashMap<KeyCode,Action> keyMap){
         this.model = model;
         this.keyMap = keyMap;
         this.window = window;

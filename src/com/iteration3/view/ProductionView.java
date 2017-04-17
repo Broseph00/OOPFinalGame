@@ -121,7 +121,6 @@ public class ProductionView extends VBox {
 		tileResourceList.setFont(Font.font(15));
 		transportResourceList.setFont(Font.font(15));
 		
-		
 	}
 	
 	public void setEnableFactoryButton(Boolean isEnabled){
