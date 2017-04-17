@@ -104,6 +104,10 @@ public class AbilityManager {
         if (verifyTruckFactoryAbility(transporter)) { abilitiesList.add(new BuildTruckFactoryAbility(transporter, executionManager)); }
         if (verifyWagonFactoryAbility(transporter)) { abilitiesList.add(new BuildWagonFactoryAbility(transporter, executionManager)); }
         if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager)); }
+        if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
+        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildSpecializedMineAbility(transporter, executionManager)); }
+        if (verifyBuildWallAbility(transporter)) { abilitiesList.add(new BuildWallAbility(transporter, executionManager)); }
+        if (verifyBuildRoadAbility(transporter)) { abilitiesList.add(new BuildRoadAbility(transporter, executionManager)); }
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
@@ -294,6 +298,23 @@ public class AbilityManager {
 
     private boolean verifyWoodcutterAbility(Transporter transporter){
         return (validationManager.validateResources(transporter, WOODCUTTER_BOARD, WOODCUTTER_STONE) && validationManager.validateTerrain(transporter, WOODS)) && !validationManager.existingProducer(transporter);
+    }
+
+    private boolean verifyBigMineAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter) && researchManager.isFinishedEnlargementResearch());
+    }
+
+    private boolean verifySpecializedMineAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, MINE_BOARD, MINE_STONE) && validationManager.validateTerrain(transporter, MOUNTAINS) && !validationManager.existingProducer(transporter) && researchManager.isFinishedSpecializationResearch());
+
+    }
+
+    private boolean verifyBuildWallAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, WALL_BOARD, WALL_STONE)); //TODO
+    }
+
+    private boolean verifyBuildRoadAbility(Transporter transporter){
+        return ( validationManager.validateResources(transporter, ROAD_BOARD, ROAD_STONE)); //TODO
     }
 
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){
