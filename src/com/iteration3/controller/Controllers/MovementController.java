@@ -4,9 +4,15 @@ package com.iteration3.controller.Controllers;
  * Created by Clay on 4/14/2017.
  */
 import com.iteration3.controller.Action;
+import com.iteration3.controller.Modes.*;
 import com.iteration3.controller.Observable;
 import com.iteration3.controller.Observer;
+import com.iteration3.model.Abilities.Ability;
+import com.iteration3.model.AbilityIterator;
 import com.iteration3.model.GameModel;
+import com.iteration3.model.Players.Player;
+import com.iteration3.model.TransporterIterator;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
 import javafx.event.ActionEvent;
@@ -20,11 +26,20 @@ public class MovementController implements Observable {
 
     private GameModel model;
     private GameWindow window;
-    ArrayList<Observer> subscribers;
+    Player player;
+    private ArrayList<Observer> subscribers;
     boolean lastPlayer;
-    HashMap<KeyCode, Action> keyMap;
+    private HashMap<KeyCode, Action> keyMap;
     private EventHandler<ActionEvent> pickupResources, endTurn;
-    //TODO - Iterator over transporters, valid tiles around them
+    private ArrayList<CycleMode> modes;
+    private CycleMode current;
+    private int index;
+    private Transporter currTrans;
+    private Ability currAbility;
+
+    TransporterIterator transIter;
+    AbilityIterator abilityIter;
+    //TODO - Iterator over transporters
 
     public MovementController(GameModel model, GameWindow window, HashMap<KeyCode, Action> keyMap) {
         this.model = model;
@@ -32,50 +47,79 @@ public class MovementController implements Observable {
         this.keyMap = keyMap;
         subscribers = new ArrayList<>();
         lastPlayer = false;
+        index = 0;
+
+        model.getCurrentPlayer();
+        transIter = player.getTransportIterator();
+        currTrans = transIter.first();
+        abilityIter = currTrans.makeAbilityIterator();
 
         initializeKeyMap();
+        initializeModes();
         createHandlers();
     }
 
     private void initializeKeyMap() {
         keyMap.put(KeyCode.RIGHT, new Action() {
             public void execute() {
-                //transIter.next();
+                modes.get(index).next();
+                currTrans = transIter.current();
+                currAbility = abilityIter.current();
 
             }
         });
 
         keyMap.put(KeyCode.LEFT, new Action() {
             public void execute() {
-                //transIter.prev();
+                modes.get(index).prev();
+                currTrans = transIter.current();
+                currAbility = abilityIter.current();
 
             }
         });
 
-        keyMap.put(KeyCode.NUMPAD6, new Action() {
+        keyMap.put(KeyCode.UP, new Action() {
             public void execute() {
-                //locationIter.next();
+                index++;
+                index %= modes.size();
+                current = modes.get(index);
 
             }
         });
 
-        keyMap.put(KeyCode.NUMPAD4, new Action() {
+        keyMap.put(KeyCode.DOWN, new Action() {
             public void execute() {
-                //locationIter.prev();
+                index--;
+                if (index < 0)
+                    index = modes.size()-1;
+                current = modes.get(index);
 
             }
         });
 
-        keyMap.put(KeyCode.SPACE, new Action() {
+        keyMap.put(KeyCode.ENTER, new Action() {
             public void execute() {
                 //pickUpResources();
 
             }
         });
 
+        keyMap.put(KeyCode.ESCAPE, new Action() {
+            public void execute() {
+                //pickUpResources();
 
-
+            }
+        });
     }
+
+    private void initializeModes(){
+        modes.add(new TransporterMode(transIter));
+        modes.add(new ResourceOnTileMode(currTrans));
+        modes.add(new ResourceOnTransporterMode(currTrans));
+
+        current = modes.get(0);
+    }
+
 
     private void createHandlers() {
         endTurn = new EventHandler<ActionEvent>() {
