@@ -6,8 +6,8 @@ public class WonderManager {
 
     private Wonder wonder;
 
-    public WonderManager(){
-        wonder = new Wonder();
+    public WonderManager(Wonder wonder){
+        this.wonder = wonder;
     }
 
     public void addPlayerBricks(Player owner, int quantity){

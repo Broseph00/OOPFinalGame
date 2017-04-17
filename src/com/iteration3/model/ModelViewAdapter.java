@@ -13,9 +13,6 @@ import com.iteration3.view.MainView;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by LesliesLaptop on 4/11/17.
- */
 //TODO: Consider breaking up this class into more manageable chunks?
 public class ModelViewAdapter {
     private GameModel gameModel;
