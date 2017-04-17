@@ -13,6 +13,7 @@ import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
+import com.iteration3.model.Transporters.Transporter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -104,6 +105,9 @@ public class GameModel {
         return getTiles().get(location);
     }
 
+    public ResourceList getAvailableResources(Transporter transporter){
+        return map.getAvailableResources(transporter);
+    }
     public void intializePlayers() {
         // initialize player1
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());

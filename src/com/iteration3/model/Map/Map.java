@@ -2,8 +2,10 @@ package com.iteration3.model.Map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
 import com.iteration3.model.Resource.ResourceList;
@@ -502,4 +504,23 @@ public class Map {
     public HashMap<RegionLocation, Producer> getProducers() {
         return producers;
     }
+
+    public ResourceList getAvailableResources(Transporter transporter){
+        RegionLocation regionLocation = this.getTransportRegionLocation(transporter);
+        int region = regionLocation.getRegion();
+        Location location = regionLocation.getLocation();
+        Region regions = this.getRegions().get(location);
+        ArrayList<Integer> connected = regions.getRegion(region);
+        ResourceList resourceList = new ResourceList();
+        Iterator<Integer> iterator = connected.iterator();
+        while(iterator.hasNext()){
+            int hold = iterator.next();
+            RegionLocation newReg = new RegionLocation(location, hold);
+            if(this.getResources().containsKey(newReg)){
+                resourceList.addAll(this.getResources().get(newReg));
+            }
+        }
+        return resourceList;
+    }
+
 }
