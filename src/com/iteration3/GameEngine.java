@@ -19,7 +19,7 @@ public class GameEngine {
         this.gameWindow = gameWindow;
         this.gameModel = gameModel;
         MVA = new ModelViewAdapter(gameModel, gameWindow);
-        ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
+        //ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
 
 
         new AnimationTimer() {
