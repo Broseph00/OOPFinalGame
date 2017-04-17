@@ -33,7 +33,7 @@ public class MainView extends BorderPane implements View {
     private void initializeWindow() {
         this.mapView = new MapView((3.0/4)*this.getWidth(), this.getHeight());
         this.statusBox = new VBox();
-        this.productionView = new ProductionView((1.0/4)*this.getWidth(),this.getHeight());
+        this.productionView = new ProductionView((1.0/4)*this.getWidth(),this.getHeight()*.5);
         this.tileView = new TileView();
       
         this.statusBox.getChildren().addAll(productionView, tileView);

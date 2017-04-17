@@ -7,3 +7,4 @@ producer0 ::= 0 0 0 1 claypit
 producer1 ::= 0 0 1 1 mint
 research0 ::= oil player2
 research1 ::= enlargement player1
+wonder ::= neutral player1 player1 neutral player2 player2
