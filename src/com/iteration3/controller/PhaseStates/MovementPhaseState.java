@@ -32,12 +32,14 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
         movementController = new MovementController(model, window, keyMap);
         movementController.addObserver(this);
 
+
         tileViewController = new TileViewController(model, window, keyMap);
         cursorController = new CursorController(model, window, keyMap);
         cursorController.addObserver(tileViewController);
 
         System.out.println("Move Phase");
         System.out.println("after " + dispatch.getCurrentState());
+
     }
 
     @Override

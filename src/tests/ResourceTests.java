@@ -1,4 +1,4 @@
-//package tests;
+package tests;
 
 import com.iteration3.model.Buildings.Primary.Claypit;
 import com.iteration3.model.Buildings.Primary.GoldMine;
@@ -17,6 +17,7 @@ import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
 import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Transporters.Water.Raft;
 import com.iteration3.model.Transporters.Water.Steamship;
+import com.iteration3.utilities.GameLibrary;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -31,8 +32,8 @@ public class ResourceTests {
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         RegionLocation location = new RegionLocation(0, 0, 0, 1);
 
-        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
-        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER2_COLOR);
 
         mapManager.fillMapFromTextFile();
 
@@ -69,8 +70,8 @@ public class ResourceTests {
         RegionLocation regionLocation = new RegionLocation(0, 0, 0, 1);
         Location location = new Location(0,0,0);
 
-        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
-        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER2_COLOR);
 
         mapManager.fillMapFromTextFile();
 
@@ -95,8 +96,8 @@ public class ResourceTests {
         RegionLocation regionLocation = new RegionLocation(0, 0, 0, 1);
         Location location = new Location(0,0,0);
 
-        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
-        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER2_COLOR);
 
         mapManager.fillMapFromTextFile();
 
@@ -137,8 +138,8 @@ public class ResourceTests {
         RegionLocation regionLocation2 = new RegionLocation(0, -1, 1, 1);
         Location location = new Location(0,0,0);
 
-        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1));
-        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1));
+        Player player1 = new Player(map, 1, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER1_COLOR);
+        Player player2 = new Player(map, 2, new RegionLocation(0, 3, -3, 1), GameLibrary.PLAYER2_COLOR);
 
         mapManager.fillMapFromTextFile();
 

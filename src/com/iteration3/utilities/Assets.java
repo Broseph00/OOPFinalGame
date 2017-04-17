@@ -49,8 +49,6 @@ public class Assets {
         images.put("tri1", new Image("tri1.png"));
         images.put("tri2", new Image("tri2.png"));
         images.put("welcomeImage", new Image("welcomeImage.png"));
-        images.put("bigTri1", new Image("bigTri1.png"));
-        images.put("bigPasture", new Image("bigPasture.png"));
         images.put("donkey", new Image("donkey.png"));
         images.put("wagon", new Image("wagon.png"));
         images.put("truck", new Image("truck.png"));
@@ -83,6 +81,35 @@ public class Assets {
         images.put("truckFactory", new Image("truckFactory.png"));
         images.put("wagonFactory", new Image("wagonFactory.png"));
         images.put("woodcutter", new Image("woodcutter.png"));
+        images.put("bigAdj1", new Image("bigAdj1.png"));
+        images.put("bigAdj2", new Image("bigAdj2.png"));
+        images.put("bigAdj3", new Image("bigAdj3.png"));
+        images.put("bigAdj4", new Image("bigAdj4.png"));
+        images.put("bigAdj5", new Image("bigAdj5.png"));
+        images.put("bigAdj6", new Image("bigAdj6.png"));
+        images.put("bigAngled1", new Image("bigAngled1.png"));
+        images.put("bigAngled2", new Image("bigAngled2.png"));
+        images.put("bigAngled3", new Image("bigAngled3.png"));
+        images.put("bigAngled4", new Image("bigAngled4.png"));
+        images.put("bigAngled5", new Image("bigAngled5.png"));
+        images.put("bigAngled6", new Image("bigAngled6.png"));
+        images.put("bigTri1", new Image("bigTri1.png"));
+        images.put("bigTri2", new Image("bigTri2.png"));
+        images.put("bigSource1", new Image("bigSource1.png"));
+        images.put("bigSource2", new Image("bigSource2.png"));
+        images.put("bigSource3", new Image("bigSource3.png"));
+        images.put("bigSource4", new Image("bigSource4.png"));
+        images.put("bigSource5", new Image("bigSource5.png"));
+        images.put("bigSource6", new Image("bigSource6.png"));
+        images.put("bigStraight1", new Image("bigStraight1.png"));
+        images.put("bigStraight2", new Image("bigStraight2.png"));
+        images.put("bigStraight3", new Image("bigStraight3.png"));
+        images.put("bigDesert", new Image("bigDesert.png"));
+        images.put("bigMountains", new Image("bigMountains.png"));
+        images.put("bigPasture", new Image("bigPasture.png"));
+        images.put("bigRock", new Image("bigRock.png"));
+        images.put("bigSea", new Image("bigSea.png"));
+        images.put("bigWoods", new Image("bigWoods.png"));
     }
 
     public Image getImage(String imageName) {

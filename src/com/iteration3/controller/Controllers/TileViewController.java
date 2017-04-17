@@ -97,72 +97,72 @@ public class TileViewController implements Observer {
         // handle river sources
         if(riverEdges.size() == 1) {
             if(riverEdges.contains(1)) {
-                window.drawPreviewImage("source1");
+                window.drawPreviewImage("bigSource1");
             }
             else if(riverEdges.contains(2)) {
-                window.drawPreviewImage("source2");
+                window.drawPreviewImage("bigSource2");
             }
             else if(riverEdges.contains(3)) {
-                window.drawPreviewImage("source3");
+                window.drawPreviewImage("bigSource3");
             }
             else if(riverEdges.contains(4)) {
-                window.drawPreviewImage("source4");
+                window.drawPreviewImage("bigSource4");
             }
             else if(riverEdges.contains(5)) {
-                window.drawPreviewImage("source5");
+                window.drawPreviewImage("bigSource5");
             }
             else if(riverEdges.contains(6)) {
-                window.drawPreviewImage("source6");
+                window.drawPreviewImage("bigSource6");
             }
         }
         else if(riverEdges.size() == 2) {
             // handle adjacent rivers
             if(riverEdges.contains(1) && riverEdges.contains(2)) {
-                window.drawPreviewImage("adj1");
+                window.drawPreviewImage("bigAdj1");
             }
             else if(riverEdges.contains(2) && riverEdges.contains(3)) {
-                window.drawPreviewImage("adj2");
+                window.drawPreviewImage("bigAdj2");
             }
             else if(riverEdges.contains(3) && riverEdges.contains(4)) {
-                window.drawPreviewImage("adj3");
+                window.drawPreviewImage("bigAdj3");
             }
             else if(riverEdges.contains(4) && riverEdges.contains(5)) {
-                window.drawPreviewImage("adj4");
+                window.drawPreviewImage("bigAdj4");
             }
             else if(riverEdges.contains(5) && riverEdges.contains(6)) {
-                window.drawPreviewImage("adj5");
+                window.drawPreviewImage("bigAdj5");
             }
             else if(riverEdges.contains(6) && riverEdges.contains(1)) {
-                window.drawPreviewImage("adj6");
+                window.drawPreviewImage("bigAdj6");
             }
             // handle angled
             else if(riverEdges.contains(1) && riverEdges.contains(3)) {
-                window.drawPreviewImage("angled1");
+                window.drawPreviewImage("bigAngled1");
             }
             else if(riverEdges.contains(2) && riverEdges.contains(4)) {
-                window.drawPreviewImage("angled2");
+                window.drawPreviewImage("bigAngled2");
             }
             else if(riverEdges.contains(3) && riverEdges.contains(5)) {
-                window.drawPreviewImage("angled3");
+                window.drawPreviewImage("bigAngled3");
             }
             else if(riverEdges.contains(4) && riverEdges.contains(6)) {
-                window.drawPreviewImage("angled4");
+                window.drawPreviewImage("bigAngled4");
             }
             else if(riverEdges.contains(5) && riverEdges.contains(1)) {
-                window.drawPreviewImage("angled5");
+                window.drawPreviewImage("bigAngled5");
             }
             else if(riverEdges.contains(6) && riverEdges.contains(2)) {
-                window.drawPreviewImage("angled6");
+                window.drawPreviewImage("bigAngled6");
             }
             // handle straight
             else if(riverEdges.contains(1) && riverEdges.contains(4)) {
-                window.drawPreviewImage("straight1");
+                window.drawPreviewImage("bigStraight1");
             }
             else if(riverEdges.contains(2) && riverEdges.contains(5)) {
-                window.drawPreviewImage("straight2");
+                window.drawPreviewImage("bigStraight2");
             }
             else if(riverEdges.contains(3) && riverEdges.contains(6)) {
-                window.drawPreviewImage("straight3");
+                window.drawPreviewImage("bigStraight3");
             }
 
         }
@@ -187,19 +187,19 @@ public class TileViewController implements Observer {
         terrainTypes.add("bigPasture");
         //terrainMap.put("Pasture", new PastureTerrain());
 
-        terrainTypes.add("Woods");
+        terrainTypes.add("bigWoods");
         //terrainMap.put("Woods", new WoodsTerrain());
 
-        terrainTypes.add("Mountain");
+        terrainTypes.add("bigMountain");
         //terrainMap.put("Mountain", new MountainTerrain());
 
-        terrainTypes.add("Desert");
+        terrainTypes.add("bigDesert");
         //terrainMap.put("Desert", new DesertTerrain());
 
-        terrainTypes.add("Rock");
+        terrainTypes.add("bigRock");
         //terrainMap.put("Rock", new RockTerrain());
 
-        terrainTypes.add("Sea");
+        terrainTypes.add("bigSea");
         //terrainMap.put("Sea", new SeaTerrain());
 
     }
