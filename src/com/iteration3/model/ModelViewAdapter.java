@@ -4,11 +4,15 @@ import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Managers.MapFileManager;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
+import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Players.Research.*;
 import com.iteration3.model.Tiles.*;
+import com.iteration3.model.Transporters.TransportList;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
+import sun.plugin2.message.transport.Transport;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -164,7 +168,14 @@ public class ModelViewAdapter {
     }
 
     private void drawTransports(){
-        //TODO: Handle Drawing
+        for(RegionLocation regionlocation : gameModel.getTransports().keySet()) {
+            currentLocation = regionlocation.getLocation();
+            TransportList transportList = gameModel.getTransports().get(regionlocation);
+            for(Transporter transport : transportList.getTransports()){
+                gameWindow.drawTransport("donkey", currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            }
+
+        }
     }
 
 }

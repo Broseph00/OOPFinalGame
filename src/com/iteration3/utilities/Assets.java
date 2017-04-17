@@ -51,6 +51,7 @@ public class Assets {
         images.put("welcomeImage", new Image("welcomeImage.png"));
         images.put("bigTri", new Image("bigTri1.png"));
         images.put("bigPasture", new Image("bigPasture.png"));
+        images.put("donkey", new Image("donkey.png"));
     }
 
     public Image getImage(String imageName) {
