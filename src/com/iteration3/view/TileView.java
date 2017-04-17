@@ -34,4 +34,89 @@ public class TileView extends StackPane {
         gc.setFill(Color.WHITE);
     }
 
+    public void drawResource(String url, int region) {
+
+        if(region == 1) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,25);
+        }
+        else if(region == 2) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 195,90);
+        }
+        else if(region == 3) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,205);
+        }
+        else if(region == 4) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 75,205);
+        }
+        else if(region == 5) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 20,90);
+        }
+        else if(region == 6) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 75,25);
+        }
+    }
+
+    public void drawTransport(String url, int region) {
+
+        if(region == 1) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,60);
+        }
+        else if(region == 2) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 210,125);
+        }
+        else if(region == 3) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,165);
+        }
+        else if(region == 4) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 75,170);
+        }
+        else if(region == 5) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 40,95);
+        }
+        else if(region == 6) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 75,65);
+        }
+    }
+
+    public void drawProducer(String url, int region) {
+
+        if(region == 1) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,80);
+        }
+        else if(region == 2) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 170,115);
+        }
+        else if(region == 3) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 165,165);
+        }
+        else if(region == 4) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 85,140);
+        }
+        else if(region == 5) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 55,105);
+        }
+        else if(region == 6) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 40,35);
+        }
+    }
+
+
 }

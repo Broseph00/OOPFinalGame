@@ -181,7 +181,7 @@ public class ModelViewAdapter {
         for(RegionLocation regionlocation : gameModel.getProducers().keySet()) {
             currentLocation = regionlocation.getLocation();
             Producer producer = gameModel.getProducers().get(regionlocation);
-            gameWindow.drawProducer(producer.getType(), currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+            gameWindow.drawProducer(producer.getType(), currentLocation.getX(), currentLocation.getZ(), regionlocation.getRegion());
         }
     }
 
@@ -190,7 +190,7 @@ public class ModelViewAdapter {
             currentLocation = regionlocation.getLocation();
             ResourceList resourceList = gameModel.getResources().get(regionlocation);
             for(Resource resource : resourceList.getResources()){
-                gameWindow.drawResource(resource.getType(), currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                gameWindow.drawResource(resource.getType(), currentLocation.getX(), currentLocation.getZ(), regionlocation.getRegion());
             }
         }
     }
@@ -200,7 +200,7 @@ public class ModelViewAdapter {
             currentLocation = regionlocation.getLocation();
             TransportList transportList = gameModel.getTransports().get(regionlocation);
             for(Transporter transport : transportList.getTransports()){
-                gameWindow.drawTransport(transport.getType(), currentLocation.getX(), currentLocation.getY(), regionlocation.getRegion());
+                gameWindow.drawTransport(transport.getType(), currentLocation.getX(), currentLocation.getZ(), regionlocation.getRegion());
             }
         }
     }

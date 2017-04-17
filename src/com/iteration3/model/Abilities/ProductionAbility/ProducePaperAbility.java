@@ -34,4 +34,8 @@ public class ProducePaperAbility extends ProductionAbility {
         return visitor.getType(this);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.iteration3.model;
 import com.iteration3.controller.ControlDispatch;
 import com.iteration3.controller.PhaseStates.ControlDispatchState;
 import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Buildings.Secondary.Papermill;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
@@ -119,22 +120,20 @@ public class GameModel {
     }
     public void intializePlayers() {
         // initialize player1
-        this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
-        this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
-        this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Stone(), player1.getStartingRegionLocation());
+        this.map.addTransport(new Donkey(player1), new RegionLocation(0,0,0,4));
+        this.map.addTransport(new Donkey(player1), new RegionLocation(0,0,0,5));
+        this.map.addTransport(new Donkey(player1), new RegionLocation(0,0,0,6 ));
+        this.map.addProducer(new Papermill(), new RegionLocation(0,0,0,6));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,2));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,3));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,4));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,5));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,6));
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
        // this.map.addRoad(new Location(0,0,0), new Location(-1,0,1));
 
-        //currentPlayer.addTransporter(new Donkey(currentPlayer));
-        //currentPlayer.addTransporter(new Donkey(currentPlayer));
-        //currentPlayer.addTransporter(new Donkey(currentPlayer));
 
         // initialize player2
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());

@@ -52,6 +52,8 @@ public class GameWindow extends VBox implements View {
         Tab mainViewTab = new Tab("Main View");
         Tab wonderViewTab = new Tab("Wonder View");
 
+        wonderViewTab.setDisable(true);
+        
         mainViewTab.setContent(getMainView());
         wonderViewTab.setContent(getWonderView());
 
@@ -88,10 +90,17 @@ public class GameWindow extends VBox implements View {
     public void drawTransport(String imageURL, int x, int y, int region){getMainView().drawTransport(imageURL, x, y, region);}
     public void drawResource(String imageURL, int x, int y, int region){getMainView().drawResource(imageURL, x, y, region);}
 	public void drawProducer(String imageURL, int x, int y, int region){getMainView().drawProducer(imageURL, x, y, region);}
+
 	public void drawRoad(int x1, int y1, int x2, int y2){getMainView().drawRoad(x1,y1,x2,y2);}
 	public void drawWall(int x, int y, String color){getMainView().drawWall(x, y, color);}
 
-    public Location getCursorLocation() {
+	public void drawBigResource(String imageURL, int region) {getMainView().drawBigResource(imageURL, region);}
+	public void drawBigTransport(String imageURL, int region) {getMainView().drawBigTransport(imageURL, region);};
+	public void drawBigProducer(String imageURL, int region) {getMainView().drawBigProducer(imageURL, region);};
+
+
+
+	public Location getCursorLocation() {
         return mainView.getCursorLocation();
     }
 

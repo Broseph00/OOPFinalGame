@@ -10,8 +10,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.iteration3.controller.Action;
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Map.Location;
+import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Resource.Resource;
+import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Tiles.Terrain;
+import com.iteration3.model.Transporters.TransportList;
+import com.iteration3.model.Transporters.Transporter;
 import com.iteration3.utilities.Observer;
 
 import javafx.scene.input.KeyCode;
@@ -53,6 +59,9 @@ public class TileViewController implements Observer {
         this.window.clearPreviewImage();
         displayCurrentTerrain();
         displayCurrentRiver();
+        displayResources();
+        displayTransports();
+        displayProducers();
     }
 
     public String getSelectedTerrainType() {
@@ -223,8 +232,52 @@ public class TileViewController implements Observer {
         riverTypes.add("Tri River");
         riverMap.put("Tri River",new ArrayList<Integer>(Arrays.asList(1,3,5)));
 
-
     }
+
+    public void displayResources() {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(cursorLocation.getX(), cursorLocation.getY(), cursorLocation.getZ(), i);
+            ResourceList resources = new ResourceList();
+            if(this.model.getMap().getResources().containsKey(regionLocation)) {
+                resources = this.model.getMap().getResources().get(regionLocation);
+            }
+
+            for(Resource resource : resources.getResources()){
+                window.drawBigResource(resource.getType(), regionLocation.getRegion());
+            }
+
+        }
+    }
+
+    public void displayTransports() {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(cursorLocation.getX(), cursorLocation.getY(), cursorLocation.getZ(), i);
+            TransportList transports = new TransportList();
+            if(this.model.getMap().getTransports().containsKey(regionLocation)) {
+                transports = this.model.getMap().getTransports().get(regionLocation);
+            }
+
+            for(Transporter transport : transports.getTransports()){
+                window.drawBigTransport(transport.getType(), regionLocation.getRegion());
+            }
+
+        }
+    }
+
+    public void displayProducers() {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(cursorLocation.getX(), cursorLocation.getY(), cursorLocation.getZ(), i);
+
+            if(this.model.getMap().getProducers().containsKey(regionLocation)) {
+                Producer producer = this.model.getMap().getProducers().get(regionLocation);
+                window.drawBigProducer(producer.getType(), regionLocation.getRegion());
+            }
+
+
+
+        }
+    }
+
 
     @Override
     public void update() {

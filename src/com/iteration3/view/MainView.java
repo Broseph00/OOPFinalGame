@@ -83,6 +83,9 @@ public class MainView extends BorderPane implements View {
     public void clearPreviewImage() {
         tileView.clearPreviewImage();
     }
+    public void drawBigResource(String url, int region) { tileView.drawResource(url, region);}
+	public void drawBigTransport(String url, int region) { tileView.drawTransport(url, region);}
+	public void drawBigProducer(String url, int region) { tileView.drawProducer(url, region);}
 
     public void update() {
         getMapView().update();

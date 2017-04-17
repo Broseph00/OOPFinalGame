@@ -33,4 +33,8 @@ public class DockatSea6Ability extends DockatSeaAbility {
         return visitor.getType(this);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }
