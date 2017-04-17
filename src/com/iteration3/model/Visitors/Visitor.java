@@ -105,4 +105,6 @@ public interface Visitor {
     public void visit(ProduceBrickAbility ability);
     public void visit(ProduceCoinAbility ability);
     public void visit(ProduceStockAbility ability);
+    public void visit(ProduceWagonAbility ability);
+
 }

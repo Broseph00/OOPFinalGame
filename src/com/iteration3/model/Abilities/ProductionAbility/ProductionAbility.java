@@ -28,7 +28,4 @@ public abstract class ProductionAbility extends Ability{
         return producer;
     }
 
-    public void execute(){
-
-    }
 }
