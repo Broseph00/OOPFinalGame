@@ -207,4 +207,23 @@ public class GameWindow extends VBox implements View {
 	public void setOnClickResearchButton(EventHandler<ActionEvent> handler) {
 		mainView.setOnClickResearchButton(handler);
 	}
+	
+	 public void moveCursorNW(){
+	        mainView.moveCursorNW();
+	    }
+	    public void moveCursorNE(){
+	        mainView.moveCursorNE();
+	    }
+	    public void moveCursorSW(){
+	        mainView.moveCursorSW();
+	    }
+	    public void moveCursorSE(){
+	        mainView.moveCursorSE();
+	    }
+	    public void moveCursorNorth(){
+	        mainView.moveCursorNorth();
+	    }
+	    public void moveCursorSouth(){
+	        mainView.moveCursorSouth();
+	    }
 }

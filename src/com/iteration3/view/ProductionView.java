@@ -125,9 +125,6 @@ public class ProductionView extends VBox {
 		
 	}
 
-	public void addKeyHandler(EventHandler <KeyEvent> handler) {
-		this.setOnKeyPressed(handler);
-	}
 	public void setEnableFactoryButton(Boolean isEnabled){
 		useFactoryButton.setDisable(!isEnabled);
 	}

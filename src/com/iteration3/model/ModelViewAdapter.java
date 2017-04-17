@@ -23,7 +23,7 @@ import com.iteration3.model.Transporters.Water.Steamship;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.view.GameWindow;
 import com.iteration3.view.MainView;
-import sun.plugin2.message.transport.Transport;
+
 
 import java.io.IOException;
 import java.util.ArrayList;

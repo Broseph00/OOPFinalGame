@@ -30,7 +30,7 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
         productionController = new ProductionController(model, window, keyMap);
         productionController.addObserver(this);
         tileViewController = new TileViewController(model, window, keyMap);
-        cursorController = new CursorController(model, window.getMainView(), keyMap);
+        cursorController = new CursorController(model, window, keyMap);
         cursorController.addObserver(tileViewController);
     }
 
