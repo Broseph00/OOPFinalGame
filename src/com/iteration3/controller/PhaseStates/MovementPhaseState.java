@@ -30,12 +30,14 @@ public class MovementPhaseState implements ControlDispatchState, Observer {
         keyMap = new HashMap<>();
         movementController = new MovementController(model, window, keyMap);
         movementController.addObserver(this);
+        System.out.println("Move Phase");
+        System.out.println("after " + dispatch.getCurrentState());
 
     }
 
     @Override
     public void handleInput(KeyEvent event) {
-        System.out.print(event);
+        System.out.println("Movement command");
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
     }

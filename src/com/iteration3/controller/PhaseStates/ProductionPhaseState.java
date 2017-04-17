@@ -41,12 +41,12 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
         System.out.print("Production phase input");
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
-            System.out.println("Handling input");
     }
 
     @Override
     public void nextState() {
         dispatch.changeState(new MovementPhaseState(dispatch, model, window));
+        System.out.println("Change state to move");
         window.swapToMovementView();
     }
 
