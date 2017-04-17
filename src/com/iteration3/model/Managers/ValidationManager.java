@@ -214,6 +214,16 @@ public class ValidationManager {
         return map.wallOwnedByOpposingPlayer(location, transporter.getOwner(), edge);
     }
 
+    public boolean transporterHasResource(Transporter transporter){
+        return !transporter.getResourceList().isEmpty();
+    }
+
+    public boolean canPickupResource(Transporter transporter){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        ResourceList resourceList = map.getAvailableResources(transporter);
+        return !resourceList.isEmpty();
+    }
+
     private int oppositeEdge(int edge){
         switch (edge){
             case 1:

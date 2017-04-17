@@ -5,6 +5,8 @@ import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Abilities.BuildAbility.*;
 import com.iteration3.model.Abilities.ConstructAbility.*;
 import com.iteration3.model.Abilities.DockAbility.*;
+import com.iteration3.model.Abilities.ExchangeAbility.DropResourceAbility;
+import com.iteration3.model.Abilities.ExchangeAbility.PickupResourceAbility;
 import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Abilities.ProductionAbility.*;
 import com.iteration3.model.Map.Map;
@@ -22,12 +24,14 @@ public class AbilityManager {
     ValidationManager validationManager;
     ExecutionManager executionManager;
     ResearchManager researchManager;
+    ExchangeManager exchangeManager;
 
-    public AbilityManager(Map map, ValidationManager validationManager, ResearchManager researchManager, ExecutionManager executionManager){
+    public AbilityManager(Map map, ValidationManager validationManager, ResearchManager researchManager, ExecutionManager executionManager, ExchangeManager exchangeManager){
         this.map = map;
         this.validationManager = validationManager;
         this.executionManager = executionManager;
         this.researchManager = researchManager;
+        this.exchangeManager = exchangeManager;
     }
 
     public void updateRoadTransporters(ArrayList<OnRoadLandTransporter> roadLandTransporters){
@@ -73,7 +77,8 @@ public class AbilityManager {
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
         addDockAbilities(transporter, abilitiesList);
-        addProduceAbilities(transporter, abilitiesList);
+        //addProduceAbilities(transporter, abilitiesList);
+        addExchangeAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
@@ -82,7 +87,8 @@ public class AbilityManager {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
-        addProduceAbilities(transporter, abilitiesList);
+        //addProduceAbilities(transporter, abilitiesList);
+        addExchangeAbilities(transporter, abilitiesList);
         return abilitiesList;
     }
 
@@ -91,8 +97,14 @@ public class AbilityManager {
         addBuildAbilities(transporter, abilitiesList);
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
-        addProduceAbilities(transporter, abilitiesList);
+        //addProduceAbilities(transporter, abilitiesList);
+        addExchangeAbilities(transporter, abilitiesList);
         return abilitiesList;
+    }
+
+    public void addExchangeAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+        if (verifyDropResourceAbility(transporter)) { abilitiesList.add(new DropResourceAbility(transporter, exchangeManager, executionManager)); }
+        if (verifyPickupResourceAbility(transporter)) { abilitiesList.add(new PickupResourceAbility(transporter, executionManager, exchangeManager)); }
     }
 
     public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
@@ -463,6 +475,10 @@ public class AbilityManager {
     private boolean verifyWagonAbility(Transporter transporter){
         return true; //TODO
     }
+
+    private boolean verifyDropResourceAbility(Transporter transporter) { return validationManager.transporterHasResource(transporter); }
+
+    private boolean verifyPickupResourceAbility(Transporter transporter) { return validationManager.canPickupResource(transporter); }
     
     /*public String getAbilityName(Ability ability){
         return null;

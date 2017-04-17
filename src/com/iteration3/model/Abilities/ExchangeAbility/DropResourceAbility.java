@@ -24,9 +24,12 @@ public class DropResourceAbility extends Ability {
     private ExchangeManager exchangeManager;
     private Resource resource;
 
-    public DropResourceAbility(Transporter transporter, Resource resource, ExchangeManager exchangeManager, ExecutionManager executionManager){
+    public DropResourceAbility(Transporter transporter, ExchangeManager exchangeManager, ExecutionManager executionManager){
         super(transporter, GameLibrary.DROP_RESOURCE, executionManager);
         this.exchangeManager = exchangeManager;
+    }
+
+    public void chooseResource(Resource resource){
         this.resource = resource;
     }
 
