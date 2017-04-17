@@ -157,6 +157,13 @@ public class ValidationManager {
         return map.containsBridge(location, edge);
     }
 
+    public boolean bridgeOverRiver(Transporter transporter, ConstructBridgeAbility ability){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        int edge = ability.getBorder();
+        return map.containsRiverEdge(location, edge);
+    }
+
     public boolean validateResources(Transporter transporter, int boardCost, int stoneCost){
         ResourceList resourceList = getAvailableResources(transporter);
         return resourceList.getBoards().size()>=boardCost && resourceList.getStones().size()>=stoneCost;

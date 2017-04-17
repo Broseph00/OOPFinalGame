@@ -16,6 +16,7 @@ import com.iteration3.model.Tiles.Tile;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.TransportList;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.Raft;
 import com.iteration3.utilities.GameLibrary;
 
 import java.util.ArrayList;
@@ -122,7 +123,23 @@ public class GameModel {
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
+        this.map.addTransport(new Raft(player1), new RegionLocation(0, 1, -1, 7));
         this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,1));
+
+
         this.map.addResource(new Board(), new RegionLocation(0,0,0,2));
         this.map.addResource(new Board(), new RegionLocation(0,0,0,3));
         this.map.addResource(new Board(), new RegionLocation(0,0,0,4));

@@ -461,7 +461,7 @@ public class AbilityManager {
     }
 
     private boolean verifyConstructBridgeAbility(ConstructBridgeAbility constructBridgeAbility, Transporter transporter){
-        return ( validationManager.validateResources(transporter, BRIDGE_BOARD, BRIDGE_STONE)) && !validationManager.containsBridge(transporter, constructBridgeAbility);
+        return ( validationManager.validateResources(transporter, BRIDGE_BOARD, BRIDGE_STONE)) && !validationManager.containsBridge(transporter, constructBridgeAbility) && validationManager.bridgeOverRiver(transporter, constructBridgeAbility);
     }
 
     private boolean verifyWaterMoveAbility(MoveAbility moveAbility, WaterTransporter transporter){
