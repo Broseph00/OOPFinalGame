@@ -19,8 +19,9 @@ import javafx.scene.input.KeyEvent;
         public WelcomeState(ControlDispatch dispatch, GameModel model, GameWindow window){
             this.model = model;
             this.window = window;
-            welcome = new WelcomeViewController();
+            welcome = new WelcomeViewController(model,window);
             this.dispatch = dispatch;
+            welcome.addObserver(this);
 
         }
 
