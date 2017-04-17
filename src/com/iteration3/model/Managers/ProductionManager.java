@@ -53,19 +53,23 @@ public class ProductionManager {
         }
     }
 
-//    public void produceSecondaryProducers() {
-//
-//        HashMap<RegionLocation, SecondaryProducer> secondaryProducers = getSecondaryProducers();
-//        for(RegionLocation regionLocation: secondaryProducers.keySet()) {
-//            SecondaryProducer secondaryProducer = getSecondaryProducers().get(regionLocation);
-//            ArrayList<Resource> createdResources = secondaryProducer.produce(availableResources);
-//            for(Resource resource: createdResources) {
-//                transport.addResource(resource);
-//            }
-//
-//        }
-//
-//    }
+    public void produceSecondaryProducers() {
+
+        HashMap<RegionLocation, SecondaryProducer> secondaryProducers = getSecondaryProducers();
+        for(RegionLocation regionLocation: secondaryProducers.keySet()) {
+            ResourceList availableResources = validationManager.getAvailableResources(regionLocation);
+            SecondaryProducer secondaryProducer = getSecondaryProducers().get(regionLocation);
+            ArrayList<Resource> createdResources = new ArrayList<>();
+
+            if(secondaryProducer.checkResources(availableResources)) {
+                createdResources= secondaryProducer.produce(availableResources);
+            }
+
+            for(Resource resource: createdResources) {
+                this.map.addResource(resource, regionLocation);
+            }
+        }
+    }
 
 
 
