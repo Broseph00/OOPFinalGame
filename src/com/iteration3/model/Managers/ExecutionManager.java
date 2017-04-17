@@ -36,7 +36,7 @@ public class ExecutionManager {
 
     public void execute(BuildMineAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
-        Mine producer = new Mine();
+        Mine producer = new StandardMine();
         map.addProducer(producer, regionLocation);
         ability.getTransporter().getOwner().updateTransporterAbilities();
     }
