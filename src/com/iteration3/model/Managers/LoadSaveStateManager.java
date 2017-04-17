@@ -3,6 +3,7 @@ package com.iteration3.model.Managers;
 
 import com.iteration3.model.Map.*;
 import com.iteration3.model.Players.Player;
+import com.iteration3.model.Players.Research.*;
 import com.iteration3.model.Resource.*;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Land.RoadOnly.Truck;
@@ -40,22 +41,22 @@ public class LoadSaveStateManager {
 
             // determine what Object is stored per line and add it to the game
             if(splitLine[0].contains("resource")) {
-                addResourceToMap(splitLine);
+                loadResource(splitLine);
             }
             else if(splitLine[0].contains("transport")) {
-                addTransportToMap(splitLine);
+                loadTransport(splitLine);
             }
             else if(splitLine[0].contains("producer")) {
-                addProducerToMap(splitLine);    // TODO: FINISH
+                loadProducer(splitLine);
             }
             else if(splitLine[0].contains("research")) {
-
+                loadResearch(splitLine);
             }
             else if(splitLine[0].contains("wall")) {
-                addWallToMap(splitLine);
+                loadWalls(splitLine);
             }
             else if(splitLine[0].contains("bridge")) {
-                addBridgeToMap(splitLine);
+                loadBridges(splitLine);
             }
             else if(splitLine[0].contains("wonder")) {
 
@@ -75,6 +76,7 @@ public class LoadSaveStateManager {
         saveTransportsFromMap(fw);
         saveWallsFromMap(fw);
         saveBridgesFromMap(fw);
+        saveResearch(fw);
 
         fw.close();
     }
@@ -82,7 +84,7 @@ public class LoadSaveStateManager {
 
     // LOAD HELPER FUNCTIONS *********************************************************************
 
-    private void addResourceToMap(String[] splitLine) {
+    private void loadResource(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -127,7 +129,7 @@ public class LoadSaveStateManager {
     }
 
 
-    private void addTransportToMap(String[] splitLine) {
+    private void loadTransport(String[] splitLine) {
         // handle location
         int x = Integer.parseInt(splitLine[2]);
         int y = Integer.parseInt(splitLine[3]);
@@ -220,8 +222,8 @@ public class LoadSaveStateManager {
 
     }
 
-     // TODO: FINISH
-    private void addProducerToMap(String[] splitLine) {
+
+    private void loadProducer(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -235,7 +237,7 @@ public class LoadSaveStateManager {
     }
 
 
-    private void addBridgeToMap(String[] splitLine) {
+    private void loadBridges(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -252,7 +254,7 @@ public class LoadSaveStateManager {
 
 
 
-    private void addWallToMap(String[] splitLine) {
+    private void loadWalls(String[] splitLine) {
 
         // handle location
         int x = Integer.parseInt(splitLine[2]);
@@ -284,6 +286,40 @@ public class LoadSaveStateManager {
                     map.addNeutralWall(new Location(x,y,z), edge,strength);
                 }
             }
+        }
+
+
+    }
+
+    private void loadResearch(String[] splitLine) {
+        String researchName = splitLine[2];
+        Player player;
+        if(splitLine[3].equals("player1")) {
+            player = this.player1;
+        } else {
+            player = this.player2;
+        }
+
+        if(researchName.equals("enlargement")) {
+            player.getResearchManager().completeResearch(new EnlargementResearch());
+        }
+        else if(researchName.equals("newShaft")) {
+            player.getResearchManager().completeResearch(new NewShaftResearch());
+        }
+        else if(researchName.equals("oil")) {
+            player.getResearchManager().completeResearch(new OilResearch());
+        }
+        else if(researchName.equals("rowing")) {
+            player.getResearchManager().completeResearch(new RowingResearch());
+        }
+        else if(researchName.equals("ship")) {
+            player.getResearchManager().completeResearch(new ShipResearch());
+        }
+        else if(researchName.equals("specialization")) {
+            player.getResearchManager().completeResearch(new SpecializationResearch());
+        }
+        else if(researchName.equals("truck")) {
+            player.getResearchManager().completeResearch(new TruckResearch());
         }
 
 
@@ -493,6 +529,88 @@ public class LoadSaveStateManager {
 
             fw.write(line + '\n');
         }
+    }
+
+
+    private void saveResearch(FileWriter fw) throws IOException{
+        int id = 0;
+        ResearchManager player1Research = player1.getResearchManager();
+        ResearchManager player2Research = player2.getResearchManager();
+
+        if(player1Research.isFinishedEnlargementResearch()) {
+            String line = "research" + id + " ::= enlargement player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedNewShaftResearch()) {
+            String line = "research" + id + " ::= newShaft player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedOilResearch()) {
+            String line = "research" + id + " ::= oil player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedRowingResearch()) {
+            String line = "research" + id + " ::= rowing player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedShipResearch()) {
+            String line = "research" + id + " ::= ship player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedSpecializationResearch()) {
+            String line = "research" + id + " ::= specialization player1";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player1Research.isFinishedTruckResearch()) {
+            String line = "research" + id + " ::= truck player1";
+            id++;
+            fw.write(line + '\n');
+        }
+
+
+        if(player2Research.isFinishedEnlargementResearch()) {
+            String line = "research" + id + " ::= enlargement player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedNewShaftResearch()) {
+            String line = "research" + id + " ::= newShaft player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedOilResearch()) {
+            String line = "research" + id + " ::= oil player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedRowingResearch()) {
+            String line = "research" + id + " ::= rowing player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedShipResearch()) {
+            String line = "research" + id + " ::= ship player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedSpecializationResearch()) {
+            String line = "research" + id + " ::= specialization player2";
+            id++;
+            fw.write(line + '\n');
+        }
+        if(player2Research.isFinishedTruckResearch()) {
+            String line = "research" + id + " ::= truck player2";
+            id++;
+            fw.write(line + '\n');
+        }
+
+
     }
 
 
