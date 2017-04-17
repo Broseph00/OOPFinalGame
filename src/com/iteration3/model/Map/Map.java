@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.iteration3.model.Buildings.Primary.PrimaryProducer;
 import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Buildings.Secondary.SecondaryProducer;
 import com.iteration3.model.Managers.ValidationManager;
 import com.iteration3.model.Players.Player;
 import com.iteration3.model.Resource.Resource;
@@ -404,6 +406,26 @@ public class Map {
             }
         }
         return seaTiles;
+    }
+
+    public HashMap<RegionLocation, SecondaryProducer> getSecondary(){
+        HashMap<RegionLocation, SecondaryProducer> secondary = new HashMap<>();
+        for(RegionLocation regionLocation : producers.keySet()) {
+            if(producers.get(regionLocation) instanceof SecondaryProducer) {
+                secondary.put(regionLocation, (SecondaryProducer) producers.get(regionLocation));
+            }
+        }
+        return secondary;
+    }
+
+    public HashMap<RegionLocation, PrimaryProducer> getPrimary(){
+        HashMap<RegionLocation, PrimaryProducer> primary = new HashMap<>();
+        for(RegionLocation regionLocation : producers.keySet()) {
+            if(producers.get(regionLocation) instanceof PrimaryProducer) {
+                primary.put(regionLocation, (PrimaryProducer) producers.get(regionLocation));
+            }
+        }
+        return primary;
     }
 
     // gets the strength of a wall at a location for building on top of old walls
