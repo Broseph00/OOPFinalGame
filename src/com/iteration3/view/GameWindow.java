@@ -7,6 +7,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -82,6 +83,10 @@ public class GameWindow extends VBox implements View {
 
     public Location getCursorLocation() {
         return mainView.getCursorLocation();
+    }
+
+    public void addKeyHandler(EventHandler <KeyEvent> handler) {
+        this.setOnKeyPressed(handler);
     }
 
     @Override

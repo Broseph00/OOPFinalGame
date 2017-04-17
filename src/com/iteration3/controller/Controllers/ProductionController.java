@@ -103,20 +103,24 @@ public class ProductionController implements Observable {
         useFactory = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 //model.nextPlayer();
+                if (lastPlayer)
+                    notifyAllObservers();
                 lastPlayer = !lastPlayer;
-                if (lastPlayer);
-                notifyAllObservers();
             }
         };
+
+        window.setOnClickFactoryButton(useFactory);
 
         endTurn = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 //model.nextPlayer();
-                lastPlayer = !lastPlayer;
-                if (lastPlayer);
+                if (lastPlayer)
                     notifyAllObservers();
+                lastPlayer = !lastPlayer;
             }
         };
+
+        window.setOnClickEndProductionTurn(endTurn);
     }
 
     public void addObserver(Observer obs) {

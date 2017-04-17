@@ -39,6 +39,7 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
 
     @Override
     public void handleInput(KeyEvent event) {
+        System.out.print("Production phase input");
         if (keyMap.containsKey(event.getCode()))
             keyMap.get(event.getCode()).execute();
     }
@@ -46,6 +47,7 @@ public class ProductionPhaseState implements ControlDispatchState, Observer {
     @Override
     public void nextState() {
         dispatch.changeState(new MovementPhaseState(dispatch, model, window));
+        window.swapToMovementView();
     }
 
     public void update() {

@@ -19,7 +19,7 @@ public class GameEngine {
         this.gameWindow = gameWindow;
         this.gameModel = gameModel;
         MVA = new ModelViewAdapter(gameModel, gameWindow);
-        //ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
+        ControlDispatch controller = new ControlDispatch(gameModel, gameWindow);
 
 
         new AnimationTimer() {
@@ -38,6 +38,7 @@ public class GameEngine {
 
         //TODO: Make size equal to screen resolution
         Scene scene = new Scene(this.gameWindow, 1221, 726);
+        scene.setOnKeyPressed(gameWindow.getOnKeyPressed());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Roads & Boats");
         primaryStage.show();
