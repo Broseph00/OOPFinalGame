@@ -33,4 +33,8 @@ public class MoveEdge1Ability extends MoveAbility {
         return visitor.getType(this);
     }
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }

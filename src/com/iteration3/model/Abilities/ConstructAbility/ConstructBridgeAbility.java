@@ -28,4 +28,8 @@ public abstract class ConstructBridgeAbility extends Ability {
 
     public int getBorder(){return border;}
 
+    public void execute(){
+        executionManager.execute(this);
+    }
+
 }
