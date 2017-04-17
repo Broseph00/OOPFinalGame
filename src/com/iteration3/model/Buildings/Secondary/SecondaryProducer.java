@@ -1,9 +1,7 @@
 package com.iteration3.model.Buildings.Secondary;
 
-import com.iteration3.model.Buildings.Producer;
-import com.iteration3.model.Buildings.ResourceRequirement;
-import com.iteration3.model.Resource.Resource;
-import com.iteration3.model.Resource.ResourceList;
+import com.iteration3.model.Buildings.*;
+import com.iteration3.model.Resource.*;
 
 import java.util.ArrayList;
 
@@ -20,11 +18,11 @@ public abstract class SecondaryProducer extends Producer {
 
     public abstract ArrayList<Resource> produce(ResourceList availableResources);
 
-    public void addRequirement(ResourceRequirement requirement) {
+    protected void addRequirement(ResourceRequirement requirement) {
         this.necessaryResources.add(requirement);
     }
 
-    public ArrayList<ResourceRequirement> getNecessaryResources() {
+    protected ArrayList<ResourceRequirement> getNecessaryResources() {
         return necessaryResources;
     }
 }
