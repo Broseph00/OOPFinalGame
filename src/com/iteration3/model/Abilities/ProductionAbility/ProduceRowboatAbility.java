@@ -1,28 +1,29 @@
 package com.iteration3.model.Abilities.ProductionAbility;
 
-import com.iteration3.model.Buildings.Primary.Woodcutter;
-import com.iteration3.model.Buildings.Producer;
+import com.iteration3.model.Buildings.Transporter.RowboatFactory;
+import com.iteration3.model.Buildings.Transporter.TruckFactory;
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
+import com.iteration3.model.Transporters.Water.Rowboat;
 import com.iteration3.model.Visitors.Visitor;
 import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/16/2017.
+ * Created by test on 04/17/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    ProduceBoardAbility Module: Created by test on 04/16/2017.
+|    ProduceTruckAbility Module: Created by test on 04/17/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class ProduceBoardAbility extends ProductionAbility {
+public class ProduceRowboatAbility extends ProductionAbility {
 
-    public ProduceBoardAbility(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, executionManager, GameLibrary.PRODUCE_BOARD);
+    public ProduceRowboatAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, executionManager, GameLibrary.PRODUCE_ROWBOAT);
     }
 
     @Override

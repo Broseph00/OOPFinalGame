@@ -313,4 +313,16 @@ public class AbilityTypeVisitor implements iAbilityVisitor{
 
     @Override
     public String getType(ProduceWagonAbility ability) { return GameLibrary.PRODUCE_WAGON; }
+
+    @Override
+    public String getType(ProduceRaftAbility ability) { return GameLibrary.PRODUCE_RAFT; }
+
+    @Override
+    public String getType(ProduceRowboatAbility ability) { return  GameLibrary.PRODUCE_ROWBOAT; }
+
+    @Override
+    public String getType(ProduceSteamerAbility ability) { return GameLibrary.PRODUCE_STEAMER; }
+
+    @Override
+    public String getType(ProduceTruckAbility ability) { return GameLibrary.PRODUCE_TRUCK; }
 }

@@ -6,6 +6,7 @@ import com.iteration3.model.Abilities.BuildAbility.*;
 import com.iteration3.model.Abilities.ConstructAbility.*;
 import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.MoveAbility.*;
+import com.iteration3.model.Abilities.ProductionAbility.*;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Transporters.Land.LandTransporter;
 import com.iteration3.model.Transporters.Land.RoadOnly.OnRoadLandTransporter;
@@ -152,6 +153,22 @@ public class AbilityManager {
         addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
         constructBridgeAbility = new ConstructBridge6Ability(transporter, executionManager);
         addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+    }
+
+    public void addProduceAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+        if(verifyBoardAbility(transporter)) { abilitiesList.add(new ProduceBoardAbility(transporter, executionManager)); }
+        if(verifyBrickAbility(transporter)) { abilitiesList.add(new ProduceBrickAbility(transporter, executionManager)); }
+        if(verifyCoinAbility(transporter)) { abilitiesList.add(new ProduceCoinAbility(transporter, executionManager)); }
+        if(verifyFuelAbility(transporter)) { abilitiesList.add(new ProduceFuelAbility(transporter, executionManager)); }
+        if(verifyPaperAbility(transporter)) { abilitiesList.add(new ProducePaperAbility(transporter, executionManager)); }
+        if(verifyRaftAbility(transporter)) { abilitiesList.add(new ProduceRaftAbility(transporter, executionManager)); }
+        if(verifyRowboatAbility(transporter)) { abilitiesList.add(new ProduceRowboatAbility(transporter, executionManager)); }
+        if(verifySteamerAbility(transporter)) { abilitiesList.add(new ProduceSteamerAbility(transporter, executionManager)); }
+        if(verifyStockAbility(transporter)) { abilitiesList.add(new ProduceStockAbility(transporter, executionManager)); }
+        if(verifyTruckAbility(transporter)) { abilitiesList.add(new ProduceTruckAbility(transporter, executionManager)); }
+        if(verifyWagonAbility(transporter)) { abilitiesList.add(new ProduceWagonAbility(transporter, executionManager)); }
+
+
     }
 
     public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
@@ -399,7 +416,51 @@ public class AbilityManager {
     private boolean verifyUndockAbility(UndockAbility undockAbility, WaterTransporter transporter){
         return validationManager.validateUndock(transporter);
     }
+    
+    private boolean verifyBoardAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyBrickAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyCoinAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyFuelAbility(Transporter transporter){
+        return true; //TODO
+    }
 
+    private boolean verifyPaperAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyRaftAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyRowboatAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifySteamerAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyStockAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyTruckAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
+    private boolean verifyWagonAbility(Transporter transporter){
+        return true; //TODO
+    }
+    
     /*public String getAbilityName(Ability ability){
         return null;
     }*/
