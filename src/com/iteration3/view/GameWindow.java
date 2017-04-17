@@ -1,5 +1,7 @@
 package com.iteration3.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
@@ -77,4 +79,49 @@ public class GameWindow extends VBox implements View {
     public void update() {
         getMainView().update();
     }
+    
+    public void setEnableMoveButton(Boolean isEnabled){
+		mainView.setEnableMoveButton(isEnabled);
+	}
+	
+	public void setTileResourceList(String list) {
+		mainView.setTileResourceList(list);
+	}
+	
+	public void setTransportResourceList(String list) {
+		mainView.setTransportResourceList(list);
+	}
+	
+	
+	public void setCurrentTransporter(String currentTransporter) {
+		mainView.setCurrentTransporter(currentTransporter);
+	}
+	
+	public void setOnMoveButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnMoveButton(handler);
+	}
+	
+	public void setOnClickEndMovementTurn(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickEndMovementTurn(handler);
+	}
+	
+	public void setEnableFactoryButton(Boolean isEnabled){
+		mainView.setEnableFactoryButton(isEnabled);
+	}
+	
+	public void setOnClickFactoryButton(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickFactoryButton(handler);
+	}
+	
+	public void setOnClickEndProductionTurn(EventHandler<ActionEvent> handler) {
+		mainView.setOnClickEndProductionTurn(handler);
+	}
+	
+	public void highlightTransportOption() {
+		mainView.highlightTransportOption();
+	}
+	
+	public void highlightMovementOption() {
+		mainView.highlightMovementOption();
+	}
 }

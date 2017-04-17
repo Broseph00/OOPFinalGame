@@ -22,6 +22,10 @@ public abstract class Ability implements Visitable {
     public Transporter getTransporter(){
         return  transporter;
     }
+    
+    public String getName() {
+    	return name;
+    }
 
     public void execute(){
         executionManager.execute(this);
