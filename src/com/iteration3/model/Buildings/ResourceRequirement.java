@@ -9,6 +9,7 @@ public class ResourceRequirement {
     ArrayList<Resource> resourceRequirements;
 
     public ResourceRequirement(Resource... resources){
+        resourceRequirements = new ArrayList<>();
         for(Resource resource : resources){
             resourceRequirements.add(resource);
         }

@@ -1,6 +1,6 @@
 package com.iteration3.model.Managers;
 
-import com.iteration3.model.Abilities.DockatSeaAbility;
+import com.iteration3.model.Abilities.DockAbility.DockatSeaAbility;
 import com.iteration3.model.Abilities.MoveAbility.MoveAbility;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
@@ -187,6 +187,12 @@ public class ValidationManager {
     public boolean existingProducer(Transporter transporter){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         return map.existingProducer(regionLocation);
+    }
+
+    public boolean wallOwnedByOpposingPlayer(Transporter transporter, int edge){
+        RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
+        Location location = regionLocation.getLocation();
+        return map.wallOwnedByOpposingPlayer(location, transporter.getOwner(), edge);
     }
 
     private int oppositeEdge(int edge){

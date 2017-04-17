@@ -21,6 +21,7 @@ import javafx.scene.input.KeyEvent;
             this.window = window;
             welcome = new WelcomeViewController();
             this.dispatch = dispatch;
+            welcome.addObserver(this);
 
         }
 

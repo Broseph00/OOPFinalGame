@@ -6,15 +6,19 @@ import com.iteration3.model.Resource.*;
 import java.util.ArrayList;
 
 public class StoneFactory extends SecondaryProducer {
-    private ArrayList<ResourceRequirement> necessaryResources;
 
     public StoneFactory() {
         super(6);
     }
 
+    private void initialize(){
+        ResourceRequirement req1 = new ResourceRequirement(new Clay());
+        addRequirement(req1);
+    }
+
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             if(reqs.verify(availableResources.getResources())){
                 return true;
             }
@@ -27,7 +31,7 @@ public class StoneFactory extends SecondaryProducer {
         boolean canProduce = false;
         ArrayList<Resource> stones = new ArrayList<>();
 
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             canProduce = reqs.consume(availableResources.getResources());
             if(canProduce && (getCapacity() > 0)) {
                 stones.add(new Stone());

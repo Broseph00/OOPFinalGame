@@ -7,7 +7,6 @@ import com.iteration3.model.Resource.*;
 import java.util.ArrayList;
 
 public class Mint extends SecondaryProducer {
-    private ArrayList<ResourceRequirement> necessaryResources;
 
     public Mint() {
         super(1);
@@ -16,12 +15,12 @@ public class Mint extends SecondaryProducer {
 
     private void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Fuel(), new Gold(), new Gold());
-        necessaryResources.add(req1);
+        addRequirement(req1);
     }
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             if(reqs.verify(availableResources.getResources())){
                 return true;
             }
@@ -34,7 +33,7 @@ public class Mint extends SecondaryProducer {
         boolean canProduce;
         ArrayList<Resource> coins = null;
 
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             canProduce = reqs.consume(availableResources.getResources());
             if(canProduce && (getCapacity() > 0)) {
                 coins.add(new Coin());

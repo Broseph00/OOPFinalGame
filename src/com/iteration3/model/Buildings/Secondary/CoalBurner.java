@@ -6,7 +6,6 @@ import com.iteration3.model.Resource.*;
 import java.util.ArrayList;
 
 public class CoalBurner extends SecondaryProducer {
-    private ArrayList<ResourceRequirement> necessaryResources;
 
     public CoalBurner() {
         super(6);
@@ -15,18 +14,18 @@ public class CoalBurner extends SecondaryProducer {
 
     private void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Trunk(), new Trunk());
-        necessaryResources.add(req1);
+        addRequirement(req1);
 
         ResourceRequirement req2 = new ResourceRequirement(new Trunk(), new Board());
-        necessaryResources.add(req2);
+        addRequirement(req2);
 
         ResourceRequirement req3 = new ResourceRequirement(new Board(), new Board());
-        necessaryResources.add(req3);
+        addRequirement(req3);
     }
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             if(reqs.verify(availableResources.getResources())){
                 return true;
             }
@@ -39,7 +38,7 @@ public class CoalBurner extends SecondaryProducer {
         boolean canProduce = false;
         ArrayList<Resource> fuels = new ArrayList<>();
 
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             canProduce = reqs.consume(availableResources.getResources());
             if(canProduce && (getCapacity() > 0)) {
                 fuels.add(new Fuel());

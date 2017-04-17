@@ -6,20 +6,20 @@ import com.iteration3.model.Resource.*;
 import java.util.ArrayList;
 
 public class Sawmill extends SecondaryProducer {
-    private ArrayList<ResourceRequirement> necessaryResources;
 
     public Sawmill() {
         super(6);
+        initialize();
     }
 
     private void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Trunk());
-        necessaryResources.add(req1);
+        addRequirement(req1);
     }
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             if(reqs.verify(availableResources.getResources())){
                 return true;
             }
@@ -32,7 +32,7 @@ public class Sawmill extends SecondaryProducer {
         boolean canProduce = false;
         ArrayList<Resource> boards = new ArrayList<>();
 
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             canProduce = reqs.consume(availableResources.getResources());
             if(canProduce && (getCapacity() > 0)) {
                 boards.add(new Board());

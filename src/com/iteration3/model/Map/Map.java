@@ -499,4 +499,7 @@ public class Map {
 
     }
 
+    public HashMap<RegionLocation, Producer> getProducers() {
+        return producers;
+    }
 }

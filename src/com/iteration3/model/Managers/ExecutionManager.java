@@ -1,13 +1,17 @@
 package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.BuildAbility.*;
+import com.iteration3.model.Abilities.DockAbility.*;
 import com.iteration3.model.Abilities.MoveAbility.*;
+import com.iteration3.model.Abilities.ProductionAbility.ProduceBoardAbility;
+import com.iteration3.model.Abilities.ProductionAbility.ProductionAbility;
 import com.iteration3.model.Buildings.Primary.*;
+import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Buildings.Secondary.*;
 import com.iteration3.model.Buildings.Transporter.*;
 import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
-import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
 import com.iteration3.model.Transporters.Transporter;
 
@@ -226,6 +230,10 @@ public class ExecutionManager {
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
         ability.getTransporter().getOwner().updateTransporterAbilities();
+    }
+
+    public void execute(ProduceBoardAbility ability){
+
     }
 
     private int getOppositeRegion(int exitRegion, int exitEdge){

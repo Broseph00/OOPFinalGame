@@ -35,4 +35,8 @@ public class ControlDispatch implements EventHandler<KeyEvent>{
     public void changeState(ControlDispatchState newState){
         currentState = newState;
     }
+
+    public ControlDispatchState getCurrentState(){
+        return currentState;
+    }
 }

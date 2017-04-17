@@ -6,7 +6,6 @@ import com.iteration3.model.Resource.*;
 import java.util.ArrayList;
 
 public class StockExchange extends SecondaryProducer {
-    private ArrayList<ResourceRequirement> necessaryResources;
 
     public StockExchange() {
         super(6);
@@ -15,13 +14,13 @@ public class StockExchange extends SecondaryProducer {
 
     private void initialize(){
         ResourceRequirement req1 = new ResourceRequirement(new Paper(), new Coin(), new Coin());
-        necessaryResources.add(req1);
+        addRequirement(req1);
     }
 
 
     @Override
     public boolean checkResources(ResourceList availableResources) {
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             if(reqs.verify(availableResources.getResources())){
                 return true;
             }
@@ -34,7 +33,7 @@ public class StockExchange extends SecondaryProducer {
         boolean canProduce;
         ArrayList<Resource> stocks = new ArrayList<>();
 
-        for(ResourceRequirement reqs : necessaryResources){
+        for(ResourceRequirement reqs : getNecessaryResources()){
             canProduce = reqs.consume(availableResources.getResources());
             if(canProduce && (getCapacity() > 0)) {
                 stocks.add(new Stock());
