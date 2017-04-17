@@ -1,5 +1,6 @@
 package com.iteration3.model;
 
+import com.iteration3.controller.ControlDispatch;
 import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
@@ -189,5 +190,10 @@ public class GameModel {
 
     public ProductionManager getProductionManager() {
         return productionManager;
+    }
+
+    public void updatePlayers(ControlDispatch controlDispatch){
+        player1.updateAbilityManager(controlDispatch);
+        player2.updateAbilityManager(controlDispatch);
     }
 }
