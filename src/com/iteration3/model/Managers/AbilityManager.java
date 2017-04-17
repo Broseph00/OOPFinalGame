@@ -35,13 +35,14 @@ public class AbilityManager {
     }
 
     public void updateRoadTransporters(ArrayList<OnRoadLandTransporter> roadLandTransporters){
+        System.out.println("Step 3.5");
         for(OnRoadLandTransporter transporter : roadLandTransporters){
             giveAbilities(transporter);
         }
     }
 
     public void updateLandTransporters(ArrayList<LandTransporter> landTransporters){
-        //System.out.println("Step 3");
+        System.out.println("Step 3");
         for(LandTransporter transporter : landTransporters){
             giveAbilities(transporter);
         }
@@ -60,7 +61,7 @@ public class AbilityManager {
     }
 
     public void giveAbilities(LandTransporter transporter){
-        //System.out.println("Step 4");
+        System.out.println("Step 4");
         transporter.clearAbilityList();
         ArrayList<Ability> abilityList = populateList(transporter);
         transporter.setAbilityList(abilityList);
@@ -83,7 +84,7 @@ public class AbilityManager {
     }
 
     public ArrayList<Ability> populateList(LandTransporter transporter) {
-        //System.out.println("Step 5");
+        System.out.println("Step 5");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
         addConstructionAbilities(transporter, abilitiesList);
         addMoveAbilities(transporter, abilitiesList);
@@ -93,6 +94,7 @@ public class AbilityManager {
     }
 
     public ArrayList<Ability> populateList(OnRoadLandTransporter transporter) {
+        System.out.print("Step 6");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
         addBuildAbilities(transporter, abilitiesList);
         addConstructionAbilities(transporter, abilitiesList);
@@ -103,6 +105,7 @@ public class AbilityManager {
     }
 
     public void addExchangeAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+        System.out.println("lol");
         if (verifyDropResourceAbility(transporter)) { abilitiesList.add(new DropResourceAbility(transporter, exchangeManager, executionManager)); }
         if (verifyPickupResourceAbility(transporter)) { abilitiesList.add(new PickupResourceAbility(transporter, executionManager, exchangeManager)); }
     }

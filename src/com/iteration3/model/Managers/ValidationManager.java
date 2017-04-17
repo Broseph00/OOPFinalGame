@@ -221,6 +221,7 @@ public class ValidationManager {
     public boolean canPickupResource(Transporter transporter){
         RegionLocation regionLocation = map.getTransportRegionLocation(transporter);
         ResourceList resourceList = map.getAvailableResources(transporter);
+        System.out.println("Size: " + resourceList.getResources().size());
         return !resourceList.isEmpty();
     }
 
