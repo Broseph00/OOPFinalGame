@@ -134,7 +134,7 @@ public class ExecutionManager {
         Transporter transporter = ability.getTransporter();
         RegionLocation start = map.getTransportRegionLocation(transporter);
         Location location = start.getLocation();
-        RegionLocation end = new RegionLocation(location, getOppositeRegion(ability.getRegion(), ability.getBorder()));
+        RegionLocation end = new RegionLocation(location.getLocationEdge(ability.getBorder()), getOppositeRegion(ability.getRegion(), ability.getBorder()));
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
         ability.getTransporter().getOwner().updateTransporterAbilities();

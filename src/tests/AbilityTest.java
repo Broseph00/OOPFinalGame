@@ -30,7 +30,7 @@ public class AbilityTest {
         MapFileManager mapManager = new MapFileManager(map, "src/com/iteration3/RoadsAndBoatsMap.txt");
         mapManager.fillMapFromTextFile();
         ValidationManager validationManager = new ValidationManager(map);
-        RegionLocation regionLocation = new RegionLocation(0,3,-3,1);
+        RegionLocation regionLocation = new RegionLocation(0,0,0,1);
         Player player1 = new Player(map, 1, regionLocation);
         Resource resource = new Board();
         map.addResource(resource, regionLocation);
@@ -52,7 +52,7 @@ public class AbilityTest {
         //assertEquals(4, transporter.getAbilityList().size());
         //System.out.println("Before finishing research:");
         //printResearchList(player1.getResearchManager().getResearchList());
-        //printAbilityList(transporter.getAbilityList());
+        printAbilityList(transporter.getAbilityList());
 
 
         System.out.println("After finishing research:");
@@ -66,6 +66,10 @@ public class AbilityTest {
         
         assertEquals(false, player1.getResearchManager().getResearchList().contains(oilResearch));
         //assertEquals(5, transporter.getAbilityList().size());
+
+        transporter.getAbilityList().get(0).execute();
+        System.out.println("new location: " + map.getTransportRegionLocation(transporter).getX() +", " +
+                map.getTransportRegionLocation(transporter).getY() + ", " + map.getTransportRegionLocation(transporter).getZ());
     }
 
     public void printResearchList(List<Research> researchList){
