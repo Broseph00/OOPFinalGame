@@ -11,6 +11,7 @@ import com.iteration3.model.Players.Research.OilResearch;
 import com.iteration3.model.Players.Research.Research;
 import com.iteration3.model.Resource.Board;
 import com.iteration3.model.Resource.Resource;
+import com.iteration3.model.Resource.Stone;
 import com.iteration3.model.Transporters.Land.Donkey;
 import com.iteration3.model.Transporters.Transporter;
 import org.junit.Test;
@@ -33,8 +34,9 @@ public class AbilityTest {
         Player player1 = new Player(map, 1, regionLocation);
         Resource resource = new Board();
         map.addResource(resource, regionLocation);
+
         Transporter transporter = new Donkey(player1);
-        map.addTransport(transporter, new RegionLocation(new Location(0,0,0), 1));
+        map.addTransport(transporter, regionLocation);
         assertEquals(true, transporter.getAbilityList().isEmpty());
 
         player1.addTransporter(transporter);
@@ -48,17 +50,19 @@ public class AbilityTest {
         OilResearch oilResearch = (OilResearch) player1.getResearchManager().getResearchList().get(2);
         assertEquals(true, player1.getResearchManager().getResearchList().contains(oilResearch));
         //assertEquals(4, transporter.getAbilityList().size());
-
-        System.out.println("Before finishing research:");
+        //System.out.println("Before finishing research:");
         //printResearchList(player1.getResearchManager().getResearchList());
-        printAbilityList(transporter.getAbilityList());
+        //printAbilityList(transporter.getAbilityList());
 
+
+        System.out.println("After finishing research:");
+        Resource resource2 = new Stone();
+        map.addResource(resource2, new RegionLocation(0,3,-3,3));
         player1.getResearchManager().completeResearch(oilResearch);
         player1.updateTransporterAbilities();
 
-        System.out.println("After finishing research:");
         //printResearchList(player1.getResearchManager().getResearchList());
-        printAbilityList(transporter.getAbilityList());
+        //printAbilityList(transporter.getAbilityList());
         
         assertEquals(false, player1.getResearchManager().getResearchList().contains(oilResearch));
         //assertEquals(5, transporter.getAbilityList().size());
