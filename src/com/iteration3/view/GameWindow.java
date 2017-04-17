@@ -90,6 +90,7 @@ public class GameWindow extends VBox implements View {
     public void drawTransport(String imageURL, int x, int y, int region){getMainView().drawTransport(imageURL, x, y, region);}
     public void drawResource(String imageURL, int x, int y, int region){getMainView().drawResource(imageURL, x, y, region);}
 	public void drawProducer(String imageURL, int x, int y, int region){getMainView().drawProducer(imageURL, x, y, region);}
+	public void drawBigResource(String imageURL, int region) {getMainView().drawBigResource(imageURL, region);};
 
     public Location getCursorLocation() {
         return mainView.getCursorLocation();

@@ -122,12 +122,12 @@ public class GameModel {
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
         this.map.addTransport(new Donkey(player1), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Board(), player1.getStartingRegionLocation());
-        this.map.addResource(new Stone(), player1.getStartingRegionLocation());
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,1));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,2));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,3));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,4));
+        this.map.addResource(new Board(), new RegionLocation(0,0,0,5));
+        this.map.addResource(new Stone(), new RegionLocation(0,0,0,6));
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
 

@@ -34,4 +34,32 @@ public class TileView extends StackPane {
         gc.setFill(Color.WHITE);
     }
 
+    public void drawResource(String url, int region) {
+
+        if(region == 1) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,25);
+        }
+        else if(region == 2) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 195,90);
+        }
+        else if(region == 3) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 145,205);
+        }
+        else if(region == 4) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 75,205);
+        }
+        else if(region == 5) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 20,90);
+        }
+        else if(region == 6) {
+            Image image = images.getImage(url);
+            gc.drawImage(image, 75,25);
+        }
+    }
+
 }

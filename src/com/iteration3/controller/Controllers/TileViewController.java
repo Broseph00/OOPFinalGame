@@ -11,6 +11,9 @@ import java.util.HashMap;
 
 import com.iteration3.controller.Action;
 import com.iteration3.model.Map.Location;
+import com.iteration3.model.Map.RegionLocation;
+import com.iteration3.model.Resource.Resource;
+import com.iteration3.model.Resource.ResourceList;
 import com.iteration3.model.Tiles.Terrain;
 import com.iteration3.utilities.Observer;
 
@@ -53,6 +56,7 @@ public class TileViewController implements Observer {
         this.window.clearPreviewImage();
         displayCurrentTerrain();
         displayCurrentRiver();
+        displayResources();
     }
 
     public String getSelectedTerrainType() {
@@ -223,8 +227,20 @@ public class TileViewController implements Observer {
         riverTypes.add("Tri River");
         riverMap.put("Tri River",new ArrayList<Integer>(Arrays.asList(1,3,5)));
 
-
     }
+
+    public void displayResources() {
+        for(int i = 1; i < 7; i++) {
+            RegionLocation regionLocation = new RegionLocation(cursorLocation.getX(), cursorLocation.getY(), cursorLocation.getZ(), i);
+            ResourceList resources = this.model.getMap().getResources().get(regionLocation);
+
+            for(Resource resource : resources.getResources()){
+                window.drawBigResource(resource.getType(), regionLocation.getRegion());
+            }
+
+        }
+    }
+
 
     @Override
     public void update() {
