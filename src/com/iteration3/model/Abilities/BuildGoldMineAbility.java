@@ -7,20 +7,20 @@ import com.iteration3.model.Visitors.iAbilityVisitor;
 import com.iteration3.utilities.GameLibrary;
 
 /**
- * Created by test on 04/14/2017.
+ * Created by test on 04/16/2017.
  */
 
 /*--------------------------------------------------------------------------------------
-|    MoveDegree30Ability Module: Created by test on 04/14/2017.
+|    BuildGoldMineAbility Module: Created by test on 04/16/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class MoveDegree30Ability extends MoveAbility {
+public class BuildGoldMineAbility extends Ability {
 
-    public MoveDegree30Ability(Transporter transporter, ExecutionManager executionManager){
-        super(transporter,1,2, GameLibrary.MOVE_ANGLE30_ABILITY, executionManager);
+    public BuildGoldMineAbility(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, GameLibrary.BUILD_GOLD_MINE, executionManager);
     }
 
     @Override
@@ -32,4 +32,5 @@ public class MoveDegree30Ability extends MoveAbility {
     public String getAbilityType(iAbilityVisitor visitor) {
         return visitor.getType(this);
     }
+
 }

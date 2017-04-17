@@ -1,5 +1,6 @@
-package com.iteration3.model.Abilities;
+package com.iteration3.model.Abilities.MoveAbility;
 
+import com.iteration3.model.Abilities.Ability;
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
 

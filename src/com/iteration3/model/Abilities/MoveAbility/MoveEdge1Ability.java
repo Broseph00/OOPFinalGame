@@ -1,4 +1,4 @@
-package com.iteration3.model.Abilities;
+package com.iteration3.model.Abilities.MoveAbility;
 
 import com.iteration3.model.Managers.ExecutionManager;
 import com.iteration3.model.Transporters.Transporter;
@@ -11,16 +11,16 @@ import com.iteration3.utilities.GameLibrary;
  */
 
 /*--------------------------------------------------------------------------------------
-|    MoveEdge5Ability Module: Created by test on 04/15/2017.
+|    MoveEdge1Ability Module: Created by test on 04/15/2017.
 |---------------------------------------------------------------------------------------
 |   Description:
 |
 ---------------------------------------------------------------------------------------*/
 
-public class MoveEdge5Ability extends MoveAbility {
+public class MoveEdge1Ability extends MoveAbility {
 
-    public MoveEdge5Ability(Transporter transporter, ExecutionManager executionManager){
-        super(transporter, 7, 5, GameLibrary.MOVE_EDGE5_ABILITY, executionManager);
+    public MoveEdge1Ability(Transporter transporter, ExecutionManager executionManager){
+        super(transporter, 7, 1, GameLibrary.MOVE_EDGE1_ABILITY, executionManager);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.iteration3.model.Managers;
 
 import com.iteration3.model.Abilities.*;
+import com.iteration3.model.Abilities.MoveAbility.*;
 import com.iteration3.model.Buildings.Primary.*;
 import com.iteration3.model.Buildings.Secondary.*;
 import com.iteration3.model.Buildings.Transporter.*;
@@ -8,7 +9,6 @@ import com.iteration3.model.Map.Location;
 import com.iteration3.model.Map.Map;
 import com.iteration3.model.Map.Region;
 import com.iteration3.model.Map.RegionLocation;
-import com.iteration3.model.Transporters.Land.RoadOnly.Wagon;
 import com.iteration3.model.Transporters.Transporter;
 
 public class ExecutionManager {
@@ -36,7 +36,7 @@ public class ExecutionManager {
 
     public void execute(BuildMineAbility ability) {
         RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
-        Mine producer = new StandardMine();
+        StandardMine producer = new StandardMine();
         map.addProducer(producer, regionLocation);
         ability.getTransporter().getOwner().updateTransporterAbilities();
     }
@@ -133,6 +133,24 @@ public class ExecutionManager {
         map.removeTransport(transporter, start);
         map.addTransport(transporter, end);
         ability.getTransporter().getOwner().updateTransporterAbilities();
+    }
+
+    public void execute(BuildBigMineAbility ability) {
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        BigMine producer = new BigMine();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildIronMineAbility ability){
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        IronMine producer = new IronMine();
+        map.addProducer(producer, regionLocation);
+    }
+
+    public void execute(BuildGoldMineAbility ability){
+        RegionLocation regionLocation = map.getTransportRegionLocation(ability.getTransporter());
+        GoldMine producer = new GoldMine();
+        map.addProducer(producer, regionLocation);
     }
 
     public void execute(MoveDegree0Ability ability) {executeMoveDegree(ability);}
