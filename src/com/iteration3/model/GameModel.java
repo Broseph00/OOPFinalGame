@@ -1,5 +1,6 @@
 package com.iteration3.model;
 
+import com.iteration3.controller.ControlDispatch;
 import com.iteration3.model.Buildings.Producer;
 import com.iteration3.model.Managers.*;
 import com.iteration3.model.Map.*;
@@ -35,7 +36,7 @@ public class GameModel {
         productionManager = new ProductionManager(map);
         wonderManager = new WonderManager(this);
 
-        player1 = new Player(map, 1, new RegionLocation(0,3,-3,1));
+        player1 = new Player(map, 1, new RegionLocation(0,0,0,1));
         player2 = new Player(map, 2, new RegionLocation(0,-3,3,1));
         currentPlayer = player1;
         loadSaveStateManager = new LoadSaveStateManager(map, "src/com/iteration3/RoadsAndBoatsSavedState.txt", player1, player2, getWonder());
@@ -127,9 +128,9 @@ public class GameModel {
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
         this.map.addResource(new Goose(), player1.getStartingRegionLocation());
 
-        currentPlayer.addTransporter(new Donkey(currentPlayer));
-        currentPlayer.addTransporter(new Donkey(currentPlayer));
-        currentPlayer.addTransporter(new Donkey(currentPlayer));
+        //currentPlayer.addTransporter(new Donkey(currentPlayer));
+        //currentPlayer.addTransporter(new Donkey(currentPlayer));
+        //currentPlayer.addTransporter(new Donkey(currentPlayer));
 
         // initialize player2
         this.map.addTransport(new Donkey(player2), player2.getStartingRegionLocation());
@@ -188,5 +189,10 @@ public class GameModel {
 
     public ProductionManager getProductionManager() {
         return productionManager;
+    }
+
+    public void updatePlayers(ControlDispatch controlDispatch){
+        player1.updateAbilityManager(controlDispatch);
+        player2.updateAbilityManager(controlDispatch);
     }
 }

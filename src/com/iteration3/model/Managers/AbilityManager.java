@@ -1,6 +1,11 @@
 package com.iteration3.model.Managers;
 
 import static com.iteration3.utilities.GameLibrary.*;
+
+import com.iteration3.controller.ControlDispatch;
+import com.iteration3.controller.PhaseStates.BuildingPhaseState;
+import com.iteration3.controller.PhaseStates.ControlDispatchState;
+import com.iteration3.controller.PhaseStates.MovementPhaseState;
 import com.iteration3.model.Abilities.*;
 import com.iteration3.model.Abilities.BuildAbility.*;
 import com.iteration3.model.Abilities.ConstructAbility.*;
@@ -25,6 +30,7 @@ public class AbilityManager {
     ExecutionManager executionManager;
     ResearchManager researchManager;
     ExchangeManager exchangeManager;
+    ControlDispatch controlDispatch;
 
     public AbilityManager(Map map, ValidationManager validationManager, ResearchManager researchManager, ExecutionManager executionManager, ExchangeManager exchangeManager){
         this.map = map;
@@ -34,15 +40,19 @@ public class AbilityManager {
         this.exchangeManager = exchangeManager;
     }
 
+    public void updateControlDispatch(ControlDispatch controlDispatch){
+        this.controlDispatch = controlDispatch;
+    }
+
     public void updateRoadTransporters(ArrayList<OnRoadLandTransporter> roadLandTransporters){
-        System.out.println("Step 3.5");
+        //System.out.println("Step 3.5");
         for(OnRoadLandTransporter transporter : roadLandTransporters){
             giveAbilities(transporter);
         }
     }
 
     public void updateLandTransporters(ArrayList<LandTransporter> landTransporters){
-        System.out.println("Step 3");
+        //System.out.println("Step 3");
         for(LandTransporter transporter : landTransporters){
             giveAbilities(transporter);
         }
@@ -61,7 +71,7 @@ public class AbilityManager {
     }
 
     public void giveAbilities(LandTransporter transporter){
-        System.out.println("Step 4");
+        //System.out.println("Step 4");
         transporter.clearAbilityList();
         ArrayList<Ability> abilityList = populateList(transporter);
         transporter.setAbilityList(abilityList);
@@ -75,102 +85,148 @@ public class AbilityManager {
 
     public ArrayList<Ability> populateList(WaterTransporter transporter) {
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-        addConstructionAbilities(transporter, abilitiesList);
-        addMoveAbilities(transporter, abilitiesList);
-        addDockAbilities(transporter, abilitiesList);
+        addConstructionAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addMoveAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addDockAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
         //addProduceAbilities(transporter, abilitiesList);
-        addExchangeAbilities(transporter, abilitiesList);
+        addExchangeAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
         return abilitiesList;
     }
 
     public ArrayList<Ability> populateList(LandTransporter transporter) {
-        System.out.println("Step 5");
+        //System.out.println("Step 5");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-        addConstructionAbilities(transporter, abilitiesList);
-        addMoveAbilities(transporter, abilitiesList);
+        addConstructionAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addMoveAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
         //addProduceAbilities(transporter, abilitiesList);
-        addExchangeAbilities(transporter, abilitiesList);
+        addExchangeAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
         return abilitiesList;
     }
 
     public ArrayList<Ability> populateList(OnRoadLandTransporter transporter) {
-        System.out.print("Step 6");
+        //System.out.print("Step 6");
         ArrayList<Ability> abilitiesList = new ArrayList<>();
-        addBuildAbilities(transporter, abilitiesList);
-        addConstructionAbilities(transporter, abilitiesList);
-        addMoveAbilities(transporter, abilitiesList);
+        addBuildAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addConstructionAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
+        addMoveAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
         //addProduceAbilities(transporter, abilitiesList);
-        addExchangeAbilities(transporter, abilitiesList);
+        addExchangeAbilities(transporter, abilitiesList, controlDispatch.getCurrentState());
         return abilitiesList;
     }
 
-    public void addExchangeAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
-        System.out.println("lol");
-        if (verifyDropResourceAbility(transporter)) { abilitiesList.add(new DropResourceAbility(transporter, exchangeManager, executionManager)); }
-        if (verifyPickupResourceAbility(transporter)) { abilitiesList.add(new PickupResourceAbility(transporter, executionManager, exchangeManager)); }
+    public void addExchangeAbilities(Transporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+        //System.out.println("lol");
+        if(controlDispatchState instanceof MovementPhaseState) {
+            if (verifyDropResourceAbility(transporter)) {
+                abilitiesList.add(new DropResourceAbility(transporter, exchangeManager, executionManager));
+            }
+            if (verifyPickupResourceAbility(transporter)) {
+                abilitiesList.add(new PickupResourceAbility(transporter, executionManager, exchangeManager));
+            }
+        }
     }
 
-    public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
+    public void addBuildAbilities(Transporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
         //construction abilities
-        if (verifyClayPitAbility(transporter)) { abilitiesList.add(new BuildClaypitAbility(transporter, executionManager)); }
-        if (verifyCoalBurnerAbility(transporter)) { abilitiesList.add(new BuildCoalBurnerAbility(transporter, executionManager)); }
-        if (verifyMineAbility(transporter)) { abilitiesList.add(new BuildMineAbility(transporter, executionManager)); }
-        if (verifyMintAbility(transporter)) { abilitiesList.add(new BuildMintAbility(transporter, executionManager)); }
-        if (verifyOilRigAbility(transporter)) { abilitiesList.add(new BuildOilRigAbility(transporter, executionManager)); }
-        if (verifyPaperMillAbility(transporter)) { abilitiesList.add(new BuildPapermillAbility(transporter, executionManager)); }
-        if (verifyRaftFactoryAbility(transporter)) { abilitiesList.add(new BuildRaftFactoryAbility(transporter, executionManager)); }
-        if (verifyRowboatFactoryAbility(transporter)) { abilitiesList.add(new BuildRowboatFactoryAbility(transporter, executionManager)); }
-        if (verifySteamerFactoryAbility(transporter)) { abilitiesList.add(new BuildSteamerFactoryAbility(transporter, executionManager)); }
-        if (verifyStockExchangeAbility(transporter)) { abilitiesList.add(new BuildStockExchangeAbility(transporter, executionManager)); }
-        if (verifyStoneFactoryAbility(transporter)) { abilitiesList.add(new BuildStoneFactoryAbility(transporter, executionManager)); }
-        if (verifyStoneQuarryAbility(transporter)) { abilitiesList.add(new BuildStoneQuarryAbility(transporter, executionManager)); }
-        if (verifyTruckFactoryAbility(transporter)) { abilitiesList.add(new BuildTruckFactoryAbility(transporter, executionManager)); }
-        if (verifyWagonFactoryAbility(transporter)) { abilitiesList.add(new BuildWagonFactoryAbility(transporter, executionManager)); }
-        if (verifyWoodcutterAbility(transporter)) { abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager)); }
-        if (verifyBigMineAbility(transporter)) { abilitiesList.add(new BuildBigMineAbility(transporter, executionManager)); }
-        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildIronMineAbility(transporter, executionManager)); }
-        if (verifySpecializedMineAbility(transporter)) { abilitiesList.add(new BuildGoldMineAbility(transporter, executionManager)); }
+        if(controlDispatchState instanceof BuildingPhaseState) {
+            if (verifyClayPitAbility(transporter)) {
+                abilitiesList.add(new BuildClaypitAbility(transporter, executionManager));
+            }
+            if (verifyCoalBurnerAbility(transporter)) {
+                abilitiesList.add(new BuildCoalBurnerAbility(transporter, executionManager));
+            }
+            if (verifyMineAbility(transporter)) {
+                abilitiesList.add(new BuildMineAbility(transporter, executionManager));
+            }
+            if (verifyMintAbility(transporter)) {
+                abilitiesList.add(new BuildMintAbility(transporter, executionManager));
+            }
+            if (verifyOilRigAbility(transporter)) {
+                abilitiesList.add(new BuildOilRigAbility(transporter, executionManager));
+            }
+            if (verifyPaperMillAbility(transporter)) {
+                abilitiesList.add(new BuildPapermillAbility(transporter, executionManager));
+            }
+            if (verifyRaftFactoryAbility(transporter)) {
+                abilitiesList.add(new BuildRaftFactoryAbility(transporter, executionManager));
+            }
+            if (verifyRowboatFactoryAbility(transporter)) {
+                abilitiesList.add(new BuildRowboatFactoryAbility(transporter, executionManager));
+            }
+            if (verifySteamerFactoryAbility(transporter)) {
+                abilitiesList.add(new BuildSteamerFactoryAbility(transporter, executionManager));
+            }
+            if (verifyStockExchangeAbility(transporter)) {
+                abilitiesList.add(new BuildStockExchangeAbility(transporter, executionManager));
+            }
+            if (verifyStoneFactoryAbility(transporter)) {
+                abilitiesList.add(new BuildStoneFactoryAbility(transporter, executionManager));
+            }
+            if (verifyStoneQuarryAbility(transporter)) {
+                abilitiesList.add(new BuildStoneQuarryAbility(transporter, executionManager));
+            }
+            if (verifyTruckFactoryAbility(transporter)) {
+                abilitiesList.add(new BuildTruckFactoryAbility(transporter, executionManager));
+            }
+            if (verifyWagonFactoryAbility(transporter)) {
+                abilitiesList.add(new BuildWagonFactoryAbility(transporter, executionManager));
+            }
+            if (verifyWoodcutterAbility(transporter)) {
+                abilitiesList.add(new BuildWoodcutterAbility(transporter, executionManager));
+            }
+            if (verifyBigMineAbility(transporter)) {
+                abilitiesList.add(new BuildBigMineAbility(transporter, executionManager));
+            }
+            if (verifySpecializedMineAbility(transporter)) {
+                abilitiesList.add(new BuildIronMineAbility(transporter, executionManager));
+            }
+            if (verifySpecializedMineAbility(transporter)) {
+                abilitiesList.add(new BuildGoldMineAbility(transporter, executionManager));
+            }
+        }
     }
 
-    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
-        ConstructWallAbility constructWallAbility = new ConstructWall1Ability(transporter, executionManager);
-        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
-        constructWallAbility = new ConstructWall2Ability(transporter, executionManager);
-        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
-        constructWallAbility = new ConstructWall3Ability(transporter, executionManager);
-        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
-        constructWallAbility = new ConstructWall4Ability(transporter, executionManager);
-        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
-        constructWallAbility = new ConstructWall5Ability(transporter, executionManager);
-        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
-        constructWallAbility = new ConstructWall6Ability(transporter, executionManager);
-        addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+    public void addConstructionAbilities(Transporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
+        if(controlDispatchState instanceof BuildingPhaseState) {
+            ConstructWallAbility constructWallAbility = new ConstructWall1Ability(transporter, executionManager);
+            addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+            constructWallAbility = new ConstructWall2Ability(transporter, executionManager);
+            addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+            constructWallAbility = new ConstructWall3Ability(transporter, executionManager);
+            addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+            constructWallAbility = new ConstructWall4Ability(transporter, executionManager);
+            addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+            constructWallAbility = new ConstructWall5Ability(transporter, executionManager);
+            addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
+            constructWallAbility = new ConstructWall6Ability(transporter, executionManager);
+            addConstructWallAbility(constructWallAbility, transporter, abilitiesList);
 
-        ConstructRoadAbility constructRoadAbility = new ConstructRoad1Ability(transporter, executionManager);
-        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
-        constructRoadAbility = new ConstructRoad2Ability(transporter, executionManager);
-        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
-        constructRoadAbility = new ConstructRoad3Ability(transporter, executionManager);
-        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
-        constructRoadAbility = new ConstructRoad4Ability(transporter, executionManager);
-        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
-        constructRoadAbility = new ConstructRoad5Ability(transporter, executionManager);
-        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
-        constructRoadAbility = new ConstructRoad6Ability(transporter, executionManager);
-        addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+            ConstructRoadAbility constructRoadAbility = new ConstructRoad1Ability(transporter, executionManager);
+            addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+            constructRoadAbility = new ConstructRoad2Ability(transporter, executionManager);
+            addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+            constructRoadAbility = new ConstructRoad3Ability(transporter, executionManager);
+            addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+            constructRoadAbility = new ConstructRoad4Ability(transporter, executionManager);
+            addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+            constructRoadAbility = new ConstructRoad5Ability(transporter, executionManager);
+            addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
+            constructRoadAbility = new ConstructRoad6Ability(transporter, executionManager);
+            addConstructRoadAbility(constructRoadAbility, transporter, abilitiesList);
 
-        ConstructBridgeAbility constructBridgeAbility = new ConstructBridge1Ability(transporter, executionManager);
-        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
-        constructBridgeAbility = new ConstructBridge2Ability(transporter, executionManager);
-        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
-        constructBridgeAbility = new ConstructBridge3Ability(transporter, executionManager);
-        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
-        constructBridgeAbility = new ConstructBridge4Ability(transporter, executionManager);
-        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
-        constructBridgeAbility = new ConstructBridge5Ability(transporter, executionManager);
-        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
-        constructBridgeAbility = new ConstructBridge6Ability(transporter, executionManager);
-        addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+            ConstructBridgeAbility constructBridgeAbility = new ConstructBridge1Ability(transporter, executionManager);
+            addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+            constructBridgeAbility = new ConstructBridge2Ability(transporter, executionManager);
+            addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+            constructBridgeAbility = new ConstructBridge3Ability(transporter, executionManager);
+            addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+            constructBridgeAbility = new ConstructBridge4Ability(transporter, executionManager);
+            addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+            constructBridgeAbility = new ConstructBridge5Ability(transporter, executionManager);
+            addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+            constructBridgeAbility = new ConstructBridge6Ability(transporter, executionManager);
+            addConstructBridgeAbility(constructBridgeAbility, transporter, abilitiesList);
+        }
     }
 
     public void addProduceAbilities(Transporter transporter, ArrayList<Ability> abilitiesList){
@@ -189,110 +245,118 @@ public class AbilityManager {
 
     }
 
-    public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList) {
+    public void addMoveAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState) {
         //abilities to move
-        MoveAbility moveAbility = new MoveEdge1Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveEdge2Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveEdge3Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveEdge4Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveEdge5Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveEdge6Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
+        if(controlDispatchState instanceof MovementPhaseState) {
+            MoveAbility moveAbility = new MoveEdge1Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveEdge2Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveEdge3Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveEdge4Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveEdge5Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveEdge6Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+        }
     }
 
-    public void addDockAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList){
+    public void addDockAbilities(WaterTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
         //abilities to dock
-        UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
-        addUndockAbility(undockAbility, transporter, abilitiesList);
+        if(controlDispatchState instanceof MovementPhaseState) {
+            UndockAbility undockAbility = new UndockAbility(transporter, executionManager);
+            addUndockAbility(undockAbility, transporter, abilitiesList);
 
-        DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
-        addRiverDockAbility(dockAbility, transporter, abilitiesList);
-        dockAbility = new DockatRiver2Ability(transporter, executionManager);
-        addRiverDockAbility(dockAbility, transporter, abilitiesList);
-        dockAbility = new DockatRiver3Ability(transporter, executionManager);
-        addRiverDockAbility(dockAbility, transporter, abilitiesList);
-        dockAbility = new DockatRiver4Ability(transporter, executionManager);
-        addRiverDockAbility(dockAbility, transporter, abilitiesList);
-        dockAbility = new DockatRiver5Ability(transporter, executionManager);
-        addRiverDockAbility(dockAbility, transporter, abilitiesList);
-        dockAbility = new DockatRiver6Ability(transporter, executionManager);
-        addRiverDockAbility(dockAbility, transporter, abilitiesList);
+            DockatRiverAbility dockAbility = new DockatRiver1Ability(transporter, executionManager);
+            addRiverDockAbility(dockAbility, transporter, abilitiesList);
+            dockAbility = new DockatRiver2Ability(transporter, executionManager);
+            addRiverDockAbility(dockAbility, transporter, abilitiesList);
+            dockAbility = new DockatRiver3Ability(transporter, executionManager);
+            addRiverDockAbility(dockAbility, transporter, abilitiesList);
+            dockAbility = new DockatRiver4Ability(transporter, executionManager);
+            addRiverDockAbility(dockAbility, transporter, abilitiesList);
+            dockAbility = new DockatRiver5Ability(transporter, executionManager);
+            addRiverDockAbility(dockAbility, transporter, abilitiesList);
+            dockAbility = new DockatRiver6Ability(transporter, executionManager);
+            addRiverDockAbility(dockAbility, transporter, abilitiesList);
 
-        DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
-        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
-        dockatSeaAbility = new DockatSea2Ability(transporter, executionManager);
-        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
-        dockatSeaAbility = new DockatSea3Ability(transporter, executionManager);
-        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
-        dockatSeaAbility = new DockatSea4Ability(transporter, executionManager);
-        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
-        dockatSeaAbility = new DockatSea5Ability(transporter, executionManager);
-        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
-        dockatSeaAbility = new DockatSea6Ability(transporter, executionManager);
-        addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+            DockatSeaAbility dockatSeaAbility = new DockatSea1Ability(transporter, executionManager);
+            addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+            dockatSeaAbility = new DockatSea2Ability(transporter, executionManager);
+            addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+            dockatSeaAbility = new DockatSea3Ability(transporter, executionManager);
+            addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+            dockatSeaAbility = new DockatSea4Ability(transporter, executionManager);
+            addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+            dockatSeaAbility = new DockatSea5Ability(transporter, executionManager);
+            addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+            dockatSeaAbility = new DockatSea6Ability(transporter, executionManager);
+            addSeaDockAbility(dockatSeaAbility, transporter, abilitiesList);
+        }
     }
 
-    public void addMoveAbilities(LandTransporter transporter, ArrayList<Ability> abilitiesList){
+    public void addMoveAbilities(LandTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
 
         //abilities to move
-        MoveAbility moveAbility = new MoveDegree0Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree30Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree60Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree90Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree120Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree150Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree180Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree210Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree240Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree270Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree300Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree330Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
+        if(controlDispatchState instanceof MovementPhaseState) {
+            MoveAbility moveAbility = new MoveDegree0Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree30Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree60Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree90Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree120Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree150Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree180Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree210Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree240Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree270Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree300Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree330Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+        }
     }
 
-    public void addMoveAbilities(OnRoadLandTransporter transporter, ArrayList<Ability> abilitiesList){
+    public void addMoveAbilities(OnRoadLandTransporter transporter, ArrayList<Ability> abilitiesList, ControlDispatchState controlDispatchState){
 
         //abilities to move
-        MoveAbility moveAbility = new MoveDegree0Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree30Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree60Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree90Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree120Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree150Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree180Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree210Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree240Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree270Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree300Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
-        moveAbility = new MoveDegree330Ability(transporter, executionManager);
-        addMoveAbility(moveAbility, transporter, abilitiesList);
+        if(controlDispatchState instanceof MovementPhaseState) {
+            MoveAbility moveAbility = new MoveDegree0Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree30Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree60Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree90Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree120Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree150Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree180Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree210Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree240Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree270Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree300Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+            moveAbility = new MoveDegree330Ability(transporter, executionManager);
+            addMoveAbility(moveAbility, transporter, abilitiesList);
+        }
     }
 
     private void addRiverDockAbility(DockatRiverAbility dockAbility, WaterTransporter transporter, ArrayList<Ability> abilitiesList){
